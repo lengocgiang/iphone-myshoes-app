@@ -18,6 +18,7 @@
 	UIButton *_previousButton;
 	NSDictionary *_shoesCategoryDict;
   NSArray *_shoesArray;
+  NSArray *_categoryButtons;
   
 	ContentUpdater *_cu;
 }
@@ -26,6 +27,7 @@
 @property (nonatomic, retain) UIButton *previousButton;
 @property (nonatomic, retain) NSDictionary *shoesCategoryDict;
 @property (nonatomic, retain) NSArray *shoesArray;
+@property (nonatomic, retain) NSArray *categoryButtons;
 @property (nonatomic, retain) ContentUpdater *cu;
 
 - (id)init;
