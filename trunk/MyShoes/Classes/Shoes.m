@@ -20,9 +20,13 @@
 @synthesize	styleNameList = _styleNameList;
 @synthesize	productPrice = _productPrice;
 @synthesize productCategory = _productCategory;
-@synthesize productBrandTitleColor = _productBrandTitleColor;
+//@synthesize productBrandTitleColor = _productBrandTitleColor;
 @synthesize	productPriceCurrency = _productPriceCurrency;
 @synthesize productDetailLink = _productDetailLink;
+@synthesize productRating = _productRating;
+@synthesize productStyle = _productStyle;
+@synthesize productColor = _productColor;
+@synthesize productBrandName = _productBrandName;
 
 /*  Child node structure
  
@@ -44,7 +48,8 @@
         _productSalesmessaging = [self processShoesInfo:child withProductTag:SHOES_NODE_PRODUCTTAG];
       }
       else if ([tagValue isEqualToString:SHOES_NODE_PRODUCTBRANDTITLECOLOR]) {
-        _productBrandTitleColor = [self processShoesInfo:child withProductTag:HREF_TAG];
+        //_productBrandTitleColor = [self processShoesInfo:child withProductTag:HREF_TAG];
+        [self processBrandTitleColor:child];
       }
       else if ([tagValue isEqualToString:SHOES_NODE_PRODUCTPRICE]) {
         _productPrice = [self processShoesInfo:child withProductTag:SHOES_NODE_PRODUCTPRICETAG_USD];
@@ -103,6 +108,60 @@
   return [element objectForKey:tag];
   
 }
+
+- (void)processBrandTitleColor:(TFHppleElement *) node{
+  
+  NSArray *elements  = [node childNodes];  
+  // Access the first cell
+  if([elements count] <= 0){
+    return;
+  }
+  
+  //Get the product detail node
+  TFHppleElement *element = [elements objectAtIndex:0];
+  
+  //set product detail link
+  self.productDetailLink = [element objectForKey:HREF_TAG];
+  
+  NSArray *childElements  = [element childNodes];
+  if([childElements count] <= 0){
+    return;
+  }
+  TFHppleElement *childElement = [childElements objectAtIndex:0];
+  //set product brand name
+  id str = [childElement content];
+  self.productBrandName = str;
+    
+  childElement = [childElements objectAtIndex:2];
+  //set product style name
+  str = [childElement content];
+  self.productStyle = str;
+  
+  //To test if the shoes has more info like color and rating
+  if ([elements count] <= 2){
+    return;
+  }
+
+  [element autorelease];
+  element = [elements objectAtIndex:2];
+  
+  self.productColor = [element content];
+  
+  [element autorelease];
+  //Check if the shoes has the rating info section
+  if ([elements count] >= 4){
+    element = [elements objectAtIndex:3];
+    childElements  = [element childNodes];
+    if([childElements count] <= 0){
+      return;
+    }
+    childElement = [childElements objectAtIndex:0];
+    //Get the shoes rating value
+  
+    self.productRating = [childElement content];
+  }
+}
+
 
 - (void)dealloc {
 	//release all objects here

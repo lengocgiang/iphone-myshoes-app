@@ -26,9 +26,13 @@
 	
 	NSString *_productPrice;
   NSString *_productCategory;
-  NSString *_productBrandTitleColor;
+  //NSString *_product;
 	NSString *_productPriceCurrency;
   NSString *_productDetailLink;
+  NSString *_productRating;
+  NSString *_productStyle;
+  NSString *_productColor;
+  NSString *_productBrandName;
 
 }
 
@@ -40,12 +44,17 @@
 @property(nonatomic, retain) NSArray	*styleNameList;
 @property(nonatomic, retain) NSString	*productPrice;
 @property(nonatomic, retain) NSString *productCategory;
-@property(nonatomic, retain) NSString *productBrandTitleColor;
+//@property(nonatomic, retain) NSString *productBrandTitleColor;
 @property(nonatomic, retain) NSString	*productPriceCurrency;
 @property(nonatomic, retain) NSString *productDetailLink;
+@property(nonatomic, retain) NSString *productRating;
+@property(nonatomic, retain) NSString *productStyle;
+@property(nonatomic, retain) NSString *productColor;
+@property(nonatomic, retain) NSString *productBrandName;
 
 - (id)initWithShoesNode:(TFHppleElement *) node;
 - (void)processProductImage:(TFHppleElement *) node;
+- (void)processBrandTitleColor:(TFHppleElement *) node;
 - (NSString *)processShoesInfo:(TFHppleElement *) node withProductTag:(NSString*) tag;
 
 @end
