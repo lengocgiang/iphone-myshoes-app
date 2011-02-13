@@ -27,7 +27,7 @@
 
 	debug_NSLog(@"This is the start point of init data and fetching all data refreshed");	
 
-	ContentUpdater * cu = [[[ContentUpdater alloc] init] autorelease];
+	//ContentUpdater * cu = [[[ContentUpdater alloc] init] autorelease];
 	// initialize the slide menu by passing a suitable frame, background color and an array of buttons.
   /* slideMenuView = [[SlideMenuView alloc] initWithFrameColorAndButtons:CGRectMake(0.0f, [window bounds].size.height - 80.0f, [window bounds].size.width,  80.0f) backgroundColor:[UIColor grayColor]  buttons:buttonArray];
 	
@@ -35,20 +35,39 @@
 	[self.window addSubview:slideMenuView];*/
 	// Add the view controller's view to the window and display.
 	_shoesCategoryDict = [[OrderedDictionary alloc] init];
-	[_shoesCategoryDict setObject:[[[ShoesCategory alloc] initWithName:SHOES_CATEGORY_WOMEN_NAME andXPath:SHOES_CATEGORY_WOMEN_XPATH] autorelease] forKey:SHOES_CATEGORY_WOMEN_NAME];
+/*	[_shoesCategoryDict setObject:[[[ShoesCategory alloc] initWithName:SHOES_CATEGORY_WOMEN_NAME andXPath:SHOES_CATEGORY_WOMEN_XPATH] autorelease] forKey:SHOES_CATEGORY_WOMEN_NAME];
 	[_shoesCategoryDict setObject:[[[ShoesCategory alloc] initWithName:SHOES_CATEGORY_MEN_NAME andXPath:SHOES_CATEGORY_MEN_XPATH] autorelease] forKey:SHOES_CATEGORY_MEN_NAME];
 	[_shoesCategoryDict setObject:[[[ShoesCategory alloc] initWithName:SHOES_CATEGORY_GIRLS_NAME andXPath:SHOES_CATEGORY_GIRLS_XPATH] autorelease] forKey:SHOES_CATEGORY_GIRLS_NAME];
-	[_shoesCategoryDict setObject:[[[ShoesCategory alloc] initWithName:SHOES_CATEGORY_BOYS_NAME andXPath:SHOES_CATEGORY_BOYS_XPATH] autorelease] forKey:SHOES_CATEGORY_BOYS_NAME];
-
+	[_shoesCategoryDict setObject:[[[ShoesCategory alloc] initWithName:SHOES_CATEGORY_BOYS_NAME andXPath:SHOES_CATEGORY_BOYS_XPATH] autorelease] forKey:SHOES_CATEGORY_BOYS_NAME];*/
+  //Setup category for women
+  ShoesCategory *category = [[[ShoesCategory alloc] initWithName:SHOES_CATEGORY_WOMEN_NAME andXPath:SHOES_CATEGORY_WOMEN_XPATH] autorelease];
+  category.categoryURI = SHOES_CATEGORY_WOMEN_URI_12ITEM;
+	[_shoesCategoryDict setObject: category forKey:SHOES_CATEGORY_WOMEN_NAME];
+  //Setup category for men
+  category = [[[ShoesCategory alloc] initWithName:SHOES_CATEGORY_MEN_NAME andXPath:SHOES_CATEGORY_MEN_XPATH] autorelease];
+  category.categoryURI = SHOES_CATEGORY_MEN_URI_12ITEM;
+	[_shoesCategoryDict setObject:category forKey:SHOES_CATEGORY_MEN_NAME];
+  //Setup category for girls
+  category = [[[ShoesCategory alloc] initWithName:SHOES_CATEGORY_GIRLS_NAME andXPath:SHOES_CATEGORY_GIRLS_XPATH] autorelease];
+  category.categoryURI = SHOES_CATEGORY_GIRLS_URI_12ITEM;
+	[_shoesCategoryDict setObject: category forKey:SHOES_CATEGORY_GIRLS_NAME];
+  //Setup category for boys
+  category = [[[ShoesCategory alloc] initWithName:SHOES_CATEGORY_BOYS_NAME andXPath:SHOES_CATEGORY_BOYS_XPATH] autorelease];
+  category.categoryURI = SHOES_CATEGORY_BOYS_URI_12ITEM;
+	[_shoesCategoryDict setObject:category forKey:SHOES_CATEGORY_BOYS_NAME];
+  
   [self.window addSubview:contentViewController.view];
 	slideMenuViewController = [[SlideMenuViewController alloc] initWithCategories:_shoesCategoryDict];
   
 	[self.window addSubview:slideMenuViewController.view];
   [self.window makeKeyAndVisible];
 	
-	[cu getContent:MYSHOES_URL withDelegate:self requestSelector:@selector(shoesCategoryUdateCallbackWithData:)];
-  [contentViewController startAnimation];
+  //The shoes category link is hard coded
+  
+	//[cu getContent:MYSHOES_URL withDelegate:self requestSelector:@selector(shoesCategoryUdateCallbackWithData:)];
+  //[contentViewController startAnimation];
 	
+  [contentViewController stopAnimation];
   return YES;
 }
 

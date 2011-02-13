@@ -2,17 +2,18 @@
 {
 	1D3623240D0F684500981E51 /* MyShoesAppDelegate.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1083, 468}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1320, 582}}";
 			sepNavSelRange = "{152, 0}";
-			sepNavVisRange = "{0, 954}";
+			sepNavVisRange = "{0, 955}";
+			sepNavWindowFrame = "{{1, 0}, {1619, 1028}}";
 		};
 	};
 	1D3623250D0F684500981E51 /* MyShoesAppDelegate.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1559, 1833}}";
-			sepNavSelRange = "{1301, 0}";
-			sepNavVisRange = "{724, 2210}";
-			sepNavWindowFrame = "{{1, 0}, {1387, 878}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1559, 2002}}";
+			sepNavSelRange = "{3674, 0}";
+			sepNavVisRange = "{1318, 2756}";
+			sepNavWindowFrame = "{{1, 0}, {1619, 1028}}";
 		};
 	};
 	1D6058900D05DD3D006BFB54 /* MyShoes */ = {
@@ -23,16 +24,16 @@
 	};
 	28D7ACF60DDB3853001CB0EB /* MyShoesViewController.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1083, 456}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1320, 582}}";
 			sepNavSelRange = "{612, 0}";
 			sepNavVisRange = "{0, 620}";
 		};
 	};
 	28D7ACF70DDB3853001CB0EB /* MyShoesViewController.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1083, 1183}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1320, 1183}}";
 			sepNavSelRange = "{1775, 46}";
-			sepNavVisRange = "{1288, 805}";
+			sepNavVisRange = "{961, 1137}";
 		};
 	};
 	29B97313FDCFA39411CA2CEA /* Project object */ = {
@@ -46,8 +47,6 @@
 		breakpoints = (
 			B0B8B9D512FB595600446CCC /* objc_exception_throw */,
 			B0B8BA4F12FB5EA600446CCC /* malloc_error_break */,
-			B0E1C1621306897E0044A2EF /* SlideMenuViewController.m:190 */,
-			B092F99B13088BBA007855C5 /* Shoes.m:154 */,
 		);
 		codeSenseManager = B0CFB18712CD53980045CA62 /* Code sense */;
 		executables = (
@@ -198,6 +197,17 @@
 			B092F9AC13088C8F007855C5 /* PBXTextBookmark */ = B092F9AC13088C8F007855C5 /* PBXTextBookmark */;
 			B092F9B113088CD8007855C5 /* PBXTextBookmark */ = B092F9B113088CD8007855C5 /* PBXTextBookmark */;
 			B092F9BB13088E01007855C5 /* PBXTextBookmark */ = B092F9BB13088E01007855C5 /* PBXTextBookmark */;
+			B092F9C4130898BB007855C5 /* PBXTextBookmark */ = B092F9C4130898BB007855C5 /* PBXTextBookmark */;
+			B092F9C5130898BB007855C5 /* PBXTextBookmark */ = B092F9C5130898BB007855C5 /* PBXTextBookmark */;
+			B092F9C6130898BB007855C5 /* PBXTextBookmark */ = B092F9C6130898BB007855C5 /* PBXTextBookmark */;
+			B092F9C7130898BB007855C5 /* PBXTextBookmark */ = B092F9C7130898BB007855C5 /* PBXTextBookmark */;
+			B092F9C8130898BB007855C5 /* PBXTextBookmark */ = B092F9C8130898BB007855C5 /* PBXTextBookmark */;
+			B092F9C9130898BB007855C5 /* PBXTextBookmark */ = B092F9C9130898BB007855C5 /* PBXTextBookmark */;
+			B092F9CA130898BB007855C5 /* PBXTextBookmark */ = B092F9CA130898BB007855C5 /* PBXTextBookmark */;
+			B092F9CB130898BB007855C5 /* PBXTextBookmark */ = B092F9CB130898BB007855C5 /* PBXTextBookmark */;
+			B092F9CC130898BB007855C5 /* PBXTextBookmark */ = B092F9CC130898BB007855C5 /* PBXTextBookmark */;
+			B092F9CD130898BB007855C5 /* PBXTextBookmark */ = B092F9CD130898BB007855C5 /* PBXTextBookmark */;
+			B092F9CE130898BB007855C5 /* PBXTextBookmark */ = B092F9CE130898BB007855C5 /* PBXTextBookmark */;
 			B0B8B8A212F8C79E00446CCC = B0B8B8A212F8C79E00446CCC /* PBXTextBookmark */;
 			B0B8B9D812FB595900446CCC = B0B8B9D812FB595900446CCC /* PBXTextBookmark */;
 			B0E1BA0E12FF51600044A2EF = B0E1BA0E12FF51600044A2EF /* PBXTextBookmark */;
@@ -292,7 +302,7 @@
 		fRef = 1D3623250D0F684500981E51 /* MyShoesAppDelegate.m */;
 		name = "MyShoesAppDelegate.m: 37";
 		rLen = 0;
-		rLoc = 1301;
+		rLoc = 1303;
 		rType = 0;
 		vrLen = 2210;
 		vrLoc = 724;
@@ -663,24 +673,6 @@
 		vrLen = 1132;
 		vrLoc = 3454;
 	};
-	B092F99B13088BBA007855C5 /* Shoes.m:154 */ = {
-		isa = PBXFileBreakpoint;
-		actions = (
-		);
-		breakpointStyle = 0;
-		continueAfterActions = 0;
-		countType = 0;
-		delayBeforeContinue = 0;
-		fileReference = B0B8B86F12F7EED600446CCC /* Shoes.m */;
-		functionName = "-processBrandTitleColor:";
-		hitCount = 1;
-		ignoreCount = 0;
-		lineNumber = 154;
-		location = MyShoes;
-		modificationTime = 319327454.110354;
-		originalNumberOfMultipleMatches = 1;
-		state = 1;
-	};
 	B092F9A313088BC8007855C5 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = B0B8B86F12F7EED600446CCC /* Shoes.m */;
@@ -731,11 +723,118 @@
 		vrLen = 959;
 		vrLoc = 3850;
 	};
+	B092F9C4130898BB007855C5 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623240D0F684500981E51 /* MyShoesAppDelegate.h */;
+		name = "MyShoesAppDelegate.h: 9";
+		rLen = 0;
+		rLoc = 152;
+		rType = 0;
+		vrLen = 955;
+		vrLoc = 0;
+	};
+	B092F9C5130898BB007855C5 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B0B8B86E12F7EED600446CCC /* Shoes.h */;
+		name = "Shoes.h: 52";
+		rLen = 0;
+		rLoc = 1484;
+		rType = 0;
+		vrLen = 1508;
+		vrLoc = 193;
+	};
+	B092F9C6130898BB007855C5 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B0E1BC8C130095560044A2EF /* ShoesCategory.m */;
+		name = "ShoesCategory.m: 28";
+		rLen = 0;
+		rLoc = 525;
+		rType = 0;
+		vrLen = 531;
+		vrLoc = 0;
+	};
+	B092F9C7130898BB007855C5 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B0E1BC8B130095560044A2EF /* ShoesCategory.h */;
+		name = "ShoesCategory.h: 26";
+		rLen = 64;
+		rLoc = 478;
+		rType = 0;
+		vrLen = 550;
+		vrLoc = 0;
+	};
+	B092F9C8130898BB007855C5 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF70DDB3853001CB0EB /* MyShoesViewController.m */;
+		name = "MyShoesViewController.m: 75";
+		rLen = 46;
+		rLoc = 1775;
+		rType = 0;
+		vrLen = 1137;
+		vrLoc = 961;
+	};
+	B092F9C9130898BB007855C5 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 28D7ACF60DDB3853001CB0EB /* MyShoesViewController.h */;
+		name = "MyShoesViewController.h: 24";
+		rLen = 0;
+		rLoc = 612;
+		rType = 0;
+		vrLen = 620;
+		vrLoc = 0;
+	};
+	B092F9CA130898BB007855C5 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B0B8B76B12F76C1900446CCC /* Config.h */;
+		name = "Config.h: 29";
+		rLen = 30;
+		rLoc = 1063;
+		rType = 0;
+		vrLen = 1771;
+		vrLoc = 0;
+	};
+	B092F9CB130898BB007855C5 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623250D0F684500981E51 /* MyShoesAppDelegate.m */;
+		name = "MyShoesAppDelegate.m: 70";
+		rLen = 0;
+		rLoc = 3674;
+		rType = 0;
+		vrLen = 2756;
+		vrLoc = 1318;
+	};
+	B092F9CC130898BB007855C5 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B0B8B86F12F7EED600446CCC /* Shoes.m */;
+		name = "Shoes.m: 154";
+		rLen = 0;
+		rLoc = 4455;
+		rType = 0;
+		vrLen = 954;
+		vrLoc = 3850;
+	};
+	B092F9CD130898BB007855C5 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B0E1BA8D12FF58FE0044A2EF /* SlideMenuViewController.m */;
+		rLen = 0;
+		rLoc = 189;
+		rType = 1;
+	};
+	B092F9CE130898BB007855C5 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B0E1BA8D12FF58FE0044A2EF /* SlideMenuViewController.m */;
+		name = "SlideMenuViewController.m: 190";
+		rLen = 0;
+		rLoc = 6248;
+		rType = 0;
+		vrLen = 1167;
+		vrLoc = 5429;
+	};
 	B0B8B76B12F76C1900446CCC /* Config.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1328, 726}}";
-			sepNavSelRange = "{304, 0}";
-			sepNavVisRange = "{0, 1428}";
+			sepNavIntBoundsRect = "{{0, 0}, {1320, 582}}";
+			sepNavSelRange = "{1063, 30}";
+			sepNavVisRange = "{0, 1771}";
 		};
 	};
 	B0B8B79C12F7706600446CCC /* Debug.h */ = {
@@ -792,15 +891,15 @@
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1320, 793}}";
 			sepNavSelRange = "{1484, 0}";
-			sepNavVisRange = "{223, 1422}";
+			sepNavVisRange = "{193, 1508}";
 			sepNavWindowFrame = "{{0, 0}, {1618, 1028}}";
 		};
 	};
 	B0B8B86F12F7EED600446CCC /* Shoes.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1320, 2314}}";
-			sepNavSelRange = "{4147, 0}";
-			sepNavVisRange = "{3850, 959}";
+			sepNavIntBoundsRect = "{{0, 0}, {1320, 2405}}";
+			sepNavSelRange = "{4455, 0}";
+			sepNavVisRange = "{3850, 954}";
 			sepNavWindowFrame = "{{0, 0}, {1618, 1028}}";
 		};
 	};
@@ -855,7 +954,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		location = libobjc.A.dylib;
-		modificationTime = 319327449.795593;
+		modificationTime = 319330471.325389;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
 		symbolName = objc_exception_throw;
@@ -881,7 +980,7 @@
 		hitCount = 0;
 		ignoreCount = 0;
 		location = libSystem.B.dylib;
-		modificationTime = 319327449.795625;
+		modificationTime = 319330471.325682;
 		originalNumberOfMultipleMatches = 1;
 		state = 1;
 		symbolName = malloc_error_break;
@@ -1000,9 +1099,9 @@
 	};
 	B0E1BA8D12FF58FE0044A2EF /* SlideMenuViewController.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1139, 2873}}";
-			sepNavSelRange = "{6566, 0}";
-			sepNavVisRange = "{5710, 902}";
+			sepNavIntBoundsRect = "{{0, 0}, {1594, 2756}}";
+			sepNavSelRange = "{6248, 0}";
+			sepNavVisRange = "{5429, 1167}";
 			sepNavWindowFrame = "{{0, 0}, {1383, 878}}";
 		};
 	};
@@ -1018,14 +1117,14 @@
 	};
 	B0E1BC8B130095560044A2EF /* ShoesCategory.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1328, 730}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1320, 582}}";
 			sepNavSelRange = "{478, 64}";
 			sepNavVisRange = "{0, 550}";
 		};
 	};
 	B0E1BC8C130095560044A2EF /* ShoesCategory.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1126, 478}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1320, 582}}";
 			sepNavSelRange = "{525, 0}";
 			sepNavVisRange = "{0, 531}";
 		};
@@ -1174,24 +1273,6 @@
 		rType = 0;
 		vrLen = 1428;
 		vrLoc = 0;
-	};
-	B0E1C1621306897E0044A2EF /* SlideMenuViewController.m:190 */ = {
-		isa = PBXFileBreakpoint;
-		actions = (
-		);
-		breakpointStyle = 0;
-		continueAfterActions = 0;
-		countType = 0;
-		delayBeforeContinue = 0;
-		fileReference = B0E1BA8D12FF58FE0044A2EF /* SlideMenuViewController.m */;
-		functionName = "-shoesCategoryUdateCallbackWithData:";
-		hitCount = 0;
-		ignoreCount = 0;
-		lineNumber = 190;
-		location = MyShoes;
-		modificationTime = 319327449.795192;
-		originalNumberOfMultipleMatches = 1;
-		state = 1;
 	};
 	B0E1C16C130689EF0044A2EF /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;

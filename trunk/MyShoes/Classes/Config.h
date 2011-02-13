@@ -23,6 +23,11 @@
 #define SHOES_CATEGORY_GIRLS_NAME @"Girls"
 #define SHOES_CATEGORY_BOYS_NAME @"Boys"
 
+#define SHOES_CATEGORY_WOMEN_URI_12ITEM @"/en-US/Womens/_/_/_/View+12/Products.aspx"
+#define SHOES_CATEGORY_MEN_URI_12ITEM @"/en-US/Mens/_/_/_/View+12/Products.aspx"
+#define SHOES_CATEGORY_GIRLS_URI_12ITEM @"/en-US/Kids-Girls/_/_/_/View+12/Products.aspx"
+#define SHOES_CATEGORY_BOYS_URI_12ITEM @"/en-US/Kids-Boys/_/_/_/View+12/Products.aspx"
+
 #define SHOES_NODE_PRODUCTTAG @"class"
 #define SHOES_NODE_PRODUCTPRICETAG_USD @"e4xprice_usd"
 #define SHOES_NODE_PRODUCTIMAGE @"productImage"
