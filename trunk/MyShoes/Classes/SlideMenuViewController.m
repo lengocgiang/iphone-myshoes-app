@@ -21,6 +21,7 @@
 @synthesize previousButton = _previousButton;
 @synthesize shoesCategoryDict = _shoesCategoryDict;
 @synthesize shoesArray = _shoesArray;
+@synthesize categoryButtons = _categoryButtons;
 @synthesize cu = _cu;
 
 
@@ -78,9 +79,9 @@
 		
 		//[btn release];
 	}
-	
-	// initialize the slide menu by passing a suitable frame, background color and an array of buttons.
-    //slideMenuView = [[SlideMenuView alloc] initWithFrameColorAndButtons:CGRectMake(0.0f, [self.view bounds].size.height - 80.0f, [self.view bounds].size.width,  80.0f) backgroundColor:[UIColor grayColor]  buttons:buttonArray];
+	self.categoryButtons = [[buttonArray copy] autorelease];
+  // initialize the slide menu by passing a suitable frame, background color and an array of buttons.
+  //slideMenuView = [[SlideMenuView alloc] initWithFrameColorAndButtons:CGRectMake(0.0f, [self.view bounds].size.height - 80.0f, [self.view bounds].size.width,  80.0f) backgroundColor:[UIColor grayColor]  buttons:buttonArray];
 	slideMenuView = [[SlideMenuView alloc] initWithFrameColorAndButtons:CGRectMake(0.0f, 0.0f, [self.view bounds].size.width,  [self.view bounds].size.height) backgroundColor:[UIColor grayColor]  buttons:buttonArray];
 
 	// Add the slide menu to the window.
@@ -118,6 +119,11 @@
 }
 
 - (void)buttonPressed:(id)sender {
+  //Disable all buttons
+  for(UIButton *btn in self.categoryButtons){
+    [btn setEnabled:FALSE];
+  }
+  
   //Start animation
   MyShoesAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
   [delegate.contentViewController startAnimation];
@@ -184,6 +190,12 @@
     NSString *imageName = shoes.shoesImageName;
     NSString *imageUrl = [NSString stringWithFormat:@"%@%@",MYSHOES_URL,imageName];
     [delegate.contentViewController showShoesImage:imageUrl];
+  }
+  
+  //Enable all buttons
+  //Disable all buttons
+  for(UIButton *btn in self.categoryButtons){
+    [btn setEnabled:TRUE];
   }
 
 }
