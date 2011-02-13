@@ -34,7 +34,7 @@
 	// Add the slide menu to the window.
 	[self.window addSubview:slideMenuView];*/
 	// Add the view controller's view to the window and display.
-	_shoesCategoryDict = [[NSMutableDictionary alloc] init];
+	_shoesCategoryDict = [[OrderedDictionary alloc] init];
 	[_shoesCategoryDict setObject:[[[ShoesCategory alloc] initWithName:SHOES_CATEGORY_WOMEN_NAME andXPath:SHOES_CATEGORY_WOMEN_XPATH] autorelease] forKey:SHOES_CATEGORY_WOMEN_NAME];
 	[_shoesCategoryDict setObject:[[[ShoesCategory alloc] initWithName:SHOES_CATEGORY_MEN_NAME andXPath:SHOES_CATEGORY_MEN_XPATH] autorelease] forKey:SHOES_CATEGORY_MEN_NAME];
 	[_shoesCategoryDict setObject:[[[ShoesCategory alloc] initWithName:SHOES_CATEGORY_GIRLS_NAME andXPath:SHOES_CATEGORY_GIRLS_XPATH] autorelease] forKey:SHOES_CATEGORY_GIRLS_NAME];

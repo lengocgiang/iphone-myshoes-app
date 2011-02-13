@@ -14,6 +14,8 @@
 #import "Debug.h"
 #import "ShoesCategory.h"
 
+#import "OrderedDictionary.h"
+
 @class MyShoesViewController;
 
 @interface MyShoesAppDelegate : NSObject <UIApplicationDelegate> {

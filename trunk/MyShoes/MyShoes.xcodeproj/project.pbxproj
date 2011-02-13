@@ -15,6 +15,7 @@
 		2899E5220DE3E06400AC0155 /* MyShoesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* MyShoesViewController.xib */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		28D7ACF80DDB3853001CB0EB /* MyShoesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* MyShoesViewController.m */; };
+		B092F8D11307DB39007855C5 /* OrderedDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = B092F8CF1307DB39007855C5 /* OrderedDictionary.m */; };
 		B0B8B7E312F7917A00446CCC /* TFHpple.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B8B7DE12F7917A00446CCC /* TFHpple.m */; };
 		B0B8B7E412F7917A00446CCC /* TFHppleElement.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B8B7E012F7917A00446CCC /* TFHppleElement.m */; };
 		B0B8B7E512F7917A00446CCC /* XPathQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B8B7E212F7917A00446CCC /* XPathQuery.m */; };
@@ -40,6 +41,8 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* MyShoes_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyShoes_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* MyShoes-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "MyShoes-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		B092F8CF1307DB39007855C5 /* OrderedDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderedDictionary.m; sourceTree = "<group>"; };
+		B092F8D01307DB39007855C5 /* OrderedDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderedDictionary.h; sourceTree = "<group>"; };
 		B0B8B76B12F76C1900446CCC /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Config.h; sourceTree = "<group>"; };
 		B0B8B79C12F7706600446CCC /* Debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Debug.h; sourceTree = "<group>"; };
 		B0B8B7DD12F7917A00446CCC /* TFHpple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFHpple.h; sourceTree = "<group>"; };
@@ -112,6 +115,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				B092F8CE1307DB0C007855C5 /* OrderedDictionary */,
 				B0B8B7DC12F7917A00446CCC /* hpple */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -149,6 +153,15 @@
 				288765A40DF7441C002DB57D /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B092F8CE1307DB0C007855C5 /* OrderedDictionary */ = {
+			isa = PBXGroup;
+			children = (
+				B092F8D01307DB39007855C5 /* OrderedDictionary.h */,
+				B092F8CF1307DB39007855C5 /* OrderedDictionary.m */,
+			);
+			name = OrderedDictionary;
 			sourceTree = "<group>";
 		};
 		B0B8B7DC12F7917A00446CCC /* hpple */ = {
@@ -238,6 +251,7 @@
 				B0E1BA8E12FF58FE0044A2EF /* SlideMenuViewController.m in Sources */,
 				B0E1BC8D130095560044A2EF /* ShoesCategory.m in Sources */,
 				B0E1BE741301F88B0044A2EF /* TFHppleElement+AccessChildren.m in Sources */,
+				B092F8D11307DB39007855C5 /* OrderedDictionary.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -2,16 +2,16 @@
 {
 	1D3623240D0F684500981E51 /* MyShoesAppDelegate.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1083, 456}}";
-			sepNavSelRange = "{765, 0}";
-			sepNavVisRange = "{0, 924}";
+			sepNavIntBoundsRect = "{{0, 0}, {1083, 468}}";
+			sepNavSelRange = "{152, 0}";
+			sepNavVisRange = "{0, 954}";
 		};
 	};
 	1D3623250D0F684500981E51 /* MyShoesAppDelegate.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1559, 1846}}";
-			sepNavSelRange = "{2028, 0}";
-			sepNavVisRange = "{1318, 1881}";
+			sepNavIntBoundsRect = "{{0, 0}, {1559, 1833}}";
+			sepNavSelRange = "{1301, 0}";
+			sepNavVisRange = "{724, 2210}";
 			sepNavWindowFrame = "{{1, 0}, {1387, 878}}";
 		};
 	};
@@ -41,6 +41,7 @@
 		activeSDKPreference = iphonesimulator4.2;
 		activeTarget = 1D6058900D05DD3D006BFB54 /* MyShoes */;
 		addToTargets = (
+			1D6058900D05DD3D006BFB54 /* MyShoes */,
 		);
 		breakpoints = (
 			B0B8B9D512FB595600446CCC /* objc_exception_throw */,
@@ -153,6 +154,20 @@
 		perUserProjectItems = {
 			B092F8C11307A5E2007855C5 /* PBXTextBookmark */ = B092F8C11307A5E2007855C5 /* PBXTextBookmark */;
 			B092F8C21307A5E2007855C5 /* PBXTextBookmark */ = B092F8C21307A5E2007855C5 /* PBXTextBookmark */;
+			B092F8D61307DC2D007855C5 /* XCBuildMessageTextBookmark */ = B092F8D61307DC2D007855C5 /* XCBuildMessageTextBookmark */;
+			B092F8D71307DC2D007855C5 /* PBXTextBookmark */ = B092F8D71307DC2D007855C5 /* PBXTextBookmark */;
+			B092F8E41307DC62007855C5 /* PBXTextBookmark */ = B092F8E41307DC62007855C5 /* PBXTextBookmark */;
+			B092F8E51307DC62007855C5 /* PBXTextBookmark */ = B092F8E51307DC62007855C5 /* PBXTextBookmark */;
+			B092F8E61307DC62007855C5 /* PBXTextBookmark */ = B092F8E61307DC62007855C5 /* PBXTextBookmark */;
+			B092F8E81307DC62007855C5 /* PBXTextBookmark */ = B092F8E81307DC62007855C5 /* PBXTextBookmark */;
+			B092F8E91307DC62007855C5 /* PBXTextBookmark */ = B092F8E91307DC62007855C5 /* PBXTextBookmark */;
+			B092F8EA1307DC62007855C5 /* PBXTextBookmark */ = B092F8EA1307DC62007855C5 /* PBXTextBookmark */;
+			B092F8EB1307DC62007855C5 /* PBXTextBookmark */ = B092F8EB1307DC62007855C5 /* PBXTextBookmark */;
+			B092F8EC1307DC62007855C5 /* PBXTextBookmark */ = B092F8EC1307DC62007855C5 /* PBXTextBookmark */;
+			B092F8ED1307DC62007855C5 /* PBXTextBookmark */ = B092F8ED1307DC62007855C5 /* PBXTextBookmark */;
+			B092F8EE1307DC62007855C5 /* PBXTextBookmark */ = B092F8EE1307DC62007855C5 /* PBXTextBookmark */;
+			B092F8F01307DCBD007855C5 /* PBXTextBookmark */ = B092F8F01307DCBD007855C5 /* PBXTextBookmark */;
+			B092F8F11307DCBD007855C5 /* PBXTextBookmark */ = B092F8F11307DCBD007855C5 /* PBXTextBookmark */;
 			B0B8B8A212F8C79E00446CCC = B0B8B8A212F8C79E00446CCC /* PBXTextBookmark */;
 			B0B8B9D812FB595900446CCC = B0B8B9D812FB595900446CCC /* PBXTextBookmark */;
 			B0E1BA0E12FF51600044A2EF = B0E1BA0E12FF51600044A2EF /* PBXTextBookmark */;
@@ -219,6 +234,171 @@
 		vrLen = 860;
 		vrLoc = 0;
 	};
+	B092F8CF1307DB39007855C5 /* OrderedDictionary.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1083, 1677}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 1112}";
+		};
+	};
+	B092F8D01307DB39007855C5 /* OrderedDictionary.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1083, 440}}";
+			sepNavSelRange = "{532, 0}";
+			sepNavVisRange = "{0, 811}";
+			sepNavWindowFrame = "{{0, 0}, {1384, 878}}";
+		};
+	};
+	B092F8D61307DC2D007855C5 /* XCBuildMessageTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "Cocoa/Cocoa.h: No such file or directory";
+		fRef = B092F8D01307DB39007855C5 /* OrderedDictionary.h */;
+		fallbackIsa = XCBuildMessageTextBookmark;
+		rLen = 1;
+		rLoc = 14;
+		rType = 1;
+	};
+	B092F8D71307DC2D007855C5 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B092F8D01307DB39007855C5 /* OrderedDictionary.h */;
+		name = "OrderedDictionary.h: 15";
+		rLen = 0;
+		rLoc = 499;
+		rType = 0;
+		vrLen = 801;
+		vrLoc = 0;
+	};
+	B092F8E41307DC62007855C5 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B0E1BA8C12FF58FE0044A2EF /* SlideMenuViewController.h */;
+		name = "SlideMenuViewController.h: 30";
+		rLen = 0;
+		rLoc = 749;
+		rType = 0;
+		vrLen = 860;
+		vrLoc = 0;
+	};
+	B092F8E51307DC62007855C5 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B0E1BA8D12FF58FE0044A2EF /* SlideMenuViewController.m */;
+		name = "SlideMenuViewController.m: 198";
+		rLen = 0;
+		rLoc = 6566;
+		rType = 0;
+		vrLen = 902;
+		vrLoc = 5710;
+	};
+	B092F8E61307DC62007855C5 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B092F8E71307DC62007855C5 /* project.pbxproj */;
+		name = "project.pbxproj: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 3740;
+		vrLoc = 0;
+	};
+	B092F8E71307DC62007855C5 /* project.pbxproj */ = {
+		isa = PBXFileReference;
+		name = project.pbxproj;
+		path = /Users/denny/projects/MyShoes/MyShoes.xcodeproj/project.pbxproj;
+		sourceTree = "<absolute>";
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1664, 3939}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 3678}";
+		};
+	};
+	B092F8E81307DC62007855C5 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623250D0F684500981E51 /* MyShoesAppDelegate.m */;
+		name = "MyShoesAppDelegate.m: 37";
+		rLen = 0;
+		rLoc = 1301;
+		rType = 0;
+		vrLen = 2210;
+		vrLoc = 724;
+	};
+	B092F8E91307DC62007855C5 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 1D3623240D0F684500981E51 /* MyShoesAppDelegate.h */;
+		name = "MyShoesAppDelegate.h: 9";
+		rLen = 0;
+		rLoc = 152;
+		rType = 0;
+		vrLen = 954;
+		vrLoc = 0;
+	};
+	B092F8EA1307DC62007855C5 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B0B8B95D12FA8F7600446CCC /* SlideMenuView.h */;
+		name = "SlideMenuView.h: 12";
+		rLen = 12;
+		rLoc = 255;
+		rType = 0;
+		vrLen = 746;
+		vrLoc = 0;
+	};
+	B092F8EB1307DC62007855C5 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B0B8B86E12F7EED600446CCC /* Shoes.h */;
+		name = "Shoes.h: 9";
+		rLen = 33;
+		rLoc = 115;
+		rType = 0;
+		vrLen = 623;
+		vrLoc = 0;
+	};
+	B092F8EC1307DC62007855C5 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B092F8D01307DB39007855C5 /* OrderedDictionary.h */;
+		name = "OrderedDictionary.h: 15";
+		rLen = 0;
+		rLoc = 532;
+		rType = 0;
+		vrLen = 811;
+		vrLoc = 0;
+	};
+	B092F8ED1307DC62007855C5 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B092F8CF1307DB39007855C5 /* OrderedDictionary.m */;
+		name = "OrderedDictionary.m: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 1112;
+		vrLoc = 0;
+	};
+	B092F8EE1307DC62007855C5 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B092F8CF1307DB39007855C5 /* OrderedDictionary.m */;
+		name = "OrderedDictionary.m: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 1073;
+		vrLoc = 0;
+	};
+	B092F8F01307DCBD007855C5 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B092F8CF1307DB39007855C5 /* OrderedDictionary.m */;
+		name = "OrderedDictionary.m: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 1112;
+		vrLoc = 0;
+	};
+	B092F8F11307DCBD007855C5 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B092F8E71307DC62007855C5 /* project.pbxproj */;
+		name = "project.pbxproj: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 3678;
+		vrLoc = 0;
+	};
 	B0B8B76B12F76C1900446CCC /* Config.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1328, 726}}";
@@ -279,8 +459,8 @@
 	B0B8B86E12F7EED600446CCC /* Shoes.h */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1083, 676}}";
-			sepNavSelRange = "{354, 15}";
-			sepNavVisRange = "{248, 1171}";
+			sepNavSelRange = "{115, 33}";
+			sepNavVisRange = "{0, 623}";
 			sepNavWindowFrame = "{{0, 0}, {1618, 1028}}";
 		};
 	};
@@ -319,7 +499,7 @@
 	};
 	B0B8B95D12FA8F7600446CCC /* SlideMenuView.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1083, 456}}";
+			sepNavIntBoundsRect = "{{0, 0}, {1083, 440}}";
 			sepNavSelRange = "{255, 12}";
 			sepNavVisRange = "{0, 746}";
 			sepNavWindowFrame = "{{0, 0}, {1387, 878}}";
@@ -490,7 +670,7 @@
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1139, 2873}}";
 			sepNavSelRange = "{6566, 0}";
-			sepNavVisRange = "{5710, 933}";
+			sepNavVisRange = "{5710, 902}";
 			sepNavWindowFrame = "{{0, 0}, {1383, 878}}";
 		};
 	};
@@ -764,7 +944,7 @@
 		fRef = 1D3623240D0F684500981E51 /* MyShoesAppDelegate.h */;
 		name = "MyShoesAppDelegate.h: 28";
 		rLen = 0;
-		rLoc = 765;
+		rLoc = 796;
 		rType = 0;
 		vrLen = 924;
 		vrLoc = 0;
@@ -774,7 +954,7 @@
 		fRef = 1D3623250D0F684500981E51 /* MyShoesAppDelegate.m */;
 		name = "MyShoesAppDelegate.m: 43";
 		rLen = 0;
-		rLoc = 2028;
+		rLoc = 2026;
 		rType = 0;
 		vrLen = 1881;
 		vrLoc = 1318;
