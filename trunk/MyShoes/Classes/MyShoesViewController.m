@@ -13,7 +13,8 @@
 @synthesize contentView;
 @synthesize progressIndicator;
 @synthesize shoesImage;
-
+@synthesize slideImageView = _slideImageView;
+@synthesize imageArray = _imageArray;
 /*
 // The designated initializer. Override to perform setup that is required before the view is loaded.
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -38,6 +39,30 @@
   [super viewDidLoad];
   //Hide progress indicator
   //[progressIndicator removeFromSuperview];
+  //Add slide Image View
+
+  NSMutableArray* images = [NSMutableArray arrayWithCapacity:CAPACITY_SHOES_LIST];
+	
+	for(int i=0; i<CATEGORY_SHOES_COUNT; i++)
+	{
+		// Rounded rect is nice
+		UIWebView *imageView = [[UIWebView alloc] initWithFrame:CGRectMake(0.0f, 20.0f, 50.0f, 50.0f)];
+		
+		// Give the buttons a width of 100 and a height of 30. The slide menu will take care of positioning the buttons.
+		// If you don't know that 100 will be enough, use my function to calculate the length of a string. You find it on my blog.
+		/*[btn setFrame:CGRectMake(0.0f, 20.0f, 50.0f, 50.0f)];
+		[btn setTitle:scategoryName forState:UIControlStateNormal];		
+		[btn addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];*/
+		[images addObject:imageView];
+		
+		//[btn release];
+	}
+	
+  self.imageArray = [[images copy] autorelease];
+  self.slideImageView = [[SlideImageView alloc] initWithFrameColorAndImages:CGRectMake(0.0f, 50.0f, 320.0f,  250.0f) 
+                                                            backgroundColor:[UIColor grayColor]  
+                                                                     images:self.imageArray];
+  [self.contentView addSubview:self.slideImageView];
 }
 
 
@@ -72,14 +97,23 @@
   [progressIndicator removeFromSuperview];
 }
 
-- (void) showShoesImage:(NSString *) imageUrl {
+- (void) showShoes:(NSArray *) shoesArray {
   //Start animation
   [self startAnimation];
+  int i=0;
   
-  NSURL *url = [NSURL URLWithString:imageUrl];
-  NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
+  for (Shoes *shoes in shoesArray){
+    
+    NSString *imageName = shoes.shoesImageName;
+    NSString *imageUrl = [NSString stringWithFormat:@"%@%@",MYSHOES_URL,imageName];
+    
+    NSURL *url = [NSURL URLWithString:imageUrl];
+    NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
   
-  [shoesImage loadRequest:requestObj];
+    if (i< [self.imageArray count]){
+      [[self.imageArray objectAtIndex:i++] loadRequest:requestObj];
+    }
+  }
   [self stopAnimation];
 }
 
