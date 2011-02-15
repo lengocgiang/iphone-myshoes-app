@@ -47,20 +47,6 @@
 						<int key="NSvFlags">274</int>
 						<object class="NSMutableArray" key="NSSubviews">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBUIWebView" id="942826562">
-								<reference key="NSNextResponder" ref="991569921"/>
-								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{91, 83}, {135, 135}}</string>
-								<reference key="NSSuperview" ref="991569921"/>
-								<object class="NSColor" key="IBUIBackgroundColor">
-									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MSAxIDEAA</bytes>
-								</object>
-								<bool key="IBUIMultipleTouchEnabled">YES</bool>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<int key="IBUIDataDetectorTypes">1</int>
-								<bool key="IBUIDetectsPhoneNumbers">YES</bool>
-							</object>
 							<object class="IBUIActivityIndicatorView" id="189223042">
 								<reference key="NSNextResponder" ref="991569921"/>
 								<int key="NSvFlags">292</int>
@@ -123,14 +109,6 @@
 					</object>
 					<int key="connectionID">11</int>
 				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">shoesImage</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="942826562"/>
-					</object>
-					<int key="connectionID">13</int>
-				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -167,7 +145,6 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="189223042"/>
-							<reference ref="942826562"/>
 						</object>
 						<reference key="parent" ref="774585933"/>
 						<string key="objectName">contentView</string>
@@ -178,12 +155,6 @@
 						<reference key="parent" ref="991569921"/>
 						<string key="objectName">progressIndicator</string>
 					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">12</int>
-						<reference key="object" ref="942826562"/>
-						<reference key="parent" ref="991569921"/>
-						<string key="objectName">shoesImage</string>
-					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -192,8 +163,6 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>-1.CustomClassName</string>
 					<string>-2.CustomClassName</string>
-					<string>12.IBPluginDependency</string>
-					<string>12.IBViewBoundsToFrameTransform</string>
 					<string>6.IBEditorWindowLastContentRect</string>
 					<string>6.IBPluginDependency</string>
 					<string>8.IBPluginDependency</string>
@@ -205,10 +174,6 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>MyShoesViewController</string>
 					<string>UIResponder</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">P4AAAL+AAABCuAAAw1kAAA</bytes>
-					</object>
 					<string>{{351, 376}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
