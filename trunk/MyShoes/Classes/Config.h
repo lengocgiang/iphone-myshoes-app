@@ -37,6 +37,7 @@
 
 #define SHOES_CATEGORY_PRODUCT_LIST_XPATH @"//*[@id='ResultZone2_wrapper']//div[@class='productCell']"
 //#define SHOES_CATEGORY_PRODUCT_LIST_XPATH @"//*[@id='ResultZone2_wrapper']//div[@style='height: auto;']"
+#define CATEGORY_SHOES_COUNT 12
 
 #define CAPACITY_DICTIONARY 20
 #define CAPACITY_SCROLL_BAR 20
