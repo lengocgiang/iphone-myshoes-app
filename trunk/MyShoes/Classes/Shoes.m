@@ -142,12 +142,12 @@
     return;
   }
 
-  [element autorelease];
+  //[element autorelease];
   element = [elements objectAtIndex:2];
   
   self.productColor = [element content];
   
-  [element autorelease];
+  //[element autorelease];
   //Check if the shoes has the rating info section
   if ([elements count] >= 4){
     element = [elements objectAtIndex:3];
