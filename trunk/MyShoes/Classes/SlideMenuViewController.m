@@ -82,7 +82,9 @@
 	self.categoryButtons = [[buttonArray copy] autorelease];
   // initialize the slide menu by passing a suitable frame, background color and an array of buttons.
   //slideMenuView = [[SlideMenuView alloc] initWithFrameColorAndButtons:CGRectMake(0.0f, [self.view bounds].size.height - 80.0f, [self.view bounds].size.width,  80.0f) backgroundColor:[UIColor grayColor]  buttons:buttonArray];
-	slideMenuView = [[SlideMenuView alloc] initWithFrameColorAndButtons:CGRectMake(0.0f, 0.0f, [self.view bounds].size.width,  [self.view bounds].size.height) backgroundColor:[UIColor grayColor]  buttons:buttonArray];
+	self.slideMenuView = [[SlideMenuView alloc] initWithFrameColorAndButtons:CGRectMake(0.0f, 0.0f, [self.view bounds].size.width,  [self.view bounds].size.height) 
+                                                           backgroundColor:[UIColor grayColor]  
+                                                                   buttons:self.categoryButtons];
 
 	// Add the slide menu to the window.
 	[self.view addSubview:slideMenuView];
@@ -186,10 +188,10 @@
   //If there is any shoes come back, show the first shoes
   if ([self.shoesArray count] > 0){
     //Show the first shoes in the list
-    Shoes *shoes = [self.shoesArray objectAtIndex:0];
+    /*Shoes *shoes = [self.shoesArray objectAtIndex:0];
     NSString *imageName = shoes.shoesImageName;
-    NSString *imageUrl = [NSString stringWithFormat:@"%@%@",MYSHOES_URL,imageName];
-    [delegate.contentViewController showShoesImage:imageUrl];
+    NSString *imageUrl = [NSString stringWithFormat:@"%@%@",MYSHOES_URL,imageName];*/
+    [delegate.contentViewController showShoes:self.shoesArray];
   }
   
   //Enable all buttons
@@ -206,7 +208,7 @@
 	[self.slideMenuView release];
 	[self.view release];
 	
-    [super dealloc];
+  [super dealloc];
 }
 
 
