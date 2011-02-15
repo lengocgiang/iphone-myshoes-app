@@ -44,14 +44,17 @@
   category.categoryURI = SHOES_CATEGORY_WOMEN_URI_12ITEM;
 	[_shoesCategoryDict setObject: category forKey:SHOES_CATEGORY_WOMEN_NAME];
   //Setup category for men
+  //[category autorelease];
   category = [[[ShoesCategory alloc] initWithName:SHOES_CATEGORY_MEN_NAME andXPath:SHOES_CATEGORY_MEN_XPATH] autorelease];
   category.categoryURI = SHOES_CATEGORY_MEN_URI_12ITEM;
 	[_shoesCategoryDict setObject:category forKey:SHOES_CATEGORY_MEN_NAME];
   //Setup category for girls
+  //[category autorelease];
   category = [[[ShoesCategory alloc] initWithName:SHOES_CATEGORY_GIRLS_NAME andXPath:SHOES_CATEGORY_GIRLS_XPATH] autorelease];
   category.categoryURI = SHOES_CATEGORY_GIRLS_URI_12ITEM;
 	[_shoesCategoryDict setObject: category forKey:SHOES_CATEGORY_GIRLS_NAME];
   //Setup category for boys
+  //[category autorelease];
   category = [[[ShoesCategory alloc] initWithName:SHOES_CATEGORY_BOYS_NAME andXPath:SHOES_CATEGORY_BOYS_XPATH] autorelease];
   category.categoryURI = SHOES_CATEGORY_BOYS_URI_12ITEM;
 	[_shoesCategoryDict setObject:category forKey:SHOES_CATEGORY_BOYS_NAME];
