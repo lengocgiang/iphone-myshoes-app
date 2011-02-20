@@ -32,7 +32,9 @@
     }
     
     [self updateImagesRectAnimation];
-    [self updateImagesRectNoAnimation];
+    [self updateImagesRectAnimationRight];
+    [self updateImagesRectAnimationLeft];
+    
 	}
 	return self;
 }
@@ -75,10 +77,10 @@
 }
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{ 
-  NSLog(@"TOUCHES MOVED!!");
   if(!_firstMove){
     return;
   }
+  NSLog(@"TOUCHES MOVED!!");
   // get touch event
   UITouch *touch = [[event allTouches] anyObject];
 
@@ -86,27 +88,53 @@
   CGPoint touchLoc = [touch locationInView:touch.view];
   NSLog(@"Mouse location: %f %f", touchLoc.x, touchLoc.y);
   int dx = _touchBegin.x - touchLoc.x;
-  int dy = _touchBegin.y - touchLoc.y;
-  if(dy>0){
+  //int dy = _touchBegin.y - touchLoc.y;
+  /*if(dy>0){
     NSLog(@"N");
   }else{
     NSLog(@"S");
-  }
+  }*/
   if(dx>0)
   {
     NSLog(@"W");
-
-    id queueHead = [self.imageViews dequeue];
-    [self.imageViews enqueue:queueHead];
     
-    [UIView beginAnimations:nil context:nil];
-    [self updateImagesRectAnimation];
-    [UIView commitAnimations];
-    [self updateImagesRectNoAnimation];
+    if ([self.imageViews count] >= 1) {
+
+      id queueHead = [self.imageViews dequeue];
+      [self.imageViews enqueue:queueHead];
+    
+      [UIView beginAnimations:nil context:nil];
+      [self updateImagesRectAnimation];
+      [self updateImagesRectAnimationLeft];
+      [UIView commitAnimations];
+      [self updateImagesRectAnimationRight];
+    }
 
   }else{
     //Going backward to the previous views
     NSLog(@"E");
+    
+    if ([self.imageViews count] >= 1)
+    {
+      //Get and remove the last image in the queue
+      id endObject = [self.imageViews objectAtIndex:[self.imageViews count] -1];
+      if (endObject != nil) {
+        [[endObject retain] autorelease]; // so it isn't dealloc'ed on remove
+        [self.imageViews removeObjectAtIndex:[self.imageViews count] -1];
+      }
+      [self.imageViews insertObject:endObject atIndex:0];
+      //[self.imageViews enqueue:endObject];
+      /*for (int i=[self.imageViews.count]-1; i>=1 ;i--)
+      {
+        [self.imageViews[i] =
+      }*/
+      
+      [UIView beginAnimations:nil context:nil];
+      [self updateImagesRectAnimation];
+      [self updateImagesRectAnimationRight];
+      [UIView commitAnimations];
+      [self updateImagesRectAnimationLeft];
+    }
   }
   _firstMove = FALSE;
 }
@@ -133,8 +161,8 @@
   //((UIView*)[self.imageViews objectAtIndex:5]).layer.cornerRadius = (0/135.0f)*SHOES_IMAGE_CORNER_RADIUS;
 
   //Set the position of the last image in the image queue
-  [(UIView*)[self.imageViews objectAtIndex:[_imageViews count]-1] setFrame:CGRectMake(-295.0f, 108.0f, 135.0f,  135.0f)];
-  ((UIView*)[self.imageViews objectAtIndex:[_imageViews count]-1]).layer.cornerRadius = (135.0f/135.0f)*SHOES_IMAGE_CORNER_RADIUS;
+  //[(UIView*)[self.imageViews objectAtIndex:[_imageViews count]-1] setFrame:CGRectMake(-295.0f, 108.0f, 135.0f,  135.0f)];
+  //((UIView*)[self.imageViews objectAtIndex:[_imageViews count]-1]).layer.cornerRadius = (135.0f/135.0f)*SHOES_IMAGE_CORNER_RADIUS;
 
   for (int i=3; i>=0; i--){
     [self addSubview:((UIView*)[self.imageViews objectAtIndex:i])];
@@ -148,12 +176,22 @@
   
 }
 
-- (void)updateImagesRectNoAnimation{
+- (void)updateImagesRectAnimationLeft{
+  [(UIView*)[self.imageViews objectAtIndex:[_imageViews count]-1] setFrame:CGRectMake(-295.0f, 108.0f, 135.0f,  135.0f)];
+  ((UIView*)[self.imageViews objectAtIndex:[_imageViews count]-1]).layer.cornerRadius = (135.0f/135.0f)*SHOES_IMAGE_CORNER_RADIUS;
+}
+
+- (void)updateImagesRectAnimationRight{
   [(UIView*)[self.imageViews objectAtIndex:5] setFrame:CGRectMake(148.0f, 9.0f, 0.0f,  0.0f)];
   ((UIView*)[self.imageViews objectAtIndex:5]).layer.cornerRadius = (0/135.0f)*SHOES_IMAGE_CORNER_RADIUS;
-  //[(UIView*)[self.imageViews objectAtIndex:[_imageViews count]-1] setFrame:CGRectMake(-295.0f, 108.0f, 135.0f,  135.0f)];
-  //((UIView*)[self.imageViews objectAtIndex:[_imageViews count]-1]).layer.cornerRadius = (135.0f/135.0f)*SHOES_IMAGE_CORNER_RADIUS;
 }
+
+/*- (void)updateImagesRectNoAnimation{
+  [(UIView*)[self.imageViews objectAtIndex:5] setFrame:CGRectMake(148.0f, 9.0f, 0.0f,  0.0f)];
+  ((UIView*)[self.imageViews objectAtIndex:5]).layer.cornerRadius = (0/135.0f)*SHOES_IMAGE_CORNER_RADIUS;
+  [(UIView*)[self.imageViews objectAtIndex:[_imageViews count]-1] setFrame:CGRectMake(-295.0f, 108.0f, 135.0f,  135.0f)];
+  ((UIView*)[self.imageViews objectAtIndex:[_imageViews count]-1]).layer.cornerRadius = (135.0f/135.0f)*SHOES_IMAGE_CORNER_RADIUS;
+}*/
 
 - (void)dealloc {
 	//[_imageScrollView release];

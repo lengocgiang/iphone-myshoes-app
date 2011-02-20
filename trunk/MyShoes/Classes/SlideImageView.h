@@ -30,6 +30,8 @@
 
 - (id) initWithFrameColorAndImages:(CGRect)frame backgroundColor:(UIColor*)bgColor images:(NSArray*)imageArray;
 - (void)updateImagesRectAnimation;
-- (void)updateImagesRectNoAnimation;
+//- (void)updateImagesRectNoAnimation;
+- (void)updateImagesRectAnimationLeft;
+- (void)updateImagesRectAnimationRight;
 
 @end
