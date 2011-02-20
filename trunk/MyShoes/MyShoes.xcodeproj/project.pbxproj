@@ -16,6 +16,11 @@
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		28D7ACF80DDB3853001CB0EB /* MyShoesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* MyShoesViewController.m */; };
 		B005B2BC130B338F00021D56 /* ZoomImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = B005B2BA130B338F00021D56 /* ZoomImageView.m */; };
+		B029239F130DBFD200A78DB1 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = B029239A130DBFD200A78DB1 /* UIImage+Alpha.m */; };
+		B02923A0130DBFD200A78DB1 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = B029239C130DBFD200A78DB1 /* UIImage+Resize.m */; };
+		B02923A1130DBFD200A78DB1 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = B029239E130DBFD200A78DB1 /* UIImage+RoundedCorner.m */; };
+		B029241D130DCC8B00A78DB1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B029241C130DCC8B00A78DB1 /* QuartzCore.framework */; };
+		B0292545130E2CF700A78DB1 /* NSMutableArray+QueueAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B0292544130E2CF700A78DB1 /* NSMutableArray+QueueAdditions.m */; };
 		B092F8D11307DB39007855C5 /* OrderedDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = B092F8CF1307DB39007855C5 /* OrderedDictionary.m */; };
 		B092FABF1309CEFC007855C5 /* SlideImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = B092FABE1309CEFC007855C5 /* SlideImageView.m */; };
 		B0B8B7E312F7917A00446CCC /* TFHpple.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B8B7DE12F7917A00446CCC /* TFHpple.m */; };
@@ -45,6 +50,15 @@
 		8D1107310486CEB800E47090 /* MyShoes-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "MyShoes-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		B005B2BA130B338F00021D56 /* ZoomImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZoomImageView.m; sourceTree = "<group>"; };
 		B005B2BB130B338F00021D56 /* ZoomImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZoomImageView.h; sourceTree = "<group>"; };
+		B0292399130DBFD200A78DB1 /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Alpha.h"; sourceTree = "<group>"; };
+		B029239A130DBFD200A78DB1 /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Alpha.m"; sourceTree = "<group>"; };
+		B029239B130DBFD200A78DB1 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
+		B029239C130DBFD200A78DB1 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
+		B029239D130DBFD200A78DB1 /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
+		B029239E130DBFD200A78DB1 /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
+		B029241C130DCC8B00A78DB1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		B0292543130E2CF600A78DB1 /* NSMutableArray+QueueAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+QueueAdditions.h"; sourceTree = "<group>"; };
+		B0292544130E2CF700A78DB1 /* NSMutableArray+QueueAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+QueueAdditions.m"; sourceTree = "<group>"; };
 		B092F8CF1307DB39007855C5 /* OrderedDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderedDictionary.m; sourceTree = "<group>"; };
 		B092F8D01307DB39007855C5 /* OrderedDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderedDictionary.h; sourceTree = "<group>"; };
 		B092FABD1309CEFC007855C5 /* SlideImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideImageView.h; sourceTree = "<group>"; };
@@ -79,6 +93,7 @@
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
+				B029241D130DCC8B00A78DB1 /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,6 +125,8 @@
 				B0E1BC8C130095560044A2EF /* ShoesCategory.m */,
 				B0E1BE721301F88B0044A2EF /* TFHppleElement+AccessChildren.h */,
 				B0E1BE731301F88B0044A2EF /* TFHppleElement+AccessChildren.m */,
+				B0292543130E2CF600A78DB1 /* NSMutableArray+QueueAdditions.h */,
+				B0292544130E2CF700A78DB1 /* NSMutableArray+QueueAdditions.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -125,6 +142,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				B0292398130DBFD200A78DB1 /* UIImage-categories */,
 				B092F8CE1307DB0C007855C5 /* OrderedDictionary */,
 				B0B8B7DC12F7917A00446CCC /* hpple */,
 				080E96DDFE201D6D7F000001 /* Classes */,
@@ -161,8 +179,22 @@
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765A40DF7441C002DB57D /* CoreGraphics.framework */,
+				B029241C130DCC8B00A78DB1 /* QuartzCore.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B0292398130DBFD200A78DB1 /* UIImage-categories */ = {
+			isa = PBXGroup;
+			children = (
+				B0292399130DBFD200A78DB1 /* UIImage+Alpha.h */,
+				B029239A130DBFD200A78DB1 /* UIImage+Alpha.m */,
+				B029239B130DBFD200A78DB1 /* UIImage+Resize.h */,
+				B029239C130DBFD200A78DB1 /* UIImage+Resize.m */,
+				B029239D130DBFD200A78DB1 /* UIImage+RoundedCorner.h */,
+				B029239E130DBFD200A78DB1 /* UIImage+RoundedCorner.m */,
+			);
+			path = "UIImage-categories";
 			sourceTree = "<group>";
 		};
 		B092F8CE1307DB0C007855C5 /* OrderedDictionary */ = {
@@ -264,6 +296,10 @@
 				B092F8D11307DB39007855C5 /* OrderedDictionary.m in Sources */,
 				B092FABF1309CEFC007855C5 /* SlideImageView.m in Sources */,
 				B005B2BC130B338F00021D56 /* ZoomImageView.m in Sources */,
+				B029239F130DBFD200A78DB1 /* UIImage+Alpha.m in Sources */,
+				B02923A0130DBFD200A78DB1 /* UIImage+Resize.m in Sources */,
+				B02923A1130DBFD200A78DB1 /* UIImage+RoundedCorner.m in Sources */,
+				B0292545130E2CF700A78DB1 /* NSMutableArray+QueueAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
