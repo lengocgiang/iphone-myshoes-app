@@ -7,12 +7,16 @@
 //
 
 #import "MyShoesViewController.h"
+#import "UIImage+Alpha.h"
+#import "UIImage+Resize.h"
+#import "UIImage+RoundedCorner.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation MyShoesViewController
 
 @synthesize contentView;
 @synthesize progressIndicator;
-@synthesize shoesImage;
+//@synthesize shoesImage;
 @synthesize slideImageView = _slideImageView;
 @synthesize imageArray = _imageArray;
 /*
@@ -46,23 +50,28 @@
 	for(int i=0; i<CATEGORY_SHOES_COUNT; i++)
 	{
 		// Rounded rect is nice
-		UIWebView *imageView = [[UIWebView alloc] initWithFrame:CGRectMake(0.0f, 20.0f, 50.0f, 50.0f)];
+		UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(-320.0f, 0.0f, 135.0f, 135.0f)];
 		
 		// Give the buttons a width of 100 and a height of 30. The slide menu will take care of positioning the buttons.
 		// If you don't know that 100 will be enough, use my function to calculate the length of a string. You find it on my blog.
 		/*[btn setFrame:CGRectMake(0.0f, 20.0f, 50.0f, 50.0f)];
 		[btn setTitle:scategoryName forState:UIControlStateNormal];		
 		[btn addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];*/
+    //imageView.scalesPageToFit = YES;
+    imageView.backgroundColor = [UIColor clearColor];
+    imageView.layer.cornerRadius = ((imageView.frame.size.width)/135.0f)*SHOES_IMAGE_CORNER_RADIUS;
 		[images addObject:imageView];
+    imageView.contentMode = UIViewContentModeScaleToFill;
 		
+    [imageView release];
 		//[btn release];
 	}
 	
   self.imageArray = [[images copy] autorelease];
-  self.slideImageView = [[SlideImageView alloc] initWithFrameColorAndImages:CGRectMake(0.0f, 50.0f, 320.0f,  250.0f) 
+  self.slideImageView = [[SlideImageView alloc] initWithFrameColorAndImages:CGRectMake(0.0f, 50.0f, 320.0f,  280.0f) 
                                                             backgroundColor:[UIColor grayColor]  
                                                                      images:self.imageArray];
-  [self.contentView addSubview:self.slideImageView];
+  //[self.contentView addSubview:self.slideImageView];
 }
 
 
@@ -98,6 +107,20 @@
 }
 
 - (void) showShoes:(NSArray *) shoesArray {
+  //Add the subview of slideImageView
+  BOOL hasSlidImageView = FALSE;
+  
+  for (id subview in self.contentView.subviews) {
+    if ([subview isEqual:self.slideImageView]) {
+      //barview = subview;
+      hasSlidImageView = TRUE;
+      break;
+    }
+  }
+  
+  if (!hasSlidImageView){
+    [self.contentView addSubview:self.slideImageView];
+  }
   //Start animation
   [self startAnimation];
   int i=0;
@@ -108,11 +131,26 @@
     NSString *imageUrl = [NSString stringWithFormat:@"%@%@",MYSHOES_URL,imageName];
     
     NSURL *url = [NSURL URLWithString:imageUrl];
-    NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
+    //NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
   
+    UIImage *image = [[UIImage imageWithData: [NSData dataWithContentsOfURL: url]] retain];
+    UIImage *roundImage = [image roundedCornerImage:SHOES_IMAGE_CORNER_RADIUS borderSize:SHOES_IMAGE_BORDER_SIZE];
+    
     if (i< [self.imageArray count]){
-      [[self.imageArray objectAtIndex:i++] loadRequest:requestObj];
+      UIImageView *imageView;
+      imageView = [self.imageArray objectAtIndex:i++];
+      //[imageView loadRequest:requestObj];
+      imageView.image = roundImage;
+      
+      /*
+      //webView.scalesPageToFit = YES;
+      //Turn bouncing vertically
+      for (id subview in webView.subviews){
+        if ([[subview class] isSubclassOfClass: [UIScrollView class]])
+          ((UIScrollView *)subview).bounces = NO;
+      }*/
     }
+    [image release];
   }
   [self stopAnimation];
 }

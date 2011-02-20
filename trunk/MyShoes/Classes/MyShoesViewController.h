@@ -14,7 +14,7 @@
 @interface MyShoesViewController : UIViewController {
   UIView *contentView;
   UIActivityIndicatorView *progressIndicator;
-  UIWebView *shoesImage;
+  //UIWebView *shoesImage;
   
   SlideImageView *_slideImageView;
   NSArray *_imageArray;
@@ -22,7 +22,7 @@
 
 @property (nonatomic, retain) IBOutlet UIView *contentView;
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *progressIndicator;
-@property (nonatomic, retain) IBOutlet UIWebView *shoesImage;
+//@property (nonatomic, retain) IBOutlet UIWebView *shoesImage;
 @property (nonatomic, retain) SlideImageView *slideImageView;
 @property (nonatomic, retain) NSArray *imageArray;
 

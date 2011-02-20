@@ -8,21 +8,22 @@
 //  Implemented by a UIScrollView which has only one image View
 #import <Foundation/Foundation.h>
 
-
-@interface ZoomImageView : UIView <UIScrollViewDelegate> {
+@interface ZoomImageView : NSObject /*UIView <UIScrollViewDelegate> */{
   
-	UIScrollView *_imageScrollView;
+	//UIScrollView *_imageScrollView;
 	//NSMutableArray *_imageViews;
   UIView *_imageView;
   
-  UIView *_nextView;
+  //ZoomImageView *_nextView;
 }
--(id) initWithFrameColorAndImage:(CGRect)frame backgroundColor:(UIColor*)bgColor image:(UIView*)image;
 
-@property (nonatomic, retain) UIScrollView* imageScrollView;
+//@property (nonatomic, retain) UIScrollView* imageScrollView;
 //@property (nonatomic, retain) UIImageView* rightMenuImage;
 //@property (nonatomic, retain) UIImageView* leftMenuImage;
 @property (nonatomic, retain) UIView* imageView;
-@property (nonatomic, retain) UIView* nextView;
+@property (nonatomic, retain) ZoomImageView* nextView;
+
+-(id) initWithFrameColorAndImage:(CGRect)frame backgroundColor:(UIColor*)bgColor image:(UIImageView*)image;
+-(void) resizeView:(CGRect)frame;
 
 @end

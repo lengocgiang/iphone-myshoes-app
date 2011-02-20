@@ -16,7 +16,7 @@
 //@synthesize leftMenuImage = _leftMenuImage;
 @synthesize menuButtons = _menuButtons;
 
--(id) initWithFrameColorAndButtons:(CGRect)frame backgroundColor:(UIColor*)bgColor  buttons:(NSArray*)buttonArray  {
+- (id) initWithFrameColorAndButtons:(CGRect)frame backgroundColor:(UIColor*)bgColor  buttons:(NSArray*)buttonArray  {
 	
 	if (self = [super initWithFrame:frame]) {
 		
