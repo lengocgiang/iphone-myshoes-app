@@ -282,6 +282,8 @@
 			B03B06791314692600A39685 /* PBXTextBookmark */ = B03B06791314692600A39685 /* PBXTextBookmark */;
 			B03B067A1314697B00A39685 /* PBXTextBookmark */ = B03B067A1314697B00A39685 /* PBXTextBookmark */;
 			B03B067B1314697B00A39685 /* PBXTextBookmark */ = B03B067B1314697B00A39685 /* PBXTextBookmark */;
+			B03B068013146A5100A39685 /* PBXTextBookmark */ = B03B068013146A5100A39685 /* PBXTextBookmark */;
+			B03B068113146A5100A39685 /* PBXTextBookmark */ = B03B068113146A5100A39685 /* PBXTextBookmark */;
 			B092F9C7130898BB007855C5 = B092F9C7130898BB007855C5 /* PBXTextBookmark */;
 			B092F9D713089B76007855C5 = B092F9D713089B76007855C5 /* PBXTextBookmark */;
 			B092F9D813089B76007855C5 = B092F9D813089B76007855C5 /* PBXTextBookmark */;
@@ -328,6 +330,12 @@
 		vrLoc = 0;
 	};
 	B005B2BA130B338F00021D56 /* ZoomImageView.m */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.objc;
+		name = ZoomImageView.m;
+		path = /Users/denny/projects/MyShoes/Classes/ZoomImageView.m;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1111, 1170}}";
 			sepNavSelRange = "{1751, 111}";
@@ -336,6 +344,12 @@
 		};
 	};
 	B005B2BB130B338F00021D56 /* ZoomImageView.h */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.h;
+		name = ZoomImageView.h;
+		path = /Users/denny/projects/MyShoes/Classes/ZoomImageView.h;
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1111, 637}}";
 			sepNavSelRange = "{393, 0}";
@@ -360,8 +374,8 @@
 		path = /Users/denny/projects/MyShoes/MyShoes.xcodeproj/denny.pbxuser;
 		sourceTree = "<absolute>";
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1296, 24713}}";
-			sepNavSelRange = "{47153, 0}";
+			sepNavIntBoundsRect = "{{0, 0}, {1296, 25077}}";
+			sepNavSelRange = "{57894, 0}";
 			sepNavVisRange = "{0, 1822}";
 		};
 	};
@@ -1390,6 +1404,26 @@
 		vrLen = 1822;
 		vrLoc = 0;
 	};
+	B03B068013146A5100A39685 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B005B34F130B3D2A00021D56 /* denny.pbxuser */;
+		name = "denny.pbxuser: 1923";
+		rLen = 0;
+		rLoc = 57894;
+		rType = 0;
+		vrLen = 1822;
+		vrLoc = 0;
+	};
+	B03B068113146A5100A39685 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B092F8F51307DCFD007855C5 /* project.pbxproj */;
+		name = "project.pbxproj: 273";
+		rLen = 0;
+		rLoc = 20288;
+		rType = 0;
+		vrLen = 8476;
+		vrLoc = 0;
+	};
 	B092F8CF1307DB39007855C5 /* OrderedDictionary.m */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1320, 1703}}";
@@ -1412,9 +1446,9 @@
 		path = /Users/denny/projects/MyShoes/MyShoes.xcodeproj/project.pbxproj;
 		sourceTree = "<absolute>";
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {2049, 3978}}";
+			sepNavIntBoundsRect = "{{0, 0}, {2049, 5421}}";
 			sepNavSelRange = "{20288, 0}";
-			sepNavVisRange = "{0, 5661}";
+			sepNavVisRange = "{0, 8476}";
 		};
 	};
 	B092F9C7130898BB007855C5 /* PBXTextBookmark */ = {
