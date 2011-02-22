@@ -64,13 +64,22 @@
   
 	[self.window addSubview:slideMenuViewController.view];
   [self.window makeKeyAndVisible];
+  
+  //Test network reachability
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(reachabilityChanged:)
+                                               name: kReachabilityChangedNotification
+                                             object: nil];
+  _hostReach = [[Reachability reachabilityWithHostName:@"www.shoes.com"] retain];
+  [_hostReach startNotifier];
+  [_hostReach release];
 	
   //The shoes category link is hard coded
   
 	//[cu getContent:MYSHOES_URL withDelegate:self requestSelector:@selector(shoesCategoryUdateCallbackWithData:)];
   //[contentViewController startAnimation];
 	
-  [contentViewController stopAnimation];
+  //[contentViewController stopAnimation];
   return YES;
 }
 
@@ -148,6 +157,30 @@
      */
 }
 
+- (void)reachabilityChanged:(NSNotification *)note {
+  Reachability* curReach = [note object];
+  NSParameterAssert([curReach isKindOfClass: [Reachability class]]);
+  NetworkStatus status = [curReach currentReachabilityStatus];
+  
+  if (status == NotReachable) {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"www.shoes.com"
+                          message:@"Shoes.com can NOT be Reached"
+                          delegate:nil
+                          cancelButtonTitle:@"YES" otherButtonTitles:nil];
+                          [alert show];
+                          [alert release];
+  }
+}
+
+// If WIFI ready
++ (BOOL) IsEnableWIFI {
+  return ([[Reachability reachabilityForLocalWiFi] currentReachabilityStatus] != NotReachable);
+}
+
+// If 3G ready
++ (BOOL) IsEnable3G {
+  return ([[Reachability reachabilityForInternetConnection] currentReachabilityStatus] != NotReachable);
+}
 
 #pragma mark -
 #pragma mark Memory management

@@ -21,6 +21,9 @@
 		B02923A1130DBFD200A78DB1 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = B029239E130DBFD200A78DB1 /* UIImage+RoundedCorner.m */; };
 		B029241D130DCC8B00A78DB1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B029241C130DCC8B00A78DB1 /* QuartzCore.framework */; };
 		B0292545130E2CF700A78DB1 /* NSMutableArray+QueueAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B0292544130E2CF700A78DB1 /* NSMutableArray+QueueAdditions.m */; };
+		B03B057A1313463600A39685 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B03B05791313463600A39685 /* SystemConfiguration.framework */; };
+		B03B05A813134F0500A39685 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = B03B05A613134F0500A39685 /* Reachability.m */; };
+		B03B05B7131387D500A39685 /* shoes_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B03B05B6131387D500A39685 /* shoes_icon.png */; };
 		B092F8D11307DB39007855C5 /* OrderedDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = B092F8CF1307DB39007855C5 /* OrderedDictionary.m */; };
 		B092FABF1309CEFC007855C5 /* SlideImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = B092FABE1309CEFC007855C5 /* SlideImageView.m */; };
 		B0B8B7E312F7917A00446CCC /* TFHpple.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B8B7DE12F7917A00446CCC /* TFHpple.m */; };
@@ -59,6 +62,10 @@
 		B029241C130DCC8B00A78DB1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		B0292543130E2CF600A78DB1 /* NSMutableArray+QueueAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+QueueAdditions.h"; sourceTree = "<group>"; };
 		B0292544130E2CF700A78DB1 /* NSMutableArray+QueueAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+QueueAdditions.m"; sourceTree = "<group>"; };
+		B03B05791313463600A39685 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		B03B05A613134F0500A39685 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		B03B05A713134F0500A39685 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		B03B05B6131387D500A39685 /* shoes_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shoes_icon.png; sourceTree = "<group>"; };
 		B092F8CF1307DB39007855C5 /* OrderedDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderedDictionary.m; sourceTree = "<group>"; };
 		B092F8D01307DB39007855C5 /* OrderedDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderedDictionary.h; sourceTree = "<group>"; };
 		B092FABD1309CEFC007855C5 /* SlideImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideImageView.h; sourceTree = "<group>"; };
@@ -94,6 +101,7 @@
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
 				B029241D130DCC8B00A78DB1 /* QuartzCore.framework in Frameworks */,
+				B03B057A1313463600A39685 /* SystemConfiguration.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,6 +111,8 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				B03B05A613134F0500A39685 /* Reachability.m */,
+				B03B05A713134F0500A39685 /* Reachability.h */,
 				B005B2BA130B338F00021D56 /* ZoomImageView.m */,
 				B005B2BB130B338F00021D56 /* ZoomImageView.h */,
 				B0B8B95D12FA8F7600446CCC /* SlideMenuView.h */,
@@ -166,6 +176,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B03B05B6131387D500A39685 /* shoes_icon.png */,
 				2899E5210DE3E06400AC0155 /* MyShoesViewController.xib */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* MyShoes-Info.plist */,
@@ -180,6 +191,7 @@
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765A40DF7441C002DB57D /* CoreGraphics.framework */,
 				B029241C130DCC8B00A78DB1 /* QuartzCore.framework */,
+				B03B05791313463600A39685 /* SystemConfiguration.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -271,6 +283,7 @@
 			files = (
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
 				2899E5220DE3E06400AC0155 /* MyShoesViewController.xib in Resources */,
+				B03B05B7131387D500A39685 /* shoes_icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,6 +313,7 @@
 				B02923A0130DBFD200A78DB1 /* UIImage+Resize.m in Sources */,
 				B02923A1130DBFD200A78DB1 /* UIImage+RoundedCorner.m in Sources */,
 				B0292545130E2CF700A78DB1 /* NSMutableArray+QueueAdditions.m in Sources */,
+				B03B05A813134F0500A39685 /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,14 +351,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Qi Wang (2ZTPN43Z5Y)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "${SDKROOT}/usr/include/libxml2/**";
 				OTHER_LDFLAGS = "-lxml2";
 				PREBINDING = NO;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0E31CE08-4CCA-48C2-81FD-3E209C129980";
 				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -352,7 +368,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Qi Wang (2ZTPN43Z5Y)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -360,8 +376,10 @@
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = "-lxml2";
 				PREBINDING = NO;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0E31CE08-4CCA-48C2-81FD-3E209C129980";
 				SDKROOT = iphoneos;
 				SYMROOT = /Users/denny/projects/output/MyShoes;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

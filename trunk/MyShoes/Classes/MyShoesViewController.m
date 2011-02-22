@@ -42,7 +42,7 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   //Hide progress indicator
-  //[progressIndicator removeFromSuperview];
+  [progressIndicator removeFromSuperview];
   //Add slide Image View
 
   NSMutableArray* images = [NSMutableArray arrayWithCapacity:CAPACITY_SHOES_LIST];
@@ -60,6 +60,7 @@
     //imageView.scalesPageToFit = YES;
     imageView.backgroundColor = [UIColor clearColor];
     imageView.layer.cornerRadius = ((imageView.frame.size.width)/135.0f)*SHOES_IMAGE_CORNER_RADIUS;
+    imageView.clipsToBounds = YES;
 		[images addObject:imageView];
     imageView.contentMode = UIViewContentModeScaleToFill;
 		
@@ -134,13 +135,13 @@
     //NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
   
     UIImage *image = [[UIImage imageWithData: [NSData dataWithContentsOfURL: url]] retain];
-    UIImage *roundImage = [image roundedCornerImage:SHOES_IMAGE_CORNER_RADIUS borderSize:SHOES_IMAGE_BORDER_SIZE];
+    //UIImage *roundImage = [image roundedCornerImage:SHOES_IMAGE_CORNER_RADIUS borderSize:SHOES_IMAGE_BORDER_SIZE];
     
     if (i< [self.imageArray count]){
       UIImageView *imageView;
       imageView = [self.imageArray objectAtIndex:i++];
       //[imageView loadRequest:requestObj];
-      imageView.image = roundImage;
+      imageView.image = image;
       
       /*
       //webView.scalesPageToFit = YES;

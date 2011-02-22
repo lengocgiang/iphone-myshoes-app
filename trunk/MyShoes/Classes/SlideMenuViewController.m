@@ -121,6 +121,18 @@
 }
 
 - (void)buttonPressed:(id)sender {
+  //Check if there is any network available
+  if(![MyShoesAppDelegate IsEnableWIFI] && ![MyShoesAppDelegate IsEnable3G]){
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"www.shoes.com"
+                                                    message:@"There is no network, Check your system"
+                                                   delegate:nil
+                                          cancelButtonTitle:@"YES" otherButtonTitles:nil];
+    [alert show];
+    [alert release];
+
+    return;
+  }
+  
   //Disable all buttons
   for(UIButton *btn in self.categoryButtons){
     [btn setEnabled:FALSE];
