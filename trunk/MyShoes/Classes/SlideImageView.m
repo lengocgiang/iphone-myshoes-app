@@ -15,10 +15,41 @@
 //@synthesize imageQueueHead = _imageQueueHead;
 //@synthesize imageQueueEnd = _imageQueueEnd;
 
--(id) initWithFrameColorAndImages:(CGRect)frame backgroundColor:(UIColor*)bgColor  images:(NSArray*)imageArray{
+/*-(id) initWithFrame:(CGRect)frame{
 	
 	if (self = [super initWithFrame:frame]) {
 				
+    //Do nothing right now
+    //
+    
+	}
+	return self;
+}*/
+
+- (void) setupImages:(NSArray*)imageArray{
+
+  // Add the buttons to the scrollview
+  //menuButtons = buttonArray;
+
+  self.imageViews = [[NSMutableArray arrayWithCapacity:CAPACITY_SCROLL_BAR] retain];
+  
+  //Initialize queue of the image
+  for (UIView *image in imageArray){
+    //image.layer.cornerRadius = ((frame.size.width)/135.0f)*30.0f;
+    image.layer.borderWidth = SHOES_IMAGE_BORDER_SIZE;
+    //self.layer.borderWidth = SHOES_IMAGE_BORDER_SIZE;
+    [self addSubview:image];
+    [self.imageViews enqueue:image];
+  }
+  
+  [self updateImagesRectAnimation];
+  [self updateImagesRectAnimationRight];
+  [self updateImagesRectAnimationLeft];
+}
+/*-(id) initWithFrameColorAndImages:(CGRect)frame backgroundColor:(UIColor*)bgColor  images:(NSArray*)imageArray{
+	
+	if (self = [super initWithFrame:frame]) {
+    
 		// Add the buttons to the scrollview
 		//menuButtons = buttonArray;
 		_imageViews = [[NSMutableArray arrayWithCapacity:CAPACITY_SCROLL_BAR] retain];
@@ -27,6 +58,7 @@
     for (UIView *image in imageArray){
       //image.layer.cornerRadius = ((frame.size.width)/135.0f)*30.0f;
       image.layer.borderWidth = SHOES_IMAGE_BORDER_SIZE;
+      //self.layer.borderWidth = SHOES_IMAGE_BORDER_SIZE;
       [self addSubview:image];
       [_imageViews enqueue:image];
     }
@@ -37,7 +69,7 @@
     
 	}
 	return self;
-}
+}*/
 
 /*
 - (void)drawRect:(CGRect)rect {

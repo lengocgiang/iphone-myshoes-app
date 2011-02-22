@@ -17,7 +17,7 @@
 @synthesize contentView;
 @synthesize progressIndicator;
 //@synthesize shoesImage;
-@synthesize slideImageView = _slideImageView;
+@synthesize slideImageView;
 @synthesize imageArray = _imageArray;
 /*
 // The designated initializer. Override to perform setup that is required before the view is loaded.
@@ -42,7 +42,7 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   //Hide progress indicator
-  [progressIndicator removeFromSuperview];
+  //[progressIndicator removeFromSuperview];
   //Add slide Image View
 
   NSMutableArray* images = [NSMutableArray arrayWithCapacity:CAPACITY_SHOES_LIST];
@@ -63,15 +63,19 @@
     imageView.clipsToBounds = YES;
 		[images addObject:imageView];
     imageView.contentMode = UIViewContentModeScaleToFill;
+    
+    //hide all imageview in the very beginning
+    imageView.hidden = YES;
 		
     [imageView release];
 		//[btn release];
 	}
 	
   self.imageArray = [[images copy] autorelease];
-  self.slideImageView = [[SlideImageView alloc] initWithFrameColorAndImages:CGRectMake(0.0f, 50.0f, 320.0f,  280.0f) 
+  /*self.slideImageView = [[SlideImageView alloc] initWithFrameColorAndImages:CGRectMake(0.0f, 0.0f, 320.0f,  280.0f) 
                                                             backgroundColor:[UIColor grayColor]  
-                                                                     images:self.imageArray];
+                                                                     images:self.imageArray];*/
+  [self.slideImageView setupImages:self.imageArray];
   //[self.contentView addSubview:self.slideImageView];
 }
 
@@ -98,30 +102,21 @@
 }
 
 - (void) startAnimation {
-  [contentView addSubview:progressIndicator];
+  slideImageView.hidden = YES;
+  progressIndicator.hidden = NO;
   [progressIndicator startAnimating];
 }
 
 - (void) stopAnimation {
   [progressIndicator stopAnimating];
-  [progressIndicator removeFromSuperview];
+  progressIndicator.hidden = YES;
+  [UIView beginAnimations:nil context:nil];
+  slideImageView.hidden = NO;
+  [UIView commitAnimations];
 }
 
 - (void) showShoes:(NSArray *) shoesArray {
-  //Add the subview of slideImageView
-  BOOL hasSlidImageView = FALSE;
-  
-  for (id subview in self.contentView.subviews) {
-    if ([subview isEqual:self.slideImageView]) {
-      //barview = subview;
-      hasSlidImageView = TRUE;
-      break;
-    }
-  }
-  
-  if (!hasSlidImageView){
-    [self.contentView addSubview:self.slideImageView];
-  }
+
   //Start animation
   [self startAnimation];
   int i=0;
@@ -143,13 +138,8 @@
       //[imageView loadRequest:requestObj];
       imageView.image = image;
       
-      /*
-      //webView.scalesPageToFit = YES;
-      //Turn bouncing vertically
-      for (id subview in webView.subviews){
-        if ([[subview class] isSubclassOfClass: [UIScrollView class]])
-          ((UIScrollView *)subview).bounces = NO;
-      }*/
+      imageView.hidden = NO;
+
     }
     [image release];
   }

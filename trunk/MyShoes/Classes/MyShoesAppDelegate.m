@@ -83,7 +83,7 @@
   return YES;
 }
 
-- (void)shoesCategoryUdateCallbackWithData: (NSData *) content {
+/*- (void)shoesCategoryUdateCallbackWithData: (NSData *) content {
 	
 	//debug_NSLog(@"%@",[[[NSString alloc] initWithData:content encoding:NSASCIIStringEncoding] autorelease]);
 	// Create parser
@@ -110,7 +110,7 @@
 	
 	[xpathParser release];
 	//[content release];
-}
+}*/
 
 /*- (void)buttonPressed:(id)sender {
 	//screenLabel.text = ((UIButton*)sender).currentTitle;

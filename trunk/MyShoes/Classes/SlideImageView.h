@@ -28,7 +28,9 @@
 //@property (nonatomic, retain) ZoomImageView* imageQueueHead;
 //@property (nonatomic, retain) ZoomImageView* imageQueueEnd;
 
-- (id) initWithFrameColorAndImages:(CGRect)frame backgroundColor:(UIColor*)bgColor images:(NSArray*)imageArray;
+//- (id) initWithFrame:(CGRect)frame;
+//- (id) initWithFrameColorAndImages:(CGRect)frame backgroundColor:(UIColor*)bgColor images:(NSArray*)imageArray;
+- (void) setupImages:(NSArray*)imageArray;
 - (void)updateImagesRectAnimation;
 //- (void)updateImagesRectNoAnimation;
 - (void)updateImagesRectAnimationLeft;

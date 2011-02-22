@@ -16,14 +16,14 @@
   UIActivityIndicatorView *progressIndicator;
   //UIWebView *shoesImage;
   
-  SlideImageView *_slideImageView;
+  SlideImageView *slideImageView;
   NSArray *_imageArray;
 }
 
 @property (nonatomic, retain) IBOutlet UIView *contentView;
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *progressIndicator;
 //@property (nonatomic, retain) IBOutlet UIWebView *shoesImage;
-@property (nonatomic, retain) SlideImageView *slideImageView;
+@property (nonatomic, retain) IBOutlet SlideImageView *slideImageView;
 @property (nonatomic, retain) NSArray *imageArray;
 
 - (void) startAnimation;
