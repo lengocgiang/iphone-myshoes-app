@@ -284,6 +284,7 @@
 			B03B067B1314697B00A39685 /* PBXTextBookmark */ = B03B067B1314697B00A39685 /* PBXTextBookmark */;
 			B03B068013146A5100A39685 /* PBXTextBookmark */ = B03B068013146A5100A39685 /* PBXTextBookmark */;
 			B03B068113146A5100A39685 /* PBXTextBookmark */ = B03B068113146A5100A39685 /* PBXTextBookmark */;
+			B03B068413146A6900A39685 /* PBXTextBookmark */ = B03B068413146A6900A39685 /* PBXTextBookmark */;
 			B092F9C7130898BB007855C5 = B092F9C7130898BB007855C5 /* PBXTextBookmark */;
 			B092F9D713089B76007855C5 = B092F9D713089B76007855C5 /* PBXTextBookmark */;
 			B092F9D813089B76007855C5 = B092F9D813089B76007855C5 /* PBXTextBookmark */;
@@ -380,6 +381,12 @@
 		};
 	};
 	B0292399130DBFD200A78DB1 /* UIImage+Alpha.h */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.h;
+		name = "UIImage+Alpha.h";
+		path = "/Users/denny/projects/MyShoes/UIImage-categories/UIImage+Alpha.h";
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1341, 594}}";
 			sepNavSelRange = "{0, 0}";
@@ -388,6 +395,12 @@
 		};
 	};
 	B029239D130DBFD200A78DB1 /* UIImage+RoundedCorner.h */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.h;
+		name = "UIImage+RoundedCorner.h";
+		path = "/Users/denny/projects/MyShoes/UIImage-categories/UIImage+RoundedCorner.h";
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1292, 771}}";
 			sepNavSelRange = "{0, 0}";
@@ -396,6 +409,12 @@
 		};
 	};
 	B029239E130DBFD200A78DB1 /* UIImage+RoundedCorner.m */ = {
+		isa = PBXFileReference;
+		fileEncoding = 4;
+		lastKnownFileType = sourcecode.c.objc;
+		name = "UIImage+RoundedCorner.m";
+		path = "/Users/denny/projects/MyShoes/UIImage-categories/UIImage+RoundedCorner.m";
+		sourceTree = "<absolute>";
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1323, 1001}}";
 			sepNavSelRange = "{3565, 0}";
@@ -1424,6 +1443,16 @@
 		vrLen = 8476;
 		vrLoc = 0;
 	};
+	B03B068413146A6900A39685 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = B092F8F51307DCFD007855C5 /* project.pbxproj */;
+		name = "project.pbxproj: 405";
+		rLen = 0;
+		rLoc = 25230;
+		rType = 0;
+		vrLen = 8476;
+		vrLoc = 0;
+	};
 	B092F8CF1307DB39007855C5 /* OrderedDictionary.m */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1320, 1703}}";
@@ -1446,8 +1475,8 @@
 		path = /Users/denny/projects/MyShoes/MyShoes.xcodeproj/project.pbxproj;
 		sourceTree = "<absolute>";
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {2049, 5421}}";
-			sepNavSelRange = "{20288, 0}";
+			sepNavIntBoundsRect = "{{0, 0}, {2049, 4238}}";
+			sepNavSelRange = "{25230, 0}";
 			sepNavVisRange = "{0, 8476}";
 		};
 	};
