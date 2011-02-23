@@ -12,6 +12,7 @@
 
 @implementation SlideImageView
 @synthesize imageViews = _imageViews;
+@synthesize delegate;
 //@synthesize imageQueueHead = _imageQueueHead;
 //@synthesize imageQueueEnd = _imageQueueEnd;
 
@@ -31,7 +32,7 @@
   // Add the buttons to the scrollview
   //menuButtons = buttonArray;
 
-  self.imageViews = [[NSMutableArray arrayWithCapacity:CAPACITY_SCROLL_BAR] retain];
+  self.imageViews = [[NSMutableArray arrayWithCapacity:CAPACITY_SHOES_LIST] retain];
   
   //Initialize queue of the image
   for (UIView *image in imageArray){
@@ -86,6 +87,10 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
   NSLog(@"TOUCHES BEGAN!!");
+  //Called back to delegate when starting to scroll
+  [self.delegate performSelector:@selector(scrollViewBeganScroll)];
+  //[self.delegate performSelector:@selector(scrollViewBeganScroll:) withObject:[self.imageViews objectAtIndex:0]];
+  
   UITouch *touch = [[event allTouches] anyObject];
   //Handle single tap only
   //UITouch *touch = [touches anyObject];
@@ -169,6 +174,9 @@
     }
   }
   _firstMove = FALSE;
+  
+  //Called back to delegate when done scrolling
+  [self.delegate performSelector:@selector(scrollViewDidScroll:) withObject:[self.imageViews objectAtIndex:0]];
 }
 
 - (void)updateImagesRectAnimation{
