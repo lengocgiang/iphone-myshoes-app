@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ZoomImageView.h"
+//#import "ZoomImageView.h"
 #import "NSMutableArray+QueueAdditions.h"
 
 @interface SlideImageView : UIView{

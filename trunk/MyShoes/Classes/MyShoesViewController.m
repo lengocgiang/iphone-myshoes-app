@@ -7,9 +7,9 @@
 //
 
 #import "MyShoesViewController.h"
-#import "UIImage+Alpha.h"
-#import "UIImage+Resize.h"
-#import "UIImage+RoundedCorner.h"
+//#import "UIImage+Alpha.h"
+//#import "UIImage+Resize.h"
+//#import "UIImage+RoundedCorner.h"
 #import <QuartzCore/QuartzCore.h>
 
 @implementation MyShoesViewController
