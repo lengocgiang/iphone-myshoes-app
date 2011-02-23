@@ -45,14 +45,14 @@
         [self processProductImage:child];
       }
       else if ([tagValue isEqualToString:SHOES_NODE_PRODUCTSALESMESSAGING]) {
-        _productSalesmessaging = [self processShoesInfo:child withProductTag:SHOES_NODE_PRODUCTTAG];
+        _productSalesmessaging = [[self processShoesInfo:child withProductTag:SHOES_NODE_PRODUCTTAG] retain];
       }
       else if ([tagValue isEqualToString:SHOES_NODE_PRODUCTBRANDTITLECOLOR]) {
         //_productBrandTitleColor = [self processShoesInfo:child withProductTag:HREF_TAG];
         [self processBrandTitleColor:child];
       }
       else if ([tagValue isEqualToString:SHOES_NODE_PRODUCTPRICE]) {
-        _productPrice = [self processShoesInfo:child withProductTag:SHOES_NODE_PRODUCTPRICETAG_USD];
+        _productPrice = [[self processShoesInfo:child withProductTag:SHOES_NODE_PRODUCTPRICETAG_USD] retain];
       }
 		}
 		
@@ -73,7 +73,7 @@
   TFHppleElement *element = [elements objectAtIndex:0];
   
   //set product detail link
-  self.productDetailLink = [element objectForKey:HREF_TAG];
+  self.productDetailLink = [[element objectForKey:HREF_TAG] retain];
   
   NSArray *childElements  = [element childNodes];
   if([childElements count] <= 0){
@@ -85,8 +85,8 @@
   if (str == nil) {
     str = [childElement objectForKey:ORIGINAL_TAG];
   }
-  self.shoesImageName = str;//[childElement objectForKey:SRC_TAG];
-  self.productCategory = [childElement objectForKey:ALT_TAG];
+  self.shoesImageName = [str retain];//[childElement objectForKey:SRC_TAG];
+  self.productCategory = [[childElement objectForKey:ALT_TAG] retain];
   
 }
 
@@ -121,7 +121,7 @@
   TFHppleElement *element = [elements objectAtIndex:0];
   
   //set product detail link
-  self.productDetailLink = [element objectForKey:HREF_TAG];
+  self.productDetailLink = [[element objectForKey:HREF_TAG] retain];
   
   NSArray *childElements  = [element childNodes];
   if([childElements count] <= 0){
@@ -130,12 +130,12 @@
   TFHppleElement *childElement = [childElements objectAtIndex:0];
   //set product brand name
   id str = [childElement content];
-  self.productBrandName = str;
+  self.productBrandName = [str retain];
     
   childElement = [childElements objectAtIndex:2];
   //set product style name
   str = [childElement content];
-  self.productStyle = str;
+  self.productStyle = [str retain];
   
   //To test if the shoes has more info like color and rating
   if ([elements count] <= 2){
@@ -145,7 +145,7 @@
   //[element autorelease];
   element = [elements objectAtIndex:2];
   
-  self.productColor = [element content];
+  self.productColor = [[element content] retain];
   
   //[element autorelease];
   //Check if the shoes has the rating info section
@@ -158,15 +158,26 @@
     childElement = [childElements objectAtIndex:0];
     //Get the shoes rating value
   
-    self.productRating = [childElement content];
+    self.productRating = [[childElement content] retain];
   }
 }
 
 
 - (void)dealloc {
 	//release all objects here
-	[_pID release];
-	[_pgID release];
+	//[_pID release];
+	//[_pgID release];
+  
+  [_productSalesmessaging release];
+  [_productPrice release];
+  [_productDetailLink release];
+  [_shoesImageName release];
+  [_productCategory release];
+  [_productDetailLink release];
+  [_productBrandName release];
+  [_productColor release];
+  [_productStyle release];
+  [_productRating release];
 	
 	[super dealloc];
 }	
