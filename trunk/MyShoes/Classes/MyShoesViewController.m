@@ -18,6 +18,12 @@
 @synthesize progressIndicator;
 //@synthesize shoesImage;
 @synthesize slideImageView;
+//@synthesize shoesList = _shoesList;
+@synthesize shoesDict = _shoesDict;
+@synthesize shoesBrandName;
+@synthesize shoesStyle;
+@synthesize shoesColor;
+@synthesize shoesPrice;
 @synthesize imageArray = _imageArray;
 /*
 // The designated initializer. Override to perform setup that is required before the view is loaded.
@@ -41,6 +47,7 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
   [super viewDidLoad];
+  slideImageView.delegate = self;
   //Hide progress indicator
   //[progressIndicator removeFromSuperview];
   //Add slide Image View
@@ -118,8 +125,12 @@
 - (void) showShoes:(NSArray *) shoesArray {
 
   //Start animation
-  [self startAnimation];
+  //[self startAnimation];
+  //[self hideShoesInfoLabels];
   int i=0;
+  
+  [self.shoesDict autorelease];
+  self.shoesDict = [[NSMutableDictionary dictionaryWithCapacity:CAPACITY_SHOES_LIST] retain];
   
   for (Shoes *shoes in shoesArray){
     
@@ -139,11 +150,59 @@
       imageView.image = image;
       
       imageView.hidden = NO;
+      
+      //Add shoes imageView pair to shoesDict (key is the imageView)
+      [self.shoesDict setObject:shoes forKey:imageView.image];
 
     }
     [image release];
   }
-  [self stopAnimation];
+  
+  /*if ([shoesArray count] >= 1){
+    [self showShoesInfo:[shoesArray objectAtIndex:0]];
+  }*/
+  //[self stopAnimation];
+}
+
+- (void)scrollViewDidScroll:(UIImageView *)selectedView {
+  //locate the actually shoes selected
+  Shoes *shoes = [self.shoesDict objectForKey:selectedView.image];
+  
+  /*shoesBrandName.text = shoes.brandName;
+  shoesStyle.text = shoes.productStyle;
+  shoesColor.text = shoes.productColor;
+  shoesPrice.text = shoes.productPrice;
+  //Show shoes info
+  shoesBrandName.hidden = NO;
+  shoesStyle.hidden = NO;
+  shoesColor.hidden = NO;
+  shoesPrice.hidden = NO;*/
+  [self showShoesInfo:shoes];
+}
+
+- (void)scrollViewBeganScroll {
+  //When users begin scrolling, hide all the four labels
+  [self hideShoesInfoLabels];
+}
+
+- (void) showShoesInfo:(Shoes *)shoes{
+  shoesBrandName.text = shoes.productCategory;
+  shoesStyle.text = shoes.productStyle;
+  shoesColor.text = shoes.productColor;
+  shoesPrice.text = shoes.productPrice;
+  //Show shoes info
+  shoesBrandName.hidden = NO;
+  shoesStyle.hidden = NO;
+  shoesColor.hidden = NO;
+  shoesPrice.hidden = NO;
+  
+}
+
+- (void) hideShoesInfoLabels {
+  shoesBrandName.hidden = YES;
+  shoesStyle.hidden = YES;
+  shoesColor.hidden = YES;
+  shoesPrice.hidden = YES;
 }
 
 - (void)dealloc {
