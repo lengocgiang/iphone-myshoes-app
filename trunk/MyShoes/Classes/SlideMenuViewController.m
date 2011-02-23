@@ -140,6 +140,8 @@
   
   //Start animation
   MyShoesAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+  
+  [delegate.contentViewController hideShoesInfoLabels];
   [delegate.contentViewController startAnimation];
   
 	//screenLabel.text = ((UIButton*)sender).currentTitle;
@@ -193,7 +195,6 @@
 
   //Stop Animation
   MyShoesAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-  [delegate.contentViewController stopAnimation];
   
 	[xpathParser release];
   
@@ -204,6 +205,10 @@
     NSString *imageName = shoes.shoesImageName;
     NSString *imageUrl = [NSString stringWithFormat:@"%@%@",MYSHOES_URL,imageName];*/
     [delegate.contentViewController showShoes:self.shoesArray];
+  }
+  [delegate.contentViewController stopAnimation];
+  if ([self.shoesArray count] >= 1){
+    [delegate.contentViewController showShoesInfo:[self.shoesArray objectAtIndex:0]];
   }
   
   //Enable all buttons
