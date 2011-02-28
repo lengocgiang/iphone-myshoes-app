@@ -9,7 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "Config.h"
 #import "SlideImageView.h"
+#import "SlideMenuViewController.h"
 #import "Shoes.h"
+#import "ShoesCategory.h"
+#import "OrderedDictionary.h"
 
 @interface MyShoesViewController : UIViewController <SlideImageViewDelegate>{
   UIView *contentView;
@@ -25,7 +28,13 @@
   UILabel *shoesColor;
   UILabel *shoesPrice;
   
+  //UIToolbar
+  UIToolbar *toolBar;
+  
   NSArray *_imageArray;
+  
+  NSMutableDictionary *_shoesCategoryDict;
+  SlideMenuViewController *slideMenuViewController;
 }
 
 @property (nonatomic, retain) IBOutlet UIView *contentView;
@@ -38,7 +47,10 @@
 @property (nonatomic, retain) IBOutlet UILabel *shoesStyle;
 @property (nonatomic, retain) IBOutlet UILabel *shoesColor;
 @property (nonatomic, retain) IBOutlet UILabel *shoesPrice;
+@property (nonatomic, retain) UIToolbar *toolBar;
 @property (nonatomic, retain) NSArray *imageArray;
+@property (nonatomic, retain) SlideMenuViewController *slideMenuViewController;
+@property (nonatomic, retain) NSMutableDictionary *shoesCategoryDict;
 
 - (void) startAnimation;
 - (void) stopAnimation;

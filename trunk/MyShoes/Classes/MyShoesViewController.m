@@ -24,7 +24,10 @@
 @synthesize shoesStyle;
 @synthesize shoesColor;
 @synthesize shoesPrice;
+@synthesize toolBar;
 @synthesize imageArray = _imageArray;
+@synthesize slideMenuViewController;
+@synthesize shoesCategoryDict = _shoesCategoryDict;
 /*
 // The designated initializer. Override to perform setup that is required before the view is loaded.
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -48,8 +51,67 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   slideImageView.delegate = self;
-  //Hide progress indicator
-  //[progressIndicator removeFromSuperview];
+
+  //Init search toolbar
+  //create toolbar using new
+  self.toolBar = [UIToolbar new];
+  self.toolBar.barStyle = UIBarStyleDefault;
+  [self.toolBar sizeToFit];
+  self.toolBar.frame = CGRectMake(0, 0, 320, 60);
+  
+  //Add buttons
+  /*UIBarButtonItem *button1 = [[UIBarButtonItem alloc] initWithTitle:@"Button 1"
+                                                              style:UIBarButtonItemStyleBordered
+                                                             target:self	 
+                                                             action:@selector(doSomethingWithButton1)];*/
+  //Use this to put space in between your toolbox buttons
+  UIBarButtonItem *BtnSpace = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+
+                                                                                            
+  // Button 2.
+  UIBarButtonItem *searchButton = [[UIBarButtonItem alloc] initWithTitle:@"Search" 
+                                                                   style:UIBarButtonItemStyleBordered 
+                                                                  target:self
+                                                                  action:@selector(openSearchView)];
+                                                                                                                                                       
+  //Add buttons to the array
+  NSArray *items = [NSArray arrayWithObjects: BtnSpace, searchButton, nil];
+  
+  //release buttons
+  [BtnSpace release];
+  [searchButton release];
+  
+  //add array of buttons to toolbar
+  [self.toolBar setItems:items animated:NO];
+  [self.view addSubview:self.toolBar];
+                                                                                                                                                                  
+  
+  //Init and add slide button menu Image View
+  _shoesCategoryDict = [[OrderedDictionary alloc] init];
+  //Setup category for women
+  ShoesCategory *category = [[[ShoesCategory alloc] initWithName:SHOES_CATEGORY_WOMEN_NAME andXPath:SHOES_CATEGORY_WOMEN_XPATH] autorelease];
+  category.categoryURI = SHOES_CATEGORY_WOMEN_URI_12ITEM;
+	[_shoesCategoryDict setObject: category forKey:SHOES_CATEGORY_WOMEN_NAME];
+  //Setup category for men
+  //[category autorelease];
+  category = [[[ShoesCategory alloc] initWithName:SHOES_CATEGORY_MEN_NAME andXPath:SHOES_CATEGORY_MEN_XPATH] autorelease];
+  category.categoryURI = SHOES_CATEGORY_MEN_URI_12ITEM;
+	[_shoesCategoryDict setObject:category forKey:SHOES_CATEGORY_MEN_NAME];
+  //Setup category for girls
+  //[category autorelease];
+  category = [[[ShoesCategory alloc] initWithName:SHOES_CATEGORY_GIRLS_NAME andXPath:SHOES_CATEGORY_GIRLS_XPATH] autorelease];
+  category.categoryURI = SHOES_CATEGORY_GIRLS_URI_12ITEM;
+	[_shoesCategoryDict setObject: category forKey:SHOES_CATEGORY_GIRLS_NAME];
+  //Setup category for boys
+  //[category autorelease];
+  category = [[[ShoesCategory alloc] initWithName:SHOES_CATEGORY_BOYS_NAME andXPath:SHOES_CATEGORY_BOYS_XPATH] autorelease];
+  category.categoryURI = SHOES_CATEGORY_BOYS_URI_12ITEM;
+	[_shoesCategoryDict setObject:category forKey:SHOES_CATEGORY_BOYS_NAME];
+  
+  //[self.window addSubview:contentViewController.view];
+	self.slideMenuViewController = [[SlideMenuViewController alloc] initWithCategories:_shoesCategoryDict];
+  
+  [self.view addSubview:slideMenuViewController.view];
   //Add slide Image View
 
   NSMutableArray* images = [NSMutableArray arrayWithCapacity:CAPACITY_SHOES_LIST];
@@ -164,7 +226,7 @@
   //[self stopAnimation];
 }
 
-- (void)scrollViewDidScroll:(UIImageView *)selectedView {
+- (void)scrollViewDidScroll:(UIImageView *)selectedView{
   //locate the actually shoes selected
   Shoes *shoes = [self.shoesDict objectForKey:selectedView.image];
   
@@ -180,12 +242,12 @@
   [self showShoesInfo:shoes];
 }
 
-- (void)scrollViewBeganScroll {
+- (void)scrollViewBeganScroll{
   //When users begin scrolling, hide all the four labels
   [self hideShoesInfoLabels];
 }
 
-- (void) showShoesInfo:(Shoes *)shoes{
+- (void)showShoesInfo:(Shoes *)shoes{
   shoesBrandName.text = shoes.productCategory;
   shoesStyle.text = shoes.productStyle;
   shoesColor.text = shoes.productColor;
@@ -198,15 +260,24 @@
   
 }
 
-- (void) hideShoesInfoLabels {
+- (void)hideShoesInfoLabels{
   shoesBrandName.hidden = YES;
   shoesStyle.hidden = YES;
   shoesColor.hidden = YES;
   shoesPrice.hidden = YES;
 }
 
+- (void)openSearchView{
+  NSLog(@"Gonna open search view");
+}
+
 - (void)dealloc {
-    [super dealloc];
+  [self.slideMenuViewController release];
+  [self.shoesDict release];
+  [self.shoesCategoryDict release];
+  [self.imageArray release];
+  
+  [super dealloc];
 }
 
 @end

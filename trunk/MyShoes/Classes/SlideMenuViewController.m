@@ -61,7 +61,7 @@
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView {
 	
-	self.view = [[UIView alloc] initWithFrame:CGRectMake(0, 400, 320, 80)];
+	self.view = [[UIView alloc] initWithFrame:CGRectMake(0, 380, 320, 80)];
 	
 	NSMutableArray* buttonArray = [NSMutableArray arrayWithCapacity:CAPACITY_SCROLL_BAR];
 	

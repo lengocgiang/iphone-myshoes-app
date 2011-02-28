@@ -88,7 +88,7 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
   NSLog(@"TOUCHES BEGAN!!");
   //Called back to delegate when starting to scroll
-  [self.delegate performSelector:@selector(scrollViewBeganScroll)];
+  //[self.delegate performSelector:@selector(scrollViewBeganScroll)];
   //[self.delegate performSelector:@selector(scrollViewBeganScroll:) withObject:[self.imageViews objectAtIndex:0]];
   
   UITouch *touch = [[event allTouches] anyObject];
@@ -118,6 +118,9 @@
     return;
   }
   NSLog(@"TOUCHES MOVED!!");
+  //Called back to delegate when starting to scroll
+  [self.delegate performSelector:@selector(scrollViewBeganScroll)];
+
   // get touch event
   UITouch *touch = [[event allTouches] anyObject];
 
@@ -134,7 +137,7 @@
   if(dx>0)
   {
     NSLog(@"W");
-    
+
     if ([self.imageViews count] >= 1) {
 
       id queueHead = [self.imageViews dequeue];
