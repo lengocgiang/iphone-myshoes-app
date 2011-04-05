@@ -12,8 +12,6 @@
 @implementation SlideMenuView
 
 @synthesize menuScrollView = _menuScrollView;
-//@synthesize rightMenuImage = _rightMenuImage;
-//@synthesize leftMenuImage = _leftMenuImage;
 @synthesize menuButtons = _menuButtons;
 
 - (id) initWithFrameColorAndButtons:(CGRect)frame backgroundColor:(UIColor*)bgColor  buttons:(NSArray*)buttonArray  {
