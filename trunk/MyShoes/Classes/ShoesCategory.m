@@ -15,13 +15,13 @@
 @synthesize categoryXPath = _categoryXPath;
 @synthesize categoryURI = _categoryURI;
 
-- (id)initWithName:(NSString *) name andXPath:(NSString *) xpath {
+- (id)initWithName:(NSString *) name{// andXPath:(NSString *) xpath {
 	
 	self = [super init];
     if (self) {
         // Custom initialization.
 		_categoryName = name;
-		_categoryXPath = xpath;
+		//_categoryXPath = xpath;
     }
     return self;
 }

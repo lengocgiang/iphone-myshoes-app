@@ -76,6 +76,9 @@
 		[btn setTitle:scategoryName forState:UIControlStateNormal];		
 		[btn addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
 		[buttonArray addObject:btn];
+    
+    //set the font of unselected btns
+    btn.titleLabel.font = [UIFont systemFontOfSize:SHOES_CATEGORY_BUTTON_UNSELECTED_SIZE];
 		
 		//[btn release];
 	}
@@ -150,7 +153,12 @@
 	//set the previous button to original size
 	if (self.previousButton != nil) {
 		[self.previousButton setFrame:CGRectMake(5.0f, 5.0f, 50.0f, 50.0f)];
+    //Change the font size of previously selected button to small one
+    self.previousButton.titleLabel.font = [UIFont systemFontOfSize:SHOES_CATEGORY_BUTTON_UNSELECTED_SIZE];
 	}
+  
+  //Change the font size of newly selected button to big one
+  ((UIButton*)sender).titleLabel.font = [UIFont systemFontOfSize:SHOES_CATEGORY_BUTTON_SELECTED_SIZE];
 	//add an effect showing the button bigger	
 	[(UIButton*)sender setFrame:CGRectMake(0.0f, 0.0f, 60.0f, 60.0f)];
 	self.previousButton = (UIButton*)sender;

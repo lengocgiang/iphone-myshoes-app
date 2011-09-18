@@ -33,6 +33,9 @@
 		B0E1BC8D130095560044A2EF /* ShoesCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = B0E1BC8C130095560044A2EF /* ShoesCategory.m */; };
 		B0E1BE741301F88B0044A2EF /* TFHppleElement+AccessChildren.m in Sources */ = {isa = PBXBuildFile; fileRef = B0E1BE731301F88B0044A2EF /* TFHppleElement+AccessChildren.m */; };
 		B0E5030E12F185C100C8978B /* ContentUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = B0E5030D12F185C100C8978B /* ContentUpdater.m */; };
+		B0EE6B811391D3D30023FD4A /* ShoesTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = B0EE6B801391D3D30023FD4A /* ShoesTableView.m */; };
+		B0EE6B861391D95C0023FD4A /* ShoesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = B0EE6B831391D95C0023FD4A /* ShoesDataSource.m */; };
+		B0EE6B891391E1C50023FD4A /* ShoesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B0EE6B871391E1C40023FD4A /* ShoesTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,6 +86,13 @@
 		B0E1BE731301F88B0044A2EF /* TFHppleElement+AccessChildren.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TFHppleElement+AccessChildren.m"; sourceTree = "<group>"; };
 		B0E5030C12F185C100C8978B /* ContentUpdater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentUpdater.h; sourceTree = "<group>"; };
 		B0E5030D12F185C100C8978B /* ContentUpdater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentUpdater.m; sourceTree = "<group>"; };
+		B0EE6B7F1391D3D30023FD4A /* ShoesTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoesTableView.h; sourceTree = "<group>"; };
+		B0EE6B801391D3D30023FD4A /* ShoesTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoesTableView.m; sourceTree = "<group>"; };
+		B0EE6B831391D95C0023FD4A /* ShoesDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShoesDataSource.m; path = Classes/ShoesDataSource.m; sourceTree = "<group>"; };
+		B0EE6B841391D95C0023FD4A /* ShoesDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShoesDataSource.h; path = Classes/ShoesDataSource.h; sourceTree = "<group>"; };
+		B0EE6B851391D95C0023FD4A /* ShoesDataSourceProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShoesDataSourceProtocol.h; path = Classes/ShoesDataSourceProtocol.h; sourceTree = "<group>"; };
+		B0EE6B871391E1C40023FD4A /* ShoesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoesTableViewCell.m; sourceTree = "<group>"; };
+		B0EE6B881391E1C50023FD4A /* ShoesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoesTableViewCell.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +140,10 @@
 				B0292544130E2CF700A78DB1 /* NSMutableArray+QueueAdditions.m */,
 				B0ADDBFF1316FEEE00B34625 /* MyShoesDetailViewController.h */,
 				B0ADDC001316FEEE00B34625 /* MyShoesDetailViewController.m */,
+				B0EE6B7F1391D3D30023FD4A /* ShoesTableView.h */,
+				B0EE6B801391D3D30023FD4A /* ShoesTableView.m */,
+				B0EE6B881391E1C50023FD4A /* ShoesTableViewCell.h */,
+				B0EE6B871391E1C40023FD4A /* ShoesTableViewCell.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -146,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				B092F8CE1307DB0C007855C5 /* OrderedDictionary */,
+				B0EE6B821391D9310023FD4A /* Data source */,
 				B0B8B7DC12F7917A00446CCC /* hpple */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -210,6 +225,16 @@
 			);
 			name = hpple;
 			path = Classes/hpple;
+			sourceTree = "<group>";
+		};
+		B0EE6B821391D9310023FD4A /* Data source */ = {
+			isa = PBXGroup;
+			children = (
+				B0EE6B851391D95C0023FD4A /* ShoesDataSourceProtocol.h */,
+				B0EE6B841391D95C0023FD4A /* ShoesDataSource.h */,
+				B0EE6B831391D95C0023FD4A /* ShoesDataSource.m */,
+			);
+			name = "Data source";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -292,6 +317,9 @@
 				B0292545130E2CF700A78DB1 /* NSMutableArray+QueueAdditions.m in Sources */,
 				B03B05A813134F0500A39685 /* Reachability.m in Sources */,
 				B0ADDC021316FEEE00B34625 /* MyShoesDetailViewController.m in Sources */,
+				B0EE6B811391D3D30023FD4A /* ShoesTableView.m in Sources */,
+				B0EE6B861391D95C0023FD4A /* ShoesDataSource.m in Sources */,
+				B0EE6B891391E1C50023FD4A /* ShoesTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

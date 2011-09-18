@@ -23,6 +23,6 @@
 @property(nonatomic, retain) NSString	*categoryXPath;
 @property(nonatomic, retain) NSString	*categoryURI;
 
-- (id)initWithName:(NSString *) name andXPath:(NSString *) xpath;
+- (id)initWithName:(NSString *) name;// andXPath:(NSString *) xpath;
 
 @end

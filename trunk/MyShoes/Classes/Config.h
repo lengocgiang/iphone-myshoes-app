@@ -13,20 +13,27 @@
 #define ALT_TAG @"alt"
 #define ORIGINAL_TAG @"original"
 
-#define SHOES_CATEGORY_WOMEN_XPATH @"//*[@id='navlist-main']/li/a[text()='Women']"
-#define SHOES_CATEGORY_MEN_XPATH @"//*[@id='navlist-main']/li/a[text()='Men']"
-#define SHOES_CATEGORY_GIRLS_XPATH @"//*[@id='navlist-main']/li/a[text()='Girls']"
-#define SHOES_CATEGORY_BOYS_XPATH @"//*[@id='navlist-main']/li/a[text()='Boys']"
+//#define SHOES_CATEGORY_WOMEN_XPATH @"//*[@id='navlist-main']/li/a[text()='Women']"
+//#define SHOES_CATEGORY_MEN_XPATH @"//*[@id='navlist-main']/li/a[text()='Men']"
+//#define SHOES_CATEGORY_GIRLS_XPATH @"//*[@id='navlist-main']/li/a[text()='Girls']"
+//#define SHOES_CATEGORY_BOYS_XPATH @"//*[@id='navlist-main']/li/a[text()='Boys']"
+//#define SHOES_CATEGORY_JUNIORS_XPATH @"//*[@id='navlist-main']/li/a[text()='Juniors']"
+//#define SHOES_CATEGORY_BAGS_XPATH @"//*[@id='navlist-main']/li/a[text()='Maps']"
 
 #define SHOES_CATEGORY_WOMEN_NAME @"Women"
 #define SHOES_CATEGORY_MEN_NAME @"Men"
 #define SHOES_CATEGORY_GIRLS_NAME @"Girls"
 #define SHOES_CATEGORY_BOYS_NAME @"Boys"
+#define SHOES_CATEGORY_JUNIORS_NAME @"Juniors"
+#define SHOES_CATEGORY_BAGS_NAME @"Bags"
+
 
 #define SHOES_CATEGORY_WOMEN_URI_12ITEM @"/en-US/Womens/_/_/_/View+12/Products.aspx"
 #define SHOES_CATEGORY_MEN_URI_12ITEM @"/en-US/Mens/_/_/_/View+12/Products.aspx"
 #define SHOES_CATEGORY_GIRLS_URI_12ITEM @"/en-US/Kids-Girls/_/_/_/View+12/Products.aspx"
 #define SHOES_CATEGORY_BOYS_URI_12ITEM @"/en-US/Kids-Boys/_/_/_/View+12/Products.aspx"
+#define SHOES_CATEGORY_JUNIORS_URI_12ITEM @"/en-US/Womens/_/_/Juniors+Shoes/View+12/Products.aspx"
+#define SHOES_CATEGORY_BAGS_URI_12ITEM @"/en-US/Bags/_/_/_/View+12/Products.aspx"
 
 #define SHOES_NODE_PRODUCTTAG @"class"
 #define SHOES_NODE_PRODUCTPRICETAG_USD @"e4xprice_usd"
@@ -34,6 +41,9 @@
 #define SHOES_NODE_PRODUCTSALESMESSAGING @"productSalesMessaging"
 #define SHOES_NODE_PRODUCTBRANDTITLECOLOR @"productBrandTitleColor"
 #define SHOES_NODE_PRODUCTPRICE @"productPrice"
+
+#define SHOES_CATEGORY_BUTTON_UNSELECTED_SIZE 12
+#define SHOES_CATEGORY_BUTTON_SELECTED_SIZE 16
 
 #define SHOES_CATEGORY_PRODUCT_LIST_XPATH @"//*[@id='ResultZone2_wrapper']//div[@class='productCell']"
 //#define SHOES_CATEGORY_PRODUCT_LIST_XPATH @"//*[@id='ResultZone2_wrapper']//div[@style='height: auto;']"
@@ -43,5 +53,5 @@
 #define CAPACITY_SCROLL_BAR 20
 #define CAPACITY_SHOES_LIST 20
 
-#define SHOES_IMAGE_BORDER_SIZE 1.0f
+#define SHOES_IMAGE_BORDER_SIZE 0.3f
 #define SHOES_IMAGE_CORNER_RADIUS 20.0f

@@ -13,6 +13,7 @@
 #import "Shoes.h"
 #import "ShoesCategory.h"
 #import "OrderedDictionary.h"
+#import "ShoesTableView.h"
 
 @interface MyShoesViewController : UIViewController <SlideImageViewDelegate>{
   UIView *contentView;
@@ -20,6 +21,8 @@
   //UIWebView *shoesImage;
   
   SlideImageView *slideImageView;
+  ShoesTableView *shoesTableView;
+  UIView *shoesScrollingView;
   //NSMutableArray *_shoesList;
   NSMutableDictionary *_shoesDict;
   
@@ -33,11 +36,16 @@
   
   NSArray *_imageArray;
   
+  NSArray *_shoesArray;
+  
+  Boolean _isTableView;
+  
   NSMutableDictionary *_shoesCategoryDict;
   SlideMenuViewController *slideMenuViewController;
 }
 
 @property (nonatomic, retain) IBOutlet UIView *contentView;
+@property (nonatomic, retain) IBOutlet UIView *shoesScrollingView;
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *progressIndicator;
 //@property (nonatomic, retain) IBOutlet UIWebView *shoesImage;
 @property (nonatomic, retain) IBOutlet SlideImageView *slideImageView;
