@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SlideMenuView.h"
 #import "Config.h"
-#import "ContentUpdater.h"
+#import "NetworkTool.h"
 
 
 @interface SlideMenuViewController : UIViewController {
@@ -20,7 +20,7 @@
   NSArray *_shoesArray;
   NSArray *_categoryButtons;
   
-	ContentUpdater *_cu;
+	NetworkTool *_cu;
 }
 
 @property (nonatomic, retain) SlideMenuView *slideMenuView;
@@ -28,7 +28,7 @@
 @property (nonatomic, retain) NSDictionary *shoesCategoryDict;
 @property (nonatomic, retain) NSArray *shoesArray;
 @property (nonatomic, retain) NSArray *categoryButtons;
-@property (nonatomic, retain) ContentUpdater *cu;
+@property (nonatomic, retain) NetworkTool *cu;
 
 - (id)init;
 - (id)initWithCategories:(NSDictionary*) dict;

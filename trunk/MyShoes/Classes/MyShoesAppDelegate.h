@@ -9,32 +9,33 @@
 #import <UIKit/UIKit.h>
 #import "Reachability.h"
 #import "Config.h"
-#import "ContentUpdater.h"
-//#import "SlideMenuView.h"
-//#import "SlideMenuViewController.h"
+#import "NetworkTool.h"
 #import "MyShoesViewController.h"
+#import "HomeViewController.h"
+#import "ShoesCategoryViewController.h"
 #import "Debug.h"
 
-//#import "OrderedDictionary.h"
-
-//@class MyShoesViewController;
 @class Reachability;
 
 @interface MyShoesAppDelegate : NSObject <UIApplicationDelegate> {
   UIWindow *window;
-	MyShoesViewController *contentViewController;
-	//SlideMenuViewController *slideMenuViewController;
-	//key value:XPATH value of category, url of the category
-	//NSMutableDictionary *_shoesCategoryDict;
+  
+  UITabBarController *tabController;
+  
+  UINavigationController *homeNavController;
+  
+	MyShoesViewController *shoesListController;
+  ShoesCategoryViewController *shoesCategoryController;
+  HomeViewController *homeViewController;
   
   //Reachability object
   Reachability *_hostReach;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, retain) IBOutlet MyShoesViewController *contentViewController;
-//@property (nonatomic, retain) SlideMenuViewController *slideMenuViewController;
-//@property (nonatomic, retain) NSMutableDictionary *shoesCategoryDict;
+@property (nonatomic, retain) IBOutlet HomeViewController *homeViewController;
+@property (nonatomic, retain) MyShoesViewController *shoesListController;
+@property (nonatomic, retain) ShoesCategoryViewController *shoesCategoryController;
 
 + (BOOL) IsEnableWIFI;
 + (BOOL) IsEnable3G;

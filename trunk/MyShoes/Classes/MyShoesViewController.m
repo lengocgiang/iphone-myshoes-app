@@ -20,6 +20,7 @@
 
 @synthesize contentView;
 @synthesize shoesScrollingView;
+//@synthesize shoesTableView;
 @synthesize progressIndicator;
 //@synthesize shoesImage;
 @synthesize slideImageView;
@@ -31,7 +32,7 @@
 @synthesize shoesPrice;
 @synthesize toolBar;
 @synthesize imageArray = _imageArray;
-@synthesize slideMenuViewController;
+//@synthesize slideMenuViewController;
 @synthesize shoesCategoryDict = _shoesCategoryDict;
 /*
 // The designated initializer. Override to perform setup that is required before the view is loaded.
@@ -57,48 +58,8 @@
   [super viewDidLoad];
   slideImageView.delegate = self;
 
-  //Init search toolbar
-  //create toolbar using new
-  self.toolBar = [UIToolbar new];
-  self.toolBar.barStyle = UIBarStyleDefault;
-  [self.toolBar sizeToFit];
-  self.toolBar.frame = CGRectMake(0, 0, 320, 60);
-  
   //Default shoes list view is table view
   _isTableView = YES;
-  
-  //Add buttons
-  /*UIBarButtonItem *button1 = [[UIBarButtonItem alloc] initWithTitle:@"Button 1"
-                                                              style:UIBarButtonItemStyleBordered
-                                                             target:self	 
-                                                             action:@selector(doSomethingWithButton1)];*/
-  //Use this to put space in between your toolbox buttons
-  UIBarButtonItem *BtnSpace = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
-
-                                                                                            
-  // Button 2.
-  UIBarButtonItem *searchButton = [[UIBarButtonItem alloc] initWithTitle:@"Search" 
-                                                                   style:UIBarButtonItemStyleBordered 
-                                                                  target:self
-                                                                  action:@selector(openSearchView)];
-
-  UIBarButtonItem *switchButton = [[UIBarButtonItem alloc] initWithTitle:@"Switch view" 
-                                                                   style:UIBarButtonItemStyleBordered 
-                                                                  target:self
-                                                                  action:@selector(switchShoesListView)];
-
-  //Add buttons to the array
-  NSArray *items = [NSArray arrayWithObjects: switchButton, BtnSpace, searchButton, nil];
-  
-  //release buttons
-  [BtnSpace release];
-  [searchButton release];
-  [switchButton release];
-  
-  //add array of buttons to toolbar
-  [self.toolBar setItems:items animated:NO];
-  [self.view addSubview:self.toolBar];
-                                                                                                                                                                  
   
   //Init and add slide button menu Image View
   _shoesCategoryDict = [[OrderedDictionary alloc] init];
@@ -135,9 +96,9 @@
 	[_shoesCategoryDict setObject:category forKey:SHOES_CATEGORY_BAGS_NAME];
 
   //[self.window addSubview:contentViewController.view];
-	self.slideMenuViewController = [[SlideMenuViewController alloc] initWithCategories:_shoesCategoryDict];
+	//self.slideMenuViewController = [[SlideMenuViewController alloc] initWithCategories:_shoesCategoryDict];
   
-  [self.view addSubview:slideMenuViewController.view];
+  //[self.view addSubview:slideMenuViewController.view];
   //Add slide Image View
 
   NSMutableArray* images = [NSMutableArray arrayWithCapacity:CAPACITY_SHOES_LIST];
@@ -172,6 +133,23 @@
                                                                      images:self.imageArray];*/
   [self.slideImageView setupImages:self.imageArray];
   //[self.contentView addSubview:self.slideImageView];
+  
+  //Add table view
+  /*self.shoesTableView = [[ShoesTableView alloc] initWithFrame:CGRectMake(0.0f,0.0f,320.0f,300.0f) 
+                                           withDataSource:nil];
+  
+  //[self.contentView addSubview:shoesTableView];
+  
+  //Get the progress indicator on the top as always.
+  [self.contentView addSubview:shoesTableView];*/
+
+  
+  //Add activity indicator
+  /*progressIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+  
+  CGPoint newCenter = (CGPoint) [self.slideImageView center];
+  progressIndicator.center = newCenter;
+  [self.slideImageView addSubview:progressIndicator];*/
 }
 
 
@@ -197,6 +175,8 @@
 }
 
 - (void) startAnimation {
+  //[shoesTableView setHidden:YES];
+  //[self hideShoesInfoLabels];
   slideImageView.hidden = YES;
   progressIndicator.hidden = NO;
   [progressIndicator startAnimating];
@@ -206,7 +186,8 @@
   [progressIndicator stopAnimating];
   progressIndicator.hidden = YES;
   [UIView beginAnimations:nil context:nil];
-  slideImageView.hidden = NO;
+  [slideImageView setHidden:YES];
+  //[shoesTableView setHidden:YES];
   [UIView commitAnimations];
 }
 
@@ -275,11 +256,16 @@
 
       id shoesSource = [[ShoesDataSource alloc] init];
       [shoesSource setDataSourceShoesArray:_shoesArray];
+      
+      //shoesTableView.dataSource = shoesSource;
 
-      shoesTableView = [[[ShoesTableView alloc] initWithFrame:CGRectMake(0.0f,0.0f,320.0f,300.0f) 
+      shoesTableView = [[[ShoesTableView alloc] initWithFrame:CGRectMake(0.0f,0.0f,320.0f,387.0f) 
                                                withDataSource:(id)shoesSource] autorelease];
   
-      [self.contentView addSubview:shoesTableView];
+      //[self.contentView addSubview:shoesTableView];
+      
+      //Get the progress indicator on the top as always.
+      [self.contentView insertSubview:shoesTableView belowSubview:progressIndicator ];
     }
   
     //[shoesTableView release];
@@ -355,7 +341,9 @@
 }
 
 - (void)dealloc {
-  [slideMenuViewController release];
+  //[slideMenuViewController release];
+  //[shoesTableView release];
+  //[progressIndicator release];
   [_shoesDict release];
   [_shoesCategoryDict release];
   [_imageArray release];

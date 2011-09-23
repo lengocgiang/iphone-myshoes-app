@@ -8,6 +8,7 @@
 
 //This is the entrance of the whole app
 #define MYSHOES_URL @"http://www.shoes.com/"
+#define MYSHOES_HOSTNAME @"www.shoes.com"
 #define HREF_TAG @"href"
 #define SRC_TAG @"src"
 #define ALT_TAG @"alt"
@@ -19,13 +20,22 @@
 //#define SHOES_CATEGORY_BOYS_XPATH @"//*[@id='navlist-main']/li/a[text()='Boys']"
 //#define SHOES_CATEGORY_JUNIORS_XPATH @"//*[@id='navlist-main']/li/a[text()='Juniors']"
 //#define SHOES_CATEGORY_BAGS_XPATH @"//*[@id='navlist-main']/li/a[text()='Maps']"
+#define HOME_CATEGORY_BTN_IMG_SIZE CGSizeMake(24.0f, 24.0f)
 
-#define SHOES_CATEGORY_WOMEN_NAME @"Women"
-#define SHOES_CATEGORY_MEN_NAME @"Men"
-#define SHOES_CATEGORY_GIRLS_NAME @"Girls"
-#define SHOES_CATEGORY_BOYS_NAME @"Boys"
-#define SHOES_CATEGORY_JUNIORS_NAME @"Juniors"
-#define SHOES_CATEGORY_BAGS_NAME @"Bags"
+#define HOME_NAVE_TITLE_NAME @"MyShoes"
+#define TAB_HOME_NAV_NAME @"Home"
+#define TAB_HOME_NAV_PNG  @"home.png"
+#define TAB_SETTING_NAV_NAME @"Settings"
+
+#define CATEGORY_NAV_TITLE_NAME @"Category"
+#define SHOESLIST_NAV_TITLE_NAME @"Shoes List"
+
+#define SHOES_CATEGORY_WOMEN_NAME @"women"
+#define SHOES_CATEGORY_MEN_NAME @"men"
+#define SHOES_CATEGORY_GIRLS_NAME @"girls"
+#define SHOES_CATEGORY_BOYS_NAME @"boys"
+#define SHOES_CATEGORY_JUNIORS_NAME @"juniors"
+#define SHOES_CATEGORY_BAGS_NAME @"bags&more"
 
 
 #define SHOES_CATEGORY_WOMEN_URI_12ITEM @"/en-US/Womens/_/_/_/View+12/Products.aspx"

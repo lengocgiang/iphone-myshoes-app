@@ -13,7 +13,9 @@
 @implementation MyShoesAppDelegate
 
 @synthesize window;
-@synthesize contentViewController;
+@synthesize shoesListController;
+@synthesize shoesCategoryController;
+@synthesize homeViewController;
 //@synthesize slideMenuViewController;
 //@synthesize shoesCategoryDict = _shoesCategoryDict;
 
@@ -25,14 +27,46 @@
     
     // Override point for customization after application launch.
 
-	debug_NSLog(@"This is the start point of init data and fetching all data refreshed");	
+	debug_NSLog(@"This is the start point of init data and fetching all data refreshed");
+  //Create Content Category list view controller
+  shoesCategoryController = [[ShoesCategoryViewController alloc]
+                                initWithNibName:@"ShoesCategoryViewController" 
+                                         bundle:nil];
+  shoesCategoryController.title = CATEGORY_NAV_TITLE_NAME;
+  shoesListController = [[MyShoesViewController alloc]
+                              initWithNibName:@"MyShoesViewController" 
+                                       bundle:nil];
+  shoesListController.title = SHOESLIST_NAV_TITLE_NAME;
 
-  /*MyShoesViewController *shoesViewController = [[MyShoesViewController alloc]
-                                        initWithNibName:@"MyShoesViewController" bundle:nil];
-	self.contentViewController = shoesViewController;*/
+  //Add tabBar Controller
+  tabController = [[UITabBarController alloc] init];
   
-  [self.window addSubview:self.contentViewController.view];
-  [self.window makeKeyAndVisible];
+  homeNavController = [[UINavigationController alloc] init];
+  [homeNavController pushViewController:homeViewController animated:NO];
+  
+  /*UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
+                                                                  style:UIBarButtonSystemItemDone 
+                                                                 target:nil action:nil];
+  homeViewController.navigationItem.rightBarButtonItem = rightButton;*/
+  //homeNavController.title = TAB_HOME_NAV_NAME;
+  homeViewController.title = HOME_NAVE_TITLE_NAME;
+  
+  UIBarButtonItem *backButton = [[[UIBarButtonItem alloc] initWithTitle:TAB_HOME_NAV_NAME	 
+                                                                  style:UIBarButtonItemStyleBordered	 
+                                                                 target:nil action:nil] autorelease];
+  homeViewController.navigationItem.backBarButtonItem = backButton;
+  
+  UITabBarItem *homeItme = [[UITabBarItem alloc] initWithTitle:TAB_HOME_NAV_NAME image:[UIImage imageNamed:TAB_HOME_NAV_PNG] tag:0];
+  homeNavController.tabBarItem = homeItme;
+  [homeItme release];
+  //[rightButton 
+  //[rightButton release];
+  
+  tabController.viewControllers = [NSArray arrayWithObjects:homeNavController, nil];
+  
+  //[self.window addSubview:self.contentViewController.view];
+  [window addSubview:tabController.view];
+  [window makeKeyAndVisible];
   
   //[shoesViewController release];
   //Test network reachability
@@ -40,7 +74,7 @@
                                            selector:@selector(reachabilityChanged:)
                                                name: kReachabilityChangedNotification
                                              object: nil];
-  _hostReach = [[Reachability reachabilityWithHostName:@"www.shoes.com"] retain];
+  _hostReach = [[Reachability reachabilityWithHostName:MYSHOES_HOSTNAME] retain];
   [_hostReach startNotifier];
   [_hostReach release];
 
@@ -122,7 +156,10 @@
 - (void)dealloc {
     //[viewController release];
 	//[slideMenuViewController release];
-  [self.contentViewController release];
+  [shoesListController release];
+  [shoesCategoryController release];
+  [homeNavController release];
+  [tabController release];
   [window release];
 	
 	//[_shoesCategoryDict release];

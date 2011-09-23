@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface ContentUpdater : NSObject {
+@interface NetworkTool : NSObject {
 	
 	NSMutableData		*receivedData;
 	NSMutableURLRequest	*theRequest;

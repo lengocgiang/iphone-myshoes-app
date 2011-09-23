@@ -7,7 +7,7 @@
 //
 
 #import "ShoesTableView.h"
-#import "ShoesTableViewCell.h"
+//#import "ShoesTableViewCell.h"
 #import "ShoesDataSource.h"
 
 

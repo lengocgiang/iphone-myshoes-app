@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Config.h"
 #import "SlideImageView.h"
-#import "SlideMenuViewController.h"
+//#import "SlideMenuViewController.h"
 #import "Shoes.h"
 #import "ShoesCategory.h"
 #import "OrderedDictionary.h"
@@ -41,7 +41,7 @@
   Boolean _isTableView;
   
   NSMutableDictionary *_shoesCategoryDict;
-  SlideMenuViewController *slideMenuViewController;
+  //SlideMenuViewController *slideMenuViewController;
 }
 
 @property (nonatomic, retain) IBOutlet UIView *contentView;
@@ -49,6 +49,7 @@
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *progressIndicator;
 //@property (nonatomic, retain) IBOutlet UIWebView *shoesImage;
 @property (nonatomic, retain) IBOutlet SlideImageView *slideImageView;
+//@property (nonatomic, retain) ShoesTableView *shoesTableView;
 //@property (nonatomic, retain) NSMutableArray *shoesList;
 @property (nonatomic, retain) NSMutableDictionary *shoesDict;
 @property (nonatomic, retain) IBOutlet UILabel *shoesBrandName;
@@ -57,7 +58,7 @@
 @property (nonatomic, retain) IBOutlet UILabel *shoesPrice;
 @property (nonatomic, retain) UIToolbar *toolBar;
 @property (nonatomic, retain) NSArray *imageArray;
-@property (nonatomic, retain) SlideMenuViewController *slideMenuViewController;
+//@property (nonatomic, retain) SlideMenuViewController *slideMenuViewController;
 @property (nonatomic, retain) NSMutableDictionary *shoesCategoryDict;
 
 - (void) startAnimation;

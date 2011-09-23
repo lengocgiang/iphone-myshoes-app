@@ -6,10 +6,10 @@
 //  Copyright 2011 Mbi. All rights reserved.
 //
 
-#import "ContentUpdater.h"
+#import "NetworkTool.h"
 
 
-@implementation ContentUpdater
+@implementation NetworkTool
 
 @synthesize username;
 @synthesize password;

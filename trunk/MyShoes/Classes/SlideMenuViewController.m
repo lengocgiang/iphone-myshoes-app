@@ -53,7 +53,7 @@
 		_shoesCategoryDict = dict;
 		
 		//init the network module.
-		_cu = [[ContentUpdater alloc] init];
+		_cu = [[NetworkTool alloc] init];
     }
     return self;
 }
@@ -144,8 +144,8 @@
   //Start animation
   MyShoesAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
   
-  [delegate.contentViewController hideShoesInfoLabels];
-  [delegate.contentViewController startAnimation];
+  [delegate.shoesListController hideShoesInfoLabels];
+  [delegate.shoesListController startAnimation];
   
 	//screenLabel.text = ((UIButton*)sender).currentTitle;
 	NSLog(@"The button pressed is:%@",((UIButton*)sender).currentTitle);
@@ -212,11 +212,11 @@
     /*Shoes *shoes = [self.shoesArray objectAtIndex:0];
     NSString *imageName = shoes.shoesImageName;
     NSString *imageUrl = [NSString stringWithFormat:@"%@%@",MYSHOES_URL,imageName];*/
-    [delegate.contentViewController showShoes:self.shoesArray];
+    [delegate.shoesListController showShoes:self.shoesArray];
   }
-  [delegate.contentViewController stopAnimation];
+  [delegate.shoesListController stopAnimation];
   if ([self.shoesArray count] >= 1){
-    [delegate.contentViewController showShoesInfo:[self.shoesArray objectAtIndex:0]];
+    [delegate.shoesListController showShoesInfo:[self.shoesArray objectAtIndex:0]];
   }
   
   //Enable all buttons
