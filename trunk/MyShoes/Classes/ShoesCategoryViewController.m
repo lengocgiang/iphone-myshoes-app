@@ -170,7 +170,7 @@
   //Start animation
   MyShoesAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
   
-  [delegate.shoesListController hideShoesInfoLabels];
+  [delegate.shoesListController hideShoesListInfoLabels];
   [delegate.shoesListController startAnimation];
   
 	//get the uri for the selected category
@@ -227,11 +227,11 @@
     /*Shoes *shoes = [self.shoesArray objectAtIndex:0];
      NSString *imageName = shoes.shoesImageName;
      NSString *imageUrl = [NSString stringWithFormat:@"%@%@",MYSHOES_URL,imageName];*/
-    [delegate.shoesListController showShoes:self.shoesArray];
+    [delegate.shoesListController showShoesList:self.shoesArray];
   }
   [delegate.shoesListController stopAnimation];
   if ([self.shoesArray count] >= 1){
-    [delegate.shoesListController showShoesInfo:[self.shoesArray objectAtIndex:0]];
+    [delegate.shoesListController showShoesListInfo:[self.shoesArray objectAtIndex:0]];
   }
     
 }

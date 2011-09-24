@@ -7,7 +7,7 @@
 //
 
 #import "HomeViewController.h"
-#import "MyShoesViewController.h"
+#import "ShoesListViewController.h"
 #import "MyShoesAppDelegate.h"
 
 @implementation HomeViewController
@@ -72,7 +72,8 @@
                                            withDataSource:self] autorelease];
   
   [self.view addSubview:aTableViewBtn]; */
-  aTableViewBtn = [[[UITableView alloc] initWithFrame:CGRectMake(0.0f,100.0f,320.0f,200.0f) style:UITableViewStyleGrouped] autorelease];
+  aTableViewBtn = [[[UITableView alloc] initWithFrame:CGRectMake(0.0f,100.0f,320.0f,200.0f) 
+                                                style:UITableViewStyleGrouped] autorelease];
   aTableViewBtn.delegate = self;
   aTableViewBtn.dataSource = self;
   

@@ -21,6 +21,10 @@
 //#define SHOES_CATEGORY_JUNIORS_XPATH @"//*[@id='navlist-main']/li/a[text()='Juniors']"
 //#define SHOES_CATEGORY_BAGS_XPATH @"//*[@id='navlist-main']/li/a[text()='Maps']"
 #define HOME_CATEGORY_BTN_IMG_SIZE CGSizeMake(24.0f, 24.0f)
+#define SHOES_LIST_IMG_SIZE CGSizeMake(60.0f, 60.0f)
+
+#define SHOES_LIST_CELL_IMG_WIDTH 60.0f
+#define SHOES_LIST_CELL_HEIGHT 60.0f
 
 #define HOME_NAVE_TITLE_NAME @"MyShoes"
 #define TAB_HOME_NAV_NAME @"Home"

@@ -7,7 +7,7 @@
 //
 
 #import "MyShoesAppDelegate.h"
-#import "MyShoesViewController.h"
+#import "ShoesListViewController.h"
 #import "TFHpple.h"
 
 @implementation MyShoesAppDelegate
@@ -33,8 +33,8 @@
                                 initWithNibName:@"ShoesCategoryViewController" 
                                          bundle:nil];
   shoesCategoryController.title = CATEGORY_NAV_TITLE_NAME;
-  shoesListController = [[MyShoesViewController alloc]
-                              initWithNibName:@"MyShoesViewController" 
+  shoesListController = [[ShoesListViewController alloc]
+                              initWithNibName:@"ShoesListViewController" 
                                        bundle:nil];
   shoesListController.title = SHOESLIST_NAV_TITLE_NAME;
 

@@ -6,17 +6,18 @@
 //  Copyright 2011 Mbi. All rights reserved.
 //
 
-#import "MyShoesViewController.h"
+#import "ShoesListViewController.h"
+#import "HomeViewController.h"
 //#import "UIImage+Alpha.h"
 //#import "UIImage+Resize.h"
 //#import "UIImage+RoundedCorner.h"
 #import <QuartzCore/QuartzCore.h>
-
+#import "Shoes.h"
 //#import "ShoesTableView.h"
 #import "ShoesDataSource.h"
 
 
-@implementation MyShoesViewController
+@implementation ShoesListViewController
 
 @synthesize contentView;
 @synthesize shoesScrollingView;
@@ -24,6 +25,8 @@
 @synthesize progressIndicator;
 //@synthesize shoesImage;
 @synthesize slideImageView;
+@synthesize shoesListView;
+@synthesize shoesListCell;
 //@synthesize shoesList = _shoesList;
 @synthesize shoesDict = _shoesDict;
 @synthesize shoesBrandName;
@@ -34,6 +37,7 @@
 @synthesize imageArray = _imageArray;
 //@synthesize slideMenuViewController;
 @synthesize shoesCategoryDict = _shoesCategoryDict;
+
 /*
 // The designated initializer. Override to perform setup that is required before the view is loaded.
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -134,22 +138,6 @@
   [self.slideImageView setupImages:self.imageArray];
   //[self.contentView addSubview:self.slideImageView];
   
-  //Add table view
-  /*self.shoesTableView = [[ShoesTableView alloc] initWithFrame:CGRectMake(0.0f,0.0f,320.0f,300.0f) 
-                                           withDataSource:nil];
-  
-  //[self.contentView addSubview:shoesTableView];
-  
-  //Get the progress indicator on the top as always.
-  [self.contentView addSubview:shoesTableView];*/
-
-  
-  //Add activity indicator
-  /*progressIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-  
-  CGPoint newCenter = (CGPoint) [self.slideImageView center];
-  progressIndicator.center = newCenter;
-  [self.slideImageView addSubview:progressIndicator];*/
 }
 
 
@@ -191,7 +179,7 @@
   [UIView commitAnimations];
 }
 
-- (void) showShoes:(NSArray *) shoesArray {
+- (void) showShoesList:(NSArray *) shoesArray {
 
   //Start animation
   //[self startAnimation];
@@ -240,7 +228,8 @@
       [image release];
     }
     
-    [shoesTableView setHidden:YES];
+    //[shoesTableView setHidden:YES];
+    [shoesListView setHidden:YES];
     [shoesScrollingView setHidden:NO];
     
     /*if ([shoesArray count] >= 1){
@@ -250,53 +239,50 @@
   }
   else{
     
-    if(shoesArray != nil){
+    if(_shoesArray != nil){
       
-      [shoesTableView removeFromSuperview];
+      /*[shoesTableView removeFromSuperview];
 
       id shoesSource = [[ShoesDataSource alloc] init];
       [shoesSource setDataSourceShoesArray:_shoesArray];
       
       //shoesTableView.dataSource = shoesSource;
 
-      shoesTableView = [[[ShoesTableView alloc] initWithFrame:CGRectMake(0.0f,0.0f,320.0f,387.0f) 
+      shoesTableView = [[[ShoesTableView alloc] initWithFrame:CGRectMake(0.0f,0.0f,320.0f,367.0f) 
                                                withDataSource:(id)shoesSource] autorelease];
   
       //[self.contentView addSubview:shoesTableView];
       
       //Get the progress indicator on the top as always.
-      [self.contentView insertSubview:shoesTableView belowSubview:progressIndicator ];
+      [self.contentView insertSubview:shoesTableView belowSubview:progressIndicator ];*/
+      shoesListView.dataSource = self;
+      shoesListView.delegate = self;
+      [shoesListView reloadData];
+      [shoesListView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
+      [shoesListView setHidden:NO];
+      
     }
   
     //[shoesTableView release];
     //Hide scrolling shoes list view
     [shoesScrollingView setHidden:YES];
-    [shoesTableView setHidden:NO];
+    //[shoesTableView setHidden:NO];
   }
 }
 
-- (void)scrollViewDidScroll:(UIImageView *)selectedView{
+/*- (void)scrollViewDidScroll:(UIImageView *)selectedView{
   //locate the actually shoes selected
   Shoes *shoes = [self.shoesDict objectForKey:selectedView.image];
   
-  /*shoesBrandName.text = shoes.brandName;
-  shoesStyle.text = shoes.productStyle;
-  shoesColor.text = shoes.productColor;
-  shoesPrice.text = shoes.productPrice;
-  //Show shoes info
-  shoesBrandName.hidden = NO;
-  shoesStyle.hidden = NO;
-  shoesColor.hidden = NO;
-  shoesPrice.hidden = NO;*/
-  [self showShoesInfo:shoes];
+  [self showShoesListInfo:shoes];
 }
 
 - (void)scrollViewBeganScroll{
   //When users begin scrolling, hide all the four labels
-  [self hideShoesInfoLabels];
-}
+  [self hideShoesListInfoLabels];
+}*/
 
-- (void)showShoesInfo:(Shoes *)shoes{
+- (void)showShoesListInfo:(Shoes *)shoes{
   shoesBrandName.text = shoes.productCategory;
   shoesStyle.text = shoes.productStyle;
   shoesColor.text = shoes.productColor;
@@ -309,7 +295,7 @@
   
 }
 
-- (void)hideShoesInfoLabels{
+- (void)hideShoesListInfoLabels{
   
   //Hide shoes info when changing shoes category
   if(!_isTableView){
@@ -319,7 +305,8 @@
     shoesPrice.hidden = YES;
   }
   else{
-    [shoesTableView setHidden:YES];   
+    //[shoesTableView setHidden:YES]; 
+    [shoesListView setHidden:YES];
   }
 }
 
@@ -337,7 +324,7 @@
   }
   
   //Just refresh the view with existing shoes data
-  [self showShoes:nil];
+  [self showShoesList:nil];
 }
 
 - (void)dealloc {
@@ -350,6 +337,147 @@
   [_shoesArray release];
   
   [super dealloc];
+}
+
+#pragma mark Table view methods
+
+//Two sections here
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+  return 1;
+}
+
+
+// Customize the number of rows in the table view.
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+  return [_shoesArray count];
+}
+
+
+// Customize the appearance of table view cells.
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+
+	static NSString *MyIdentifier = @"MyIdentifier";
+	MyIdentifier = @"listViewCell";
+  
+  /*static NSInteger BrandTag = 1;
+  static NSInteger StyleTag = 2;
+  static NSInteger ColorTag = 3;
+  static NSInteger PriceTag = 4;*/
+	
+	//ShoesListViewCell *cell = (ShoesListViewCell *)[shoesListView dequeueReusableCellWithIdentifier:MyIdentifier];
+  ShoesListViewCell *cell = (ShoesListViewCell *)[shoesListView dequeueReusableCellWithIdentifier:MyIdentifier];
+  
+	if(cell == nil) {
+    /*cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:MyIdentifier] autorelease];
+    
+    float indicatorSize = 25;//cell.accessoryView.frame.size.width;
+    
+    CGRect frame;
+    frame.origin.x = 10 + SHOES_LIST_CELL_IMG_WIDTH;
+    frame.origin.y = 0;
+    frame.size.height = 30;
+    frame.size.width = 150;
+    
+    //Create Lable for BrandName
+    UILabel *brandLabel = [[[UILabel alloc] initWithFrame:frame] autorelease];
+    brandLabel.tag = BrandTag;
+    brandLabel.font = [UIFont fontWithName:@"Helvetica" size:(14.0)];
+   [cell.contentView addSubview:brandLabel];
+    
+    //The position of the Color label
+    frame.origin.x = cell.contentView.frame.size.width - 80 - indicatorSize;
+    frame.origin.y = 0;
+    frame.size.height = 20;
+    frame.size.width = 80;   
+    //Create Lable for Color
+    UILabel *colorLabel = [[[UILabel alloc] initWithFrame:frame] autorelease];
+    colorLabel.tag = ColorTag;
+    colorLabel.textAlignment = UITextAlignmentRight;
+    colorLabel.font = [UIFont fontWithName:@"Helvetica" size:(12.0)];
+    [cell.contentView addSubview:colorLabel];
+    
+    //The position of the Style label
+    frame.origin.x = 10 + SHOES_LIST_CELL_IMG_WIDTH;
+    frame.origin.y = 30;
+    frame.size.height = 30;
+    frame.size.width = 150;
+    //Create Lable for Style
+    UILabel *styleLabel = [[[UILabel alloc] initWithFrame:frame] autorelease];
+    styleLabel.tag = StyleTag;
+    styleLabel.font = [UIFont fontWithName:@"Helvetica" size:(12.0)];
+    [cell.contentView addSubview:styleLabel];
+    
+    //The position of the price label
+    frame.origin.x = cell.contentView.frame.size.width - 80 - indicatorSize;
+    frame.origin.y = 20;
+    frame.size.height = 40;
+    frame.size.width = 80;
+    //Create Lable for Style
+    UILabel *priceLabel = [[[UILabel alloc] initWithFrame:frame] autorelease];
+    priceLabel.tag = PriceTag;
+    priceLabel.textAlignment = UITextAlignmentRight;
+    priceLabel.font = [UIFont fontWithName:@"Helvetica" size:(20.0)];
+    [cell.contentView addSubview:priceLabel];*/
+    
+    cell = [[[ShoesListViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier] autorelease];
+    
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+	}
+  
+  Shoes *shoes = [_shoesArray objectAtIndex:indexPath.row];
+  
+	//imageView.image = shoes.shoesImage;
+  NSString *imageName = shoes.shoesImageName;
+  NSString *imageUrl = [NSString stringWithFormat:@"%@%@",MYSHOES_URL,imageName];
+  
+  NSURL *url = [NSURL URLWithString:imageUrl];
+  //NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
+  
+  UIImage *shoesImage = [[UIImage imageWithData: [NSData dataWithContentsOfURL: url]] retain];
+  
+  CGSize sz = SHOES_LIST_IMG_SIZE;
+  
+  UIImage *resized = [HomeViewController scale:shoesImage toSize:sz];
+
+  cell.imageView.image = resized;
+
+  /*UILabel *brandLabel = (UILabel *)[cell.contentView viewWithTag:BrandTag];
+  UILabel *styleLabel = (UILabel *)[cell.contentView viewWithTag:StyleTag];
+  UILabel *colorLabel = (UILabel *)[cell.contentView viewWithTag:ColorTag];
+  UILabel *priceLabel = (UILabel *)[cell.contentView viewWithTag:PriceTag];
+  
+  brandLabel.text = shoes.productBrandName;
+  styleLabel.text = shoes.productStyle;
+  colorLabel.text = shoes.productColor;
+  priceLabel.text = shoes.productPrice;*/
+  [cell setShoesBrandName:shoes.productBrandName];
+  [cell setShoesColor:shoes.productColor];
+  [cell setShoesStyle:shoes.productStyle];
+  [cell setShoesPrice:shoes.productPrice];
+  
+	return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+  
+  /*if(indexPath.section == 0){
+    //Set the Name of the cell is @"Category"
+    //[cell setBtnLableTxt:[btnNameArray objectAtIndex:0]];
+    if(indexPath.row == 0) {
+      MyShoesAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+      
+      [self.navigationController pushViewController:delegate.shoesCategoryController animated:YES];
+      
+      //Deselected the selected Row
+      [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    }
+  }*/
+  
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  return SHOES_LIST_CELL_HEIGHT;//[indexPath row] * 20;
 }
 
 @end

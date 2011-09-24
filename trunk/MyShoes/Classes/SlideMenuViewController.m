@@ -10,7 +10,7 @@
 #import "Shoes.h"
 #import "ShoesCategory.h"
 #import "MyShoesAppDelegate.h"
-#import "MyShoesViewController.h"
+#import "ShoesListViewController.h"
 #import "TFHpple.h"
 #import "TFHppleElement+AccessChildren.h"
 
@@ -144,7 +144,7 @@
   //Start animation
   MyShoesAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
   
-  [delegate.shoesListController hideShoesInfoLabels];
+  [delegate.shoesListController hideShoesListInfoLabels];
   [delegate.shoesListController startAnimation];
   
 	//screenLabel.text = ((UIButton*)sender).currentTitle;
@@ -212,11 +212,11 @@
     /*Shoes *shoes = [self.shoesArray objectAtIndex:0];
     NSString *imageName = shoes.shoesImageName;
     NSString *imageUrl = [NSString stringWithFormat:@"%@%@",MYSHOES_URL,imageName];*/
-    [delegate.shoesListController showShoes:self.shoesArray];
+    [delegate.shoesListController showShoesList:self.shoesArray];
   }
   [delegate.shoesListController stopAnimation];
   if ([self.shoesArray count] >= 1){
-    [delegate.shoesListController showShoesInfo:[self.shoesArray objectAtIndex:0]];
+    [delegate.shoesListController showShoesListInfo:[self.shoesArray objectAtIndex:0]];
   }
   
   //Enable all buttons

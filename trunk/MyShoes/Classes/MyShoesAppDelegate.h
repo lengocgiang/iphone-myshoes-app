@@ -10,7 +10,7 @@
 #import "Reachability.h"
 #import "Config.h"
 #import "NetworkTool.h"
-#import "MyShoesViewController.h"
+#import "ShoesListViewController.h"
 #import "HomeViewController.h"
 #import "ShoesCategoryViewController.h"
 #import "Debug.h"
@@ -24,7 +24,7 @@
   
   UINavigationController *homeNavController;
   
-	MyShoesViewController *shoesListController;
+	ShoesListViewController *shoesListController;
   ShoesCategoryViewController *shoesCategoryController;
   HomeViewController *homeViewController;
   
@@ -34,7 +34,7 @@
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet HomeViewController *homeViewController;
-@property (nonatomic, retain) MyShoesViewController *shoesListController;
+@property (nonatomic, retain) ShoesListViewController *shoesListController;
 @property (nonatomic, retain) ShoesCategoryViewController *shoesCategoryController;
 
 + (BOOL) IsEnableWIFI;

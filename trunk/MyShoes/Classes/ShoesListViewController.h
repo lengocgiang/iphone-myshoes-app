@@ -14,14 +14,17 @@
 #import "ShoesCategory.h"
 #import "OrderedDictionary.h"
 #import "ShoesTableView.h"
+#import "ShoesListViewCell.h"
 
-@interface MyShoesViewController : UIViewController <SlideImageViewDelegate>{
+@interface ShoesListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource/*, SlideImageViewDelegate*/>{
   UIView *contentView;
   UIActivityIndicatorView *progressIndicator;
   //UIWebView *shoesImage;
   
   SlideImageView *slideImageView;
-  ShoesTableView *shoesTableView;
+  //ShoesTableView *shoesTableView;
+  
+  UITableView *shoesListView;
   UIView *shoesScrollingView;
   //NSMutableArray *_shoesList;
   NSMutableDictionary *_shoesDict;
@@ -41,6 +44,8 @@
   Boolean _isTableView;
   
   NSMutableDictionary *_shoesCategoryDict;
+  
+  ShoesListViewCell *shoesListCell;
   //SlideMenuViewController *slideMenuViewController;
 }
 
@@ -49,6 +54,8 @@
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *progressIndicator;
 //@property (nonatomic, retain) IBOutlet UIWebView *shoesImage;
 @property (nonatomic, retain) IBOutlet SlideImageView *slideImageView;
+@property (nonatomic, retain) IBOutlet UITableView *shoesListView;
+@property (nonatomic, retain) IBOutlet ShoesListViewCell *shoesListCell;
 //@property (nonatomic, retain) ShoesTableView *shoesTableView;
 //@property (nonatomic, retain) NSMutableArray *shoesList;
 @property (nonatomic, retain) NSMutableDictionary *shoesDict;
@@ -63,9 +70,9 @@
 
 - (void) startAnimation;
 - (void) stopAnimation;
-- (void) showShoes:(NSArray *) shoesList;
-- (void) showShoesInfo:(Shoes *)shoes;
-- (void) hideShoesInfoLabels;
+- (void) showShoesList:(NSArray *) shoesList;
+- (void) showShoesListInfo:(Shoes *)shoes;
+- (void) hideShoesListInfoLabels;
 
 @end
 
