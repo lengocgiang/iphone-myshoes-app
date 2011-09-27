@@ -26,7 +26,10 @@
 @synthesize productRating = _productRating;
 @synthesize productStyle = _productStyle;
 @synthesize productColor = _productColor;
+@synthesize productSKU = _productSKU;
+@synthesize shoesImgsAllAngle = _shoesImgsAllAngle;
 @synthesize productBrandName = _productBrandName;
+@synthesize productBrandLogo = _productBrandLogo;
 
 /*  Child node structure
  
@@ -162,12 +165,45 @@
   }
 }
 
+- (void)processProductSKU:(TFHppleElement *) node{
+  NSString *tmpStr = [node content];
+  NSString *sku = [tmpStr substringFromIndex:[SHOES_INFO_SKU_PREFIX length]];
+  
+  self.productSKU = [sku retain];
+  
+  NSString *tmpUrl;
+  NSMutableArray *imgArray = [NSMutableArray arrayWithCapacity:SHOES_INFO_SHOESIMGS_COUNT];
+  for (int i=1; i <=8; i++){
+    tmpUrl = [NSString stringWithFormat:@"%@%@%d%@%@", MYSHOES_URL, SHOES_INFO_SHOESIMGS_ALLANGLE_URIPREFIX,
+              i, sku, SHOES_INFO_SHOESIMGS_FILE_SURFIX];
+    [imgArray addObject:tmpUrl];
+  }
+  
+  self.shoesImgsAllAngle = [[NSArray arrayWithArray:imgArray] retain];
+}
+
+- (void)processProductBrandLogo:(TFHppleElement *) node{
+  //NSLog(@"This is a function of shoes");
+  /*NSArray *childElements  = [node childNodes];
+  if([childElements count] <= 0){
+    return;
+  }
+  TFHppleElement *element = [childElements objectAtIndex:0];*/
+  //set product brand name
+  //set product detail link
+  NSString *tmpStr = [node objectForKey:SRC_TAG];
+  self.productBrandLogo = [tmpStr retain];
+  
+}
 
 - (void)dealloc {
 	//release all objects here
 	//[_pID release];
 	//[_pgID release];
   
+  [_productBrandLogo release];
+  [_shoesImgsAllAngle release];
+  [_productSKU release];
   [_productSalesmessaging release];
   [_productPrice release];
   [_productDetailLink release];

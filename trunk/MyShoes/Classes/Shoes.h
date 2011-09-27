@@ -34,27 +34,41 @@
   NSString *_productColor;
   NSString *_productBrandName;
 
+  //SKU is the serial number. With the number, shoes images with all angel can be found by
+  //For example, SKU is EC1274935, All the images is 
+  //http://www.shoes.com/ProductImages/shoes_iaec1274335.jpg to http://www.shoes.com/ProductImages/shoes_ihec1274335.jpg
+  //or
+  //http://www.shoes.com/ProductImages/shoes_i1ec1274335.jpg to http://www.shoes.com/ProductImages/shoes_i8ec1274335.jpg
+  NSString *_productSKU;
+  
+  NSArray *_shoesImgsAllAngle;
+  NSString *_productBrandLogo;
 }
 
-@property(nonatomic, retain) NSString	*pID;
-@property(nonatomic, retain) NSString	*pgID;
-@property(nonatomic, retain) NSString	*shoesImageName;
-@property(nonatomic, retain) NSString	*productSalesmessaging;
-@property(nonatomic, retain) NSString	*brandName;
-@property(nonatomic, retain) NSArray	*styleNameList;
-@property(nonatomic, retain) NSString	*productPrice;
-@property(nonatomic, retain) NSString *productCategory;
+@property (nonatomic, retain) NSString	*pID;
+@property (nonatomic, retain) NSString	*pgID;
+@property (nonatomic, retain) NSString	*shoesImageName;
+@property (nonatomic, retain) NSString	*productSalesmessaging;
+@property (nonatomic, retain) NSString	*brandName;
+@property (nonatomic, retain) NSArray	*styleNameList;
+@property (nonatomic, retain) NSString	*productPrice;
+@property (nonatomic, retain) NSString *productCategory;
 //@property(nonatomic, retain) NSString *productBrandTitleColor;
-@property(nonatomic, retain) NSString	*productPriceCurrency;
-@property(nonatomic, retain) NSString *productDetailLink;
-@property(nonatomic, retain) NSString *productRating;
-@property(nonatomic, retain) NSString *productStyle;
-@property(nonatomic, retain) NSString *productColor;
-@property(nonatomic, retain) NSString *productBrandName;
+@property (nonatomic, retain) NSString	*productPriceCurrency;
+@property (nonatomic, retain) NSString *productDetailLink;
+@property (nonatomic, retain) NSString *productRating;
+@property (nonatomic, retain) NSString *productStyle;
+@property (nonatomic, retain) NSString *productColor;
+@property (nonatomic, retain) NSString *productBrandName;
+@property (nonatomic, retain) NSString *productSKU;
+@property (nonatomic, retain) NSArray *shoesImgsAllAngle;
+@property (nonatomic, retain) NSString *productBrandLogo;
 
 - (id)initWithShoesNode:(TFHppleElement *) node;
 - (void)processProductImage:(TFHppleElement *) node;
 - (void)processBrandTitleColor:(TFHppleElement *) node;
+- (void)processProductSKU:(TFHppleElement *) node;
+- (void)processProductBrandLogo:(TFHppleElement *) node;
 - (NSString *)processShoesInfo:(TFHppleElement *) node withProductTag:(NSString*) tag;
 
 @end

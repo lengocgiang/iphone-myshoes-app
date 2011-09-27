@@ -10,9 +10,10 @@
 #import "Reachability.h"
 #import "Config.h"
 #import "NetworkTool.h"
-#import "ShoesListViewController.h"
 #import "HomeViewController.h"
 #import "ShoesCategoryViewController.h"
+#import "ShoesListViewController.h"
+#import "ShoesDetailViewController.h"
 #import "Debug.h"
 
 @class Reachability;
@@ -24,9 +25,10 @@
   
   UINavigationController *homeNavController;
   
-	ShoesListViewController *shoesListController;
-  ShoesCategoryViewController *shoesCategoryController;
   HomeViewController *homeViewController;
+  ShoesCategoryViewController *shoesCategoryController;
+	ShoesListViewController *shoesListController;
+  ShoesDetailViewController *shoesDetailController;
   
   //Reachability object
   Reachability *_hostReach;
@@ -34,8 +36,9 @@
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet HomeViewController *homeViewController;
-@property (nonatomic, retain) ShoesListViewController *shoesListController;
 @property (nonatomic, retain) ShoesCategoryViewController *shoesCategoryController;
+@property (nonatomic, retain) ShoesListViewController *shoesListController;
+@property (nonatomic, retain) ShoesDetailViewController *shoesDetailController;
 
 + (BOOL) IsEnableWIFI;
 + (BOOL) IsEnable3G;

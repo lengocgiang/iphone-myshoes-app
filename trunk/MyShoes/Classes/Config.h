@@ -12,7 +12,13 @@
 #define HREF_TAG @"href"
 #define SRC_TAG @"src"
 #define ALT_TAG @"alt"
+#define SPAN_TAG @"span"
 #define ORIGINAL_TAG @"original"
+
+#define SHOES_INFO_SKU_PREFIX @"Style # "
+#define SHOES_INFO_SHOESIMGS_ALLANGLE_URIPREFIX @"ProductImages/shoes_i"
+#define SHOES_INFO_SHOESIMGS_FILE_SURFIX @".jpg"
+#define SHOES_INFO_SHOESIMGS_COUNT 8
 
 //#define SHOES_CATEGORY_WOMEN_XPATH @"//*[@id='navlist-main']/li/a[text()='Women']"
 //#define SHOES_CATEGORY_MEN_XPATH @"//*[@id='navlist-main']/li/a[text()='Men']"
@@ -22,6 +28,7 @@
 //#define SHOES_CATEGORY_BAGS_XPATH @"//*[@id='navlist-main']/li/a[text()='Maps']"
 #define HOME_CATEGORY_BTN_IMG_SIZE CGSizeMake(24.0f, 24.0f)
 #define SHOES_LIST_IMG_SIZE CGSizeMake(60.0f, 60.0f)
+#define SHOES_DETAIL_LOGO_ING_SIZE CGSizeMake(122.0f, 54.0f)
 
 #define SHOES_LIST_CELL_IMG_WIDTH 60.0f
 #define SHOES_LIST_CELL_HEIGHT 60.0f
@@ -60,6 +67,9 @@
 #define SHOES_CATEGORY_BUTTON_SELECTED_SIZE 16
 
 #define SHOES_CATEGORY_PRODUCT_LIST_XPATH @"//*[@id='ResultZone2_wrapper']//div[@class='productCell']"
+
+#define SHOES_DETAIL_SKU_XPATH @"//*[@id='prodDetailWrap']//span[@class='SKUtxt']"
+#define SHOES_DETAIL_BRANDLOGO_IMG_XPATH @"//img[@id='ctl00_cphPageMain_BrandAndPrice1_imgLogo']"
 //#define SHOES_CATEGORY_PRODUCT_LIST_XPATH @"//*[@id='ResultZone2_wrapper']//div[@style='height: auto;']"
 #define CATEGORY_SHOES_COUNT 12
 

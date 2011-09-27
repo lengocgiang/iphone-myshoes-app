@@ -6,6 +6,7 @@
 //  Copyright 2011 Mbi. All rights reserved.
 //
 
+#import "MyShoesAppDelegate.h"
 #import "ShoesListViewController.h"
 #import "HomeViewController.h"
 //#import "UIImage+Alpha.h"
@@ -460,19 +461,16 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   
-  /*if(indexPath.section == 0){
-    //Set the Name of the cell is @"Category"
-    //[cell setBtnLableTxt:[btnNameArray objectAtIndex:0]];
-    if(indexPath.row == 0) {
-      MyShoesAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+  //Set the Name of the cell is @"Category"
+  //[cell setBtnLableTxt:[btnNameArray objectAtIndex:0]];
+  MyShoesAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
       
-      [self.navigationController pushViewController:delegate.shoesCategoryController animated:YES];
+  [delegate.shoesDetailController setShoes:[_shoesArray objectAtIndex:indexPath.row]];
+  //[delegate.shoesDetailController loadShoesDetail];
+  [self.navigationController pushViewController:delegate.shoesDetailController animated:YES];
       
-      //Deselected the selected Row
-      [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    }
-  }*/
-  
+  //Deselected the selected Row
+  [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

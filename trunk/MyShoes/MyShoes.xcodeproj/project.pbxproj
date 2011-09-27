@@ -24,8 +24,8 @@
 		B073A2FE1429BC8F00C30091 /* category.png in Resources */ = {isa = PBXBuildFile; fileRef = B073A2FC1429BC8F00C30091 /* category.png */; };
 		B092F8D11307DB39007855C5 /* OrderedDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = B092F8CF1307DB39007855C5 /* OrderedDictionary.m */; };
 		B092FABF1309CEFC007855C5 /* SlideImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = B092FABE1309CEFC007855C5 /* SlideImageView.m */; };
-		B0ADDC021316FEEE00B34625 /* MyShoesDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0ADDC001316FEEE00B34625 /* MyShoesDetailViewController.m */; };
-		B0ADDC031316FEEE00B34625 /* MyShoesDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0ADDC011316FEEE00B34625 /* MyShoesDetailViewController.xib */; };
+		B0ADDC021316FEEE00B34625 /* ShoesDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0ADDC001316FEEE00B34625 /* ShoesDetailViewController.m */; };
+		B0ADDC031316FEEE00B34625 /* ShoesDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0ADDC011316FEEE00B34625 /* ShoesDetailViewController.xib */; };
 		B0B8B7E312F7917A00446CCC /* TFHpple.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B8B7DE12F7917A00446CCC /* TFHpple.m */; };
 		B0B8B7E412F7917A00446CCC /* TFHppleElement.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B8B7E012F7917A00446CCC /* TFHppleElement.m */; };
 		B0B8B7E512F7917A00446CCC /* XPathQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B8B7E212F7917A00446CCC /* XPathQuery.m */; };
@@ -79,9 +79,9 @@
 		B092F8D01307DB39007855C5 /* OrderedDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderedDictionary.h; sourceTree = "<group>"; };
 		B092FABD1309CEFC007855C5 /* SlideImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideImageView.h; sourceTree = "<group>"; };
 		B092FABE1309CEFC007855C5 /* SlideImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideImageView.m; sourceTree = "<group>"; };
-		B0ADDBFF1316FEEE00B34625 /* MyShoesDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyShoesDetailViewController.h; sourceTree = "<group>"; };
-		B0ADDC001316FEEE00B34625 /* MyShoesDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyShoesDetailViewController.m; sourceTree = "<group>"; };
-		B0ADDC011316FEEE00B34625 /* MyShoesDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MyShoesDetailViewController.xib; path = Classes/MyShoesDetailViewController.xib; sourceTree = "<group>"; };
+		B0ADDBFF1316FEEE00B34625 /* ShoesDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoesDetailViewController.h; sourceTree = "<group>"; };
+		B0ADDC001316FEEE00B34625 /* ShoesDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoesDetailViewController.m; sourceTree = "<group>"; };
+		B0ADDC011316FEEE00B34625 /* ShoesDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ShoesDetailViewController.xib; path = Classes/ShoesDetailViewController.xib; sourceTree = "<group>"; };
 		B0B8B76B12F76C1900446CCC /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Config.h; sourceTree = "<group>"; };
 		B0B8B79C12F7706600446CCC /* Debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Debug.h; sourceTree = "<group>"; };
 		B0B8B7DD12F7917A00446CCC /* TFHpple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFHpple.h; sourceTree = "<group>"; };
@@ -166,8 +166,6 @@
 				B0E1BE731301F88B0044A2EF /* TFHppleElement+AccessChildren.m */,
 				B0292543130E2CF600A78DB1 /* NSMutableArray+QueueAdditions.h */,
 				B0292544130E2CF700A78DB1 /* NSMutableArray+QueueAdditions.m */,
-				B0ADDBFF1316FEEE00B34625 /* MyShoesDetailViewController.h */,
-				B0ADDC001316FEEE00B34625 /* MyShoesDetailViewController.m */,
 				B0EE6B7F1391D3D30023FD4A /* ShoesTableView.h */,
 				B0EE6B801391D3D30023FD4A /* ShoesTableView.m */,
 				B0EE6B881391E1C50023FD4A /* ShoesTableViewCell.h */,
@@ -182,6 +180,8 @@
 				28D7ACF70DDB3853001CB0EB /* ShoesListViewController.m */,
 				B0EE004A142D6FCC008A1131 /* ShoesListViewCell.h */,
 				B0EE004B142D6FCC008A1131 /* ShoesListViewCell.m */,
+				B0ADDBFF1316FEEE00B34625 /* ShoesDetailViewController.h */,
+				B0ADDC001316FEEE00B34625 /* ShoesDetailViewController.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -223,11 +223,11 @@
 			children = (
 				B0F63C641426AA2E0017CC02 /* images */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
-				B0ADDC011316FEEE00B34625 /* MyShoesDetailViewController.xib */,
-				B0C4BE0E142C3CB600070F39 /* ShoesCategoryViewController.xib */,
 				B02ADE6514294AEE0074543C /* HomeViewController.xib */,
 				B0F63C761426B52D0017CC02 /* HomeViewBtnCell.xib */,
+				B0C4BE0E142C3CB600070F39 /* ShoesCategoryViewController.xib */,
 				B0EE004F142DB570008A1131 /* ShoesListViewController.xib */,
+				B0ADDC011316FEEE00B34625 /* ShoesDetailViewController.xib */,
 				8D1107310486CEB800E47090 /* MyShoes-Info.plist */,
 			);
 			name = Resources;
@@ -342,7 +342,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
-				B0ADDC031316FEEE00B34625 /* MyShoesDetailViewController.xib in Resources */,
+				B0ADDC031316FEEE00B34625 /* ShoesDetailViewController.xib in Resources */,
 				B0F63C671426AA4F0017CC02 /* home.png in Resources */,
 				B0F63C681426AA4F0017CC02 /* settings.png in Resources */,
 				B0F63C6A1426B13E0017CC02 /* Icon.png in Resources */,
@@ -380,7 +380,7 @@
 				B092FABF1309CEFC007855C5 /* SlideImageView.m in Sources */,
 				B0292545130E2CF700A78DB1 /* NSMutableArray+QueueAdditions.m in Sources */,
 				B03B05A813134F0500A39685 /* Reachability.m in Sources */,
-				B0ADDC021316FEEE00B34625 /* MyShoesDetailViewController.m in Sources */,
+				B0ADDC021316FEEE00B34625 /* ShoesDetailViewController.m in Sources */,
 				B0EE6B811391D3D30023FD4A /* ShoesTableView.m in Sources */,
 				B0EE6B861391D95C0023FD4A /* ShoesDataSource.m in Sources */,
 				B0EE6B891391E1C50023FD4A /* ShoesTableViewCell.m in Sources */,

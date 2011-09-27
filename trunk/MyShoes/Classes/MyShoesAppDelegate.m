@@ -13,9 +13,11 @@
 @implementation MyShoesAppDelegate
 
 @synthesize window;
-@synthesize shoesListController;
-@synthesize shoesCategoryController;
 @synthesize homeViewController;
+@synthesize shoesCategoryController;
+@synthesize shoesListController;
+@synthesize shoesDetailController;
+
 //@synthesize slideMenuViewController;
 //@synthesize shoesCategoryDict = _shoesCategoryDict;
 
@@ -33,11 +35,17 @@
                                 initWithNibName:@"ShoesCategoryViewController" 
                                          bundle:nil];
   shoesCategoryController.title = CATEGORY_NAV_TITLE_NAME;
+  
   shoesListController = [[ShoesListViewController alloc]
                               initWithNibName:@"ShoesListViewController" 
                                        bundle:nil];
   shoesListController.title = SHOESLIST_NAV_TITLE_NAME;
+  
+  shoesDetailController = [[ShoesDetailViewController alloc]
+                              initWithNibName:@"ShoesDetailViewController"
+                                       bundle:nil];
 
+  //shoesDetailController.title = 
   //Add tabBar Controller
   tabController = [[UITabBarController alloc] init];
   
@@ -156,6 +164,7 @@
 - (void)dealloc {
     //[viewController release];
 	//[slideMenuViewController release];
+  [shoesDetailController release];
   [shoesListController release];
   [shoesCategoryController release];
   [homeNavController release];
