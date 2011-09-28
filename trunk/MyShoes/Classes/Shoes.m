@@ -165,6 +165,11 @@
   }
 }
 
+
+//Process SKU
+//Process shoes image of all angel
+//It's shoes_iaEC1148271.jpg to shoes_ihEC1148271.jpg for large image
+//And shoes_i1EC1148271.jpg to shoes_i8EC1148271.jpg for small image
 - (void)processProductSKU:(TFHppleElement *) node{
   NSString *tmpStr = [node content];
   NSString *sku = [tmpStr substringFromIndex:[SHOES_INFO_SKU_PREFIX length]];
@@ -173,8 +178,8 @@
   
   NSString *tmpUrl;
   NSMutableArray *imgArray = [NSMutableArray arrayWithCapacity:SHOES_INFO_SHOESIMGS_COUNT];
-  for (int i=1; i <=8; i++){
-    tmpUrl = [NSString stringWithFormat:@"%@%@%d%@%@", MYSHOES_URL, SHOES_INFO_SHOESIMGS_ALLANGLE_URIPREFIX,
+  for (char i=97; i <= 104; i++){
+    tmpUrl = [NSString stringWithFormat:@"%@%c%@%@", SHOES_INFO_SHOESIMGS_ALLANGLE_URIPREFIX,
               i, sku, SHOES_INFO_SHOESIMGS_FILE_SURFIX];
     [imgArray addObject:tmpUrl];
   }

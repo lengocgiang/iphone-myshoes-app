@@ -35,11 +35,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Classes/Shoes.m"
-         timestampString = "338686381.238308"
+         timestampString = "338800688.766905"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "231"
-         endingLineNumber = "231"
+         startingLineNumber = "236"
+         endingLineNumber = "236"
          landmarkName = "-processProductBrandLogo:"
          landmarkType = "5">
       </FileBreakpoint>

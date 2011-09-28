@@ -12,7 +12,7 @@
 #import "Shoes.h"
 
 
-@interface ShoesDetailViewController : UIViewController {
+@interface ShoesDetailViewController : UIViewController/*<UIScrollViewDelegate> */{
 
   UIView *shoesBriefView;
   UILabel *shoesBrandName;
@@ -46,7 +46,6 @@
 - (void)stopAnimation;
 - (void)loadShoesDetail;
 - (void)renderShoesDetail;
--(CGImageRef)createMask:(UIImage*)temp;
--(UIImage *)changeWhiteColorTransparent: (UIImage *)image;
+- (void)layoutScrollImages;
 
 @end

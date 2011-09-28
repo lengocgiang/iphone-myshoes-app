@@ -25,6 +25,11 @@
 @synthesize shoes;
 @synthesize networkTool;
 
+const CGFloat kScrollObjHeight	= 260.0;
+const CGFloat kScrollViewWidth	= 320.0;
+const CGFloat kScrollObjWidth	= 260.0;
+//const NSUInteger kNumImages		= 8;
+
 // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 /*
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -75,6 +80,12 @@
   //Reset shoes detail view
   self.shoesBrandLogo.image = nil;
   [self.shoesImageScrollView setHidden:YES];
+  //remove all the subview os shoesImageScrollView
+  for (UIView *view in [self.shoesImageScrollView subviews]) {
+    [view removeFromSuperview];
+  }
+  [self.shoesImageScrollView setContentOffset:CGPointMake(0.0f, 0.0f) animated:NO];
+  
   [self.shoesBriefView setHidden:YES];
   [self.progressIndicator startAnimating];
 }
@@ -190,6 +201,8 @@
   //UIImage *resultedimage = [UIImage imageWithCGImage: CGImageCreateWithMaskingColors(resized.CGImage, colorMasking)];
   self.shoesBrandLogo.image = resultedimage;*/
   
+  //The follwing code is to process image to get rid of white background and make it transparent
+  //Process and render shoes brand logo
   CGImageRef maskRef = [resized CGImage];
   
   CGColorSpaceRef cs = CGColorSpaceCreateDeviceRGB();
@@ -217,50 +230,127 @@
 
   self.shoesBrandLogo.image = [UIImage imageWithCGImage:masked];
 
+  //Render shoes images of all angels
+  //Set the first two images only
+  NSUInteger i=1;
+	for (i = 1; i <= [shoes.shoesImgsAllAngle count]; i++)
+	{
+    NSString *imgName = [shoes.shoesImgsAllAngle objectAtIndex:i-1]; 
+    NSString *imageUrl = [NSString stringWithFormat:@"%@%@",MYSHOES_URL,imgName];
+    
+    NSURL *url = [NSURL URLWithString:imageUrl];
+    //NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
+    
+    UIImage *image = [[UIImage imageWithData: [NSData dataWithContentsOfURL: url]] retain];
+		//NSString *imageName = [NSString stringWithFormat:@"image%d.jpg", i];
+		//UIImage *image = [UIImage imageNamed:imageName];
+    CGSize sz = CGSizeMake(kScrollObjHeight, kScrollObjHeight);
+    
+    UIImage *resized = [HomeViewController scale:image toSize:sz];
+		UIImageView *imageView = [[UIImageView alloc] initWithImage:resized];
+		
+		// setup each frame to a default height and width, it will be properly placed when we call "updateScrollList"
+		CGRect rect = imageView.frame;
+		//rect.size.height = 280;
+		//rect.size.width = 320;
+    //rect.origin.x += 25;
+    //rect.origin.y += 5;
+		imageView.frame = rect;
+		imageView.tag = i;	// tag our images for later use when we place them in serial fashion
+		[self.shoesImageScrollView addSubview:imageView];
+		[imageView release];
+    
+    /*if (i >= 2){//Only preload the first images
+      break;
+    }*/
+	}
+	
+	[self layoutScrollImages];
 }
 
--(CGImageRef)createMask:(UIImage*)temp
+- (void)layoutScrollImages
 {
-  CGImageRef ref=temp.CGImage;
-  int mWidth=CGImageGetWidth(ref);
-  int mHeight=CGImageGetHeight(ref);
-  int count=mWidth*mHeight*4;
-  void *bufferdata=malloc(count);
+	UIImageView *view = nil;
+	NSArray *subviews = [self.shoesImageScrollView subviews];
   
-  CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
-  CGBitmapInfo bitmapInfo = kCGBitmapByteOrderDefault;
-  CGColorRenderingIntent renderingIntent = kCGRenderingIntentDefault;
-  
-  CGContextRef cgctx = CGBitmapContextCreate (bufferdata,mWidth,mHeight, 8,mWidth*4, colorSpaceRef, kCGImageAlphaPremultipliedFirst); 
-  
-  CGRect rect = {0,0,mWidth,mHeight};
-  CGContextDrawImage(cgctx, rect, ref); 
-  bufferdata = CGBitmapContextGetData (cgctx);
-  
-  CGDataProviderRef provider = CGDataProviderCreateWithData(NULL, bufferdata, mWidth*mHeight*4, NULL);
-  CGImageRef savedimageref = CGImageCreate(mWidth,mHeight, 8, 32, mWidth*4, colorSpaceRef, bitmapInfo,provider , NULL, NO, renderingIntent);
-  CFRelease(colorSpaceRef);
-  return savedimageref;
+	// reposition all image subviews in a horizontal serial fashion
+  //int i = 1;
+	CGFloat curXLoc = 0;
+	for (view in subviews)
+	{
+		if ([view isKindOfClass:[UIImageView class]] && view.tag > 0)
+		{
+			CGRect frame = view.frame;
+			frame.origin = CGPointMake(curXLoc + 30.0f, 0 + 5.0f);
+			view.frame = frame;
+			
+			curXLoc += (kScrollViewWidth);
+      
+      //Process the first two image2 only
+      /*if(i >= 2){
+        break;
+      }
+      i++;*/
+		}
+	}
+	
+	// set the content size so it can be scrollable
+	[self.shoesImageScrollView setContentSize:CGSizeMake(([shoes.shoesImgsAllAngle count] * kScrollViewWidth), [self.shoesImageScrollView bounds].size.height)];
 }
 
--(UIImage *)changeWhiteColorTransparent: (UIImage *)image{
-  CGImageRef rawImageRef=image.CGImage;
+#pragma mark scroll view delegate methods
+
+/*
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+  // 
+   //  calculate the current page that is shown 
+   //  you can also use scrollview.frame.size.height if your image is the exact size of your scrollview 
+   //  
+  int currentPage = (scrollView.contentOffset.x / kScrollViewWidth);
   
-  const float colorMasking[6] = { 255,255,255, 255,255,255 };//{222, 255, 222, 255, 222, 255};
-  
-  UIGraphicsBeginImageContext(image.size);
-  CGImageRef maskedImageRef=CGImageCreateWithMaskingColors(rawImageRef, colorMasking);
-  {
-    //if in iphone
-    CGContextTranslateCTM(UIGraphicsGetCurrentContext(), 0.0, image.size.height);
-    CGContextScaleCTM(UIGraphicsGetCurrentContext(), 1.0, -1.0); 
+  if (currentPage >= [shoes.shoesImgsAllAngle count] -1){//The end of the shoes images
+    return;
   }
   
-  CGContextDrawImage(UIGraphicsGetCurrentContext(), CGRectMake(0, 0, image.size.width, image.size.height), maskedImageRef);
-  UIImage *result = UIGraphicsGetImageFromCurrentImageContext();
-  CGImageRelease(maskedImageRef);
-  UIGraphicsEndImageContext();    
-  return result;
-}
+  // display the image and maybe +/-1 for a smoother scrolling  
+  // but be sure to check if the image already exists, you can do this very easily using tags  
+  if ( [scrollView viewWithTag:(currentPage +2)] ) {  
+    return;  
+  }  
+  else {  
+    // view is missing, create it and set its tag to currentPage+1  
+    
+    NSString *imgName = [shoes.shoesImgsAllAngle objectAtIndex:currentPage +1]; 
+    NSString *imageUrl = [NSString stringWithFormat:@"%@%@",MYSHOES_URL,imgName];
+    
+    NSURL *url = [NSURL URLWithString:imageUrl];
+    //NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
+    
+    UIImage *image = [[UIImage imageWithData: [NSData dataWithContentsOfURL: url]] retain];
+		//NSString *imageName = [NSString stringWithFormat:@"image%d.jpg", i];
+		//UIImage *image = [UIImage imageNamed:imageName];
+    CGSize sz = CGSizeMake(kScrollObjHeight, kScrollObjHeight);
+    
+    UIImage *resized = [HomeViewController scale:image toSize:sz];
+		UIImageView *imageView = [[UIImageView alloc] initWithImage:resized];
+		
+		// setup each frame to a default height and width, it will be properly placed when we call "updateScrollList"
+		CGRect rect = imageView.frame;
+		//rect.size.height = 280;
+		//rect.size.width = 320;
+    //rect.origin.x += 25;
+    //rect.origin.y += 5;
+		imageView.frame = rect;
+		imageView.tag = currentPage +2;	// tag our images for later use when we place them in serial fashion
+    
+    CGRect frame = imageView.frame;
+    frame.origin = CGPointMake(scrollView.contentOffset.x + kScrollViewWidth + 30.0f, 0 + 5.0f);
+    imageView.frame = frame;
+
+		[scrollView addSubview:imageView];
+		[imageView release];
+  }  
+  
+}*/
 
 @end
