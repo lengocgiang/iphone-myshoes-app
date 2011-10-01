@@ -49,6 +49,9 @@
 		B0F63C771426B52D0017CC02 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0F63C751426B52D0017CC02 /* HomeViewController.m */; };
 		B0F63C781426B52D0017CC02 /* HomeViewBtnCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0F63C761426B52D0017CC02 /* HomeViewBtnCell.xib */; };
 		B0F63C7A1426BC8F0017CC02 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = B0F63C791426BC8F0017CC02 /* background.png */; };
+		B0F91F80143542A600E08024 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = B0F91F7E143542A600E08024 /* MBProgressHUD.m */; };
+		B0FAC2401437010400F1284D /* BSPreviewScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FAC23F1437010400F1284D /* BSPreviewScrollView.m */; };
+		B0FAC2431437037100F1284D /* TapImage.m in Sources */ = {isa = PBXBuildFile; fileRef = B0FAC2411437037100F1284D /* TapImage.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -123,6 +126,12 @@
 		B0F63C751426B52D0017CC02 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		B0F63C761426B52D0017CC02 /* HomeViewBtnCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewBtnCell.xib; sourceTree = "<group>"; };
 		B0F63C791426BC8F0017CC02 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
+		B0F91F7E143542A600E08024 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		B0F91F7F143542A600E08024 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		B0FAC23E1437010400F1284D /* BSPreviewScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSPreviewScrollView.h; sourceTree = "<group>"; };
+		B0FAC23F1437010400F1284D /* BSPreviewScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSPreviewScrollView.m; sourceTree = "<group>"; };
+		B0FAC2411437037100F1284D /* TapImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TapImage.m; sourceTree = "<group>"; };
+		B0FAC2421437037100F1284D /* TapImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapImage.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,6 +206,8 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				B0FAC23D143700EA00F1284D /* PreviewScrollView */,
+				B0F91F7D1435425D00E08024 /* MBProgressHUD */,
 				B092F8CE1307DB0C007855C5 /* OrderedDictionary */,
 				B0EE6B821391D9310023FD4A /* Data source */,
 				B0B8B7DC12F7917A00446CCC /* hpple */,
@@ -290,6 +301,26 @@
 				B0F63C661426AA4F0017CC02 /* settings.png */,
 			);
 			name = images;
+			sourceTree = "<group>";
+		};
+		B0F91F7D1435425D00E08024 /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				B0F91F7E143542A600E08024 /* MBProgressHUD.m */,
+				B0F91F7F143542A600E08024 /* MBProgressHUD.h */,
+			);
+			name = MBProgressHUD;
+			sourceTree = "<group>";
+		};
+		B0FAC23D143700EA00F1284D /* PreviewScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				B0FAC2421437037100F1284D /* TapImage.h */,
+				B0FAC2411437037100F1284D /* TapImage.m */,
+				B0FAC23E1437010400F1284D /* BSPreviewScrollView.h */,
+				B0FAC23F1437010400F1284D /* BSPreviewScrollView.m */,
+			);
+			name = PreviewScrollView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -388,6 +419,9 @@
 				B02ADE5C142941340074543C /* HomeViewBtnCell.m in Sources */,
 				B0C4BE0F142C3CB600070F39 /* ShoesCategoryViewController.m in Sources */,
 				B0EE004D142D6FCC008A1131 /* ShoesListViewCell.m in Sources */,
+				B0F91F80143542A600E08024 /* MBProgressHUD.m in Sources */,
+				B0FAC2401437010400F1284D /* BSPreviewScrollView.m in Sources */,
+				B0FAC2431437037100F1284D /* TapImage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

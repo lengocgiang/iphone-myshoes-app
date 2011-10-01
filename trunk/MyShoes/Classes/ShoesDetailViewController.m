@@ -10,27 +10,63 @@
 #import "TFHpple.h"
 #import "TFHppleElement+AccessChildren.h"
 #import "MyShoesAppDelegate.h"
+#import <QuartzCore/QuartzCore.h>
 
 
 @implementation ShoesDetailViewController
 
+@synthesize contentView;
 @synthesize shoesBriefView;
+//@synthesize indicatorView;
 @synthesize shoesBrandName;
 @synthesize shoesStyle;
 //@synthesize shoesColor;
 @synthesize shoesPrice;
 @synthesize shoesBrandLogo;
+@synthesize backgroundScrollView;
 @synthesize shoesImageScrollView;
-@synthesize progressIndicator;
+//@synthesize progressIndicator;
 @synthesize shoes;
 @synthesize networkTool;
 
-const CGFloat kScrollObjHeight	= 260.0;
-const CGFloat kScrollViewWidth	= 320.0;
-const CGFloat kScrollObjWidth	= 260.0;
+const CGFloat kScrollImgViewOffsetX	= 6.0f;
+const CGFloat kScrollImgViewOffsetY	= 6.0f;
+const CGFloat kScrollObjHeight	= 260.0f;
+const CGFloat kScrollViewWidth	= 320.0f;
+const CGFloat kScrollObjWidth	= 260.0f;
+const CGFloat kMarginX = 30.0f;
 //const NSUInteger kNumImages		= 8;
 
 // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
+
++ (UIImage *)maskWhiteToTransparent:(UIImage *)image {
+  CGImageRef maskRef = [image CGImage];
+  
+  CGColorSpaceRef cs = CGColorSpaceCreateDeviceRGB();
+  
+  CGFloat width = CGImageGetWidth(maskRef);
+  CGFloat height = CGImageGetWidth(maskRef);
+  
+  CGImageRef mask = CGImageMaskCreate(CGImageGetWidth(maskRef),
+                                      CGImageGetHeight(maskRef),
+                                      CGImageGetBitsPerComponent(maskRef),
+                                      CGImageGetBitsPerPixel(maskRef),
+                                      CGImageGetBytesPerRow(maskRef),
+                                      CGImageGetDataProvider(maskRef), nil, YES);
+  
+  CGContextRef ctxWithAlpha = CGBitmapContextCreate(nil, width, height, 8, 4*width, cs, kCGImageAlphaPremultipliedFirst);
+  
+  CGContextDrawImage(ctxWithAlpha, CGRectMake(0, 0, width, height), maskRef);
+  
+  CGImageRef imageWithAlpha = CGBitmapContextCreateImage(ctxWithAlpha);
+  
+  /*UIImage *image = [UIImage imageWithContentsOfFile:path];
+   
+   CGImageRef masked = CGImageCreateWithMask([image CGImage], mask);*/
+  CGImageRef masked = CGImageCreateWithMask(imageWithAlpha, mask);
+  
+  return [UIImage imageWithCGImage:masked];
+}
 /*
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -46,8 +82,50 @@ const CGFloat kScrollObjWidth	= 260.0;
 - (void)viewDidLoad {
   [super viewDidLoad];
   
+  //Create network toolkit
   self.networkTool = [[NetworkTool alloc] init];
+  
+  //Create shoes brief info view programmically
+  self.shoesBriefView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 86)] autorelease];
+  self.shoesBrandName = [[[UILabel alloc] init] autorelease];
+  self.shoesPrice = [[[UILabel alloc] init] autorelease];
+  self.shoesStyle = [[[UILabel alloc] init] autorelease];
+  
+  //Set position of shoes labels
+  self.shoesBrandName.frame = CGRectMake(20, 3, 144, 21);
+  self.shoesPrice.frame = CGRectMake(20, 56, 128, 21);
+  self.shoesStyle.frame = CGRectMake(20, 32, 128, 21);
+  
+  //Set font of shoes labels
+  self.shoesBrandName.font = [UIFont fontWithName:@"Helvetica" size:14.0f];
+  self.shoesStyle.font = [UIFont fontWithName:@"Helvetica" size:14.0f];
+  self.shoesPrice.font = [UIFont fontWithName:@"Helvetica-Bold" size:17.0f];
+  [self.shoesBriefView addSubview:self.shoesBrandName];
+  [self.shoesBriefView addSubview:self.shoesStyle];
+  [self.shoesBriefView addSubview:self.shoesPrice];
+  
+  shoesBrandLogo = [[UIImageView alloc] initWithFrame:CGRectMake(170, 40, 122, 54)];
+  [self.shoesBriefView addSubview:shoesBrandLogo];
+  
+  [self.contentView addSubview:self.shoesBriefView];
+  
+  shoesAllAngels = [[NSMutableArray arrayWithCapacity:SHOES_INFO_SHOESIMGS_COUNT] retain];
+  
+  //Create shoes image slide view programmically
+  /*self.shoesImageScrollView = [[[BSPreviewScrollView alloc] initWithFrame:CGRectMake(0, 86, 320, 270)] autorelease];
+  
+  self.shoesImageScrollView.pageSize = CGSizeMake(290, 270);
+	// Important to listen to the delegate methods.
+	self.shoesImageScrollView.delegate = self;
 
+  self.shoesImageScrollView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5f];
+  
+  [self.contentView addSubview:self.shoesImageScrollView];*/
+  //Set extra properties of scroll view
+  //backgroundScrollView.clipsToBounds = YES;	// default is NO, we want to restrict drawing within our scrollview
+	//backgroundScrollView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
+	//[backgroundScrollView setContentSize:CGSizeMake(imageView.frame.size.width, imageView.frame.size.height)];
+	//[backgroundScrollView setScrollEnabled:YES];
 }
 
 /*
@@ -58,12 +136,16 @@ const CGFloat kScrollObjWidth	= 260.0;
 }
 */
 
+#pragma mark -
+#pragma mark Memory management
 - (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc. that aren't in use.
+	// Releases the view if it doesn't have a superview.
+  [super didReceiveMemoryWarning];
+	
+	// Call the scrollview and let it know memory is running low
+	[self.shoesImageScrollView didReceiveMemoryWarning];
 }
+
 
 - (void)viewDidUnload {
     [super viewDidUnload];
@@ -73,7 +155,15 @@ const CGFloat kScrollObjWidth	= 260.0;
 
 - (void)viewDidAppear:(BOOL)animated {
   [super viewDidAppear:animated];
+  //Load shoes existing info
+  shoesBrandName.text = shoes.productBrandName;
+  shoesStyle.text = shoes.productStyle;
+  shoesPrice.text = shoes.productPrice;
+
   [self loadShoesDetail];
+  
+  HUD = [[MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES] retain];
+
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -84,35 +174,20 @@ const CGFloat kScrollObjWidth	= 260.0;
   for (UIView *view in [self.shoesImageScrollView subviews]) {
     [view removeFromSuperview];
   }
-  [self.shoesImageScrollView setContentOffset:CGPointMake(0.0f, 0.0f) animated:NO];
+  //[self.shoesImageScrollView setContentOffset:CGPointMake(0.0f, 0.0f) animated:NO];
   
   [self.shoesBriefView setHidden:YES];
-  [self.progressIndicator startAnimating];
+  //[self.progressIndicator startAnimating];
+  [shoesAllAngels removeAllObjects];
 }
 
 
-- (void)dealloc {
+- (void)dealloc {  
+  //[shoesImageScrollView release];
+  //[shoesBriefView release];
+  [shoesAllAngels release];
   [networkTool release];
   [super dealloc];
-}
-
-#pragma mark Activity Indicator methods
-
-- (void)startAnimation {
-
-  shoesBriefView.hidden = YES;
-  shoesImageScrollView.hidden = YES;
-  progressIndicator.hidden = NO;
-  [progressIndicator startAnimating];
-}
-
-- (void)stopAnimation {
-  [progressIndicator stopAnimating];
-  progressIndicator.hidden = YES;
-  [UIView beginAnimations:nil context:nil];
-  shoesBriefView.hidden = NO;
-  shoesImageScrollView.hidden = NO;
-  [UIView commitAnimations];
 }
 
 #pragma mark Network related methods
@@ -142,6 +217,20 @@ const CGFloat kScrollObjWidth	= 260.0;
   
   if((elements != nil) && ([elements count] > 0)){
     [shoes processProductSKU:[elements objectAtIndex:0]];
+    
+    //Load shoes images with all angels
+    for (NSString *str in shoes.shoesImgsAllAngle){
+      //NSString *imgName = [shoes.shoesImgsAllAngle objectAtIndex:index]; 
+      NSString *imageUrl = [NSString stringWithFormat:@"%@%@",MYSHOES_URL,str];
+    
+      NSURL *url = [NSURL URLWithString:imageUrl];
+      //NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
+    
+      UIImage *image = [[UIImage imageWithData: [NSData dataWithContentsOfURL: url]] retain];
+      [shoesAllAngels addObject:image];
+      
+      [image release];
+    }
   }
 	
   //Process shoes brand logo img info
@@ -165,14 +254,16 @@ const CGFloat kScrollObjWidth	= 260.0;
 }
 
 #pragma mark Shoes Rendering related methods
+
 - (void)renderShoesDetail {
-  [progressIndicator stopAnimating];
+  [HUD hide:YES];
+  //[progressIndicator stopAnimating];
   [shoesBriefView setHidden:NO];
   [shoesImageScrollView setHidden:NO];
   
-  shoesBrandName.text = shoes.productBrandName;
-  shoesStyle.text = shoes.productStyle;
-  shoesPrice.text = shoes.productPrice;
+  //shoesBrandName.text = shoes.productBrandName;
+  //shoesStyle.text = shoes.productStyle;
+  //shoesPrice.text = shoes.productPrice;
   
   //Render shoes brand logo img
   //imageView.image = shoes.shoesImage;
@@ -188,169 +279,107 @@ const CGFloat kScrollObjWidth	= 260.0;
   
   UIImage *resized = [HomeViewController scale:logoImage toSize:sz];
   
-  //Mask the image to get rid of the white background
+  self.shoesBrandLogo.image = [ShoesDetailViewController maskWhiteToTransparent:resized];
   
-  /*
-  CGImageRef ref1=[self createMask:resized];
-  const float colorMasking[6] = { 255,255,255, 255,255,255 };//{1.0, 2.0, 1.0, 1.0, 1.0, 1.0};
-  //const float whiteMask[6] = {222, 255, 222, 255, 222, 255};//{ 255,255,255, 255,255,255 };
-  //CGImageRef New=CGImageCreateWithMaskingColors(ref1, whiteMask);
-  CGImageRef New=CGImageCreateWithMaskingColors(ref1, colorMasking);
-  UIImage *resultedimage=[UIImage imageWithCGImage:New];
-  //const float colorMasking[6] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
-  //UIImage *resultedimage = [UIImage imageWithCGImage: CGImageCreateWithMaskingColors(resized.CGImage, colorMasking)];
-  self.shoesBrandLogo.image = resultedimage;*/
+  if(shoesImageScrollView){
+    [shoesImageScrollView removeFromSuperview];
+  }
   
-  //The follwing code is to process image to get rid of white background and make it transparent
-  //Process and render shoes brand logo
-  CGImageRef maskRef = [resized CGImage];
+  self.shoesImageScrollView = [[[BSPreviewScrollView alloc] initWithFrame:CGRectMake(0, 86, 320, 270)] autorelease];
   
-  CGColorSpaceRef cs = CGColorSpaceCreateDeviceRGB();
+  self.shoesImageScrollView.pageSize = CGSizeMake(kScrollObjWidth + kMarginX, kScrollObjHeight);
+	// Important to listen to the delegate methods.
+	self.shoesImageScrollView.delegate = self;
   
-  CGFloat width = CGImageGetWidth(maskRef);
-  CGFloat height = CGImageGetWidth(maskRef);
+  //self.shoesImageScrollView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5f];
   
-  CGImageRef mask = CGImageMaskCreate(CGImageGetWidth(maskRef),
-                                      CGImageGetHeight(maskRef),
-                                      CGImageGetBitsPerComponent(maskRef),
-                                      CGImageGetBitsPerPixel(maskRef),
-                                      CGImageGetBytesPerRow(maskRef),
-                                      CGImageGetDataProvider(maskRef), nil, YES);
-  
-  CGContextRef ctxWithAlpha = CGBitmapContextCreate(nil, width, height, 8, 4*width, cs, kCGImageAlphaPremultipliedFirst);
+  [self.contentView addSubview:self.shoesImageScrollView];
 
-  CGContextDrawImage(ctxWithAlpha, CGRectMake(0, 0, width, height), maskRef);
-  
-  CGImageRef imageWithAlpha = CGBitmapContextCreateImage(ctxWithAlpha);
-
-  /*UIImage *image = [UIImage imageWithContentsOfFile:path];
-  
-  CGImageRef masked = CGImageCreateWithMask([image CGImage], mask);*/
-  CGImageRef masked = CGImageCreateWithMask(imageWithAlpha, mask);
-
-  self.shoesBrandLogo.image = [UIImage imageWithCGImage:masked];
-
-  //Render shoes images of all angels
-  //Set the first two images only
-  NSUInteger i=1;
-	for (i = 1; i <= [shoes.shoesImgsAllAngle count]; i++)
-	{
-    NSString *imgName = [shoes.shoesImgsAllAngle objectAtIndex:i-1]; 
-    NSString *imageUrl = [NSString stringWithFormat:@"%@%@",MYSHOES_URL,imgName];
-    
-    NSURL *url = [NSURL URLWithString:imageUrl];
-    //NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
-    
-    UIImage *image = [[UIImage imageWithData: [NSData dataWithContentsOfURL: url]] retain];
-		//NSString *imageName = [NSString stringWithFormat:@"image%d.jpg", i];
-		//UIImage *image = [UIImage imageNamed:imageName];
-    CGSize sz = CGSizeMake(kScrollObjHeight, kScrollObjHeight);
-    
-    UIImage *resized = [HomeViewController scale:image toSize:sz];
-		UIImageView *imageView = [[UIImageView alloc] initWithImage:resized];
-		
-		// setup each frame to a default height and width, it will be properly placed when we call "updateScrollList"
-		CGRect rect = imageView.frame;
-		//rect.size.height = 280;
-		//rect.size.width = 320;
-    //rect.origin.x += 25;
-    //rect.origin.y += 5;
-		imageView.frame = rect;
-		imageView.tag = i;	// tag our images for later use when we place them in serial fashion
-		[self.shoesImageScrollView addSubview:imageView];
-		[imageView release];
-    
-    /*if (i >= 2){//Only preload the first images
-      break;
-    }*/
-	}
-	
-	[self layoutScrollImages];
 }
 
-- (void)layoutScrollImages
+/*- (void)layoutScrollImages
 {
 	UIImageView *view = nil;
 	NSArray *subviews = [self.shoesImageScrollView subviews];
   
 	// reposition all image subviews in a horizontal serial fashion
   //int i = 1;
+  int marginX = 30.0f;
+  
 	CGFloat curXLoc = 0;
 	for (view in subviews)
 	{
 		if ([view isKindOfClass:[UIImageView class]] && view.tag > 0)
 		{
 			CGRect frame = view.frame;
-			frame.origin = CGPointMake(curXLoc + 30.0f, 0 + 5.0f);
+			frame.origin = CGPointMake(curXLoc + marginX, 0 + 5.0f);
 			view.frame = frame;
 			
 			curXLoc += (kScrollViewWidth);
       
-      //Process the first two image2 only
-      /*if(i >= 2){
-        break;
-      }
-      i++;*/
+
 		}
 	}
 	
 	// set the content size so it can be scrollable
-	[self.shoesImageScrollView setContentSize:CGSizeMake(([shoes.shoesImgsAllAngle count] * kScrollViewWidth), [self.shoesImageScrollView bounds].size.height)];
+	[self.shoesImageScrollView setContentSize:CGSizeMake(([shoes.shoesImgsAllAngle count] * (kScrollObjWidth + marginX*2)), [self.shoesImageScrollView bounds].size.height)];
+}*/
+
+#pragma mark -
+#pragma mark MBProgressHUDDelegate methods
+
+- (void)hudWasHidden:(MBProgressHUD *)hud {
+  // Remove HUD from screen when the HUD was hidded
+  [HUD removeFromSuperview];
+  [HUD release];
+	HUD = nil;
 }
 
-#pragma mark scroll view delegate methods
+#pragma mark -
+#pragma mark BSPreviewScrollViewDelegate methods
+-(UIView*)viewForItemAtIndex:(BSPreviewScrollView*)scrollView index:(int)index
+{
+	// Note that the images are actually smaller than the image view frame, each image
+	// is 210x280. Images are centered and because they are smaller than the actual 
+	// view it creates a padding between each image. 
+	CGRect imageViewFrame = CGRectMake(0.0f, 0.0f, kScrollObjWidth + kMarginX , kScrollObjHeight);
+	
+	// TapImage is a subclassed UIImageView that catch touch/tap events 
+	TapImage *imageView = [[[TapImage alloc] initWithFrame:imageViewFrame] autorelease];
+	imageView.userInteractionEnabled = YES;
 
-/*
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-  // 
-   //  calculate the current page that is shown 
-   //  you can also use scrollview.frame.size.height if your image is the exact size of your scrollview 
-   //  
-  int currentPage = (scrollView.contentOffset.x / kScrollViewWidth);
+  /*NSString *imgName = [shoes.shoesImgsAllAngle objectAtIndex:index]; 
+  NSString *imageUrl = [NSString stringWithFormat:@"%@%@",MYSHOES_URL,imgName];
   
-  if (currentPage >= [shoes.shoesImgsAllAngle count] -1){//The end of the shoes images
-    return;
-  }
+  NSURL *url = [NSURL URLWithString:imageUrl];
+  //NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
   
-  // display the image and maybe +/-1 for a smoother scrolling  
-  // but be sure to check if the image already exists, you can do this very easily using tags  
-  if ( [scrollView viewWithTag:(currentPage +2)] ) {  
-    return;  
-  }  
-  else {  
-    // view is missing, create it and set its tag to currentPage+1  
-    
-    NSString *imgName = [shoes.shoesImgsAllAngle objectAtIndex:currentPage +1]; 
-    NSString *imageUrl = [NSString stringWithFormat:@"%@%@",MYSHOES_URL,imgName];
-    
-    NSURL *url = [NSURL URLWithString:imageUrl];
-    //NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
-    
-    UIImage *image = [[UIImage imageWithData: [NSData dataWithContentsOfURL: url]] retain];
-		//NSString *imageName = [NSString stringWithFormat:@"image%d.jpg", i];
-		//UIImage *image = [UIImage imageNamed:imageName];
-    CGSize sz = CGSizeMake(kScrollObjHeight, kScrollObjHeight);
-    
-    UIImage *resized = [HomeViewController scale:image toSize:sz];
-		UIImageView *imageView = [[UIImageView alloc] initWithImage:resized];
-		
-		// setup each frame to a default height and width, it will be properly placed when we call "updateScrollList"
-		CGRect rect = imageView.frame;
-		//rect.size.height = 280;
-		//rect.size.width = 320;
-    //rect.origin.x += 25;
-    //rect.origin.y += 5;
-		imageView.frame = rect;
-		imageView.tag = currentPage +2;	// tag our images for later use when we place them in serial fashion
-    
-    CGRect frame = imageView.frame;
-    frame.origin = CGPointMake(scrollView.contentOffset.x + kScrollViewWidth + 30.0f, 0 + 5.0f);
-    imageView.frame = frame;
+  UIImage *image = [[UIImage imageWithData: [NSData dataWithContentsOfURL: url]] retain];*/
+  //NSString *imageName = [NSString stringWithFormat:@"image%d.jpg", i];
+  //UIImage *image = [UIImage imageNamed:imageName];
+  UIImage *image = [shoesAllAngels objectAtIndex:index];
+  CGSize sz = CGSizeMake(kScrollObjWidth, kScrollObjHeight);
+  
+  UIImage *resized = [HomeViewController scale:image toSize:sz];
+  //UIImageView *imageView = [[UIImageView alloc] initWithImage:resized];
+	
+  imageView.image = resized;//[ShoesDetailViewController maskWhiteToTransparent:resized];
+	imageView.contentMode = UIViewContentModeCenter;
 
-		[scrollView addSubview:imageView];
-		[imageView release];
-  }  
+  CALayer *layer = [imageView layer];
+  //[layer setMasksToBounds:YES];
+  [layer setBorderColor:[UIColor lightGrayColor].CGColor];
+  [layer setBorderWidth:1.0f];
   
-}*/
+  //[image release];
+	
+	return imageView;
+}
+
+-(int)itemCount:(BSPreviewScrollView*)scrollView
+{
+	// Return the number of pages we intend to display
+	return [self.shoes.shoesImgsAllAngle count];//[self.scrollPages count];
+}
 
 @end

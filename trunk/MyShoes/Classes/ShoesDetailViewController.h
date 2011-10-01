@@ -10,11 +10,16 @@
 #import "Config.h"
 #import "NetworkTool.h"
 #import "Shoes.h"
+#import "MBProgressHUD.h"
+#import "BSPreviewScrollView.h"
+#import "TapImage.h"
 
 
-@interface ShoesDetailViewController : UIViewController/*<UIScrollViewDelegate> */{
+@interface ShoesDetailViewController : UIViewController<MBProgressHUDDelegate, BSPreviewScrollViewDelegate> {
 
+  UIView *contentView;
   UIView *shoesBriefView;
+  UIView *indicatorView;
   UILabel *shoesBrandName;
   UILabel *shoesStyle;
   //UILabel *shoesColor;
@@ -22,30 +27,40 @@
   
   UIImageView *shoesBrandLogo;
   
-  UIActivityIndicatorView *progressIndicator;
+  //UIActivityIndicatorView *progressIndicator;
   
-  UIScrollView *shoesImageScrollView;
+  UIScrollView *backgroundScrollView;
+  BSPreviewScrollView *shoesImageScrollView;
   
   Shoes *shoes;
 
   NetworkTool *networkTool;
+  
+  MBProgressHUD *HUD;
+  
+  NSMutableArray *shoesAllAngels;
 }
 
+@property (nonatomic, retain) IBOutlet UIView *contentView;
 @property (nonatomic, retain) IBOutlet UIView *shoesBriefView;
-@property (nonatomic, retain) IBOutlet UILabel *shoesBrandName;
-@property (nonatomic, retain) IBOutlet UILabel *shoesStyle;
+//@property (nonatomic, retain) IBOutlet UIView *indicatorView;
+@property (nonatomic, retain) UILabel *shoesBrandName;
+@property (nonatomic, retain) UILabel *shoesStyle;
 //@property (nonatomic, retain) IBOutlet UILabel *shoesColor;
-@property (nonatomic, retain) IBOutlet UILabel *shoesPrice;
-@property (nonatomic, retain) IBOutlet UIImageView *shoesBrandLogo;
-@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *progressIndicator;
-@property (nonatomic, retain) IBOutlet UIScrollView *shoesImageScrollView;
+@property (nonatomic, retain) UILabel *shoesPrice;
+@property (nonatomic, retain) UIImageView *shoesBrandLogo;
+//@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *progressIndicator;
+@property (nonatomic, retain) IBOutlet UIScrollView *backgroundScrollView;
+@property (nonatomic, retain) /*IBOutlet*/BSPreviewScrollView *shoesImageScrollView;
 @property (nonatomic, retain) Shoes *shoes;
 @property (nonatomic, retain) NetworkTool *networkTool;
 
-- (void)startAnimation;
-- (void)stopAnimation;
++ (UIImage *)maskWhiteToTransparent:(UIImage *)image;
+//- (void)startAnimation;
+//- (void)stopAnimation;
 - (void)loadShoesDetail;
 - (void)renderShoesDetail;
-- (void)layoutScrollImages;
+
+//- (void)layoutScrollImages;
 
 @end
