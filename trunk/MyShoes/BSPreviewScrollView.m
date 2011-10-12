@@ -46,7 +46,7 @@
     return self;
 }
 
--(void)loadPage:(int)page
+- (void)loadPage:(int)page
 {
 	// Sanity checks
     if (page < 0) return;

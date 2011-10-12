@@ -43,6 +43,14 @@
   
   NSArray *_shoesImgsAllAngle;
   NSString *_productBrandLogo;
+  
+  NSArray *_shoesColors;
+  NSArray *_urlsWithColors;
+  NSArray *_shoesSizes;
+  NSArray *_shoesSizesValue;
+  
+  int _selectedColor;
+  int _selectedSize;
 }
 
 @property (nonatomic, retain) NSString	*pID;
@@ -63,12 +71,20 @@
 @property (nonatomic, retain) NSString *productSKU;
 @property (nonatomic, retain) NSArray *shoesImgsAllAngle;
 @property (nonatomic, retain) NSString *productBrandLogo;
+@property (nonatomic, retain) NSArray *shoesColors;
+@property (nonatomic, retain) NSArray *shoesSizes;
+@property (nonatomic, retain) NSArray *shoesSizesValue;
+@property (nonatomic, assign) int selectedColor;
+@property (nonatomic, assign) int selectedSize;
+@property (nonatomic, retain) NSArray *urlsWithColors;
 
-- (id)initWithShoesNode:(TFHppleElement *) node;
-- (void)processProductImage:(TFHppleElement *) node;
-- (void)processBrandTitleColor:(TFHppleElement *) node;
-- (void)processProductSKU:(TFHppleElement *) node;
-- (void)processProductBrandLogo:(TFHppleElement *) node;
-- (NSString *)processShoesInfo:(TFHppleElement *) node withProductTag:(NSString*) tag;
+- (id)initWithShoesNode:(TFHppleElement *)node;
+- (void)processProductImage:(TFHppleElement *)node;
+- (void)processBrandTitleColor:(TFHppleElement *)node;
+- (void)processProductSKU:(TFHppleElement *)node;
+- (void)processProductBrandLogo:(TFHppleElement *)node;
+- (void)processShoesColors:(TFHppleElement *)node;
+- (void)processShoesSizes:(TFHppleElement *)node;
+- (NSString *)processShoesInfo:(TFHppleElement *)node withProductTag:(NSString*)tag;
 
 @end

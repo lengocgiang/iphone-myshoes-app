@@ -14,11 +14,17 @@
 #define ALT_TAG @"alt"
 #define SPAN_TAG @"span"
 #define ORIGINAL_TAG @"original"
+#define SHOES_COLORS_BASEURL_TAG @"onchange"
+#define SELECTD_TAG @"selected"
+#define VALUE_TAG @"value"
 
 #define SHOES_INFO_SKU_PREFIX @"Style # "
 #define SHOES_INFO_SHOESIMGS_ALLANGLE_URIPREFIX @"ProductImages/shoes_i"
 #define SHOES_INFO_SHOESIMGS_FILE_SURFIX @".jpg"
 #define SHOES_INFO_SHOESIMGS_COUNT 8
+#define SHOES_INFO_COLOR_COUNT 12
+#define SHOES_INFO_SIZE_COUNT 20
+
 
 //#define SHOES_CATEGORY_WOMEN_XPATH @"//*[@id='navlist-main']/li/a[text()='Women']"
 //#define SHOES_CATEGORY_MEN_XPATH @"//*[@id='navlist-main']/li/a[text()='Men']"
@@ -70,6 +76,8 @@
 
 #define SHOES_DETAIL_SKU_XPATH @"//*[@id='prodDetailWrap']//span[@class='SKUtxt']"
 #define SHOES_DETAIL_BRANDLOGO_IMG_XPATH @"//img[@id='ctl00_cphPageMain_BrandAndPrice1_imgLogo']"
+#define SHOES_DETAIL_AVAILABLE_COLORS_XPATH @"//select[@id='ctl00_cphPageMain_ProductSelection2_ddlColor']"
+#define SHOES_DETAIL_AVAILABLE_SIZES_XPATH @"//select[@id='ctl00_cphPageMain_ProductSelection2_ddlSizeAndWidth']"
 //#define SHOES_CATEGORY_PRODUCT_LIST_XPATH @"//*[@id='ResultZone2_wrapper']//div[@style='height: auto;']"
 #define CATEGORY_SHOES_COUNT 12
 

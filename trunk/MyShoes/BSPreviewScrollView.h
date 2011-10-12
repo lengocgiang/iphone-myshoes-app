@@ -39,5 +39,6 @@
 
 - (void)didReceiveMemoryWarning;
 - (id)initWithFrameAndPageSize:(CGRect)frame pageSize:(CGSize)size;
+- (void)loadPage:(int)page;
 
 @end

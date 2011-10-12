@@ -384,6 +384,7 @@
                 self.width = lWidth + 2 * margin;
             }
             self.height = self.height + lHeight + PADDING;
+            //self.height = self.width;
 			
             // Move indicator to make room for the new label
             indFrame.origin.y -= (floorf(lHeight / 2 + PADDING / 2));
@@ -585,7 +586,7 @@
         CGFloat gradColors[8] = {0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.75f}; 
         CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
         CGGradientRef gradient = CGGradientCreateWithColorComponents(colorSpace, gradColors, gradLocations, gradLocationsNum);
-		CGColorSpaceRelease(colorSpace);
+        CGColorSpaceRelease(colorSpace);
         
         //Gradient center
         CGPoint gradCenter= CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2);
@@ -600,11 +601,14 @@
     
     // Center HUD
     CGRect allRect = self.bounds;
-    // Draw rounded HUD bacgroud rect
+    // Draw rounded HUD backgroud rect
+    /*CGRect boxRect = CGRectMake(roundf((allRect.size.width - self.width) / 2) + self.xOffset,
+                                roundf((allRect.size.height - self.height) / 2) + self.yOffset, self.width, self.height);*/
+    //Modified by Denny to make the HUD background rect like a square
     CGRect boxRect = CGRectMake(roundf((allRect.size.width - self.width) / 2) + self.xOffset,
-                                roundf((allRect.size.height - self.height) / 2) + self.yOffset, self.width, self.height);
-	// Corner radius
-	float radius = 10.0f;
+                                roundf((allRect.size.height - self.width) / 2) + self.yOffset, self.width, self.width);
+    // Corner radius
+	  float radius = 10.0f;
 	
     CGContextBeginPath(context);
     CGContextSetGrayFillColor(context, 0.0f, self.opacity);

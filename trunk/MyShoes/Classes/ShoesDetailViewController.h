@@ -15,9 +15,9 @@
 #import "TapImage.h"
 
 
-@interface ShoesDetailViewController : UIViewController<MBProgressHUDDelegate, BSPreviewScrollViewDelegate> {
+@interface ShoesDetailViewController : UIViewController<MBProgressHUDDelegate, BSPreviewScrollViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource> {
 
-  UIView *contentView;
+  //UIView *contentView;
   UIView *shoesBriefView;
   UIView *indicatorView;
   UILabel *shoesBrandName;
@@ -25,12 +25,18 @@
   //UILabel *shoesColor;
   UILabel *shoesPrice;
   
+  UILabel *chooseColorLabel;
+  UILabel *chooseSizeLabel;
+  
   UIImageView *shoesBrandLogo;
   
   //UIActivityIndicatorView *progressIndicator;
   
-  UIScrollView *backgroundScrollView;
+  //UIScrollView *backgroundScrollView;
   BSPreviewScrollView *shoesImageScrollView;
+  
+  //Shoes color selecter
+  UIPickerView *chooseColor;
   
   Shoes *shoes;
 
@@ -41,17 +47,20 @@
   NSMutableArray *shoesAllAngels;
 }
 
-@property (nonatomic, retain) IBOutlet UIView *contentView;
+//@property (nonatomic, retain) IBOutlet UIView *contentView;
 @property (nonatomic, retain) IBOutlet UIView *shoesBriefView;
 //@property (nonatomic, retain) IBOutlet UIView *indicatorView;
 @property (nonatomic, retain) UILabel *shoesBrandName;
 @property (nonatomic, retain) UILabel *shoesStyle;
 //@property (nonatomic, retain) IBOutlet UILabel *shoesColor;
 @property (nonatomic, retain) UILabel *shoesPrice;
+@property (nonatomic, retain) UILabel *chooseColorLabel;
+@property (nonatomic, retain) UILabel *chooseSizeLabel;
 @property (nonatomic, retain) UIImageView *shoesBrandLogo;
 //@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *progressIndicator;
-@property (nonatomic, retain) IBOutlet UIScrollView *backgroundScrollView;
+//@property (nonatomic, retain) IBOutlet UIScrollView *backgroundScrollView;
 @property (nonatomic, retain) /*IBOutlet*/BSPreviewScrollView *shoesImageScrollView;
+@property (nonatomic, retain) UIPickerView *chooseColor;
 @property (nonatomic, retain) Shoes *shoes;
 @property (nonatomic, retain) NetworkTool *networkTool;
 
@@ -59,6 +68,7 @@
 //- (void)startAnimation;
 //- (void)stopAnimation;
 - (void)loadShoesDetail;
+- (void)loadShoesDetailWithProductUrl:(NSString *)url;
 - (void)renderShoesDetail;
 
 //- (void)layoutScrollImages;

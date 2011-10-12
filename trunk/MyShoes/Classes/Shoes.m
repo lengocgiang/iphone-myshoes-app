@@ -30,11 +30,17 @@
 @synthesize shoesImgsAllAngle = _shoesImgsAllAngle;
 @synthesize productBrandName = _productBrandName;
 @synthesize productBrandLogo = _productBrandLogo;
+@synthesize shoesColors = _shoesColors;
+@synthesize shoesSizes = _shoesSizes;
+@synthesize shoesSizesValue = _shoesSizesValue;
+@synthesize selectedColor = _selectedColor;
+@synthesize selectedSize = _selectedSize;
+@synthesize urlsWithColors = _urlsWithColors;
 
 /*  Child node structure
  
  */
-- (id)initWithShoesNode:(TFHppleElement *) node {
+- (id)initWithShoesNode:(TFHppleElement *)node {
 	//hold the data. The node structure is shown above
 	//
 	if((self = [super init] )) {
@@ -66,7 +72,7 @@
 	return self;
 }
 
-- (void)processProductImage:(TFHppleElement *) node{
+- (void)processProductImage:(TFHppleElement *)node{
   
   NSArray *elements  = [node childNodes];  
   // Access the first cell
@@ -93,7 +99,7 @@
   
 }
 
-- (NSString *)processShoesInfo:(TFHppleElement *) node withProductTag:(NSString*) tag{
+- (NSString *)processShoesInfo:(TFHppleElement *)node withProductTag:(NSString*)tag{
   
   NSArray *elements  = [node childNodes];  
   // Access the first cell
@@ -112,7 +118,7 @@
   
 }
 
-- (void)processBrandTitleColor:(TFHppleElement *) node{
+- (void)processBrandTitleColor:(TFHppleElement *)node{
   
   NSArray *elements  = [node childNodes];  
   // Access the first cell
@@ -170,7 +176,7 @@
 //Process shoes image of all angel
 //It's shoes_iaEC1148271.jpg to shoes_ihEC1148271.jpg for large image
 //And shoes_i1EC1148271.jpg to shoes_i8EC1148271.jpg for small image
-- (void)processProductSKU:(TFHppleElement *) node{
+- (void)processProductSKU:(TFHppleElement *)node{
   NSString *tmpStr = [node content];
   NSString *sku = [tmpStr substringFromIndex:[SHOES_INFO_SKU_PREFIX length]];
   
@@ -187,7 +193,7 @@
   self.shoesImgsAllAngle = [[NSArray arrayWithArray:imgArray] retain];
 }
 
-- (void)processProductBrandLogo:(TFHppleElement *) node{
+- (void)processProductBrandLogo:(TFHppleElement *)node{
   //NSLog(@"This is a function of shoes");
   /*NSArray *childElements  = [node childNodes];
   if([childElements count] <= 0){
@@ -201,11 +207,94 @@
   
 }
 
+- (void)processShoesColors:(TFHppleElement *)node {
+  
+  NSString *baseColorURL = [node objectForKey:SHOES_COLORS_BASEURL_TAG];
+  NSArray *childElements = [node childNodes];
+  
+  if([childElements count] <= 0){
+    return;
+  }
+  
+  NSMutableArray *colorsArray = [NSMutableArray arrayWithCapacity:SHOES_INFO_COLOR_COUNT];
+  NSMutableArray *urlsWithColors = [NSMutableArray arrayWithCapacity:SHOES_INFO_COLOR_COUNT];
+  NSString *colorName;
+  NSString *urlWithColor;
+  NSString *tmpStr;
+  int i = 0;
+  
+  for(TFHppleElement *child in childElements){
+    colorName = [child content];
+    urlWithColor = [child objectForKey:VALUE_TAG];
+    
+    [colorsArray addObject:colorName];
+    if([[child objectForKey:SELECTD_TAG] isEqualToString:SELECTD_TAG]){
+      _selectedColor = i;
+    }
+    
+    //Process url with color
+    //Input is something shown as below
+    //"javascript: location.href='/Shopping/ProductDetails.aspx?p=' + this.options[this.selectedIndex].value + '&pg=5080624'"
+    //Output is something like
+    ///Shopping/ProductDetails.aspx?p12435&pg=5080624
+    NSRange range = [baseColorURL rangeOfString:@"' + this.options[this.selectedIndex].value + '"];
+    tmpStr = [baseColorURL substringFromIndex: (range.location  + range.length)];
+    
+    range = [tmpStr rangeOfString:@"'"];
+    tmpStr = [tmpStr substringToIndex:range.location];
+    
+    urlWithColor = [NSString stringWithFormat:@"%@%@%@",@"/Shopping/ProductDetails.aspx?p=", urlWithColor, tmpStr];
+    
+    [urlsWithColors addObject:urlWithColor];
+    i++;
+  }
+  
+  self.shoesColors = [[NSArray arrayWithArray:colorsArray] retain];
+  self.urlsWithColors = [[NSArray arrayWithArray:urlsWithColors] retain];
+  
+}
+
+- (void)processShoesSizes:(TFHppleElement *)node {
+
+  NSArray *childElements = [node childNodes];
+  
+  if([childElements count] <= 0){
+    return;
+  }
+  
+  NSMutableArray *sizesArray = [NSMutableArray arrayWithCapacity:SHOES_INFO_SIZE_COUNT];
+  NSMutableArray *sizesValueArray = [NSMutableArray arrayWithCapacity:SHOES_INFO_SIZE_COUNT];
+  
+  int i = 0;
+  NSString *size;
+  NSString *sizeValue;
+  
+  for(TFHppleElement *child in childElements){
+    size = [child content];
+    sizeValue = [child objectForKey:VALUE_TAG];
+    
+    [sizesArray addObject:size];
+    if([[child objectForKey:SELECTD_TAG] isEqualToString:SELECTD_TAG]){
+      _selectedSize = i;
+    }
+    
+    [sizesValueArray addObject:sizeValue];
+    
+    i++;
+  }
+  
+  self.shoesSizes = [[NSArray arrayWithArray:sizesArray] retain];
+  self.shoesSizesValue= [[NSArray arrayWithArray:sizesValueArray] retain];
+}
+
 - (void)dealloc {
 	//release all objects here
 	//[_pID release];
 	//[_pgID release];
-  
+  [_shoesSizes release];
+  [_shoesSizesValue release];
+  [_shoesColors release];
+  [_urlsWithColors release];  
   [_productBrandLogo release];
   [_shoesImgsAllAngle release];
   [_productSKU release];

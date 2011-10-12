@@ -306,8 +306,8 @@
 		B0F91F7D1435425D00E08024 /* MBProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
-				B0F91F7E143542A600E08024 /* MBProgressHUD.m */,
 				B0F91F7F143542A600E08024 /* MBProgressHUD.h */,
+				B0F91F7E143542A600E08024 /* MBProgressHUD.m */,
 			);
 			name = MBProgressHUD;
 			sourceTree = "<group>";
