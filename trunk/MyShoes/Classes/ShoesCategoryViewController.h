@@ -13,20 +13,14 @@
 
 @interface ShoesCategoryViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>{
   
-  //NSArray  *categoryNameArray;
   UITableView *categoryTableView;
 
-  NSMutableDictionary *shoesCategoryDict;
-  NSArray *shoesArray;
-
-  NetworkTool *networkTool;
+  // The array for the categories displayed on the current page
+  NSArray *currentPageCategoriesArray;
 
 }
 
 @property (nonatomic, retain) UITableView *categoryTableView;
-//@property (nonatomic, retain) NSArray *categoryNameArray;
-@property (nonatomic, retain) NSMutableDictionary *shoesCategoryDict;
-@property (nonatomic, retain)   NSArray *shoesArray;
-@property (nonatomic, retain) NetworkTool *networkTool;
+@property (nonatomic, retain) NSArray *currentPageCategoriesArray;
 
 @end

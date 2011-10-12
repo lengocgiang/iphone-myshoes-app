@@ -15,6 +15,7 @@
 @synthesize window;
 @synthesize homeViewController;
 @synthesize shoesCategoryController;
+@synthesize shoesSecondaryCategoryController;
 @synthesize shoesListController;
 @synthesize shoesDetailController;
 
@@ -35,6 +36,11 @@
                                 initWithNibName:@"ShoesCategoryViewController" 
                                          bundle:nil];
   shoesCategoryController.title = CATEGORY_NAV_TITLE_NAME;
+  
+  shoesSecondaryCategoryController = [[ShoesSecondaryCategoryViewController alloc]
+                             initWithNibName:@"ShoesSecondaryCategoryViewController" 
+                             bundle:nil];
+  shoesSecondaryCategoryController.title = SECONDARY_CATEGORY_NAV_TITLE_NAME;
   
   shoesListController = [[ShoesListViewController alloc]
                               initWithNibName:@"ShoesListViewController" 

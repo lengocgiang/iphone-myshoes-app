@@ -15,6 +15,8 @@
 #import "OrderedDictionary.h"
 #import "ShoesTableView.h"
 #import "ShoesListViewCell.h"
+#import "LoadMoreSearchResultsTableViewCell.h"
+#import "NetworkTool.h"
 
 @interface ShoesListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource/*, SlideImageViewDelegate*/>{
   UIView *contentView;
@@ -46,7 +48,20 @@
   NSMutableDictionary *_shoesCategoryDict;
   
   ShoesListViewCell *shoesListCell;
+  LoadMoreSearchResultsTableViewCell *loadMoreSearchResultsCell;
   //SlideMenuViewController *slideMenuViewController;
+  
+  /* The url for next request. */
+  NSString *url;
+  
+  /* The NetworkTool instance to do network communications. */
+  NetworkTool *networkTool;
+  
+  /* Representing how many pages have been loaded from network. */
+  NSInteger *currentPages;
+  
+  // The array storing all categories user selected
+  NSMutableArray *userSelectedCategoriesArray;  
 }
 
 @property (nonatomic, retain) IBOutlet UIView *contentView;
@@ -56,6 +71,7 @@
 @property (nonatomic, retain) IBOutlet SlideImageView *slideImageView;
 @property (nonatomic, retain) IBOutlet UITableView *shoesListView;
 @property (nonatomic, retain) IBOutlet ShoesListViewCell *shoesListCell;
+@property (nonatomic, retain) IBOutlet UITableViewCell *loadMoreSearchResultsCell;
 //@property (nonatomic, retain) ShoesTableView *shoesTableView;
 //@property (nonatomic, retain) NSMutableArray *shoesList;
 @property (nonatomic, retain) NSMutableDictionary *shoesDict;
@@ -67,12 +83,17 @@
 @property (nonatomic, retain) NSArray *imageArray;
 //@property (nonatomic, retain) SlideMenuViewController *slideMenuViewController;
 @property (nonatomic, retain) NSMutableDictionary *shoesCategoryDict;
+@property (nonatomic, retain) NSString *url;
+@property (nonatomic, retain) NetworkTool *networkTool;
+@property (nonatomic) NSInteger *currentPages;
+@property (nonatomic, retain) NSMutableArray *userSelectedCategoriesArray;
 
 - (void) startAnimation;
 - (void) stopAnimation;
-- (void) showShoesList:(NSArray *) shoesList;
+- (void) showShoesList/*:(NSArray *) shoesList*/;
 - (void) showShoesListInfo:(Shoes *)shoes;
 - (void) hideShoesListInfoLabels;
+- (void) loadShoesList;
 
 @end
 

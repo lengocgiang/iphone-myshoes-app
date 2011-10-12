@@ -45,14 +45,22 @@
 #define TAB_SETTING_NAV_NAME @"Settings"
 
 #define CATEGORY_NAV_TITLE_NAME @"Category"
+#define SECONDARY_CATEGORY_NAV_TITLE_NAME @"SecondaryCategory"
 #define SHOESLIST_NAV_TITLE_NAME @"Shoes List"
 
-#define SHOES_CATEGORY_WOMEN_NAME @"women"
-#define SHOES_CATEGORY_MEN_NAME @"men"
-#define SHOES_CATEGORY_GIRLS_NAME @"girls"
-#define SHOES_CATEGORY_BOYS_NAME @"boys"
-#define SHOES_CATEGORY_JUNIORS_NAME @"juniors"
-#define SHOES_CATEGORY_BAGS_NAME @"bags&more"
+#define SHOES_CATEGORY_WOMEN_NAME @"Women"
+#define SHOES_CATEGORY_MEN_NAME @"Men"
+#define SHOES_CATEGORY_GIRLS_NAME @"Kids-Girls"
+#define SHOES_CATEGORY_BOYS_NAME @"Kids-Boys"
+#define SHOES_CATEGORY_JUNIORS_NAME @"Juniors"
+#define SHOES_CATEGORY_BAGS_NAME @"Bags"
+
+#define SHOES_CATEGORY_DRESS_NAME @"Dress"
+#define SHOES_CATEGORY_CASUAL_NAME @"Casual"
+#define SHOES_CATEGORY_ATHLETIC_NAME @"Athletic"
+#define SHOES_CATEGORY_BOOTS_NAME @"Boots"
+#define SHOES_CATEGORY_SANDALS_NAME @"Sandals"
+#define SHOES_CATEGORY_SALE_NAME @"Sale"
 
 
 #define SHOES_CATEGORY_WOMEN_URI_12ITEM @"/en-US/Womens/_/_/_/View+12/Products.aspx"
@@ -61,6 +69,13 @@
 #define SHOES_CATEGORY_BOYS_URI_12ITEM @"/en-US/Kids-Boys/_/_/_/View+12/Products.aspx"
 #define SHOES_CATEGORY_JUNIORS_URI_12ITEM @"/en-US/Womens/_/_/Juniors+Shoes/View+12/Products.aspx"
 #define SHOES_CATEGORY_BAGS_URI_12ITEM @"/en-US/Bags/_/_/_/View+12/Products.aspx"
+
+#define SHOES_CATEGORY_WOMEN_URI @"/en-US/Womens"
+#define SHOES_CATEGORY_MEN_URI @"/en-US/Mens"
+#define SHOES_CATEGORY_GIRLS_URI @"/en-US/Kids-Girls"
+#define SHOES_CATEGORY_BOYS_URI @"/en-US/Kids-Boys"
+#define SHOES_CATEGORY_JUNIORS_URI @"/en-US/Womens/_/_/Juniors+Shoes/_/Products.aspx"
+#define SHOES_CATEGORY_BAGS_URI @"/en-US/Bags"
 
 #define SHOES_NODE_PRODUCTTAG @"class"
 #define SHOES_NODE_PRODUCTPRICETAG_USD @"e4xprice_usd"

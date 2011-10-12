@@ -12,6 +12,7 @@
 #import "NetworkTool.h"
 #import "HomeViewController.h"
 #import "ShoesCategoryViewController.h"
+#import "ShoesSecondaryCategoryViewController.h"
 #import "ShoesListViewController.h"
 #import "ShoesDetailViewController.h"
 #import "Debug.h"
@@ -27,6 +28,7 @@
   
   HomeViewController *homeViewController;
   ShoesCategoryViewController *shoesCategoryController;
+  ShoesSecondaryCategoryViewController *shoesSecondaryCategoryController;
 	ShoesListViewController *shoesListController;
   ShoesDetailViewController *shoesDetailController;
   
@@ -37,6 +39,7 @@
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet HomeViewController *homeViewController;
 @property (nonatomic, retain) ShoesCategoryViewController *shoesCategoryController;
+@property (nonatomic, retain) ShoesSecondaryCategoryViewController *shoesSecondaryCategoryController;
 @property (nonatomic, retain) ShoesListViewController *shoesListController;
 @property (nonatomic, retain) ShoesDetailViewController *shoesDetailController;
 

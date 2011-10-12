@@ -16,6 +16,8 @@
 #import "Shoes.h"
 //#import "ShoesTableView.h"
 #import "ShoesDataSource.h"
+#import "TFHpple.h"
+#import "TFHppleElement+AccessChildren.h"
 
 
 @implementation ShoesListViewController
@@ -28,6 +30,7 @@
 @synthesize slideImageView;
 @synthesize shoesListView;
 @synthesize shoesListCell;
+@synthesize loadMoreSearchResultsCell;
 //@synthesize shoesList = _shoesList;
 @synthesize shoesDict = _shoesDict;
 @synthesize shoesBrandName;
@@ -38,6 +41,10 @@
 @synthesize imageArray = _imageArray;
 //@synthesize slideMenuViewController;
 @synthesize shoesCategoryDict = _shoesCategoryDict;
+@synthesize url;
+@synthesize networkTool;
+@synthesize currentPages;
+@synthesize userSelectedCategoriesArray;
 
 /*
 // The designated initializer. Override to perform setup that is required before the view is loaded.
@@ -56,7 +63,10 @@
 }
 */
 
-
+- (void)viewDidAppear:(BOOL)animated {
+  [super viewDidAppear:animated];
+  [self loadShoesList];
+}
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
@@ -139,6 +149,8 @@
   [self.slideImageView setupImages:self.imageArray];
   //[self.contentView addSubview:self.slideImageView];
   
+  self.networkTool = [[NetworkTool alloc] init];
+  
 }
 
 
@@ -180,14 +192,79 @@
   [UIView commitAnimations];
 }
 
-- (void) showShoesList:(NSArray *) shoesArray {
+#pragma mark Network related methods
+/* Load shoes list from network. Retrieve only part of shoes one time to improve perfomance. */
+- (void)loadShoesList {
+	//Issue the request of the selected category
+  
+	[networkTool getContent:url withDelegate:self requestSelector:@selector(shoesCategoryUdateCallbackWithData:)];
+}
+
+/* Generate the intial url to load the first part of shoes list. */
+- (NSString *)generateInitialUrl {
+  ShoesCategory *firstCategory = [userSelectedCategoriesArray objectAtIndex:0];
+	NSString *initialUrl = [NSString stringWithFormat:@"%@%@%@",MYSHOES_URL,@"en-US/",firstCategory.categoryName];
+  
+  ShoesCategory *secondaryCategory = [userSelectedCategoriesArray objectAtIndex:1];
+  initialUrl = [NSString stringWithFormat:@"%@%@",initialUrl,secondaryCategory.categoryName];
+  return initialUrl;
+}
+
+- (void)shoesCategoryUdateCallbackWithData: (NSData *) content {
+	
+	//debug_NSLog(@"%@",[[[NSString alloc] initWithData:content encoding:NSASCIIStringEncoding] autorelease]);
+  NSMutableArray *shoesList = [NSMutableArray arrayWithCapacity:CAPACITY_SHOES_LIST];
+  
+	// Create parser
+	TFHpple *xpathParser = [[TFHpple alloc] initWithHTMLData:content];
+	
+	NSArray *elements  = [xpathParser search:SHOES_CATEGORY_PRODUCT_LIST_XPATH];
+	
+	// Get the link information within the cell tag
+	//NSString *value = [element objectForKey:HREF_TAG];
+	//NSString *str;
+	
+	for (TFHppleElement *element in elements) {
+    
+    Shoes *shoes = [[[Shoes alloc] initWithShoesNode:element] autorelease];
+    [shoesList addObject:shoes];
+    
+		/*NSArray *children = [element childNodes];
+     for (TFHppleElement *child in children) {
+     }*/
+	}
+	
+  [_shoesArray autorelease];
+  _shoesArray = [shoesList copy];
+  
+  //Stop Animation
+  //MyShoesAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+  
+	[xpathParser release];
+  
+  //If there is any shoes come back, show the first shoes
+  if ([_shoesArray count] > 0){
+    //Show the first shoes in the list
+    /*Shoes *shoes = [self.shoesArray objectAtIndex:0];
+     NSString *imageName = shoes.shoesImageName;
+     NSString *imageUrl = [NSString stringWithFormat:@"%@%@",MYSHOES_URL,imageName];*/
+    [self showShoesList/*:_shoesArray*/];
+  }
+  [self stopAnimation];
+  if ([_shoesArray count] >= 1){
+    [self showShoesListInfo:[_shoesArray objectAtIndex:0]];
+  }
+  
+}
+
+- (void) showShoesList/*:(NSArray *) shoesArray*/ {
 
   //Start animation
   //[self startAnimation];
   //[self hideShoesInfoLabels];
   
   
-  if(shoesArray != nil){
+  /*if(shoesArray != nil){
     [self.shoesDict autorelease];
     self.shoesDict = [[NSMutableDictionary dictionaryWithCapacity:CAPACITY_SHOES_LIST] retain];
     
@@ -196,7 +273,7 @@
       _shoesArray = nil;
     }
     _shoesArray = [shoesArray retain];
-  }
+  }*/
   
   //If scrolling view, shows shoes list in scrolling mode
   if (!_isTableView){
@@ -325,7 +402,7 @@
   }
   
   //Just refresh the view with existing shoes data
-  [self showShoesList:nil];
+  [self showShoesList/*:nil*/];
 }
 
 - (void)dealloc {
@@ -350,75 +427,69 @@
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  return [_shoesArray count];
+	// Return 1 section which will be used to display the giant blank UITableViewCell as defined
+	// in the tableView:cellForRowAtIndexPath: method below
+	if ([_shoesArray count] == 0){
+		
+		return 1;
+		
+	} else if ([_shoesArray count] < CATEGORY_SHOES_COUNT) {
+        
+		// Add an object to the end of the array for the "Load more..." table cell.
+		return [_shoesArray count];
+        
+	}	
+	// Return the number of rows as there are in the searchResults array.
+	return [_shoesArray count] + 1;
 }
 
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-
-	static NSString *MyIdentifier = @"MyIdentifier";
-	MyIdentifier = @"listViewCell";
-  
-  /*static NSInteger BrandTag = 1;
-  static NSInteger StyleTag = 2;
-  static NSInteger ColorTag = 3;
-  static NSInteger PriceTag = 4;*/
+	// Special cases:
+	// 1: if search results count == 0, display giant blank UITableViewCell, and disable user interaction.
+	// 2: if last cell, display the "Load More" search results UITableViewCell.
 	
-	//ShoesListViewCell *cell = (ShoesListViewCell *)[shoesListView dequeueReusableCellWithIdentifier:MyIdentifier];
+	if ([_shoesArray count] == 0){ // Special Case 1
+        
+		// Disable user interaction for this cell.
+		UITableViewCell *cell = [[[UITableViewCell alloc] init] autorelease]; 
+		cell.selectionStyle = UITableViewCellSelectionStyleNone;
+		return cell;
+		
+	} else if (indexPath.row == [_shoesArray count]){ // Special Case 2		
+		static NSString *loadMoreIdentifier = @"LoadMoreResultsCell";
+		LoadMoreSearchResultsTableViewCell *cell = (LoadMoreSearchResultsTableViewCell *) [tableView dequeueReusableCellWithIdentifier:loadMoreIdentifier];
+		if (cell == nil) {
+			cell = [[[LoadMoreSearchResultsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:loadMoreIdentifier] autorelease];
+			//cell.textLabel.text = @"Load More Results...";
+            
+            self.loadMoreSearchResultsCell = cell;
+            
+		}
+		
+		// Return a standard cell
+		cell.textLabel.text = @"Load More Results...";
+
+    cell.textLabel.textAlignment = UITextAlignmentCenter;
+		return cell;
+		
+	}
+    
+//    static NSString *CellIdentifier = @"SearchResultsCell";
+//    
+//	SearchResultsTableViewCell *cell = (SearchResultsTableViewCell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+//    if (cell == nil) {
+//		[[NSBundle mainBundle] loadNibNamed:@"SearchResultsTableCell" owner:self options:nil];
+//		cell = self.searchResultsCell;
+//    }
+
+    
+	static NSString *MyIdentifier = @"MyIdentifier";
+	
   ShoesListViewCell *cell = (ShoesListViewCell *)[shoesListView dequeueReusableCellWithIdentifier:MyIdentifier];
   
 	if(cell == nil) {
-    /*cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:MyIdentifier] autorelease];
-    
-    float indicatorSize = 25;//cell.accessoryView.frame.size.width;
-    
-    CGRect frame;
-    frame.origin.x = 10 + SHOES_LIST_CELL_IMG_WIDTH;
-    frame.origin.y = 0;
-    frame.size.height = 30;
-    frame.size.width = 150;
-    
-    //Create Lable for BrandName
-    UILabel *brandLabel = [[[UILabel alloc] initWithFrame:frame] autorelease];
-    brandLabel.tag = BrandTag;
-    brandLabel.font = [UIFont fontWithName:@"Helvetica" size:(14.0)];
-   [cell.contentView addSubview:brandLabel];
-    
-    //The position of the Color label
-    frame.origin.x = cell.contentView.frame.size.width - 80 - indicatorSize;
-    frame.origin.y = 0;
-    frame.size.height = 20;
-    frame.size.width = 80;   
-    //Create Lable for Color
-    UILabel *colorLabel = [[[UILabel alloc] initWithFrame:frame] autorelease];
-    colorLabel.tag = ColorTag;
-    colorLabel.textAlignment = UITextAlignmentRight;
-    colorLabel.font = [UIFont fontWithName:@"Helvetica" size:(12.0)];
-    [cell.contentView addSubview:colorLabel];
-    
-    //The position of the Style label
-    frame.origin.x = 10 + SHOES_LIST_CELL_IMG_WIDTH;
-    frame.origin.y = 30;
-    frame.size.height = 30;
-    frame.size.width = 150;
-    //Create Lable for Style
-    UILabel *styleLabel = [[[UILabel alloc] initWithFrame:frame] autorelease];
-    styleLabel.tag = StyleTag;
-    styleLabel.font = [UIFont fontWithName:@"Helvetica" size:(12.0)];
-    [cell.contentView addSubview:styleLabel];
-    
-    //The position of the price label
-    frame.origin.x = cell.contentView.frame.size.width - 80 - indicatorSize;
-    frame.origin.y = 20;
-    frame.size.height = 40;
-    frame.size.width = 80;
-    //Create Lable for Style
-    UILabel *priceLabel = [[[UILabel alloc] initWithFrame:frame] autorelease];
-    priceLabel.tag = PriceTag;
-    priceLabel.textAlignment = UITextAlignmentRight;
-    priceLabel.font = [UIFont fontWithName:@"Helvetica" size:(20.0)];
-    [cell.contentView addSubview:priceLabel];*/
     
     cell = [[[ShoesListViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier] autorelease];
     
@@ -442,15 +513,6 @@
 
   cell.imageView.image = resized;
 
-  /*UILabel *brandLabel = (UILabel *)[cell.contentView viewWithTag:BrandTag];
-  UILabel *styleLabel = (UILabel *)[cell.contentView viewWithTag:StyleTag];
-  UILabel *colorLabel = (UILabel *)[cell.contentView viewWithTag:ColorTag];
-  UILabel *priceLabel = (UILabel *)[cell.contentView viewWithTag:PriceTag];
-  
-  brandLabel.text = shoes.productBrandName;
-  styleLabel.text = shoes.productStyle;
-  colorLabel.text = shoes.productColor;
-  priceLabel.text = shoes.productPrice;*/
   [cell setShoesBrandName:shoes.productBrandName];
   [cell setShoesColor:shoes.productColor];
   [cell setShoesStyle:shoes.productStyle];
@@ -460,17 +522,48 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  
-  //Set the Name of the cell is @"Category"
-  //[cell setBtnLableTxt:[btnNameArray objectAtIndex:0]];
-  MyShoesAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-      
-  [delegate.shoesDetailController setShoes:[_shoesArray objectAtIndex:indexPath.row]];
-  //[delegate.shoesDetailController loadShoesDetail];
-  [self.navigationController pushViewController:delegate.shoesDetailController animated:YES];
-      
-  //Deselected the selected Row
-  [tableView deselectRowAtIndexPath:indexPath animated:YES];
+	if ([_shoesArray count] == 0){
+		return;
+		
+        // Special Case for the "Load More Results..." button for paging.
+	} else if (indexPath.row == [_shoesArray count]) {
+        
+		// Register for the notification
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(employeeDataReceived:)
+													 name:@"WebServiceCallCompleted" object:nil];
+		
+		// Unhide the spinner, and start animating it.
+//		[self.loadMoreSearchResultsCell.loadMoreIndicator startAnimating];
+//		self.loadMoreSearchResultsCell.loadMoreLabel.text = @"";
+//		self.loadMoreSearchResultsCell.loadMoreLabel2.text = @"Loading...";
+//		
+//		// Start the connection...
+//		[self.webServiceDataModel getNextSearchResultsPage];
+//		
+//		// Disable user interaction if/when the loading/search results view appears.
+//		[self.tableView setUserInteractionEnabled:NO];
+//		
+//		// Unhighlight the load more button after it has been tapped.
+//		NSIndexPath* selection = [self.tableView indexPathForSelectedRow];
+//		if (selection)
+//			[self.tableView deselectRowAtIndexPath:selection animated:YES];
+        
+        
+	} else {
+        
+		// Slide in the a details view.
+      //Set the Name of the cell is @"Category"
+        MyShoesAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+            
+        [delegate.shoesDetailController setShoes:[_shoesArray objectAtIndex:indexPath.row]];
+        [self.navigationController pushViewController:delegate.shoesDetailController animated:YES];
+            
+        //Deselected the selected Row
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+  }
+    
+
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

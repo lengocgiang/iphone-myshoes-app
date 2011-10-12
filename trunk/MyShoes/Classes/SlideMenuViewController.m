@@ -212,7 +212,7 @@
     /*Shoes *shoes = [self.shoesArray objectAtIndex:0];
     NSString *imageName = shoes.shoesImageName;
     NSString *imageUrl = [NSString stringWithFormat:@"%@%@",MYSHOES_URL,imageName];*/
-    [delegate.shoesListController showShoesList:self.shoesArray];
+    [delegate.shoesListController showShoesList/*:self.shoesArray*/];
   }
   [delegate.shoesListController stopAnimation];
   if ([self.shoesArray count] >= 1){

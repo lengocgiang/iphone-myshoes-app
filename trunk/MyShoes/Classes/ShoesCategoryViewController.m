@@ -12,15 +12,13 @@
 #import "ShoesCategory.h"
 #import "TFHpple.h"
 #import "TFHppleElement+AccessChildren.h"
+#import "ShoesCategoryDict.h"
 
 
 @implementation ShoesCategoryViewController
 
 @synthesize categoryTableView;
-//@synthesize categoryNameArray;
-@synthesize shoesCategoryDict;
-@synthesize shoesArray;
-@synthesize networkTool;
+@synthesize currentPageCategoriesArray;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -33,8 +31,7 @@
 
 - (void)dealloc
 {
-  [networkTool release];
-  [shoesArray release];
+  [currentPageCategoriesArray release];
   
   [super dealloc];
 }
@@ -64,42 +61,16 @@
   /*self.categoryNameArray = [NSArray arrayWithObjects:@"women", @"men", @"girls", @"boys", @"juniors", 
                                                 @"bags&more", @"sale", nil];*/
   
-  //Init all the shoes category and put them in a directory
-  //Init and add slide button menu Image View
-  self.shoesCategoryDict = [[OrderedDictionary alloc] init];
-  //Setup category for women
-  ShoesCategory *category = [[[ShoesCategory alloc] initWithName:SHOES_CATEGORY_WOMEN_NAME/* andXPath:SHOES_CATEGORY_WOMEN_XPATH*/] autorelease];
-  category.categoryURI = SHOES_CATEGORY_WOMEN_URI_12ITEM;
-	[self.shoesCategoryDict setObject: category forKey:SHOES_CATEGORY_WOMEN_NAME];
-  //Setup category for men
-  //[category autorelease];
-  category = [[[ShoesCategory alloc] initWithName:SHOES_CATEGORY_MEN_NAME/* andXPath:SHOES_CATEGORY_MEN_XPATH*/] autorelease];
-  category.categoryURI = SHOES_CATEGORY_MEN_URI_12ITEM;
-	[self.shoesCategoryDict setObject:category forKey:SHOES_CATEGORY_MEN_NAME];
-  //Setup category for girls
-  //[category autorelease];
-  category = [[[ShoesCategory alloc] initWithName:SHOES_CATEGORY_GIRLS_NAME/* andXPath:SHOES_CATEGORY_GIRLS_XPATH*/] autorelease];
-  category.categoryURI = SHOES_CATEGORY_GIRLS_URI_12ITEM;
-	[self.shoesCategoryDict setObject: category forKey:SHOES_CATEGORY_GIRLS_NAME];
-  //Setup category for boys
-  //[category autorelease];
-  category = [[[ShoesCategory alloc] initWithName:SHOES_CATEGORY_BOYS_NAME/* andXPath:SHOES_CATEGORY_BOYS_XPATH*/] autorelease];
-  category.categoryURI = SHOES_CATEGORY_BOYS_URI_12ITEM;
-	[self.shoesCategoryDict setObject:category forKey:SHOES_CATEGORY_BOYS_NAME];
-  
-  //Setup category for Juniors
-  //[category autorelease];
-  category = [[[ShoesCategory alloc] initWithName:SHOES_CATEGORY_JUNIORS_NAME/* andXPath:SHOES_CATEGORY_JUNIORS_XPATH*/] autorelease];
-  category.categoryURI = SHOES_CATEGORY_JUNIORS_URI_12ITEM;
-	[self.shoesCategoryDict setObject:category forKey:SHOES_CATEGORY_JUNIORS_NAME];
-  
-  //Setup category for bags
-  //[category autorelease];
-  category = [[[ShoesCategory alloc] initWithName:SHOES_CATEGORY_BAGS_NAME/* andXPath:SHOES_CATEGORY_BAGS_XPATH*/] autorelease];
-  category.categoryURI = SHOES_CATEGORY_BAGS_URI_12ITEM;
-	[self.shoesCategoryDict setObject:category forKey:SHOES_CATEGORY_BAGS_NAME];
-  
-  self.networkTool = [[NetworkTool alloc] init];
+  //Init the array for all categories in current page
+  NSMutableDictionary *categoryDict = [ShoesCategoryDict dictionary];
+  self.currentPageCategoriesArray = [NSArray arrayWithObjects:
+                                     [categoryDict objectForKey:SHOES_CATEGORY_WOMEN_NAME], 
+                                     [categoryDict objectForKey:SHOES_CATEGORY_MEN_NAME], 
+                                     [categoryDict objectForKey:SHOES_CATEGORY_GIRLS_NAME], 
+                                     [categoryDict objectForKey:SHOES_CATEGORY_BOYS_NAME], 
+                                     [categoryDict objectForKey:SHOES_CATEGORY_JUNIORS_NAME], 
+                                     [categoryDict objectForKey:SHOES_CATEGORY_BAGS_NAME], 
+                                     nil];
 
 }
 
@@ -134,7 +105,7 @@
     default:
       return 0;
   }*/
-  return [[self.shoesCategoryDict allKeys] count];
+  return [currentPageCategoriesArray count];
 }
 
 
@@ -149,7 +120,8 @@
    }
    
    // Set up the cell...
-   cell.textLabel.text = [[self.shoesCategoryDict allKeys] objectAtIndex:indexPath.row];
+   ShoesCategory *category = [currentPageCategoriesArray objectAtIndex:indexPath.row];
+   cell.textLabel.text = category.categoryName;
    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
    return cell;
 }
@@ -170,70 +142,18 @@
   //Start animation
   MyShoesAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
   
-  [delegate.shoesListController hideShoesListInfoLabels];
-  [delegate.shoesListController startAnimation];
+	//Initialize the user selected category
+  NSMutableArray *userSelectedCategoriesArray = [NSArray arrayWithObjects:[currentPageCategoriesArray objectAtIndex:indexPath.row], nil];
   
-	//get the uri for the selected category
-	NSString *scategoryName = [[self.shoesCategoryDict allKeys] objectAtIndex:indexPath.row];
-	ShoesCategory * category = [self.shoesCategoryDict objectForKey:scategoryName];
-	
-	NSString *uri = category.categoryURI;
+  [delegate.shoesSecondaryCategoryController setUserSelectedCategoriesArray:userSelectedCategoriesArray];
+
+  [self.navigationController pushViewController:delegate.shoesSecondaryCategoryController animated:YES];
   
-	NSString *newUrl = [NSString stringWithFormat:@"%@%@",MYSHOES_URL,uri];
-	//Issue the request of the selected category
-	[networkTool getContent:newUrl withDelegate:self requestSelector:@selector(shoesCategoryUdateCallbackWithData:)];
-  
-  [self.navigationController pushViewController:delegate.shoesListController animated:YES];
+  //Deselected the selected Row
+  [tableView deselectRowAtIndexPath:indexPath animated:YES];
   
   //Deselected the selected Row
   [categoryTableView deselectRowAtIndexPath:indexPath animated:YES];
-}
-
-- (void)shoesCategoryUdateCallbackWithData: (NSData *) content {
-	
-	//debug_NSLog(@"%@",[[[NSString alloc] initWithData:content encoding:NSASCIIStringEncoding] autorelease]);
-  NSMutableArray *shoesList = [NSMutableArray arrayWithCapacity:CAPACITY_SHOES_LIST];
-  
-	// Create parser
-	TFHpple *xpathParser = [[TFHpple alloc] initWithHTMLData:content];
-	
-	NSArray *elements  = [xpathParser search:SHOES_CATEGORY_PRODUCT_LIST_XPATH];
-	
-	// Get the link information within the cell tag
-	//NSString *value = [element objectForKey:HREF_TAG];
-	//NSString *str;
-	
-	for (TFHppleElement *element in elements) {
-    
-    Shoes *shoes = [[[Shoes alloc] initWithShoesNode:element] autorelease];
-    [shoesList addObject:shoes];
-    
-		/*NSArray *children = [element childNodes];
-     for (TFHppleElement *child in children) {
-     }*/
-	}
-	
-  [self.shoesArray autorelease];
-  self.shoesArray = [shoesList copy];
-  
-  //Stop Animation
-  MyShoesAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-  
-	[xpathParser release];
-  
-  //If there is any shoes come back, show the first shoes
-  if ([self.shoesArray count] > 0){
-    //Show the first shoes in the list
-    /*Shoes *shoes = [self.shoesArray objectAtIndex:0];
-     NSString *imageName = shoes.shoesImageName;
-     NSString *imageUrl = [NSString stringWithFormat:@"%@%@",MYSHOES_URL,imageName];*/
-    [delegate.shoesListController showShoesList:self.shoesArray];
-  }
-  [delegate.shoesListController stopAnimation];
-  if ([self.shoesArray count] >= 1){
-    [delegate.shoesListController showShoesListInfo:[self.shoesArray objectAtIndex:0]];
-  }
-    
 }
 
 @end
