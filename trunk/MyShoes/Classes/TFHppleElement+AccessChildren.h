@@ -12,6 +12,6 @@
 
 @interface TFHppleElement (AccessChildren) 
 
-- (NSArray *) childNodes;
+- (NSArray *)childNodes;
 
 @end

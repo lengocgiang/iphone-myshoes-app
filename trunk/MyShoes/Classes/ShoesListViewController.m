@@ -197,16 +197,21 @@
 - (void)loadShoesList {
 	//Issue the request of the selected category
   
-	[networkTool getContent:url withDelegate:self requestSelector:@selector(shoesCategoryUdateCallbackWithData:)];
+	[networkTool getContent:[self generateInitialUrl] withDelegate:self 
+          requestSelector:@selector(shoesCategoryUdateCallbackWithData:)];
 }
 
 /* Generate the intial url to load the first part of shoes list. */
 - (NSString *)generateInitialUrl {
   ShoesCategory *firstCategory = [userSelectedCategoriesArray objectAtIndex:0];
-	NSString *initialUrl = [NSString stringWithFormat:@"%@%@%@",MYSHOES_URL,@"en-US/",firstCategory.categoryName];
   
-  ShoesCategory *secondaryCategory = [userSelectedCategoriesArray objectAtIndex:1];
-  initialUrl = [NSString stringWithFormat:@"%@%@",initialUrl,secondaryCategory.categoryName];
+  //Need to work on this
+	//NSString *initialUrl = [NSString stringWithFormat:@"%@%@",MYSHOES_URL,firstCategory.categoryURI];;
+  //Set a temporial url
+  
+  NSString *initialUrl = [NSString stringWithFormat:@"%@%@",MYSHOES_URL,SHOES_CATEGORY_MEN_URI_12ITEM];
+  //  ShoesCategory *secondaryCategory = [userSelectedCategoriesArray objectAtIndex:1];
+  //  initialUrl = [NSString stringWithFormat:@"%@%@",initialUrl,secondaryCategory.categoryName];
   return initialUrl;
 }
 
@@ -283,12 +288,12 @@
     for (Shoes *shoes in _shoesArray){
     
       NSString *imageName = shoes.shoesImageName;
-      NSString *imageUrl = [NSString stringWithFormat:@"%@%@",MYSHOES_URL,imageName];
+      NSString *imageUrlStr = [NSString stringWithFormat:@"%@%@",MYSHOES_URL,imageName];
     
-      NSURL *url = [NSURL URLWithString:imageUrl];
+      NSURL *imageUrl = [NSURL URLWithString:imageUrlStr];
       //NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
   
-      UIImage *image = [[UIImage imageWithData: [NSData dataWithContentsOfURL: url]] retain];
+      UIImage *image = [[UIImage imageWithData: [NSData dataWithContentsOfURL: imageUrl]] retain];
       //UIImage *roundImage = [image roundedCornerImage:SHOES_IMAGE_CORNER_RADIUS borderSize:SHOES_IMAGE_BORDER_SIZE];
     
       if (i< [self.imageArray count]){
@@ -500,12 +505,12 @@
   
 	//imageView.image = shoes.shoesImage;
   NSString *imageName = shoes.shoesImageName;
-  NSString *imageUrl = [NSString stringWithFormat:@"%@%@",MYSHOES_URL,imageName];
+  NSString *imageUrlStr = [NSString stringWithFormat:@"%@%@",MYSHOES_URL,imageName];
   
-  NSURL *url = [NSURL URLWithString:imageUrl];
+  NSURL *imageUrl = [NSURL URLWithString:imageUrlStr];
   //NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
   
-  UIImage *shoesImage = [[UIImage imageWithData: [NSData dataWithContentsOfURL: url]] retain];
+  UIImage *shoesImage = [[UIImage imageWithData: [NSData dataWithContentsOfURL: imageUrl]] retain];
   
   CGSize sz = SHOES_LIST_IMG_SIZE;
   

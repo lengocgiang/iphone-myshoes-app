@@ -88,12 +88,13 @@
 @property (nonatomic) NSInteger *currentPages;
 @property (nonatomic, retain) NSMutableArray *userSelectedCategoriesArray;
 
-- (void) startAnimation;
-- (void) stopAnimation;
-- (void) showShoesList/*:(NSArray *) shoesList*/;
-- (void) showShoesListInfo:(Shoes *)shoes;
-- (void) hideShoesListInfoLabels;
-- (void) loadShoesList;
+- (void)startAnimation;
+- (void)stopAnimation;
+- (void)showShoesList/*:(NSArray *) shoesList*/;
+- (void)showShoesListInfo:(Shoes *)shoes;
+- (void)hideShoesListInfoLabels;
+- (void)loadShoesList;
+- (NSString *)generateInitialUrl;
 
 @end
 

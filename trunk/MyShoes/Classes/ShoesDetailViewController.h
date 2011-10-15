@@ -11,7 +11,7 @@
 #import "NetworkTool.h"
 #import "Shoes.h"
 #import "MBProgressHUD.h"
-#import "BSPreviewScrollView.h"
+#import "BSPreviewScrollView+ReloadPages.h"
 #import "TapImage.h"
 
 

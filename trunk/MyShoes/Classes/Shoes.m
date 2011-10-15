@@ -94,11 +94,16 @@
   if (str == nil) {
     str = [childElement objectForKey:ORIGINAL_TAG];
   }
+  
+  [self.shoesImageName release];
   self.shoesImageName = [str retain];//[childElement objectForKey:SRC_TAG];
+  [self.productCategory release];
   self.productCategory = [[childElement objectForKey:ALT_TAG] retain];
   
 }
 
+//Grab the value of a tag
+//Which is a value of the shoes
 - (NSString *)processShoesInfo:(TFHppleElement *)node withProductTag:(NSString*)tag{
   
   NSArray *elements  = [node childNodes];  
@@ -139,11 +144,13 @@
   TFHppleElement *childElement = [childElements objectAtIndex:0];
   //set product brand name
   id str = [childElement content];
+  [self.productBrandName release];
   self.productBrandName = [str retain];
     
   childElement = [childElements objectAtIndex:2];
   //set product style name
   str = [childElement content];
+  [self.productStyle release];
   self.productStyle = [str retain];
   
   //To test if the shoes has more info like color and rating
@@ -154,6 +161,7 @@
   //[element autorelease];
   element = [elements objectAtIndex:2];
   
+  [self.productColor release];
   self.productColor = [[element content] retain];
   
   //[element autorelease];
@@ -167,6 +175,7 @@
     childElement = [childElements objectAtIndex:0];
     //Get the shoes rating value
   
+    [self.productRating release];
     self.productRating = [[childElement content] retain];
   }
 }
@@ -190,6 +199,7 @@
     [imgArray addObject:tmpUrl];
   }
   
+  [self.shoesImgsAllAngle release];
   self.shoesImgsAllAngle = [[NSArray arrayWithArray:imgArray] retain];
 }
 
@@ -203,6 +213,7 @@
   //set product brand name
   //set product detail link
   NSString *tmpStr = [node objectForKey:SRC_TAG];
+  [self.productBrandLogo release];
   self.productBrandLogo = [tmpStr retain];
   
 }
@@ -249,7 +260,9 @@
     i++;
   }
   
+  [self.shoesColors release];
   self.shoesColors = [[NSArray arrayWithArray:colorsArray] retain];
+  [self.urlsWithColors release];
   self.urlsWithColors = [[NSArray arrayWithArray:urlsWithColors] retain];
   
 }
@@ -283,7 +296,9 @@
     i++;
   }
   
+  [self.shoesSizes release];
   self.shoesSizes = [[NSArray arrayWithArray:sizesArray] retain];
+  [self.shoesSizesValue release];
   self.shoesSizesValue= [[NSArray arrayWithArray:sizesValueArray] retain];
 }
 

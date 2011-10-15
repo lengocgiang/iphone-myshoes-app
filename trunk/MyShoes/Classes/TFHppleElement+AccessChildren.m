@@ -11,7 +11,7 @@
 
 @implementation TFHppleElement (AccessChildren)
 
-- (NSArray *) childNodes {
+- (NSArray *)childNodes {
 	NSString *TFHppleChildNodeArrayKey = @"nodeChildArray";
 	NSArray * childNodes = [node objectForKey:TFHppleChildNodeArrayKey];
 	NSMutableArray * hppleElements = [NSMutableArray array];

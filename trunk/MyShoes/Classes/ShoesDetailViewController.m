@@ -112,7 +112,8 @@ const NSUInteger kSizeColumn = 1;
   shoesBrandLogo = [[[UIImageView alloc] initWithFrame:CGRectMake(170, 0, 122, 54)] autorelease];
   [self.shoesBriefView addSubview:shoesBrandLogo];
       
-  //[self.view addSubview:self.shoesBriefView];
+  [self.view addSubview:self.shoesBriefView];
+  [self.shoesBriefView setHidden:YES];
   
   //self.shoesImageScrollView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5f];
   
@@ -122,7 +123,8 @@ const NSUInteger kSizeColumn = 1;
 	// Important to listen to the delegate methods.
 	self.shoesImageScrollView.delegate = self;
 
-  //[self.view addSubview:self.shoesImageScrollView];
+  [self.shoesImageScrollView setHidden:YES];
+  [self.view addSubview:self.shoesImageScrollView];
   self.chooseColor = [[UIPickerView alloc] initWithFrame:CGRectZero] ;
   CGRect frame;
   
@@ -149,8 +151,8 @@ const NSUInteger kSizeColumn = 1;
 	CGAffineTransform s0 = CGAffineTransformMakeScale(1, 0.8);
 	CGAffineTransform t1 = CGAffineTransformMakeTranslation(-self.chooseColor.bounds.size.width/2, -self.chooseColor.bounds.size.height/2);
 	self.chooseColor.transform = CGAffineTransformConcat(t0, CGAffineTransformConcat(s0, t1));*/
-  //[self.view addSubview:self.chooseColor];
-  //[self.chooseColor setHidden:YES];
+  [self.view addSubview:self.chooseColor];
+  [self.chooseColor setHidden:YES];
 
   
   shoesAllAngels = [[NSMutableArray arrayWithCapacity:SHOES_INFO_SHOESIMGS_COUNT] retain];
@@ -201,19 +203,16 @@ const NSUInteger kSizeColumn = 1;
 - (void)viewDidDisappear:(BOOL)animated {
   //Reset shoes detail view
   self.shoesBrandLogo.image = nil;
-  [self.shoesImageScrollView removeFromSuperview];
-  //remove all the subview os shoesImageScrollView
-  /*for (UIView *view in [self.shoesImageScrollView subviews]) {
-    [view removeFromSuperview];
-  }*/
-  //[self.shoesImageScrollView setContentOffset:CGPointMake(0.0f, 0.0f) animated:NO];
-  
   //[self.shoesBriefView setHidden:YES];
-  [self.shoesBriefView removeFromSuperview];
-  [self.chooseColor removeFromSuperview];
-  [self.chooseColorLabel removeFromSuperview];
+  //[self.shoesBriefView removeFromSuperview];
+  //[self.chooseColor removeFromSuperview];
+  //[self.chooseColorLabel removeFromSuperview];
   //[self.progressIndicator startAnimating];
   [shoesAllAngels removeAllObjects];
+  [self.shoesImageScrollView setHidden:YES];
+  [self.chooseColor setHidden:YES];
+  [self.shoesBriefView setHidden:YES];
+  [self.chooseColorLabel setHidden:YES];
 }
 
 
@@ -291,10 +290,8 @@ const NSUInteger kSizeColumn = 1;
       NSURL *url = [NSURL URLWithString:imageUrl];
       //NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
     
-      UIImage *image = [[UIImage imageWithData: [NSData dataWithContentsOfURL: url]] retain];
+      UIImage *image = [UIImage imageWithData: [NSData dataWithContentsOfURL: url]];
       [shoesAllAngels addObject:image];
-      
-      [image release];
     }
   }
 	
@@ -318,12 +315,6 @@ const NSUInteger kSizeColumn = 1;
   if((elements != nil) && ([elements count] > 0)){
     [shoes processShoesSizes:[elements objectAtIndex:0]];
   }
-	// Get the link information within the cell tag
-	//NSString *value = [element objectForKey:HREF_TAG];
-	//NSString *str;
-  
-  //Stop Animation
-  //MyShoesAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
   
 	[xpathParser release];
   
@@ -335,10 +326,6 @@ const NSUInteger kSizeColumn = 1;
 
 - (void)renderShoesDetail {
   [HUD hide:YES];
-  //[progressIndicator stopAnimating];
-  //[shoesBriefView setHidden:NO];
-  //[shoesImageScrollView setHidden:NO];
-  
   
   //Render shoes brand logo img
   //imageView.image = shoes.shoesImage;
@@ -361,32 +348,26 @@ const NSUInteger kSizeColumn = 1;
   shoesStyle.text = shoes.productStyle;
   shoesPrice.text = shoes.productPrice;
 
+  [self.shoesBriefView setHidden:NO];
   //Reload shoes images with all Angels
   [self.view addSubview:self.shoesBriefView];
-  //[self.shoesImageScrollView reloadData];
-  [self.view addSubview:self.shoesImageScrollView];
-  /*if(shoesImageScrollView){
-    [shoesImageScrollView removeFromSuperview];
-  }
-  
-  self.shoesImageScrollView = [[[BSPreviewScrollView alloc] initWithFrame:CGRectMake(0, 60, 320, 270)] autorelease];
-  
-  self.shoesImageScrollView.pageSize = CGSizeMake(kScrollObjWidth + kMarginX, kScrollObjHeight);
-	// Important to listen to the delegate methods.
-	self.shoesImageScrollView.delegate = self;
-  
-  //self.shoesImageScrollView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5f];
-  
-  [self.view addSubview:self.shoesImageScrollView];*/
-  
+  [self.shoesImageScrollView reloadPages];
+  [self.shoesImageScrollView setHidden:NO];
+
   //Add the choose shoes, step 1, 2, 3
   [self.view addSubview:self.chooseColorLabel];
   
   //self.chooseColor.delegate = self;
-  //[self.chooseColor reloadAllComponents];
+  [self.chooseColor reloadAllComponents];
+  //Set the default selection of the shoes color
   [self.chooseColor selectRow:shoes.selectedColor inComponent:0 animated:NO];
-  [self.view addSubview:self.chooseColor];
-  //[self.chooseColor setHidden:NO];
+  //Set the default selection of shoes size
+  //It should be a reminder "Select avaiable sizes"
+  [self.chooseColor selectRow:0 inComponent:1 animated:NO];
+
+  //[self.view addSubview:self.chooseColor];
+  [self.chooseColor setHidden:NO];
+  [self.chooseColorLabel setHidden:NO];
   //[self.chooseColor setUserInteractionEnabled:YES];
   
   self.chooseSizeLabel = [[[UILabel alloc] init] autorelease];
@@ -453,19 +434,38 @@ const NSUInteger kSizeColumn = 1;
   //Column(Component) 1 is for shoes color. Column(Component) 2 is for shoes size
   //Shoes size depends on shoes color selection.
   if(component == kColorColumn){//Should reload shoes info to get the avaiable sizes
+    //Put a safe check, it should not happen at all
+    if (row > [shoes.urlsWithColors count] -1 ){
+      return;
+    }
+      
     NSString *urlWithColor = [shoes.urlsWithColors objectAtIndex:row];
-    [self loadShoesDetailWithProductUrl:urlWithColor];
-    //Reload shoes color and size picker view
-    [self.chooseColor reloadComponent:kSizeColumn];
     
+    //Remove previous shoes images of all angels
+    [shoesAllAngels removeAllObjects];
+    
+    [self.shoesBriefView setHidden:YES];
+    [self.shoesImageScrollView setHidden:YES];
+    [self.chooseColor setHidden:YES];
+    [self.shoesBriefView setHidden:YES];
+    [self.chooseColorLabel setHidden:YES];
     //Disable touch until load finishes
     [self.view setUserInteractionEnabled:FALSE];
+    [self loadShoesDetailWithProductUrl:urlWithColor];
+    
   }
 }
 
 // tell the picker how many rows are available for a given component
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-  NSUInteger numRows = [shoes.shoesColors count];
+  NSUInteger numRows;// = [shoes.shoesColors count];
+  
+  if(component == kColorColumn){
+    numRows = [shoes.shoesColors count];
+  }
+  else if(component == kSizeColumn){
+    numRows = [shoes.shoesSizes count];
+  }
   
   return numRows;
 }

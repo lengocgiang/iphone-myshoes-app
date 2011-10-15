@@ -143,7 +143,7 @@
   MyShoesAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
   
 	//Initialize the user selected category
-  NSMutableArray *userSelectedCategoriesArray = [NSArray arrayWithObjects:[currentPageCategoriesArray objectAtIndex:indexPath.row], nil];
+  NSMutableArray *userSelectedCategoriesArray = [NSMutableArray arrayWithObjects:[currentPageCategoriesArray objectAtIndex:indexPath.row], nil];
   
   [delegate.shoesSecondaryCategoryController setUserSelectedCategoriesArray:userSelectedCategoriesArray];
 
