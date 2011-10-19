@@ -196,22 +196,31 @@
 /* Load shoes list from network. Retrieve only part of shoes one time to improve perfomance. */
 - (void)loadShoesList {
 	//Issue the request of the selected category
-  
-	[networkTool getContent:[self generateInitialUrl] withDelegate:self 
-          requestSelector:@selector(shoesCategoryUdateCallbackWithData:)];
+  url = [self generateInitialUrl];
+	[networkTool getContent:url withDelegate:self requestSelector:@selector(shoesCategoryUdateCallbackWithData:)];
 }
 
 /* Generate the intial url to load the first part of shoes list. */
 - (NSString *)generateInitialUrl {
   ShoesCategory *firstCategory = [userSelectedCategoriesArray objectAtIndex:0];
+  ShoesCategory *secondaryCategory = [userSelectedCategoriesArray objectAtIndex:1];
+  NSMutableString *initialUrl = [NSMutableString stringWithFormat:MYSHOES_URL];
+  [initialUrl appendString:@"en-US/"];
   
-  //Need to work on this
-	//NSString *initialUrl = [NSString stringWithFormat:@"%@%@",MYSHOES_URL,firstCategory.categoryURI];;
-  //Set a temporial url
+  [initialUrl appendString:firstCategory.categoryName];
   
-  NSString *initialUrl = [NSString stringWithFormat:@"%@%@",MYSHOES_URL,SHOES_CATEGORY_MEN_URI_12ITEM];
-  //  ShoesCategory *secondaryCategory = [userSelectedCategoriesArray objectAtIndex:1];
-  //  initialUrl = [NSString stringWithFormat:@"%@%@",initialUrl,secondaryCategory.categoryName];
+	[initialUrl appendString:@"/_/_/"];
+  
+  [initialUrl appendString:secondaryCategory.categoryName];
+  
+  // Bag's url doesn't has "+Shoes"
+  if (firstCategory.categoryName != SHOES_CATEGORY_BAGS_NAME)
+  {
+    [initialUrl appendString:@"+Shoes"];
+  }
+     
+  [initialUrl appendString:@"/View+12/Products.aspx"];
+  
   return initialUrl;
 }
 

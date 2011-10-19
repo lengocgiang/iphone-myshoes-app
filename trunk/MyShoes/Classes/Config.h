@@ -48,8 +48,8 @@
 #define SECONDARY_CATEGORY_NAV_TITLE_NAME @"SecondaryCategory"
 #define SHOESLIST_NAV_TITLE_NAME @"Shoes List"
 
-#define SHOES_CATEGORY_WOMEN_NAME @"Women"
-#define SHOES_CATEGORY_MEN_NAME @"Men"
+#define SHOES_CATEGORY_WOMEN_NAME @"Womens"
+#define SHOES_CATEGORY_MEN_NAME @"Mens"
 #define SHOES_CATEGORY_GIRLS_NAME @"Kids-Girls"
 #define SHOES_CATEGORY_BOYS_NAME @"Kids-Boys"
 #define SHOES_CATEGORY_JUNIORS_NAME @"Juniors"
@@ -60,8 +60,10 @@
 #define SHOES_CATEGORY_ATHLETIC_NAME @"Athletic"
 #define SHOES_CATEGORY_BOOTS_NAME @"Boots"
 #define SHOES_CATEGORY_SANDALS_NAME @"Sandals"
-#define SHOES_CATEGORY_SALE_NAME @"Sale"
-
+#define SHOES_CATEGORY_BACKPACKE_NAME @"Backpacks"
+#define SHOES_CATEGORY_HANDBAGS_NAME @"Handbags"
+#define SHOES_CATEGORY_SPORTS_AND_DUFFELS_NAME @"Sports+and+Duffels"
+#define SHOES_CATEGORY_MESSENGER_BAGS_NAME @"Messenger+Bags"
 
 #define SHOES_CATEGORY_WOMEN_URI_12ITEM @"/en-US/Womens/_/_/_/View+12/Products.aspx"
 #define SHOES_CATEGORY_MEN_URI_12ITEM @"/en-US/Mens/_/_/_/View+12/Products.aspx"

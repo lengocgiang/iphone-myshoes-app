@@ -69,10 +69,22 @@ static NSMutableDictionary *dictionary = nil;
     //Setup category for sandals
     category = [[[ShoesCategory alloc] initWithName:SHOES_CATEGORY_SANDALS_NAME] autorelease];
     [dictionary setObject: category forKey:SHOES_CATEGORY_SANDALS_NAME];
+
+    //Setup category for Backpacks
+    category = [[[ShoesCategory alloc] initWithName:SHOES_CATEGORY_BACKPACKE_NAME] autorelease];
+    [dictionary setObject: category forKey:SHOES_CATEGORY_BACKPACKE_NAME];
     
-    //Setup category for sale
-    category = [[[ShoesCategory alloc] initWithName:SHOES_CATEGORY_SALE_NAME] autorelease];
-    [dictionary setObject: category forKey:SHOES_CATEGORY_SALE_NAME];
+    //Setup category for Handbags
+    category = [[[ShoesCategory alloc] initWithName:SHOES_CATEGORY_HANDBAGS_NAME] autorelease];
+    [dictionary setObject: category forKey:SHOES_CATEGORY_HANDBAGS_NAME];
+    
+    //Setup category for Sports and Duffels
+    category = [[[ShoesCategory alloc] initWithName:SHOES_CATEGORY_SPORTS_AND_DUFFELS_NAME] autorelease];
+    [dictionary setObject: category forKey:SHOES_CATEGORY_SPORTS_AND_DUFFELS_NAME];
+    
+    //Setup category for Messenger Bags
+    category = [[[ShoesCategory alloc] initWithName:SHOES_CATEGORY_MESSENGER_BAGS_NAME] autorelease];
+    [dictionary setObject: category forKey:SHOES_CATEGORY_MESSENGER_BAGS_NAME];
   }
   
   return dictionary;

@@ -68,10 +68,8 @@
                                      [categoryDict objectForKey:SHOES_CATEGORY_MEN_NAME], 
                                      [categoryDict objectForKey:SHOES_CATEGORY_GIRLS_NAME], 
                                      [categoryDict objectForKey:SHOES_CATEGORY_BOYS_NAME], 
-                                     [categoryDict objectForKey:SHOES_CATEGORY_JUNIORS_NAME], 
                                      [categoryDict objectForKey:SHOES_CATEGORY_BAGS_NAME], 
                                      nil];
-
 }
 
 - (void)viewDidUnload
@@ -127,25 +125,38 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  
-  if(![MyShoesAppDelegate IsEnableWIFI] && ![MyShoesAppDelegate IsEnable3G]){
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"www.shoes.com"
-                                                    message:@"There is no network, Check your system"
-                                                   delegate:nil
-                                          cancelButtonTitle:@"YES" otherButtonTitles:nil];
-    [alert show];
-    [alert release];
-    
-    return;
-  }
-  
   //Start animation
   MyShoesAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
   
 	//Initialize the user selected category
-  NSMutableArray *userSelectedCategoriesArray = [NSMutableArray arrayWithObjects:[currentPageCategoriesArray objectAtIndex:indexPath.row], nil];
+  NSMutableArray *userSelectedCategoriesArray = [NSMutableArray arrayWithObjects:[currentPageCategoriesArray objectAtIndex:indexPath.row], [currentPageCategoriesArray objectAtIndex:indexPath.row], nil];
   
   [delegate.shoesSecondaryCategoryController setUserSelectedCategoriesArray:userSelectedCategoriesArray];
+  
+  //Init the array for all categories in the secondary category view
+  NSMutableDictionary *categoryDict = [ShoesCategoryDict dictionary];
+  
+  ShoesCategory *firstCategory = [userSelectedCategoriesArray objectAtIndex:0];
+  if (firstCategory.categoryName == SHOES_CATEGORY_BAGS_NAME)
+  {
+    // Bag's secondary category is special
+    [delegate.shoesSecondaryCategoryController setCurrentPageCategoriesArray: [NSArray arrayWithObjects:
+                                       [categoryDict objectForKey:SHOES_CATEGORY_BACKPACKE_NAME], 
+                                       [categoryDict objectForKey:SHOES_CATEGORY_HANDBAGS_NAME], 
+                                       [categoryDict objectForKey:SHOES_CATEGORY_SPORTS_AND_DUFFELS_NAME], 
+                                       [categoryDict objectForKey:SHOES_CATEGORY_MESSENGER_BAGS_NAME], 
+                                       nil]];
+  }
+  else
+  {
+    [delegate.shoesSecondaryCategoryController setCurrentPageCategoriesArray:[NSArray arrayWithObjects:
+                                       [categoryDict objectForKey:SHOES_CATEGORY_DRESS_NAME], 
+                                       [categoryDict objectForKey:SHOES_CATEGORY_CASUAL_NAME], 
+                                       [categoryDict objectForKey:SHOES_CATEGORY_ATHLETIC_NAME], 
+                                       [categoryDict objectForKey:SHOES_CATEGORY_BOOTS_NAME], 
+                                       [categoryDict objectForKey:SHOES_CATEGORY_SANDALS_NAME], 
+                                       nil]];
+  }
 
   [self.navigationController pushViewController:delegate.shoesSecondaryCategoryController animated:YES];
   

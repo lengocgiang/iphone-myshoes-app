@@ -59,16 +59,7 @@
   /*self.categoryNameArray = [NSArray arrayWithObjects:@"women", @"men", @"girls", @"boys", @"juniors", 
    @"bags&more", @"sale", nil];*/
   
-  //Init the array for all categories in current page
-  NSMutableDictionary *categoryDict = [ShoesCategoryDict dictionary];
-  self.currentPageCategoriesArray = [NSArray arrayWithObjects:
-                        [categoryDict objectForKey:SHOES_CATEGORY_DRESS_NAME], 
-                        [categoryDict objectForKey:SHOES_CATEGORY_CASUAL_NAME], 
-                        [categoryDict objectForKey:SHOES_CATEGORY_ATHLETIC_NAME], 
-                        [categoryDict objectForKey:SHOES_CATEGORY_BOOTS_NAME], 
-                        [categoryDict objectForKey:SHOES_CATEGORY_SANDALS_NAME], 
-                        [categoryDict objectForKey:SHOES_CATEGORY_SALE_NAME], 
-                        nil];
+
 }
 
 - (void)viewDidUnload
@@ -76,6 +67,13 @@
   [super viewDidUnload];
   // Release any retained subviews of the main view.
   // e.g. self.myOutlet = nil;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+  [super viewDidAppear:animated];
+  [categoryTableView reloadData];
+  
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -131,7 +129,7 @@
   //Start animation
   MyShoesAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
   
-	[userSelectedCategoriesArray addObject:[currentPageCategoriesArray objectAtIndex:indexPath.row]];
+	[userSelectedCategoriesArray replaceObjectAtIndex:1 withObject:[currentPageCategoriesArray objectAtIndex:indexPath.row]];
   
   [delegate.shoesListController setUserSelectedCategoriesArray:userSelectedCategoriesArray];
   //	//Issue the request of the selected category
