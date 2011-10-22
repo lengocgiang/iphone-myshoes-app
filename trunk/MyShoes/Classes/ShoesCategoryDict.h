@@ -10,8 +10,8 @@
 
 
 @interface ShoesCategoryDict : NSObject {
-  }
+}
 
-+ (NSMutableDictionary*) dictionary;
++ (NSMutableDictionary*)dictionary;
 
 @end

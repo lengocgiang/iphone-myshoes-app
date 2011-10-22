@@ -24,6 +24,7 @@
 @synthesize shoesPrice;
 @synthesize chooseColorLabel;
 @synthesize chooseSizeLabel;
+@synthesize shoppingCartBtn;
 @synthesize shoesBrandLogo;
 //@synthesize backgroundScrollView;
 @synthesize shoesImageScrollView;
@@ -91,7 +92,7 @@ const NSUInteger kSizeColumn = 1;
   self.networkTool = [[NetworkTool alloc] init];
   
   //Create shoes brief info view programmically
-  self.shoesBriefView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 60)];
+  self.shoesBriefView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 60)] autorelease];
   self.shoesBrandName = [[[UILabel alloc] init] autorelease];
   self.shoesPrice = [[[UILabel alloc] init] autorelease];
   self.shoesStyle = [[[UILabel alloc] init] autorelease];
@@ -117,7 +118,7 @@ const NSUInteger kSizeColumn = 1;
   
   //self.shoesImageScrollView.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5f];
   
-  self.shoesImageScrollView = [[BSPreviewScrollView alloc] initWithFrame:CGRectMake(0, 60, 320, 270)];
+  self.shoesImageScrollView = [[[BSPreviewScrollView alloc] initWithFrame:CGRectMake(0, 60, 320, 270)] autorelease];
   
   self.shoesImageScrollView.pageSize = CGSizeMake(kScrollObjWidth + kMarginX, kScrollObjHeight);
 	// Important to listen to the delegate methods.
@@ -125,7 +126,7 @@ const NSUInteger kSizeColumn = 1;
 
   [self.shoesImageScrollView setHidden:YES];
   [self.view addSubview:self.shoesImageScrollView];
-  self.chooseColor = [[UIPickerView alloc] initWithFrame:CGRectZero] ;
+  self.chooseColor = [[[UIPickerView alloc] initWithFrame:CGRectZero] autorelease];
   CGRect frame;
   
   frame.origin.x = 0;
@@ -141,9 +142,34 @@ const NSUInteger kSizeColumn = 1;
   self.chooseColor.showsSelectionIndicator = YES;
   self.chooseColor.backgroundColor = [UIColor clearColor];
   
-  self.chooseColorLabel = [[UILabel alloc] init];
+  self.chooseColorLabel = [[[UILabel alloc] init] autorelease];
   self.chooseColorLabel.frame = CGRectMake(10, 340, 50, 21);
   self.chooseColorLabel.text = @"Step 1";
+  //Add the choose shoes, step 1, 2, 3
+  [self.view addSubview:self.chooseColorLabel];
+  [self.view addSubview:self.chooseColor];
+  [self.chooseColor setHidden:YES];
+  [self.chooseColorLabel setHidden:YES];
+
+  self.shoppingCartBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];//[[[UIButton alloc] initWithFrame:CGRectMake(30, self.chooseColor.frame.origin.y + self.chooseColor.frame.size.height + 30, 260, 80)] autorelease];
+  self.shoppingCartBtn.frame = CGRectMake(30, self.chooseColor.frame.origin.y + self.chooseColor.frame.size.height + 30, 260, 40);
+  [self.shoppingCartBtn setTitle:@"add to cart" forState:UIControlStateNormal];
+  UIImage *btnImage = [UIImage imageNamed:@"shopping_cart-32.png"];
+  [self.shoppingCartBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, btnImage.size.width , 0.0 , 0.0)]; // Left inset is the negative of image width.
+  //[self.shoppingCartBtn setTitleEdgeInsets:UIEdgeInsetsMake(0.0, -btnImage.size.width, -25.0, 0.0)]; // Left inset is the negative of image width.
+  
+  [self.shoppingCartBtn setImage:btnImage forState:UIControlStateNormal];
+  [self.shoppingCartBtn setImageEdgeInsets:UIEdgeInsetsMake(0.0, 0.0, 0.0, 20)]; 
+  [self.shoppingCartBtn setBackgroundImage:[[UIImage imageNamed:@"red_button.png"] stretchableImageWithLeftCapWidth:12.0 topCapHeight:0.0] 
+                                  forState:UIControlStateNormal];
+  [self.shoppingCartBtn addTarget:self action:@selector(addtoCart:) forControlEvents:UIControlEventTouchUpInside];
+  // Right inset is the negative of text bounds width.  
+  //self.shoppingCartBtn.backgroundColor = [UIColor orangeColor];
+  //[self.shoppingCartBtn setImageEdgeInsets:UIEdgeInsetsMake(-15.0, 0.0, 0.0, -self.shoppingCartBtn.titleLabel.bounds.size.width)]; 
+  // Right inset is the negative of text 
+  self.shoppingCartBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+  [self.view addSubview:self.shoppingCartBtn];
+  [self.shoppingCartBtn setHidden:YES];
 
   //[self.chooseColor selectRow:shoes.selectedColor inComponent:0 animated:NO];
   
@@ -151,8 +177,6 @@ const NSUInteger kSizeColumn = 1;
 	CGAffineTransform s0 = CGAffineTransformMakeScale(1, 0.8);
 	CGAffineTransform t1 = CGAffineTransformMakeTranslation(-self.chooseColor.bounds.size.width/2, -self.chooseColor.bounds.size.height/2);
 	self.chooseColor.transform = CGAffineTransformConcat(t0, CGAffineTransformConcat(s0, t1));*/
-  [self.view addSubview:self.chooseColor];
-  [self.chooseColor setHidden:YES];
 
   
   shoesAllAngels = [[NSMutableArray arrayWithCapacity:SHOES_INFO_SHOESIMGS_COUNT] retain];
@@ -160,7 +184,7 @@ const NSUInteger kSizeColumn = 1;
   
   //self.contentView.frame = CGRectMake(0, 0, 320, 400);
   
-  [(UIScrollView *)self.view setContentSize:CGSizeMake(320,600)];
+  [(UIScrollView *)self.view setContentSize:CGSizeMake(320,1000)];
   ((UIScrollView *)self.view).clipsToBounds = YES;
   ((UIScrollView *)self.view).scrollEnabled = YES;
   
@@ -203,26 +227,12 @@ const NSUInteger kSizeColumn = 1;
 - (void)viewDidDisappear:(BOOL)animated {
   //Reset shoes detail view
   self.shoesBrandLogo.image = nil;
-  //[self.shoesBriefView setHidden:YES];
-  //[self.shoesBriefView removeFromSuperview];
-  //[self.chooseColor removeFromSuperview];
-  //[self.chooseColorLabel removeFromSuperview];
-  //[self.progressIndicator startAnimating];
   [shoesAllAngels removeAllObjects];
-  [self.shoesImageScrollView setHidden:YES];
-  [self.chooseColor setHidden:YES];
-  [self.shoesBriefView setHidden:YES];
-  [self.chooseColorLabel setHidden:YES];
+  [self hideShoesInfo];
 }
 
 
 - (void)dealloc {  
-  //[shoesImageScrollView release];
-  //[shoesBriefView release];
-  [chooseColorLabel release];
-  [chooseColor release];
-  [shoesImageScrollView release];
-  [shoesBriefView release];
   [shoesAllAngels release];
   [networkTool release];
   [super dealloc];
@@ -354,8 +364,6 @@ const NSUInteger kSizeColumn = 1;
   [self.shoesImageScrollView reloadPages];
   [self.shoesImageScrollView setHidden:NO];
 
-  //Add the choose shoes, step 1, 2, 3
-  [self.view addSubview:self.chooseColorLabel];
   
   //self.chooseColor.delegate = self;
   [self.chooseColor reloadAllComponents];
@@ -368,16 +376,27 @@ const NSUInteger kSizeColumn = 1;
   //[self.view addSubview:self.chooseColor];
   [self.chooseColor setHidden:NO];
   [self.chooseColorLabel setHidden:NO];
+  [self.shoppingCartBtn setHidden:NO];
+
   //[self.chooseColor setUserInteractionEnabled:YES];
   
-  self.chooseSizeLabel = [[[UILabel alloc] init] autorelease];
+  /*self.chooseSizeLabel = [[[UILabel alloc] init] autorelease];
   self.chooseSizeLabel.frame = CGRectMake(10, 365, 128, 21);
-  self.chooseSizeLabel.text = @"Step 2";
+  self.chooseSizeLabel.text = @"Step 2";*/
   //[self.view addSubview:self.chooseSizeLabel];
 
   //Disable touch until load finishes
   [self.view setUserInteractionEnabled:YES];
 
+}
+
+- (void)hideShoesInfo {
+  [self.shoesBriefView setHidden:YES];
+  [self.shoesImageScrollView setHidden:YES];
+  [self.chooseColor setHidden:YES];
+  [self.shoesBriefView setHidden:YES];
+  [self.chooseColorLabel setHidden:YES];
+  [self.shoppingCartBtn setHidden:YES];
 }
 
 #pragma mark -
@@ -444,11 +463,13 @@ const NSUInteger kSizeColumn = 1;
     //Remove previous shoes images of all angels
     [shoesAllAngels removeAllObjects];
     
-    [self.shoesBriefView setHidden:YES];
+    /*[self.shoesBriefView setHidden:YES];
     [self.shoesImageScrollView setHidden:YES];
     [self.chooseColor setHidden:YES];
     [self.shoesBriefView setHidden:YES];
     [self.chooseColorLabel setHidden:YES];
+    [self.shoppingCartBtn setHidden:YES];*/
+    [self hideShoesInfo];
     //Disable touch until load finishes
     [self.view setUserInteractionEnabled:FALSE];
     [self loadShoesDetailWithProductUrl:urlWithColor];
@@ -510,12 +531,21 @@ const NSUInteger kSizeColumn = 1;
   //retval.text = [shoes.shoesColors objectAtIndex:row];
   if(component == kColorColumn){
     retval.text = [shoes.shoesColors objectAtIndex:row];//[@"" stringByAppendingFormat:@"%d",row];
+    retval.font = [UIFont systemFontOfSize:14];
   }
   else if(component == kSizeColumn){
     retval.text = [shoes.shoesSizes objectAtIndex:row];
+    retval.font = [UIFont systemFontOfSize:10];
   }
-  retval.font = [UIFont systemFontOfSize:14];
+
   return retval;
+}
+
+#pragma mark -
+#pragma mark Add to cart button methods
+// Add the current shoes to the cart and go to shopping cart view
+- (void)addToCart {
+  
 }
 
 @end

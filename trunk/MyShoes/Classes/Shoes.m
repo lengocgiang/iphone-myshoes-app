@@ -189,6 +189,8 @@
   NSString *tmpStr = [node content];
   NSString *sku = [tmpStr substringFromIndex:[SHOES_INFO_SKU_PREFIX length]];
   
+  //Trim whitespaces
+  sku = [sku stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
   self.productSKU = [sku retain];
   
   NSString *tmpUrl;

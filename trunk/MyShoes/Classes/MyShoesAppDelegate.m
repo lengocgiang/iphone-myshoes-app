@@ -18,6 +18,7 @@
 @synthesize shoesSecondaryCategoryController;
 @synthesize shoesListController;
 @synthesize shoesDetailController;
+@synthesize shoppingCart;
 
 //@synthesize slideMenuViewController;
 //@synthesize shoesCategoryDict = _shoesCategoryDict;
@@ -91,6 +92,9 @@
   _hostReach = [[Reachability reachabilityWithHostName:MYSHOES_HOSTNAME] retain];
   [_hostReach startNotifier];
   [_hostReach release];
+  
+  //Init shopping cart object
+  shoppingCart = [[ShoppingCart alloc] init];
 
   return YES;
 }
@@ -170,6 +174,7 @@
 - (void)dealloc {
     //[viewController release];
 	//[slideMenuViewController release];
+  [shoppingCart release];
   [shoesDetailController release];
   [shoesListController release];
   [shoesCategoryController release];

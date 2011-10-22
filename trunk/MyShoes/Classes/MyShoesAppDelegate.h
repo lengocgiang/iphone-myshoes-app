@@ -15,6 +15,7 @@
 #import "ShoesSecondaryCategoryViewController.h"
 #import "ShoesListViewController.h"
 #import "ShoesDetailViewController.h"
+#import "ShoppingCart.h"
 #import "Debug.h"
 
 @class Reachability;
@@ -31,6 +32,8 @@
   ShoesSecondaryCategoryViewController *shoesSecondaryCategoryController;
 	ShoesListViewController *shoesListController;
   ShoesDetailViewController *shoesDetailController;
+  ShoppingCart *shoppingCart;
+  
   
   //Reachability object
   Reachability *_hostReach;
@@ -42,6 +45,7 @@
 @property (nonatomic, retain) ShoesSecondaryCategoryViewController *shoesSecondaryCategoryController;
 @property (nonatomic, retain) ShoesListViewController *shoesListController;
 @property (nonatomic, retain) ShoesDetailViewController *shoesDetailController;
+@property (nonatomic, retain) ShoppingCart *shoppingCart;
 
 + (BOOL) IsEnableWIFI;
 + (BOOL) IsEnable3G;

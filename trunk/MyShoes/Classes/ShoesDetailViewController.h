@@ -27,6 +27,7 @@
   
   UILabel *chooseColorLabel;
   UILabel *chooseSizeLabel;
+  UIButton *shoppingCartBtn;
   
   UIImageView *shoesBrandLogo;
   
@@ -56,6 +57,7 @@
 @property (nonatomic, retain) UILabel *shoesPrice;
 @property (nonatomic, retain) UILabel *chooseColorLabel;
 @property (nonatomic, retain) UILabel *chooseSizeLabel;
+@property (nonatomic, retain) UIButton *shoppingCartBtn;
 @property (nonatomic, retain) UIImageView *shoesBrandLogo;
 //@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *progressIndicator;
 //@property (nonatomic, retain) IBOutlet UIScrollView *backgroundScrollView;
@@ -70,7 +72,7 @@
 - (void)loadShoesDetail;
 - (void)loadShoesDetailWithProductUrl:(NSString *)url;
 - (void)renderShoesDetail;
-
+- (void)hideShoesInfo;
 //- (void)layoutScrollImages;
 
 @end

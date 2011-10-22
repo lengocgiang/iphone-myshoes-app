@@ -13,11 +13,11 @@ static NSMutableDictionary *dictionary = nil;
 
 @implementation ShoesCategoryDict
 
-+(NSMutableDictionary*) dictionary
++ (NSMutableDictionary*)dictionary
 {
   if (dictionary == nil)
   {
-    dictionary = [[NSMutableDictionary alloc] init];
+    dictionary = [[[NSMutableDictionary alloc] init] autorelease];
     //Setup category for women
     ShoesCategory *category = [[[ShoesCategory alloc] initWithName:SHOES_CATEGORY_WOMEN_NAME/* andXPath:SHOES_CATEGORY_WOMEN_XPATH*/] autorelease];
     category.categoryURI = SHOES_CATEGORY_WOMEN_URI;
@@ -90,12 +90,12 @@ static NSMutableDictionary *dictionary = nil;
   return dictionary;
 }
 
-+ (id)allocWithZone:(NSZone *)zone
+/*+ (id)allocWithZone:(NSZone *)zone
 {
   return [[self dictionary] retain];
-}
+}*/
 
-- (id)copyWithZone:(NSZone *)zone
+/*- (id)copyWithZone:(NSZone *)zone
 {
   return self;
 }
@@ -110,7 +110,7 @@ static NSMutableDictionary *dictionary = nil;
   return NSUIntegerMax;  //denotes an object that cannot be released
 }
 
-- (void)release
+- (oneway void)release
 {
   //do nothing
 }
@@ -118,5 +118,5 @@ static NSMutableDictionary *dictionary = nil;
 - (id)autorelease
 {
   return self;
-}
+}*/
 @end
