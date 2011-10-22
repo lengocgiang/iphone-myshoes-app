@@ -294,8 +294,17 @@ const NSUInteger kSizeColumn = 1;
     
   }
   
+  //Process count of shoes images of all angels info
+	elements  = [xpathParser search:SHOES_DETAIL_SHOES_IMAGES_ALLANGEL];
+  
+  if((elements != nil) && ([elements count] > 0)){
+    [shoes processShoesImagesCount:elements];
+    
+  }
+
+  
   //Process shoes images of all angels
-	elements  = [xpathParser search:SHOES_DETAIL_SHOES_IMAGES_ALLANGELS];
+	elements  = [xpathParser search:SHOES_DETAIL_SHOES_IMAGES_LARGE];
   
   if((elements != nil) && ([elements count] > 0)){
     [shoes processShoesImagesAllAngels:[elements objectAtIndex:0]];

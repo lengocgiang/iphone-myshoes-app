@@ -14,7 +14,15 @@
 - (void)reloadPages {
   
   int pageCount = [delegate itemCount:self];
+  
+  //Clean all previous views
+  for (UIView *subview in scrollView.subviews) {
+    [subview removeFromSuperview];
+  }
+  
+  [scrollViewPages removeAllObjects];
   [scrollViewPages release];
+  
   scrollViewPages = [[NSMutableArray alloc] initWithCapacity:pageCount];
   
   // Fill our pages collection with empty placeholders

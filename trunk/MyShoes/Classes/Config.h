@@ -95,7 +95,9 @@
 #define SHOES_DETAIL_BRANDLOGO_IMG_XPATH @"//img[@id='ctl00_cphPageMain_BrandAndPrice1_imgLogo']"
 #define SHOES_DETAIL_AVAILABLE_COLORS_XPATH @"//select[@id='ctl00_cphPageMain_ProductSelection2_ddlColor']"
 #define SHOES_DETAIL_AVAILABLE_SIZES_XPATH @"//select[@id='ctl00_cphPageMain_ProductSelection2_ddlSizeAndWidth']"
-#define SHOES_DETAIL_SHOES_IMAGES_ALLANGELS @"//img[@id='ctl00_cphPageMain_ImageMultiView1_imgLargeDisplay']"
+#define SHOES_DETAIL_SHOES_IMAGES_LARGE @"//img[@id='ctl00_cphPageMain_ImageMultiView1_imgLargeDisplay']"
+#define SHOES_DETAIL_SHOES_IMAGES_ALLANGEL @"//div[@class='multThumbs']"
+//#define SHOES_DETAIL_SHOES_IMAGES_ALLANGEL_DEFAULT 8
 //#define SHOES_CATEGORY_PRODUCT_LIST_XPATH @"//*[@id='ResultZone2_wrapper']//div[@style='height: auto;']"
 #define CATEGORY_SHOES_COUNT 12
 

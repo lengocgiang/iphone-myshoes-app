@@ -28,6 +28,7 @@
 @synthesize productColor = _productColor;
 @synthesize productSKU = _productSKU;
 @synthesize shoesImgsAllAngle = _shoesImgsAllAngle;
+@synthesize shoesImgsCount = _shoesImgsCount;
 @synthesize productBrandName = _productBrandName;
 @synthesize productBrandLogo = _productBrandLogo;
 @synthesize shoesColors = _shoesColors;
@@ -204,18 +205,23 @@
   [self.shoesImgsAllAngle release];
   self.shoesImgsAllAngle = [[NSArray arrayWithArray:imgArray] retain];*/
 }
+- (void)processShoesImagesCount:(NSArray *)elements {
+  NSUInteger tmpCount =  [elements count];
+  
+  self.shoesImgsCount = tmpCount;
+}
 
 - (void)processShoesImagesAllAngels:(TFHppleElement *)node {
   NSString *tmpStr = [node objectForKey:SRC_TAG];
   
   @try{
-    NSRange range1 = [tmpStr rangeOfString:SHOES_INFO_SHOESIMGS_ALLANGLE_URIPREFIX];
+    NSRange range1 = [tmpStr rangeOfString:SHOES_INFO_SHOESIMGS_ALLANGLE_URIPREFIX options:NSCaseInsensitiveSearch];
     //NSRange range2 = [tmpStr rangeOfString:@"."];
     //Processing "/ProductImages/shoes_if07165.jpg"
     //Target is 07165
     tmpStr = [tmpStr substringFromIndex:range1.location + range1.length + 1];
     
-    range1 = [tmpStr rangeOfString:@"."];
+    range1 = [tmpStr rangeOfString:SHOES_INFO_SHOESIMGS_FILE_SURFIX options:NSCaseInsensitiveSearch];
     tmpStr = [tmpStr substringToIndex:range1.location];
   }
   @catch ( NSException *e ){
@@ -224,7 +230,7 @@
   
   NSString *tmpUrl;
   NSMutableArray *imgArray = [NSMutableArray arrayWithCapacity:SHOES_INFO_SHOESIMGS_COUNT];
-  for (char i=97; i <= 104; i++){
+  for (char i=97; i < 97 + self.shoesImgsCount; i++){
     tmpUrl = [NSString stringWithFormat:@"%@%c%@%@", SHOES_INFO_SHOESIMGS_ALLANGLE_URIPREFIX,
               i, tmpStr, SHOES_INFO_SHOESIMGS_FILE_SURFIX];
     [imgArray addObject:tmpUrl];

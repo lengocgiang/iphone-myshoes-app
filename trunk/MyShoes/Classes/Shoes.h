@@ -42,6 +42,7 @@
   NSString *_productSKU;
   
   NSArray *_shoesImgsAllAngle;
+  NSUInteger _shoesImgsCount;
   NSString *_productBrandLogo;
   
   NSArray *_shoesColors;
@@ -70,6 +71,7 @@
 @property (nonatomic, retain) NSString *productBrandName;
 @property (nonatomic, retain) NSString *productSKU;
 @property (nonatomic, retain) NSArray *shoesImgsAllAngle;
+@property (nonatomic, assign) NSUInteger shoesImgsCount;
 @property (nonatomic, retain) NSString *productBrandLogo;
 @property (nonatomic, retain) NSArray *shoesColors;
 @property (nonatomic, retain) NSArray *shoesSizes;
@@ -82,6 +84,7 @@
 - (void)processProductImage:(TFHppleElement *)node;
 - (void)processBrandTitleColor:(TFHppleElement *)node;
 - (void)processProductSKU:(TFHppleElement *)node;
+- (void)processShoesImagesCount:(NSArray *)elements;
 - (void)processShoesImagesAllAngels:(TFHppleElement *)node;
 - (void)processProductBrandLogo:(TFHppleElement *)node;
 - (void)processShoesColors:(TFHppleElement *)node;
