@@ -35,11 +35,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Classes/Shoes.m"
-         timestampString = "340958258.887675"
+         timestampString = "340969730.365885"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "342"
-         endingLineNumber = "342">
+         startingLineNumber = "372"
+         endingLineNumber = "372">
       </FileBreakpoint>
    </FileBreakpoints>
    <SymbolicBreakpoints>

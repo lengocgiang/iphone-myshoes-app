@@ -185,7 +185,7 @@
 //Process shoes image of all angel
 //It's shoes_iaEC1148271.jpg to shoes_ihEC1148271.jpg for large image
 //And shoes_i1EC1148271.jpg to shoes_i8EC1148271.jpg for small image
-- (void)processProductSKU:(TFHppleElement *)node{
+- (void)processProductSKU:(TFHppleElement *)node {
   NSString *tmpStr = [node content];
   NSString *sku = [tmpStr substringFromIndex:[SHOES_INFO_SKU_PREFIX length]];
   
@@ -193,7 +193,7 @@
   sku = [sku stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
   self.productSKU = [sku retain];
   
-  NSString *tmpUrl;
+  /*NSString *tmpUrl;
   NSMutableArray *imgArray = [NSMutableArray arrayWithCapacity:SHOES_INFO_SHOESIMGS_COUNT];
   for (char i=97; i <= 104; i++){
     tmpUrl = [NSString stringWithFormat:@"%@%c%@%@", SHOES_INFO_SHOESIMGS_ALLANGLE_URIPREFIX,
@@ -202,10 +202,40 @@
   }
   
   [self.shoesImgsAllAngle release];
+  self.shoesImgsAllAngle = [[NSArray arrayWithArray:imgArray] retain];*/
+}
+
+- (void)processShoesImagesAllAngels:(TFHppleElement *)node {
+  NSString *tmpStr = [node objectForKey:SRC_TAG];
+  
+  @try{
+    NSRange range1 = [tmpStr rangeOfString:SHOES_INFO_SHOESIMGS_ALLANGLE_URIPREFIX];
+    //NSRange range2 = [tmpStr rangeOfString:@"."];
+    //Processing "/ProductImages/shoes_if07165.jpg"
+    //Target is 07165
+    tmpStr = [tmpStr substringFromIndex:range1.location + range1.length + 1];
+    
+    range1 = [tmpStr rangeOfString:@"."];
+    tmpStr = [tmpStr substringToIndex:range1.location];
+  }
+  @catch ( NSException *e ){
+    tmpStr = self.productSKU;
+  }
+  
+  NSString *tmpUrl;
+  NSMutableArray *imgArray = [NSMutableArray arrayWithCapacity:SHOES_INFO_SHOESIMGS_COUNT];
+  for (char i=97; i <= 104; i++){
+    tmpUrl = [NSString stringWithFormat:@"%@%c%@%@", SHOES_INFO_SHOESIMGS_ALLANGLE_URIPREFIX,
+              i, tmpStr, SHOES_INFO_SHOESIMGS_FILE_SURFIX];
+    [imgArray addObject:tmpUrl];
+  }
+  
+  [self.shoesImgsAllAngle release];
   self.shoesImgsAllAngle = [[NSArray arrayWithArray:imgArray] retain];
 }
 
-- (void)processProductBrandLogo:(TFHppleElement *)node{
+
+- (void)processProductBrandLogo:(TFHppleElement *)node {
   //NSLog(@"This is a function of shoes");
   /*NSArray *childElements  = [node childNodes];
   if([childElements count] <= 0){

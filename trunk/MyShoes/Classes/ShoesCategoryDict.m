@@ -17,7 +17,7 @@ static NSMutableDictionary *dictionary = nil;
 {
   if (dictionary == nil)
   {
-    dictionary = [[[NSMutableDictionary alloc] init] autorelease];
+    dictionary = [[NSMutableDictionary alloc] init];
     //Setup category for women
     ShoesCategory *category = [[[ShoesCategory alloc] initWithName:SHOES_CATEGORY_WOMEN_NAME/* andXPath:SHOES_CATEGORY_WOMEN_XPATH*/] autorelease];
     category.categoryURI = SHOES_CATEGORY_WOMEN_URI;

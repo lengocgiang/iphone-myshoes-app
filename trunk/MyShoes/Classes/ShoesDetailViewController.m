@@ -152,7 +152,7 @@ const NSUInteger kSizeColumn = 1;
   [self.chooseColorLabel setHidden:YES];
 
   self.shoppingCartBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];//[[[UIButton alloc] initWithFrame:CGRectMake(30, self.chooseColor.frame.origin.y + self.chooseColor.frame.size.height + 30, 260, 80)] autorelease];
-  self.shoppingCartBtn.frame = CGRectMake(30, self.chooseColor.frame.origin.y + self.chooseColor.frame.size.height + 30, 260, 40);
+  self.shoppingCartBtn.frame = CGRectMake(30, self.chooseColor.frame.origin.y + self.chooseColor.frame.size.height + 20, 260, 40);
   [self.shoppingCartBtn setTitle:@"add to cart" forState:UIControlStateNormal];
   UIImage *btnImage = [UIImage imageNamed:@"shopping_cart-32.png"];
   [self.shoppingCartBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, btnImage.size.width , 0.0 , 0.0)]; // Left inset is the negative of image width.
@@ -184,7 +184,7 @@ const NSUInteger kSizeColumn = 1;
   
   //self.contentView.frame = CGRectMake(0, 0, 320, 400);
   
-  [(UIScrollView *)self.view setContentSize:CGSizeMake(320,1000)];
+  [(UIScrollView *)self.view setContentSize:CGSizeMake(320,660)];
   ((UIScrollView *)self.view).clipsToBounds = YES;
   ((UIScrollView *)self.view).scrollEnabled = YES;
   
@@ -292,18 +292,27 @@ const NSUInteger kSizeColumn = 1;
   if((elements != nil) && ([elements count] > 0)){
     [shoes processProductSKU:[elements objectAtIndex:0]];
     
+  }
+  
+  //Process shoes images of all angels
+	elements  = [xpathParser search:SHOES_DETAIL_SHOES_IMAGES_ALLANGELS];
+  
+  if((elements != nil) && ([elements count] > 0)){
+    [shoes processShoesImagesAllAngels:[elements objectAtIndex:0]];
+    
     //Load shoes images with all angels
     for (NSString *str in shoes.shoesImgsAllAngle){
       //NSString *imgName = [shoes.shoesImgsAllAngle objectAtIndex:index]; 
       NSString *imageUrl = [NSString stringWithFormat:@"%@%@",MYSHOES_URL,str];
-    
+      
       NSURL *url = [NSURL URLWithString:imageUrl];
       //NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
-    
+      
       UIImage *image = [UIImage imageWithData: [NSData dataWithContentsOfURL: url]];
       [shoesAllAngels addObject:image];
     }
   }
+
 	
   //Process shoes brand logo img info
   

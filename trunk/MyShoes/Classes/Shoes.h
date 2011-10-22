@@ -82,6 +82,7 @@
 - (void)processProductImage:(TFHppleElement *)node;
 - (void)processBrandTitleColor:(TFHppleElement *)node;
 - (void)processProductSKU:(TFHppleElement *)node;
+- (void)processShoesImagesAllAngels:(TFHppleElement *)node;
 - (void)processProductBrandLogo:(TFHppleElement *)node;
 - (void)processShoesColors:(TFHppleElement *)node;
 - (void)processShoesSizes:(TFHppleElement *)node;
