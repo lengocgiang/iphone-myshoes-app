@@ -35,11 +35,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Classes/Shoes.m"
-         timestampString = "340972014.469041"
+         timestampString = "341044019.755415"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "378"
-         endingLineNumber = "378">
+         startingLineNumber = "431"
+         endingLineNumber = "431">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
@@ -47,11 +47,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Classes/ShoesDetailViewController.m"
-         timestampString = "341030675.283585"
+         timestampString = "341044019.755415"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "568"
-         endingLineNumber = "568"
+         startingLineNumber = "576"
+         endingLineNumber = "576"
          landmarkName = "-addToCart"
          landmarkType = "5">
       </FileBreakpoint>

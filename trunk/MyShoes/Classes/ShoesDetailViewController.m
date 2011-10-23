@@ -262,6 +262,8 @@ const NSUInteger kSizeColumn = 1;
     newUrl = [NSString stringWithFormat:@"%@%@",MYSHOES_URL,shoes.productDetailLink];    
   }
   else{
+    //Update product detail link
+    shoes.productDetailLink = url;
     newUrl = [NSString stringWithFormat:@"%@%@",MYSHOES_URL,url];  
   }
 
@@ -322,8 +324,7 @@ const NSUInteger kSizeColumn = 1;
       [shoesAllAngels addObject:image];
     }
   }
-
-	
+  
   //Process shoes brand logo img info
   
   elements = [xpathParser search:SHOES_DETAIL_BRANDLOGO_IMG_XPATH];
@@ -331,13 +332,20 @@ const NSUInteger kSizeColumn = 1;
     [shoes processProductBrandLogo:[elements objectAtIndex:0]];
   }
   
-  //Process available shoes colors info
+  //Process available shoes colors info and update the current color
   
   elements = [xpathParser search:SHOES_DETAIL_AVAILABLE_COLORS_XPATH];
   if((elements != nil) && ([elements count] > 0)){
     [shoes processShoesColors:[elements objectAtIndex:0]];
   }
   
+  //Process and update shoes price in case the same model with difference color have the different price
+  
+  elements = [xpathParser search:SHOES_DETAIL_SHOES_PRICE];
+  if((elements != nil) && ([elements count] > 0)){
+    [shoes processShoesPrice:[elements objectAtIndex:0]];
+  }
+    
   //Process available shoes size info
   
   elements = [xpathParser search:SHOES_DETAIL_AVAILABLE_SIZES_XPATH];
@@ -490,6 +498,9 @@ const NSUInteger kSizeColumn = 1;
       //The first row of size is just a reminder. It should be ignored
       return;
     }
+    
+    //Set shoes size
+    shoes.selectedSize = row;
     [self.shoppingCartBtn setEnabled:YES];
   }
 

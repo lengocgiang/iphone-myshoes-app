@@ -181,6 +181,8 @@
   }
 }
 
+#pragma mark -
+#pragma mark update shoes properties methods called from ShoesDetailViewController
 
 //Process SKU
 //Process shoes image of all angel
@@ -279,6 +281,10 @@
     [colorsArray addObject:colorName];
     if([[child objectForKey:SELECTD_TAG] isEqualToString:SELECTD_TAG]){
       _selectedColor = i;
+      
+      //update the current shoes color
+      [self.productColor release];
+      self.productColor = [colorName retain];
     }
     
     //Process url with color
@@ -340,6 +346,52 @@
   self.shoesSizesValue= [[NSArray arrayWithArray:sizesValueArray] retain];
 }
 
+//Update shoes price and price currency
+- (void)processShoesPrice:(TFHppleElement *)node {
+
+  NSDictionary *attributes = [node attributes];
+  NSString *pricePrefix = [node objectForKey:@"class"];
+  NSString *priceAttribute;
+  
+  NSArray *keys = [attributes allKeys];
+  NSRange textRange;
+  
+  for(NSString* key in keys){
+    textRange =[[key lowercaseString] rangeOfString:[pricePrefix lowercaseString]];
+    
+    if(textRange.location != NSNotFound)
+    {
+      priceAttribute = key;
+      break;
+    }
+  }
+  
+  //If price attribute is nil, won't update the price
+  if (priceAttribute == nil){
+    return;
+  }
+  
+  [self.productPrice release];
+  
+  NSString *str;
+  str = [node objectForKey:priceAttribute];
+  self.productPrice = [str retain];
+  
+  @try{
+    //Update price currency
+    str = [priceAttribute substringFromIndex:(textRange.location+textRange.length + 1)];
+    [self.productPriceCurrency release];
+    self.productPriceCurrency = [str retain];
+  }
+  @catch (NSException *e) {
+    //In case of any exception, won't update price currentcy
+    return;
+  }
+}
+
+#pragma mark -
+#pragma mark dealloc methods
+
 - (void)dealloc {
 	//release all objects here
 	//[_pID release];
@@ -352,6 +404,7 @@
   [_shoesImgsAllAngle release];
   [_productSKU release];
   [_productSalesmessaging release];
+  [_productPriceCurrency release];
   [_productPrice release];
   [_productDetailLink release];
   [_shoesImageName release];
