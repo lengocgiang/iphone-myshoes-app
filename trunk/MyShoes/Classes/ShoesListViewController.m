@@ -545,25 +545,7 @@
 		// Register for the notification
 		[[NSNotificationCenter defaultCenter] addObserver:self
 												 selector:@selector(employeeDataReceived:)
-													 name:@"WebServiceCallCompleted" object:nil];
-		
-		// Unhide the spinner, and start animating it.
-//		[self.loadMoreSearchResultsCell.loadMoreIndicator startAnimating];
-//		self.loadMoreSearchResultsCell.loadMoreLabel.text = @"";
-//		self.loadMoreSearchResultsCell.loadMoreLabel2.text = @"Loading...";
-//		
-//		// Start the connection...
-//		[self.webServiceDataModel getNextSearchResultsPage];
-//		
-//		// Disable user interaction if/when the loading/search results view appears.
-//		[self.tableView setUserInteractionEnabled:NO];
-//		
-//		// Unhighlight the load more button after it has been tapped.
-//		NSIndexPath* selection = [self.tableView indexPathForSelectedRow];
-//		if (selection)
-//			[self.tableView deselectRowAtIndexPath:selection animated:YES];
-        
-        
+													 name:@"WebServiceCallCompleted" object:nil];        
 	} else {
         
 		// Slide in the a details view.

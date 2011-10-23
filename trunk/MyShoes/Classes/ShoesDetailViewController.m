@@ -10,6 +10,7 @@
 #import "TFHpple.h"
 #import "TFHppleElement+AccessChildren.h"
 #import "MyShoesAppDelegate.h"
+#import "ShoppingCart.h"
 #import <QuartzCore/QuartzCore.h>
 
 
@@ -162,7 +163,7 @@ const NSUInteger kSizeColumn = 1;
   [self.shoppingCartBtn setImageEdgeInsets:UIEdgeInsetsMake(0.0, 0.0, 0.0, 20)]; 
   [self.shoppingCartBtn setBackgroundImage:[[UIImage imageNamed:@"red_button.png"] stretchableImageWithLeftCapWidth:12.0 topCapHeight:0.0] 
                                   forState:UIControlStateNormal];
-  [self.shoppingCartBtn addTarget:self action:@selector(addtoCart:) forControlEvents:UIControlEventTouchUpInside];
+  [self.shoppingCartBtn addTarget:self action:@selector(addToCart) forControlEvents:UIControlEventTouchUpInside];
   // Right inset is the negative of text bounds width.  
   //self.shoppingCartBtn.backgroundColor = [UIColor orangeColor];
   //[self.shoppingCartBtn setImageEdgeInsets:UIEdgeInsetsMake(-15.0, 0.0, 0.0, -self.shoppingCartBtn.titleLabel.bounds.size.width)]; 
@@ -395,14 +396,11 @@ const NSUInteger kSizeColumn = 1;
   [self.chooseColor setHidden:NO];
   [self.chooseColorLabel setHidden:NO];
   [self.shoppingCartBtn setHidden:NO];
-
-  //[self.chooseColor setUserInteractionEnabled:YES];
   
-  /*self.chooseSizeLabel = [[[UILabel alloc] init] autorelease];
-  self.chooseSizeLabel.frame = CGRectMake(10, 365, 128, 21);
-  self.chooseSizeLabel.text = @"Step 2";*/
-  //[self.view addSubview:self.chooseSizeLabel];
-
+  //Disable add to cart btn. It can be clicked only after users choose shoes color and size
+  [self.shoppingCartBtn setEnabled:NO];
+  [self.shoppingCartBtn setHidden:NO];
+  
   //Disable touch until load finishes
   [self.view setUserInteractionEnabled:YES];
 
@@ -481,18 +479,20 @@ const NSUInteger kSizeColumn = 1;
     //Remove previous shoes images of all angels
     [shoesAllAngels removeAllObjects];
     
-    /*[self.shoesBriefView setHidden:YES];
-    [self.shoesImageScrollView setHidden:YES];
-    [self.chooseColor setHidden:YES];
-    [self.shoesBriefView setHidden:YES];
-    [self.chooseColorLabel setHidden:YES];
-    [self.shoppingCartBtn setHidden:YES];*/
     [self hideShoesInfo];
     //Disable touch until load finishes
     [self.view setUserInteractionEnabled:FALSE];
     [self loadShoesDetailWithProductUrl:urlWithColor];
     
   }
+  else if(component == kSizeColumn){//Should enable add to shopping cart button if size is choosed
+    if (row == 0){
+      //The first row of size is just a reminder. It should be ignored
+      return;
+    }
+    [self.shoppingCartBtn setEnabled:YES];
+  }
+
 }
 
 // tell the picker how many rows are available for a given component
@@ -564,6 +564,16 @@ const NSUInteger kSizeColumn = 1;
 // Add the current shoes to the cart and go to shopping cart view
 - (void)addToCart {
   
+  //Locate the shopping cart object in MyShoesApplicationDelegate
+  id delegate = [[UIApplication sharedApplication] delegate];
+  
+  ShoppingCart *shoppingCart;
+  if ([delegate respondsToSelector:@selector(shoppingCart)]){
+    shoppingCart = [delegate shoppingCart];
+  }
+  
+  //Add the selected shoes object to shopping cart
+  [shoppingCart addToCart:shoes]; 
 }
 
 @end

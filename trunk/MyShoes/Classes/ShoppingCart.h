@@ -18,7 +18,10 @@
   NSMutableArray *shoesQuantity;
 }
 
-@property (nonatomic, retain) NSMutableArray *shoesArray;
-@property (nonatomic, retain) NSMutableArray *shoesQuantity;
+//@property (nonatomic, retain) NSMutableArray *shoesArray;
+//@property (nonatomic, retain) NSMutableArray *shoesQuantity;
+
+- (void)addToCart:(Shoes *)shoes;
+- (void)addToCart:(Shoes *)shoes andQuantitiy:(NSUInteger)quantity;
 
 @end

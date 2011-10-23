@@ -11,8 +11,8 @@
 
 @implementation ShoppingCart
 
-@synthesize shoesArray;
-@synthesize shoesQuantity;
+//@synthesize shoesArray;
+//@synthesize shoesQuantity;
 
 - (id)init {
 	//Initialize the two arrays to accept user's order
@@ -23,6 +23,16 @@
 	}
 	return self;
 }
+
+- (void)addToCart:(Shoes *)shoes {
+  [self addToCart:shoes andQuantitiy:1];
+}
+
+- (void)addToCart:(Shoes *)shoes andQuantitiy:(NSUInteger)quantity {
+  [shoesArray addObject:shoes];
+  [shoesQuantity addObject:[NSNumber numberWithInt:quantity]];
+}
+
 
 - (void)dealloc {
   [shoesQuantity release];

@@ -31,6 +31,6 @@
 @property (nonatomic, retain) NetworkTool *cu;
 
 - (id)init;
-- (id)initWithCategories:(NSDictionary*) dict;
+- (id)initWithCategories:(NSDictionary*)dict;
 
 @end
