@@ -11,6 +11,7 @@
 #import "TFHppleElement+AccessChildren.h"
 #import "MyShoesAppDelegate.h"
 #import "ShoppingCart.h"
+#import "ShoppingCartViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
 
@@ -496,6 +497,7 @@ const NSUInteger kSizeColumn = 1;
   else if(component == kSizeColumn){//Should enable add to shopping cart button if size is choosed
     if (row == 0){
       //The first row of size is just a reminder. It should be ignored
+      [self.shoppingCartBtn setEnabled:NO];
       return;
     }
     
@@ -576,7 +578,7 @@ const NSUInteger kSizeColumn = 1;
 - (void)addToCart {
   
   //Locate the shopping cart object in MyShoesApplicationDelegate
-  id delegate = [[UIApplication sharedApplication] delegate];
+  MyShoesAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
   
   ShoppingCart *shoppingCart;
   if ([delegate respondsToSelector:@selector(shoppingCart)]){
@@ -584,7 +586,11 @@ const NSUInteger kSizeColumn = 1;
   }
   
   //Add the selected shoes object to shopping cart
-  [shoppingCart addToCart:shoes]; 
+  [shoppingCart addToCart:shoes];
+  
+  //Go to shopping cart view
+  [self.navigationController pushViewController:delegate.shoppingCartController animated:YES];
+  
 }
 
 @end

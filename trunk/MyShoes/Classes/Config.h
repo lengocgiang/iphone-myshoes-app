@@ -48,6 +48,8 @@
 #define SECONDARY_CATEGORY_NAV_TITLE_NAME @"SecondaryCategory"
 #define SHOESLIST_NAV_TITLE_NAME @"Shoes List"
 
+#define CART_NAV_TITLE_NAME @"Shopping Cart"
+
 #define SHOES_CATEGORY_WOMEN_NAME @"Womens"
 #define SHOES_CATEGORY_MEN_NAME @"Mens"
 #define SHOES_CATEGORY_GIRLS_NAME @"Kids-Girls"

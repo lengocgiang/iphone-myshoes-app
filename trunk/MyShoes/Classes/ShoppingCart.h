@@ -23,5 +23,8 @@
 
 - (void)addToCart:(Shoes *)shoes;
 - (void)addToCart:(Shoes *)shoes andQuantitiy:(NSUInteger)quantity;
+- (NSUInteger)getCount;
+- (id)getShoesAtIndex:(NSUInteger)index;
+- (NSUInteger)getQuantity:(NSUInteger)index;
 
 @end

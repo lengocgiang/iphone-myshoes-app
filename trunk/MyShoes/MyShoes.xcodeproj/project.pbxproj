@@ -50,6 +50,8 @@
 		B0EE6B811391D3D30023FD4A /* ShoesTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = B0EE6B801391D3D30023FD4A /* ShoesTableView.m */; };
 		B0EE6B861391D95C0023FD4A /* ShoesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = B0EE6B831391D95C0023FD4A /* ShoesDataSource.m */; };
 		B0EE6B891391E1C50023FD4A /* ShoesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B0EE6B871391E1C40023FD4A /* ShoesTableViewCell.m */; };
+		B0F067C914560FB400659B05 /* ShoppingCartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0F067C714560FB400659B05 /* ShoppingCartViewController.m */; };
+		B0F067CA14560FB400659B05 /* ShoppingCartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0F067C814560FB400659B05 /* ShoppingCartViewController.xib */; };
 		B0F63C671426AA4F0017CC02 /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = B0F63C651426AA4F0017CC02 /* home.png */; };
 		B0F63C681426AA4F0017CC02 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = B0F63C661426AA4F0017CC02 /* settings.png */; };
 		B0F63C6A1426B13E0017CC02 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B0F63C691426B13E0017CC02 /* Icon.png */; };
@@ -139,6 +141,9 @@
 		B0EE6B851391D95C0023FD4A /* ShoesDataSourceProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShoesDataSourceProtocol.h; path = Classes/ShoesDataSourceProtocol.h; sourceTree = "<group>"; };
 		B0EE6B871391E1C40023FD4A /* ShoesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoesTableViewCell.m; sourceTree = "<group>"; };
 		B0EE6B881391E1C50023FD4A /* ShoesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoesTableViewCell.h; sourceTree = "<group>"; };
+		B0F067C614560FB400659B05 /* ShoppingCartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoppingCartViewController.h; sourceTree = "<group>"; };
+		B0F067C714560FB400659B05 /* ShoppingCartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoppingCartViewController.m; sourceTree = "<group>"; };
+		B0F067C814560FB400659B05 /* ShoppingCartViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ShoppingCartViewController.xib; path = Classes/ShoppingCartViewController.xib; sourceTree = "<group>"; };
 		B0F63C651426AA4F0017CC02 /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
 		B0F63C661426AA4F0017CC02 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings.png; sourceTree = "<group>"; };
 		B0F63C691426B13E0017CC02 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
@@ -220,6 +225,8 @@
 				B0EE004B142D6FCC008A1131 /* ShoesListViewCell.m */,
 				B0ADDBFF1316FEEE00B34625 /* ShoesDetailViewController.h */,
 				B0ADDC001316FEEE00B34625 /* ShoesDetailViewController.m */,
+				B0F067C614560FB400659B05 /* ShoppingCartViewController.h */,
+				B0F067C714560FB400659B05 /* ShoppingCartViewController.m */,
 				B0EDFEF4144950DF0026EC99 /* BSPreviewScrollView+ReloadPages.h */,
 				B0EDFEF5144950DF0026EC99 /* BSPreviewScrollView+ReloadPages.m */,
 			);
@@ -270,8 +277,9 @@
 				B0C4BE0E142C3CB600070F39 /* ShoesCategoryViewController.xib */,
 				B0EE004F142DB570008A1131 /* ShoesListViewController.xib */,
 				B0ADDC011316FEEE00B34625 /* ShoesDetailViewController.xib */,
-				8D1107310486CEB800E47090 /* MyShoes-Info.plist */,
 				0AA8BD0014452FAA00FA1B2D /* ShoesSecondaryCategoryViewController.xib */,
+				B0F067C814560FB400659B05 /* ShoppingCartViewController.xib */,
+				8D1107310486CEB800E47090 /* MyShoes-Info.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -425,6 +433,7 @@
 				0AA8BD0114452FAA00FA1B2D /* ShoesSecondaryCategoryViewController.xib in Resources */,
 				B0E29F61144ABA8C00024086 /* shopping_cart-32.png in Resources */,
 				B063EC41144CDC5F006E0FA9 /* red_button.png in Resources */,
+				B0F067CA14560FB400659B05 /* ShoppingCartViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -467,6 +476,7 @@
 				B0F798AE1447FCF3004EF0E9 /* BSPreviewScrollView.m in Sources */,
 				B0EDFEF6144950DF0026EC99 /* BSPreviewScrollView+ReloadPages.m in Sources */,
 				B0E59BA2144E9F810084AED5 /* ShoppingCart.m in Sources */,
+				B0F067C914560FB400659B05 /* ShoppingCartViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

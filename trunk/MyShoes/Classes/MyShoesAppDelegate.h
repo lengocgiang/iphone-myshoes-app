@@ -15,6 +15,7 @@
 #import "ShoesSecondaryCategoryViewController.h"
 #import "ShoesListViewController.h"
 #import "ShoesDetailViewController.h"
+#import "ShoppingCartViewController.h"
 #import "ShoppingCart.h"
 #import "Debug.h"
 
@@ -32,6 +33,7 @@
   ShoesSecondaryCategoryViewController *shoesSecondaryCategoryController;
 	ShoesListViewController *shoesListController;
   ShoesDetailViewController *shoesDetailController;
+  ShoppingCartViewController *shoppingCartController;
   ShoppingCart *shoppingCart;
   
   
@@ -45,6 +47,7 @@
 @property (nonatomic, retain) ShoesSecondaryCategoryViewController *shoesSecondaryCategoryController;
 @property (nonatomic, retain) ShoesListViewController *shoesListController;
 @property (nonatomic, retain) ShoesDetailViewController *shoesDetailController;
+@property (nonatomic, retain) ShoppingCartViewController *shoppingCartController;
 @property (nonatomic, retain) ShoppingCart *shoppingCart;
 
 + (BOOL) IsEnableWIFI;

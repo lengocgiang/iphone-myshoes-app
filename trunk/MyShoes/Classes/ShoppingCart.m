@@ -33,6 +33,20 @@
   [shoesQuantity addObject:[NSNumber numberWithInt:quantity]];
 }
 
+- (NSUInteger)getCount {
+  return [shoesArray count];
+}
+
+- (id)getShoesAtIndex:(NSUInteger)index {
+  return [shoesArray objectAtIndex:index];
+}
+
+- (NSUInteger)getQuantity:(NSUInteger)index {
+  NSNumber *number;
+  number = [shoesQuantity objectAtIndex:index];
+  
+  return [number unsignedIntValue];
+}
 
 - (void)dealloc {
   [shoesQuantity release];

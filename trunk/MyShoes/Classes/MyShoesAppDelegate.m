@@ -18,6 +18,7 @@
 @synthesize shoesSecondaryCategoryController;
 @synthesize shoesListController;
 @synthesize shoesDetailController;
+@synthesize shoppingCartController;
 @synthesize shoppingCart;
 
 //@synthesize slideMenuViewController;
@@ -51,6 +52,12 @@
   shoesDetailController = [[ShoesDetailViewController alloc]
                               initWithNibName:@"ShoesDetailViewController"
                                        bundle:nil];
+  
+  shoppingCartController = [[ShoppingCartViewController alloc]
+                           initWithNibName:@"ShoppingCartViewController"
+                           bundle:nil];
+  shoppingCartController.title = CART_NAV_TITLE_NAME;
+
 
   //shoesDetailController.title = 
   //Add tabBar Controller

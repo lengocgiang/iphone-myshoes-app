@@ -427,13 +427,14 @@
   [_shoesCategoryDict release];
   [_imageArray release];
   [_shoesArray release];
+  [networkTool release];
   
   [super dealloc];
 }
 
 #pragma mark Table view methods
 
-//Two sections here
+//Only one section here
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
   return 1;
 }
