@@ -36,22 +36,22 @@
 
 - (void)viewDidLoad
 {
-  [super viewDidLoad];
+    [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-  
-  // Do any additional setup after loading the view from its nib.
-  shoppingCartListView = [[[UITableView alloc] initWithFrame:CGRectMake(0.0f,0.0f,320.0f,400.0f) style:UITableViewStylePlain] autorelease];
-  shoppingCartListView.delegate = self;
-  shoppingCartListView.dataSource = self;
-  
-  shoppingCartListView.backgroundColor = [UIColor clearColor];
-  
-  [self.view addSubview:shoppingCartListView];
-  
-
-  
-  self.networkTool = [[NetworkTool alloc] init];
-
+    
+    // Do any additional setup after loading the view from its nib.
+    shoppingCartListView = [[[UITableView alloc] initWithFrame:CGRectMake(0.0f,0.0f,320.0f,400.0f) style:UITableViewStylePlain] autorelease];
+    shoppingCartListView.delegate = self;
+    shoppingCartListView.dataSource = self;
+    
+    shoppingCartListView.backgroundColor = [UIColor clearColor];
+    
+    [self.view addSubview:shoppingCartListView];
+    
+    
+    
+    self.networkTool = [[NetworkTool alloc] init];
+    
 }
 
 - (void)viewDidUnload
@@ -68,10 +68,10 @@
 }
 
 - (void)dealloc {
-
-  [networkTool release];
-  
-  [super dealloc];
+    
+    [networkTool release];
+    
+    [super dealloc];
 }
 
 
@@ -79,72 +79,75 @@
 
 //Only one sections here
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-  return 1;
+    return 1;
 }
 
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  //Locate the shopping cart object in MyShoesApplicationDelegate
-  id delegate = [[UIApplication sharedApplication] delegate];
-  
-  ShoppingCart *shoppingCart;
-  if ([delegate respondsToSelector:@selector(shoppingCart)]){
-    shoppingCart = [delegate shoppingCart];
-  }
-  
-  return [shoppingCart getCount];
+    //Locate the shopping cart object in MyShoesApplicationDelegate
+    id delegate = [[UIApplication sharedApplication] delegate];
+    
+    ShoppingCart *shoppingCart;
+    if ([delegate respondsToSelector:@selector(shoppingCart)]){
+        shoppingCart = [delegate shoppingCart];
+    }
+    
+    return [shoppingCart getCount];
 }
 
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  
-  static NSString *CellIdentifier = @"CategoryCell";
-  
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-  if (cell == nil) {
-    //cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
-    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
-  }
-  
-  // Set up the cell...
-  id delegate = [[UIApplication sharedApplication] delegate];
-  
-  ShoppingCart *shoppingCart;
-  if ([delegate respondsToSelector:@selector(shoppingCart)]){
-    shoppingCart = [delegate shoppingCart];
-  }
-
-  Shoes *shoes = [shoppingCart getShoesAtIndex:indexPath.row];
-  
-  //imageView.image = shoes.shoesImage;
-  NSString *imageName = shoes.shoesImageName;
-  NSString *imageUrlStr = [NSString stringWithFormat:@"%@%@",MYSHOES_URL,imageName];
-  
-  NSURL *imageUrl = [NSURL URLWithString:imageUrlStr];
-  //NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
-  
-  UIImage *shoesImage = [[UIImage imageWithData: [NSData dataWithContentsOfURL: imageUrl]] retain];
-  
-  CGSize sz = SHOES_LIST_IMG_SIZE;
-  
-  UIImage *resized = [HomeViewController scale:shoesImage toSize:sz];
-  
-  cell.imageView.image = resized;
-
-  cell.textLabel.text = shoes.productStyle;
-  
-  NSUInteger quantity = [shoppingCart getQuantity:indexPath.row];
-  NSString *price = shoes.productPrice;
-  cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ %d", price, quantity];
-  //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-  return cell;
+    
+    static NSString *CellIdentifier = @"CategoryCell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        //cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
+    }
+    
+    // Set up the cell...
+    id delegate = [[UIApplication sharedApplication] delegate];
+    
+    ShoppingCart *shoppingCart;
+    if ([delegate respondsToSelector:@selector(shoppingCart)]){
+        shoppingCart = [delegate shoppingCart];
+    }
+    
+    Shoes *shoes = [shoppingCart getShoesAtIndex:indexPath.row];
+    
+    //imageView.image = shoes.shoesImage;
+    NSString *imageName = shoes.shoesImageName;
+    NSString *imageUrlStr = [NSString stringWithFormat:@"%@%@",MYSHOES_URL,imageName];
+    
+    NSURL *imageUrl = [NSURL URLWithString:imageUrlStr];
+    //NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
+    
+    UIImage *shoesImage = [[UIImage imageWithData: [NSData dataWithContentsOfURL: imageUrl]] retain];
+    
+    CGSize sz = SHOES_LIST_IMG_SIZE;
+    
+    UIImage *resized = [HomeViewController scale:shoesImage toSize:sz];
+    
+    cell.imageView.image = resized;
+    
+    cell.textLabel.text = shoes.productStyle;
+    cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:(14.0)];
+    
+    NSUInteger quantity = [shoppingCart getQuantity:indexPath.row];
+    NSString *price = shoes.productPrice;
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ %d", price, quantity];
+    cell.detailTextLabel.font = [UIFont fontWithName:@"Helvetica" size:(10.0)];
+    
+    //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  //View mode is just to view the list of shopping cart
-  //Edit mode let user delete/modify items in shopping cart
+    //View mode is just to view the list of shopping cart
+    //Edit mode let user delete/modify items in shopping cart
 }
 
 
