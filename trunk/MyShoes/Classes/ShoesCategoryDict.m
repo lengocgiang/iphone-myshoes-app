@@ -13,7 +13,7 @@ static NSMutableDictionary *dictionary = nil;
 
 @implementation ShoesCategoryDict
 
-+ (NSMutableDictionary*)dictionary
++(NSMutableDictionary*) dictionary
 {
   if (dictionary == nil)
   {
@@ -90,33 +90,33 @@ static NSMutableDictionary *dictionary = nil;
   return dictionary;
 }
 
-/*+ (id)allocWithZone:(NSZone *)zone
-{
-  return [[self dictionary] retain];
-}*/
-
-/*- (id)copyWithZone:(NSZone *)zone
-{
-  return self;
-}
-
-- (id)retain
-{
-  return self;
-}
-
-- (NSUInteger)retainCount
-{
-  return NSUIntegerMax;  //denotes an object that cannot be released
-}
-
-- (oneway void)release
-{
-  //do nothing
-}
-
-- (id)autorelease
-{
-  return self;
-}*/
+//+ (id)allocWithZone:(NSZone *)zone
+//{
+//  return [[self dictionary] retain];
+//}
+//
+//- (id)copyWithZone:(NSZone *)zone
+//{
+//  return self;
+//}
+//
+//- (id)retain
+//{
+//  return self;
+//}
+//
+//- (NSUInteger)retainCount
+//{
+//  return NSUIntegerMax;  //denotes an object that cannot be released
+//}
+//
+//- (void)release
+//{
+//  //do nothing
+//}
+//
+//- (id)autorelease
+//{
+//  return self;
+//}
 @end

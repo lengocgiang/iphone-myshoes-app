@@ -29,7 +29,6 @@
   UITableView *shoesListView;
   UIView *shoesScrollingView;
   //NSMutableArray *_shoesList;
-  NSMutableDictionary *_shoesDict;
   
   UILabel *shoesBrandName;
   UILabel *shoesStyle;
@@ -41,7 +40,7 @@
   
   NSArray *_imageArray;
   
-  NSArray *_shoesArray;
+  NSMutableArray *_shoesArray;
   
   Boolean _isTableView;
   
@@ -51,14 +50,11 @@
   LoadMoreSearchResultsTableViewCell *loadMoreSearchResultsCell;
   //SlideMenuViewController *slideMenuViewController;
   
-  /* The url for next request. */
-  NSString *url;
-  
   /* The NetworkTool instance to do network communications. */
   NetworkTool *networkTool;
   
   /* Representing how many pages have been loaded from network. */
-  NSInteger *currentPages;
+  NSUInteger currentPages;
   
   // The array storing all categories user selected
   NSMutableArray *userSelectedCategoriesArray;  
@@ -82,10 +78,6 @@
 @property (nonatomic, retain) UIToolbar *toolBar;
 @property (nonatomic, retain) NSArray *imageArray;
 //@property (nonatomic, retain) SlideMenuViewController *slideMenuViewController;
-@property (nonatomic, retain) NSMutableDictionary *shoesCategoryDict;
-@property (nonatomic, retain) NSString *url;
-@property (nonatomic, retain) NetworkTool *networkTool;
-@property (nonatomic) NSInteger *currentPages;
 @property (nonatomic, retain) NSMutableArray *userSelectedCategoriesArray;
 
 - (void)startAnimation;
@@ -94,7 +86,7 @@
 - (void)showShoesListInfo:(Shoes *)shoes;
 - (void)hideShoesListInfoLabels;
 - (void)loadShoesList;
-- (NSString *)generateInitialUrl;
+- (NSString *)generateUrl;
 
 @end
 

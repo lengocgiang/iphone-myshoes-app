@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0A749E4A143ACD450072DA35 /* ShoesSecondaryCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A749E49143ACD450072DA35 /* ShoesSecondaryCategoryViewController.m */; };
 		0A749E4E143AE38C0072DA35 /* ShoesCategoryDict.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A749E4D143AE38C0072DA35 /* ShoesCategoryDict.m */; };
+		0A8D83F214576D9A00B0CFF4 /* asyncimageview.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8D83F114576D9A00B0CFF4 /* asyncimageview.m */; };
 		0AA8BD0114452FAA00FA1B2D /* ShoesSecondaryCategoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AA8BD0014452FAA00FA1B2D /* ShoesSecondaryCategoryViewController.xib */; };
 		0AABC33E1432C80E009A7FE1 /* LoadMoreSearchResultsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AABC33D1432C80D009A7FE1 /* LoadMoreSearchResultsTableViewCell.m */; };
 		1D3623260D0F684500981E51 /* MyShoesAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* MyShoesAppDelegate.m */; };
@@ -69,6 +70,8 @@
 		0A749E49143ACD450072DA35 /* ShoesSecondaryCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoesSecondaryCategoryViewController.m; sourceTree = "<group>"; };
 		0A749E4C143AE38B0072DA35 /* ShoesCategoryDict.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoesCategoryDict.h; sourceTree = "<group>"; };
 		0A749E4D143AE38C0072DA35 /* ShoesCategoryDict.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoesCategoryDict.m; sourceTree = "<group>"; };
+		0A8D83F014576D9A00B0CFF4 /* asyncimageview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = asyncimageview.h; sourceTree = "<group>"; };
+		0A8D83F114576D9A00B0CFF4 /* asyncimageview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = asyncimageview.m; sourceTree = "<group>"; };
 		0AA8BD0014452FAA00FA1B2D /* ShoesSecondaryCategoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShoesSecondaryCategoryViewController.xib; sourceTree = "<group>"; };
 		0AABC33C1432C80D009A7FE1 /* LoadMoreSearchResultsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadMoreSearchResultsTableViewCell.h; sourceTree = "<group>"; };
 		0AABC33D1432C80D009A7FE1 /* LoadMoreSearchResultsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadMoreSearchResultsTableViewCell.m; sourceTree = "<group>"; };
@@ -233,6 +236,15 @@
 			path = Classes;
 			sourceTree = "<group>";
 		};
+		0A8D83EF14576D5F00B0CFF4 /* AsynchronousImageView */ = {
+			isa = PBXGroup;
+			children = (
+				0A8D83F014576D9A00B0CFF4 /* asyncimageview.h */,
+				0A8D83F114576D9A00B0CFF4 /* asyncimageview.m */,
+			);
+			name = AsynchronousImageView;
+			sourceTree = "<group>";
+		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -244,6 +256,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				0A8D83EF14576D5F00B0CFF4 /* AsynchronousImageView */,
 				B0F798AB1447FCDA004EF0E9 /* BSPreviewScrollView */,
 				B0F798A41447FC64004EF0E9 /* MBProgressHUD */,
 				B092F8CE1307DB0C007855C5 /* OrderedDictionary */,

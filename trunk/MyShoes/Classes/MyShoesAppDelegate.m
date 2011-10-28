@@ -153,8 +153,8 @@
                           message:@"Shoes.com can NOT be Reached"
                           delegate:nil
                           cancelButtonTitle:@"YES" otherButtonTitles:nil];
-                          [alert show];
-                          [alert release];
+    [alert show];
+    [alert release];
   }
 }
 

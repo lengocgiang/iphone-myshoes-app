@@ -11,10 +11,11 @@
 #import "ShoesCategoryDict.h"
 #import "Config.h"
 
+// The position of the secodnary category in the user selected category array
+#define POSITION_OF_SECONDARY_CATEGORY 1
 
 @implementation ShoesSecondaryCategoryViewController
 
-@synthesize categoryTableView;
 @synthesize currentPageCategoriesArray;
 @synthesize userSelectedCategoriesArray;
 
@@ -29,6 +30,7 @@
 
 - (void)dealloc
 {
+  // we may not need to release the array specifically as it is auto-managed
   [currentPageCategoriesArray release];
   
   [super dealloc];
@@ -48,7 +50,7 @@
 {
   [super viewDidLoad];
   // Do any additional setup after loading the view from its nib.
-  self.categoryTableView = [[[UITableView alloc] initWithFrame:CGRectMake(0.0f,0.0f,320.0f,400.0f) style:UITableViewStyleGrouped] autorelease];
+  categoryTableView = [[[UITableView alloc] initWithFrame:CGRectMake(0.0f,0.0f,320.0f,400.0f) style:UITableViewStyleGrouped] autorelease];
   categoryTableView.delegate = self;
   categoryTableView.dataSource = self;
   
@@ -130,15 +132,9 @@
   //Start animation
   MyShoesAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
   
-	[userSelectedCategoriesArray replaceObjectAtIndex:1 withObject:[currentPageCategoriesArray objectAtIndex:indexPath.row]];
+	[userSelectedCategoriesArray replaceObjectAtIndex:POSITION_OF_SECONDARY_CATEGORY withObject:[currentPageCategoriesArray objectAtIndex:indexPath.row]];
   
   [delegate.shoesListController setUserSelectedCategoriesArray:userSelectedCategoriesArray];
-  //	//Issue the request of the selected category
-  //	[networkTool getContent:newUrl withDelegate:self requestSelector:@selector(shoesCategoryUdateCallbackWithData:)];
-  
-  [delegate.shoesListController hideShoesListInfoLabels];
-  [delegate.shoesListController startAnimation];
-  
   [self.navigationController pushViewController:delegate.shoesListController animated:YES];
   
   //Deselected the selected Row

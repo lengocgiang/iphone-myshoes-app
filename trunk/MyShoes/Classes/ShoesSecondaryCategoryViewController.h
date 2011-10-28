@@ -20,7 +20,6 @@
   NSMutableArray *userSelectedCategoriesArray;  
 }
 
-@property (nonatomic, retain) UITableView *categoryTableView;
 @property (nonatomic, retain) NSArray *currentPageCategoriesArray;
 @property (nonatomic, retain) NSMutableArray *userSelectedCategoriesArray;
 
