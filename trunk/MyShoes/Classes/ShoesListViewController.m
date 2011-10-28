@@ -40,10 +40,6 @@
 @synthesize toolBar;
 @synthesize imageArray = _imageArray;
 //@synthesize slideMenuViewController;
-@synthesize shoesCategoryDict = _shoesCategoryDict;
-@synthesize url;
-@synthesize networkTool;
-@synthesize currentPages;
 @synthesize userSelectedCategoriesArray;
 
 /*
@@ -139,7 +135,7 @@
   [self.slideImageView setupImages:self.imageArray];
   //[self.contentView addSubview:self.slideImageView];
   
-  self.networkTool = [[NetworkTool alloc] init];
+  networkTool = [[NetworkTool alloc] init];
   
 }
 
@@ -186,12 +182,12 @@
 /* Load shoes list from network. Retrieve only part of shoes one time to improve perfomance. */
 - (void)loadShoesList {
 	//Issue the request of the selected category
-  url = [self generateInitialUrl];
-	[networkTool getContent:url withDelegate:self requestSelector:@selector(shoesCategoryUdateCallbackWithData:)];
+  
+	[networkTool getContent:[self generateUrl] withDelegate:self requestSelector:@selector(shoesCategoryUdateCallbackWithData:)];
 }
 
 /* Generate the intial url to load the first part of shoes list. */
-- (NSString *)generateInitialUrl {
+- (NSString *)generateUrl {
   ShoesCategory *firstCategory = [userSelectedCategoriesArray objectAtIndex:0];
   ShoesCategory *secondaryCategory = [userSelectedCategoriesArray objectAtIndex:1];
   NSMutableString *initialUrl = [NSMutableString stringWithFormat:MYSHOES_URL];
