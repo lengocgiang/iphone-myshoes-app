@@ -32,7 +32,7 @@
   // Add the buttons to the scrollview
   //menuButtons = buttonArray;
 
-  self.imageViews = [[NSMutableArray arrayWithCapacity:CAPACITY_SHOES_LIST] retain];
+  self.imageViews = [NSMutableArray arrayWithCapacity:CAPACITY_SHOES_LIST];//[[NSMutableArray arrayWithCapacity:CAPACITY_SHOES_LIST] retain];
   
   //Initialize queue of the image
   for (UIView *image in imageArray){

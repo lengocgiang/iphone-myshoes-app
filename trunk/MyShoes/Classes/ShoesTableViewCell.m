@@ -182,7 +182,7 @@
   NSURL *url = [NSURL URLWithString:imageUrl];
   //NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
   
-  UIImage *image = [[UIImage imageWithData: [NSData dataWithContentsOfURL: url]] retain];
+  UIImage *image = [UIImage imageWithData: [NSData dataWithContentsOfURL: url]];
 
   imageView.image = image;
 	brandNameLabel.text = shoes.productBrandName;

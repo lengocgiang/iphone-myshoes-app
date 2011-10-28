@@ -83,7 +83,8 @@
   TFHppleElement *element = [elements objectAtIndex:0];
   
   //set product detail link
-  self.productDetailLink = [[element objectForKey:HREF_TAG] retain];
+  //self.productDetailLink = [[element objectForKey:HREF_TAG] retain];
+  self.productDetailLink = [element objectForKey:HREF_TAG];
   
   NSArray *childElements  = [element childNodes];
   if([childElements count] <= 0){
@@ -96,10 +97,12 @@
     str = [childElement objectForKey:ORIGINAL_TAG];
   }
   
-  [self.shoesImageName release];
-  self.shoesImageName = [str retain];//[childElement objectForKey:SRC_TAG];
-  [self.productCategory release];
-  self.productCategory = [[childElement objectForKey:ALT_TAG] retain];
+  //[self.shoesImageName release];
+  //self.shoesImageName = [str retain];//[childElement objectForKey:SRC_TAG];
+  self.shoesImageName = str;
+  //[self.productCategory release];
+  //self.productCategory = [[childElement objectForKey:ALT_TAG] retain];
+  self.productCategory = [childElement objectForKey:ALT_TAG];
   
 }
 
@@ -136,7 +139,8 @@
   TFHppleElement *element = [elements objectAtIndex:0];
   
   //set product detail link
-  self.productDetailLink = [[element objectForKey:HREF_TAG] retain];
+  //self.productDetailLink = [[element objectForKey:HREF_TAG] retain];
+  self.productDetailLink = [element objectForKey:HREF_TAG];
   
   NSArray *childElements  = [element childNodes];
   if([childElements count] <= 0){
@@ -145,14 +149,16 @@
   TFHppleElement *childElement = [childElements objectAtIndex:0];
   //set product brand name
   id str = [childElement content];
-  [self.productBrandName release];
-  self.productBrandName = [str retain];
+  //[self.productBrandName release];
+  self.productBrandName = str;
+  //self.productBrandName = [str retain];
     
   childElement = [childElements objectAtIndex:2];
   //set product style name
   str = [childElement content];
-  [self.productStyle release];
-  self.productStyle = [str retain];
+  //[self.productStyle release];
+  //self.productStyle = [str retain];
+  self.productStyle = str;
   
   //To test if the shoes has more info like color and rating
   if ([elements count] <= 2){
@@ -162,8 +168,9 @@
   //[element autorelease];
   element = [elements objectAtIndex:2];
   
-  [self.productColor release];
-  self.productColor = [[element content] retain];
+  //[self.productColor release];
+  //self.productColor = [[element content] retain];
+  self.productColor = [element content];
   
   //[element autorelease];
   //Check if the shoes has the rating info section
@@ -176,8 +183,9 @@
     childElement = [childElements objectAtIndex:0];
     //Get the shoes rating value
   
-    [self.productRating release];
-    self.productRating = [[childElement content] retain];
+    //[self.productRating release];
+    //self.productRating = [[childElement content] retain];
+    self.productRating = [childElement content];
   }
 }
 
@@ -194,7 +202,8 @@
   
   //Trim whitespaces
   sku = [sku stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-  self.productSKU = [sku retain];
+  //self.productSKU = [sku retain];
+  self.productSKU = sku;
   
   /*NSString *tmpUrl;
   NSMutableArray *imgArray = [NSMutableArray arrayWithCapacity:SHOES_INFO_SHOESIMGS_COUNT];
@@ -238,8 +247,9 @@
     [imgArray addObject:tmpUrl];
   }
   
-  [self.shoesImgsAllAngle release];
-  self.shoesImgsAllAngle = [[NSArray arrayWithArray:imgArray] retain];
+  //[self.shoesImgsAllAngle release];
+  //self.shoesImgsAllAngle = [[NSArray arrayWithArray:imgArray] retain];
+  self.shoesImgsAllAngle = [NSArray arrayWithArray:imgArray];
 }
 
 
@@ -253,8 +263,9 @@
   //set product brand name
   //set product detail link
   NSString *tmpStr = [node objectForKey:SRC_TAG];
-  [self.productBrandLogo release];
-  self.productBrandLogo = [tmpStr retain];
+  //[self.productBrandLogo release];
+  //self.productBrandLogo = [tmpStr retain];
+  self.productBrandLogo = tmpStr;
   
 }
 
@@ -283,8 +294,9 @@
       _selectedColor = i;
       
       //update the current shoes color
-      [self.productColor release];
-      self.productColor = [colorName retain];
+      //[self.productColor release];
+      //self.productColor = [colorName retain];
+      self.productColor = colorName;
     }
     
     //Process url with color
@@ -304,11 +316,12 @@
     i++;
   }
   
-  [self.shoesColors release];
-  self.shoesColors = [[NSArray arrayWithArray:colorsArray] retain];
-  [self.urlsWithColors release];
-  self.urlsWithColors = [[NSArray arrayWithArray:urlsWithColors] retain];
-  
+  //[self.shoesColors release];
+  //self.shoesColors = [[NSArray arrayWithArray:colorsArray] retain];
+  self.shoesColors = [NSArray arrayWithArray:colorsArray];
+  //[self.urlsWithColors release];
+  //self.urlsWithColors = [[NSArray arrayWithArray:urlsWithColors] retain];
+  self.urlsWithColors = [NSArray arrayWithArray:urlsWithColors];
 }
 
 - (void)processShoesSizes:(TFHppleElement *)node {
@@ -340,10 +353,12 @@
     i++;
   }
   
-  [self.shoesSizes release];
-  self.shoesSizes = [[NSArray arrayWithArray:sizesArray] retain];
-  [self.shoesSizesValue release];
-  self.shoesSizesValue= [[NSArray arrayWithArray:sizesValueArray] retain];
+  //[self.shoesSizes release];
+  //self.shoesSizes = [[NSArray arrayWithArray:sizesArray] retain];
+  self.shoesSizes = [NSArray arrayWithArray:sizesArray];
+  //[self.shoesSizesValue release];
+  //self.shoesSizesValue= [[NSArray arrayWithArray:sizesValueArray] retain];
+  self.shoesSizesValue= [NSArray arrayWithArray:sizesValueArray];
 }
 
 //Update shoes price and price currency
@@ -371,17 +386,20 @@
     return;
   }
   
-  [self.productPrice release];
+  //[self.productPrice release];
   
   NSString *str;
   str = [node objectForKey:priceAttribute];
-  self.productPrice = [str retain];
+  //self.productPrice = [str retain];
+  self.productPrice = str;
+  //[self.productPrice retain];
   
   @try{
     //Update price currency
     str = [priceAttribute substringFromIndex:(textRange.location+textRange.length + 1)];
-    [self.productPriceCurrency release];
-    self.productPriceCurrency = [str retain];
+    //[self.productPriceCurrency release];
+    //self.productPriceCurrency = [str retain];
+    self.productPriceCurrency = str;
   }
   @catch (NSException *e) {
     //In case of any exception, won't update price currentcy
@@ -409,7 +427,6 @@
   [_productDetailLink release];
   [_shoesImageName release];
   [_productCategory release];
-  [_productDetailLink release];
   [_productBrandName release];
   [_productColor release];
   [_productStyle release];

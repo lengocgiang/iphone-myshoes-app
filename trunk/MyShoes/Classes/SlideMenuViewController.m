@@ -61,7 +61,7 @@
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView {
 	
-	self.view = [[UIView alloc] initWithFrame:CGRectMake(0, 380, 320, 80)];
+	self.view = [[[UIView alloc] initWithFrame:CGRectMake(0, 380, 320, 80)] autorelease];
 	
 	NSMutableArray* buttonArray = [NSMutableArray arrayWithCapacity:CAPACITY_SCROLL_BAR];
 	
@@ -82,12 +82,12 @@
 		
 		//[btn release];
 	}
-	self.categoryButtons = [[buttonArray copy] autorelease];
+	self.categoryButtons = buttonArray;//[[buttonArray copy] autorelease];
   // initialize the slide menu by passing a suitable frame, background color and an array of buttons.
   //slideMenuView = [[SlideMenuView alloc] initWithFrameColorAndButtons:CGRectMake(0.0f, [self.view bounds].size.height - 80.0f, [self.view bounds].size.width,  80.0f) backgroundColor:[UIColor grayColor]  buttons:buttonArray];
-	self.slideMenuView = [[SlideMenuView alloc] initWithFrameColorAndButtons:CGRectMake(0.0f, 0.0f, [self.view bounds].size.width,  [self.view bounds].size.height) 
+	self.slideMenuView = [[[SlideMenuView alloc] initWithFrameColorAndButtons:CGRectMake(0.0f, 0.0f, [self.view bounds].size.width,  [self.view bounds].size.height) 
                                                            backgroundColor:[UIColor grayColor]  
-                                                                   buttons:self.categoryButtons];
+                                                                   buttons:self.categoryButtons] autorelease];
 
 	// Add the slide menu to the window.
 	[self.view addSubview:slideMenuView];
@@ -198,8 +198,9 @@
 		}*/
 	}
 	
-  [self.shoesArray autorelease];
-  self.shoesArray = [shoesList copy];
+  //[self.shoesArray autorelease];
+  //self.shoesArray = [shoesList copy];
+  self.shoesArray = shoesList;
 
   //Stop Animation
   MyShoesAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
@@ -230,8 +231,7 @@
 
 - (void)dealloc {
 	[_cu release];
-	[self.slideMenuView release];
-	[self.view release];
+	//[slideMenuView release];
 	
   [super dealloc];
 }

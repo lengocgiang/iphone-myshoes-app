@@ -73,7 +73,15 @@ const NSUInteger kSizeColumn = 1;
    CGImageRef masked = CGImageCreateWithMask([image CGImage], mask);*/
   CGImageRef masked = CGImageCreateWithMask(imageWithAlpha, mask);
   
-  return [UIImage imageWithCGImage:masked];
+  UIImage *tmpImage = [[[UIImage imageWithCGImage:masked] retain] autorelease];
+  
+  CGImageRelease(mask);
+  CGImageRelease(imageWithAlpha);
+  CGImageRelease(masked);
+  CGContextRelease(ctxWithAlpha);
+  CGColorSpaceRelease(cs);
+  
+  return tmpImage;
 }
 /*
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -91,7 +99,7 @@ const NSUInteger kSizeColumn = 1;
   [super viewDidLoad];
   
   //Create network toolkit
-  self.networkTool = [[NetworkTool alloc] init];
+  networkTool = [[NetworkTool alloc] init];
   
   //Create shoes brief info view programmically
   self.shoesBriefView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 60)] autorelease];
@@ -373,7 +381,7 @@ const NSUInteger kSizeColumn = 1;
   NSURL *url = [NSURL URLWithString:imageUrl];
   //NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
   
-  UIImage *logoImage = [[UIImage imageWithData: [NSData dataWithContentsOfURL: url]] retain];
+  UIImage *logoImage = [UIImage imageWithData: [NSData dataWithContentsOfURL: url]];
   
   CGSize sz = SHOES_DETAIL_LOGO_ING_SIZE;
   
@@ -510,7 +518,7 @@ const NSUInteger kSizeColumn = 1;
 
 // tell the picker how many rows are available for a given component
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-  NSUInteger numRows;// = [shoes.shoesColors count];
+  NSUInteger numRows = 0;// = [shoes.shoesColors count];
   
   if(component == kColorColumn){
     numRows = [shoes.shoesColors count];
@@ -529,7 +537,7 @@ const NSUInteger kSizeColumn = 1;
 
 // tell the picker the title for a given component
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-  NSString *title;
+  NSString *title = nil;
   
   //Column 1 shows avaiable colors
   //Column 2 shows avaiable sizes
@@ -580,7 +588,7 @@ const NSUInteger kSizeColumn = 1;
   //Locate the shopping cart object in MyShoesApplicationDelegate
   MyShoesAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
   
-  ShoppingCart *shoppingCart;
+  ShoppingCart *shoppingCart = nil;
   if ([delegate respondsToSelector:@selector(shoppingCart)]){
     shoppingCart = [delegate shoppingCart];
   }

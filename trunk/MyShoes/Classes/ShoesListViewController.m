@@ -79,45 +79,35 @@
   //Init and add slide button menu Image View
   _shoesCategoryDict = [[OrderedDictionary alloc] init];
   //Setup category for women
-  ShoesCategory *category = [[[ShoesCategory alloc] initWithName:SHOES_CATEGORY_WOMEN_NAME/* andXPath:SHOES_CATEGORY_WOMEN_XPATH*/] autorelease];
+  ShoesCategory *category = [[[ShoesCategory alloc] initWithName:SHOES_CATEGORY_WOMEN_NAME] autorelease];
   category.categoryURI = SHOES_CATEGORY_WOMEN_URI_12ITEM;
 	[_shoesCategoryDict setObject: category forKey:SHOES_CATEGORY_WOMEN_NAME];
   //Setup category for men
-  //[category autorelease];
-  category = [[[ShoesCategory alloc] initWithName:SHOES_CATEGORY_MEN_NAME/* andXPath:SHOES_CATEGORY_MEN_XPATH*/] autorelease];
+  category = [[[ShoesCategory alloc] initWithName:SHOES_CATEGORY_MEN_NAME] autorelease];
   category.categoryURI = SHOES_CATEGORY_MEN_URI_12ITEM;
 	[_shoesCategoryDict setObject:category forKey:SHOES_CATEGORY_MEN_NAME];
   //Setup category for girls
-  //[category autorelease];
-  category = [[[ShoesCategory alloc] initWithName:SHOES_CATEGORY_GIRLS_NAME/* andXPath:SHOES_CATEGORY_GIRLS_XPATH*/] autorelease];
+  category = [[[ShoesCategory alloc] initWithName:SHOES_CATEGORY_GIRLS_NAME] autorelease];
   category.categoryURI = SHOES_CATEGORY_GIRLS_URI_12ITEM;
 	[_shoesCategoryDict setObject: category forKey:SHOES_CATEGORY_GIRLS_NAME];
   //Setup category for boys
-  //[category autorelease];
-  category = [[[ShoesCategory alloc] initWithName:SHOES_CATEGORY_BOYS_NAME/* andXPath:SHOES_CATEGORY_BOYS_XPATH*/] autorelease];
+  category = [[[ShoesCategory alloc] initWithName:SHOES_CATEGORY_BOYS_NAME] autorelease];
   category.categoryURI = SHOES_CATEGORY_BOYS_URI_12ITEM;
 	[_shoesCategoryDict setObject:category forKey:SHOES_CATEGORY_BOYS_NAME];
 
   //Setup category for Juniors
-  //[category autorelease];
-  category = [[[ShoesCategory alloc] initWithName:SHOES_CATEGORY_JUNIORS_NAME/* andXPath:SHOES_CATEGORY_JUNIORS_XPATH*/] autorelease];
+  category = [[[ShoesCategory alloc] initWithName:SHOES_CATEGORY_JUNIORS_NAME] autorelease];
   category.categoryURI = SHOES_CATEGORY_JUNIORS_URI_12ITEM;
 	[_shoesCategoryDict setObject:category forKey:SHOES_CATEGORY_JUNIORS_NAME];
   
   //Setup category for bags
-  //[category autorelease];
-  category = [[[ShoesCategory alloc] initWithName:SHOES_CATEGORY_BAGS_NAME/* andXPath:SHOES_CATEGORY_BAGS_XPATH*/] autorelease];
+  category = [[[ShoesCategory alloc] initWithName:SHOES_CATEGORY_BAGS_NAME] autorelease];
   category.categoryURI = SHOES_CATEGORY_BAGS_URI_12ITEM;
 	[_shoesCategoryDict setObject:category forKey:SHOES_CATEGORY_BAGS_NAME];
 
-  //[self.window addSubview:contentViewController.view];
-	//self.slideMenuViewController = [[SlideMenuViewController alloc] initWithCategories:_shoesCategoryDict];
-  
-  //[self.view addSubview:slideMenuViewController.view];
   //Add slide Image View
 
   NSMutableArray* images = [NSMutableArray arrayWithCapacity:CAPACITY_SHOES_LIST];
-	
 	for(int i=0; i<CATEGORY_SHOES_COUNT; i++)
 	{
 		// Rounded rect is nice
@@ -126,8 +116,8 @@
 		// Give the buttons a width of 100 and a height of 30. The slide menu will take care of positioning the buttons.
 		// If you don't know that 100 will be enough, use my function to calculate the length of a string. You find it on my blog.
 		/*[btn setFrame:CGRectMake(0.0f, 20.0f, 50.0f, 50.0f)];
-		[btn setTitle:scategoryName forState:UIControlStateNormal];		
-		[btn addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];*/
+     [btn setTitle:scategoryName forState:UIControlStateNormal];		
+     [btn addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];*/
     //imageView.scalesPageToFit = YES;
     imageView.backgroundColor = [UIColor clearColor];
     imageView.layer.cornerRadius = ((imageView.frame.size.width)/135.0f)*SHOES_IMAGE_CORNER_RADIUS;
@@ -139,10 +129,10 @@
     imageView.hidden = YES;
 		
     [imageView release];
-		//[btn release];
 	}
+
 	
-  self.imageArray = [[images copy] autorelease];
+  self.imageArray = [images copy];//[[images copy] autorelease];
   /*self.slideImageView = [[SlideImageView alloc] initWithFrameColorAndImages:CGRectMake(0.0f, 0.0f, 320.0f,  280.0f) 
                                                             backgroundColor:[UIColor grayColor]  
                                                                      images:self.imageArray];*/
@@ -226,7 +216,6 @@
 
 - (void)shoesCategoryUdateCallbackWithData: (NSData *) content {
 	
-	//debug_NSLog(@"%@",[[[NSString alloc] initWithData:content encoding:NSASCIIStringEncoding] autorelease]);
   NSMutableArray *shoesList = [NSMutableArray arrayWithCapacity:CAPACITY_SHOES_LIST];
   
 	// Create parser
@@ -248,7 +237,8 @@
      }*/
 	}
 	
-  [_shoesArray autorelease];
+  [_shoesArray release];
+  _shoesArray = nil;
   _shoesArray = [shoesList copy];
   
   //Stop Animation
@@ -258,11 +248,7 @@
   
   //If there is any shoes come back, show the first shoes
   if ([_shoesArray count] > 0){
-    //Show the first shoes in the list
-    /*Shoes *shoes = [self.shoesArray objectAtIndex:0];
-     NSString *imageName = shoes.shoesImageName;
-     NSString *imageUrl = [NSString stringWithFormat:@"%@%@",MYSHOES_URL,imageName];*/
-    [self showShoesList/*:_shoesArray*/];
+    [self showShoesList];
   }
   [self stopAnimation];
   if ([_shoesArray count] >= 1){
@@ -273,22 +259,6 @@
 
 - (void) showShoesList/*:(NSArray *) shoesArray*/ {
 
-  //Start animation
-  //[self startAnimation];
-  //[self hideShoesInfoLabels];
-  
-  
-  /*if(shoesArray != nil){
-    [self.shoesDict autorelease];
-    self.shoesDict = [[NSMutableDictionary dictionaryWithCapacity:CAPACITY_SHOES_LIST] retain];
-    
-    if(_shoesArray != nil){
-      [_shoesArray release];
-      _shoesArray = nil;
-    }
-    _shoesArray = [shoesArray retain];
-  }*/
-  
   //If scrolling view, shows shoes list in scrolling mode
   if (!_isTableView){
     
@@ -520,7 +490,7 @@
   NSURL *imageUrl = [NSURL URLWithString:imageUrlStr];
   //NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
   
-  UIImage *shoesImage = [[UIImage imageWithData: [NSData dataWithContentsOfURL: imageUrl]] retain];
+  UIImage *shoesImage = [UIImage imageWithData: [NSData dataWithContentsOfURL: imageUrl]];
   
   CGSize sz = SHOES_LIST_IMG_SIZE;
   

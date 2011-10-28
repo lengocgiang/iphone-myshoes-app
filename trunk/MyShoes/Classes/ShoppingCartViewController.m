@@ -50,7 +50,7 @@
     
     
     
-    self.networkTool = [[NetworkTool alloc] init];
+    networkTool = [[NetworkTool alloc] init];
     
 }
 
@@ -88,7 +88,7 @@
     //Locate the shopping cart object in MyShoesApplicationDelegate
     id delegate = [[UIApplication sharedApplication] delegate];
     
-    ShoppingCart *shoppingCart;
+    ShoppingCart *shoppingCart = nil;
     if ([delegate respondsToSelector:@selector(shoppingCart)]){
         shoppingCart = [delegate shoppingCart];
     }
@@ -111,7 +111,7 @@
     // Set up the cell...
     id delegate = [[UIApplication sharedApplication] delegate];
     
-    ShoppingCart *shoppingCart;
+    ShoppingCart *shoppingCart = nil;
     if ([delegate respondsToSelector:@selector(shoppingCart)]){
         shoppingCart = [delegate shoppingCart];
     }
@@ -125,7 +125,7 @@
     NSURL *imageUrl = [NSURL URLWithString:imageUrlStr];
     //NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
     
-    UIImage *shoesImage = [[UIImage imageWithData: [NSData dataWithContentsOfURL: imageUrl]] retain];
+    UIImage *shoesImage = [UIImage imageWithData: [NSData dataWithContentsOfURL: imageUrl]];
     
     CGSize sz = SHOES_LIST_IMG_SIZE;
     
