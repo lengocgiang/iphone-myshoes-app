@@ -18,6 +18,7 @@
 #import "ShoesDataSource.h"
 #import "TFHpple.h"
 #import "TFHppleElement+AccessChildren.h"
+#import "asyncimageview.h"
 
 
 @implementation ShoesListViewController
@@ -43,67 +44,44 @@
 @synthesize userSelectedCategoriesArray;
 
 /*
-// The designated initializer. Override to perform setup that is required before the view is loaded.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-*/
+ // The designated initializer. Override to perform setup that is required before the view is loaded.
+ - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+ self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+ if (self) {
+ // Custom initialization
+ }
+ return self;
+ }
+ */
 
 /*
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView {
-}
-*/
+ // Implement loadView to create a view hierarchy programmatically, without using a nib.
+ - (void)loadView {
+ }
+ */
 
 - (void)viewDidAppear:(BOOL)animated {
   [super viewDidAppear:animated];
+  _shoesArray = [[NSMutableArray alloc] init];
+  currentPages = 1;
   [self loadShoesList];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+  [super viewDidDisappear:animated];
+  [_shoesArray release];
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
   [super viewDidLoad];
   slideImageView.delegate = self;
-
+  
   //Default shoes list view is table view
   _isTableView = YES;
   
-  //Init and add slide button menu Image View
-  _shoesCategoryDict = [[OrderedDictionary alloc] init];
-  //Setup category for women
-  ShoesCategory *category = [[[ShoesCategory alloc] initWithName:SHOES_CATEGORY_WOMEN_NAME] autorelease];
-  category.categoryURI = SHOES_CATEGORY_WOMEN_URI_12ITEM;
-	[_shoesCategoryDict setObject: category forKey:SHOES_CATEGORY_WOMEN_NAME];
-  //Setup category for men
-  category = [[[ShoesCategory alloc] initWithName:SHOES_CATEGORY_MEN_NAME] autorelease];
-  category.categoryURI = SHOES_CATEGORY_MEN_URI_12ITEM;
-	[_shoesCategoryDict setObject:category forKey:SHOES_CATEGORY_MEN_NAME];
-  //Setup category for girls
-  category = [[[ShoesCategory alloc] initWithName:SHOES_CATEGORY_GIRLS_NAME] autorelease];
-  category.categoryURI = SHOES_CATEGORY_GIRLS_URI_12ITEM;
-	[_shoesCategoryDict setObject: category forKey:SHOES_CATEGORY_GIRLS_NAME];
-  //Setup category for boys
-  category = [[[ShoesCategory alloc] initWithName:SHOES_CATEGORY_BOYS_NAME] autorelease];
-  category.categoryURI = SHOES_CATEGORY_BOYS_URI_12ITEM;
-	[_shoesCategoryDict setObject:category forKey:SHOES_CATEGORY_BOYS_NAME];
-
-  //Setup category for Juniors
-  category = [[[ShoesCategory alloc] initWithName:SHOES_CATEGORY_JUNIORS_NAME] autorelease];
-  category.categoryURI = SHOES_CATEGORY_JUNIORS_URI_12ITEM;
-	[_shoesCategoryDict setObject:category forKey:SHOES_CATEGORY_JUNIORS_NAME];
-  
-  //Setup category for bags
-  category = [[[ShoesCategory alloc] initWithName:SHOES_CATEGORY_BAGS_NAME] autorelease];
-  category.categoryURI = SHOES_CATEGORY_BAGS_URI_12ITEM;
-	[_shoesCategoryDict setObject:category forKey:SHOES_CATEGORY_BAGS_NAME];
-
-  //Add slide Image View
-
   NSMutableArray* images = [NSMutableArray arrayWithCapacity:CAPACITY_SHOES_LIST];
+	
 	for(int i=0; i<CATEGORY_SHOES_COUNT; i++)
 	{
 		// Rounded rect is nice
@@ -125,13 +103,13 @@
     imageView.hidden = YES;
 		
     [imageView release];
+		//[btn release];
 	}
-
 	
-  self.imageArray = [images copy];//[[images copy] autorelease];
+  self.imageArray = [[images copy] autorelease];
   /*self.slideImageView = [[SlideImageView alloc] initWithFrameColorAndImages:CGRectMake(0.0f, 0.0f, 320.0f,  280.0f) 
-                                                            backgroundColor:[UIColor grayColor]  
-                                                                     images:self.imageArray];*/
+   backgroundColor:[UIColor grayColor]  
+   images:self.imageArray];*/
   [self.slideImageView setupImages:self.imageArray];
   //[self.contentView addSubview:self.slideImageView];
   
@@ -142,16 +120,16 @@
 
 
 /*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-*/
+ // Override to allow orientations other than the default portrait orientation.
+ - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+ // Return YES for supported orientations
+ return (interfaceOrientation == UIInterfaceOrientationPortrait);
+ }
+ */
 
 - (void)didReceiveMemoryWarning {
 	// Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
+  [super didReceiveMemoryWarning];
 	
 	// Release any cached data, images, etc that aren't in use.
 }
@@ -182,36 +160,43 @@
 /* Load shoes list from network. Retrieve only part of shoes one time to improve perfomance. */
 - (void)loadShoesList {
 	//Issue the request of the selected category
-  
 	[networkTool getContent:[self generateUrl] withDelegate:self requestSelector:@selector(shoesCategoryUdateCallbackWithData:)];
 }
 
-/* Generate the intial url to load the first part of shoes list. */
+/* Generate the url to load the next page of shoes list. */
 - (NSString *)generateUrl {
   ShoesCategory *firstCategory = [userSelectedCategoriesArray objectAtIndex:0];
   ShoesCategory *secondaryCategory = [userSelectedCategoriesArray objectAtIndex:1];
-  NSMutableString *initialUrl = [NSMutableString stringWithFormat:MYSHOES_URL];
-  [initialUrl appendString:@"en-US/"];
+  NSMutableString *url = [NSMutableString stringWithFormat:MYSHOES_URL];
+  [url appendString:@"en-US/"];
   
-  [initialUrl appendString:firstCategory.categoryName];
+  [url appendString:firstCategory.categoryName];
   
-	[initialUrl appendString:@"/_/_/"];
+	[url appendString:@"/_/_/"];
   
-  [initialUrl appendString:secondaryCategory.categoryName];
+  [url appendString:secondaryCategory.categoryName];
   
   // Bag's url doesn't has "+Shoes"
   if (firstCategory.categoryName != SHOES_CATEGORY_BAGS_NAME)
   {
-    [initialUrl appendString:@"+Shoes"];
+    [url appendString:@"+Shoes"];
   }
-     
-  [initialUrl appendString:@"/View+12/Products.aspx"];
   
-  return initialUrl;
+  [url appendString:@"/View+"];
+  [url appendString:[NSString stringWithFormat:@"%d", CATEGORY_SHOES_COUNT]];
+  if (currentPages != 1)
+  {
+    [url appendString:@"-Num+"];
+    [url appendString:[NSString stringWithFormat:@"%d", CATEGORY_SHOES_COUNT * (currentPages - 1)]];
+  }
+  [url appendString:@"/Products.aspx"];
+  
+  return url;
 }
 
 - (void)shoesCategoryUdateCallbackWithData: (NSData *) content {
 	
+	//debug_NSLog(@"%@",[[[NSString alloc] initWithData:content encoding:NSASCIIStringEncoding] autorelease]);
   NSMutableArray *shoesList = [NSMutableArray arrayWithCapacity:CAPACITY_SHOES_LIST];
   
 	// Create parser
@@ -233,9 +218,15 @@
      }*/
 	}
 	
-  [_shoesArray release];
-  _shoesArray = nil;
-  _shoesArray = [shoesList copy];
+  if (currentPages == 1)
+  {
+    
+    [_shoesArray addObjectsFromArray:shoesList];
+  }
+  else
+  {
+    [_shoesArray addObjectsFromArray:shoesList];
+  }
   
   //Stop Animation
   //MyShoesAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
@@ -244,44 +235,75 @@
   
   //If there is any shoes come back, show the first shoes
   if ([_shoesArray count] > 0){
-    [self showShoesList];
+    //Show the first shoes in the list
+    /*Shoes *shoes = [self.shoesArray objectAtIndex:0];
+     NSString *imageName = shoes.shoesImageName;
+     NSString *imageUrl = [NSString stringWithFormat:@"%@%@",MYSHOES_URL,imageName];*/
+    [self showShoesList/*:_shoesArray*/];
   }
   [self stopAnimation];
   if ([_shoesArray count] >= 1){
     [self showShoesListInfo:[_shoesArray objectAtIndex:0]];
   }
   
+  NSUInteger index = (currentPages-1)*CATEGORY_SHOES_COUNT;
+  NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+  NSArray *array = [NSArray arrayWithObject:indexPath]; 
+  if (currentPages != 1)
+  {
+    [shoesListView reloadRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationNone];
+    [shoesListView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    [shoesListView setUserInteractionEnabled:YES];
+  }
+  
+  currentPages++;
 }
 
 - (void) showShoesList/*:(NSArray *) shoesArray*/ {
-
+  
+  //Start animation
+  //[self startAnimation];
+  //[self hideShoesInfoLabels];
+  
+  
+  /*if(shoesArray != nil){
+   [self.shoesDict autorelease];
+   self.shoesDict = [[NSMutableDictionary dictionaryWithCapacity:CAPACITY_SHOES_LIST] retain];
+   
+   if(_shoesArray != nil){
+   [_shoesArray release];
+   _shoesArray = nil;
+   }
+   _shoesArray = [shoesArray retain];
+   }*/
+  
   //If scrolling view, shows shoes list in scrolling mode
   if (!_isTableView){
     
     int i=0;
-  
-    for (Shoes *shoes in _shoesArray){
     
+    for (Shoes *shoes in _shoesArray){
+      
       NSString *imageName = shoes.shoesImageName;
       NSString *imageUrlStr = [NSString stringWithFormat:@"%@%@",MYSHOES_URL,imageName];
-    
+      
       NSURL *imageUrl = [NSURL URLWithString:imageUrlStr];
       //NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
-  
+      
       UIImage *image = [[UIImage imageWithData: [NSData dataWithContentsOfURL: imageUrl]] retain];
       //UIImage *roundImage = [image roundedCornerImage:SHOES_IMAGE_CORNER_RADIUS borderSize:SHOES_IMAGE_BORDER_SIZE];
-    
+      
       if (i< [self.imageArray count]){
         UIImageView *imageView;
         imageView = [self.imageArray objectAtIndex:i++];
         //[imageView loadRequest:requestObj];
         imageView.image = image;
-      
+        
         imageView.hidden = NO;
-      
+        
         //Add shoes imageView pair to shoesDict (key is the imageView)
         [self.shoesDict setObject:shoes forKey:imageView.image];
-
+        
       }
       [image release];
     }
@@ -300,19 +322,19 @@
     if(_shoesArray != nil){
       
       /*[shoesTableView removeFromSuperview];
-
-      id shoesSource = [[ShoesDataSource alloc] init];
-      [shoesSource setDataSourceShoesArray:_shoesArray];
-      
-      //shoesTableView.dataSource = shoesSource;
-
-      shoesTableView = [[[ShoesTableView alloc] initWithFrame:CGRectMake(0.0f,0.0f,320.0f,367.0f) 
-                                               withDataSource:(id)shoesSource] autorelease];
-  
-      //[self.contentView addSubview:shoesTableView];
-      
-      //Get the progress indicator on the top as always.
-      [self.contentView insertSubview:shoesTableView belowSubview:progressIndicator ];*/
+       
+       id shoesSource = [[ShoesDataSource alloc] init];
+       [shoesSource setDataSourceShoesArray:_shoesArray];
+       
+       //shoesTableView.dataSource = shoesSource;
+       
+       shoesTableView = [[[ShoesTableView alloc] initWithFrame:CGRectMake(0.0f,0.0f,320.0f,367.0f) 
+       withDataSource:(id)shoesSource] autorelease];
+       
+       //[self.contentView addSubview:shoesTableView];
+       
+       //Get the progress indicator on the top as always.
+       [self.contentView insertSubview:shoesTableView belowSubview:progressIndicator ];*/
       shoesListView.dataSource = self;
       shoesListView.delegate = self;
       [shoesListView reloadData];
@@ -320,7 +342,7 @@
       [shoesListView setHidden:NO];
       
     }
-  
+    
     //[shoesTableView release];
     //Hide scrolling shoes list view
     [shoesScrollingView setHidden:YES];
@@ -329,16 +351,16 @@
 }
 
 /*- (void)scrollViewDidScroll:(UIImageView *)selectedView{
-  //locate the actually shoes selected
-  Shoes *shoes = [self.shoesDict objectForKey:selectedView.image];
-  
-  [self showShoesListInfo:shoes];
-}
-
-- (void)scrollViewBeganScroll{
-  //When users begin scrolling, hide all the four labels
-  [self hideShoesListInfoLabels];
-}*/
+ //locate the actually shoes selected
+ Shoes *shoes = [self.shoesDict objectForKey:selectedView.image];
+ 
+ [self showShoesListInfo:shoes];
+ }
+ 
+ - (void)scrollViewBeganScroll{
+ //When users begin scrolling, hide all the four labels
+ [self hideShoesListInfoLabels];
+ }*/
 
 - (void)showShoesListInfo:(Shoes *)shoes{
   shoesBrandName.text = shoes.productCategory;
@@ -393,14 +415,13 @@
   [_shoesCategoryDict release];
   [_imageArray release];
   [_shoesArray release];
-  [networkTool release];
   
   [super dealloc];
 }
 
 #pragma mark Table view methods
 
-//Only one section here
+//Two sections here
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
   return 1;
 }
@@ -415,10 +436,10 @@
 		return 1;
 		
 	} else if ([_shoesArray count] < CATEGORY_SHOES_COUNT) {
-        
+    
 		// Add an object to the end of the array for the "Load more..." table cell.
 		return [_shoesArray count];
-        
+    
 	}	
 	// Return the number of rows as there are in the searchResults array.
 	return [_shoesArray count] + 1;
@@ -432,7 +453,7 @@
 	// 2: if last cell, display the "Load More" search results UITableViewCell.
 	
 	if ([_shoesArray count] == 0){ // Special Case 1
-        
+    
 		// Disable user interaction for this cell.
 		UITableViewCell *cell = [[[UITableViewCell alloc] init] autorelease]; 
 		cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -443,29 +464,18 @@
 		LoadMoreSearchResultsTableViewCell *cell = (LoadMoreSearchResultsTableViewCell *) [tableView dequeueReusableCellWithIdentifier:loadMoreIdentifier];
 		if (cell == nil) {
 			cell = [[[LoadMoreSearchResultsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:loadMoreIdentifier] autorelease];
-			//cell.textLabel.text = @"Load More Results...";
-            
-            self.loadMoreSearchResultsCell = cell;
-            
+      self.loadMoreSearchResultsCell = cell;
+      
 		}
 		
 		// Return a standard cell
 		cell.textLabel.text = @"Load More Results...";
-
+    
     cell.textLabel.textAlignment = UITextAlignmentCenter;
 		return cell;
 		
 	}
-    
-//    static NSString *CellIdentifier = @"SearchResultsCell";
-//    
-//	SearchResultsTableViewCell *cell = (SearchResultsTableViewCell *) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-//    if (cell == nil) {
-//		[[NSBundle mainBundle] loadNibNamed:@"SearchResultsTableCell" owner:self options:nil];
-//		cell = self.searchResultsCell;
-//    }
-
-    
+  
 	static NSString *MyIdentifier = @"MyIdentifier";
 	
   ShoesListViewCell *cell = (ShoesListViewCell *)[shoesListView dequeueReusableCellWithIdentifier:MyIdentifier];
@@ -479,21 +489,31 @@
   
   Shoes *shoes = [_shoesArray objectAtIndex:indexPath.row];
   
-	//imageView.image = shoes.shoesImage;
   NSString *imageName = shoes.shoesImageName;
   NSString *imageUrlStr = [NSString stringWithFormat:@"%@%@",MYSHOES_URL,imageName];
   
   NSURL *imageUrl = [NSURL URLWithString:imageUrlStr];
-  //NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
   
-  UIImage *shoesImage = [UIImage imageWithData: [NSData dataWithContentsOfURL: imageUrl]];
+  //  UIImage *shoesImage = [[UIImage imageWithData: [NSData dataWithContentsOfURL: imageUrl]] retain];
+  //  
+  //  CGSize sz = SHOES_LIST_IMG_SIZE;
+  //  
+  //  UIImage *resized = [HomeViewController scale:shoesImage toSize:sz];
+  //
+  //  cell.imageView.image = resized;
   
-  CGSize sz = SHOES_LIST_IMG_SIZE;
+  //	CGRect frame;
+  //	frame.size.width=75; frame.size.height=75;
+  //	frame.origin.x=0; frame.origin.y=0;
+  CGRect frame;
+	frame.size.width=60; frame.size.height=60;
+	frame.origin.x=0; frame.origin.y=0;
+	AsyncImageView* asyncImage = [[[AsyncImageView alloc]
+                                 initWithFrame:frame] autorelease];
+	asyncImage.tag = 999;
+	[asyncImage loadImageFromURL:imageUrl];
+	[cell.contentView addSubview:asyncImage];
   
-  UIImage *resized = [HomeViewController scale:shoesImage toSize:sz];
-
-  cell.imageView.image = resized;
-
   [cell setShoesBrandName:shoes.productBrandName];
   [cell setShoesColor:shoes.productColor];
   [cell setShoesStyle:shoes.productStyle];
@@ -506,27 +526,29 @@
 	if ([_shoesArray count] == 0){
 		return;
 		
-        // Special Case for the "Load More Results..." button for paging.
+    // Special Case for the "Load More Results..." button for paging.
 	} else if (indexPath.row == [_shoesArray count]) {
-        
-		// Register for the notification
-		[[NSNotificationCenter defaultCenter] addObserver:self
-												 selector:@selector(employeeDataReceived:)
-													 name:@"WebServiceCallCompleted" object:nil];        
-	} else {
-        
-		// Slide in the a details view.
-      //Set the Name of the cell is @"Category"
-        MyShoesAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-            
-        [delegate.shoesDetailController setShoes:[_shoesArray objectAtIndex:indexPath.row]];
-        [self.navigationController pushViewController:delegate.shoesDetailController animated:YES];
-            
-        //Deselected the selected Row
-        [tableView deselectRowAtIndexPath:indexPath animated:YES];
-  }
+    self.loadMoreSearchResultsCell.textLabel.text = @"Loading...";
+    self.loadMoreSearchResultsCell.textLabel.textAlignment = UITextAlignmentCenter;
+		
+		// load the next page of shoe list.
+    [self loadShoesList];
+		
+		// Disable user interaction if/when the loading/search results view appears.
+		[self.shoesListView setUserInteractionEnabled:NO];
     
-
+	} else {
+    
+		// Slide in the a details view.
+    //Set the Name of the cell is @"Category"
+    MyShoesAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    
+    [delegate.shoesDetailController setShoes:[_shoesArray objectAtIndex:indexPath.row]];
+    [self.navigationController pushViewController:delegate.shoesDetailController animated:YES];
+  }
+  //Deselected the selected Row
+  [tableView deselectRowAtIndexPath:indexPath animated:YES];  
+  
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
