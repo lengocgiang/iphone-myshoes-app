@@ -9,6 +9,15 @@
 /* Begin PBXBuildFile section */
 		0A749E4A143ACD450072DA35 /* ShoesSecondaryCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A749E49143ACD450072DA35 /* ShoesSecondaryCategoryViewController.m */; };
 		0A749E4E143AE38C0072DA35 /* ShoesCategoryDict.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A749E4D143AE38C0072DA35 /* ShoesCategoryDict.m */; };
+		0A90AA30145E080C00BC5224 /* HJCircularBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A90AA1D145E080C00BC5224 /* HJCircularBuffer.m */; };
+		0A90AA31145E080C00BC5224 /* HJManagedImageV.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A90AA1F145E080C00BC5224 /* HJManagedImageV.m */; };
+		0A90AA32145E080C00BC5224 /* HJMOBigFileCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A90AA22145E080C00BC5224 /* HJMOBigFileCache.m */; };
+		0A90AA33145E080C00BC5224 /* HJMOFileCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A90AA24145E080C00BC5224 /* HJMOFileCache.m */; };
+		0A90AA34145E080C00BC5224 /* HJMOHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A90AA26145E080C00BC5224 /* HJMOHandler.m */; };
+		0A90AA35145E080C00BC5224 /* HJMOPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A90AA28145E080C00BC5224 /* HJMOPolicy.m */; };
+		0A90AA36145E080C00BC5224 /* HJMOUserBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A90AA2B145E080C00BC5224 /* HJMOUserBase.m */; };
+		0A90AA37145E080C00BC5224 /* HJObjManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A90AA2D145E080C00BC5224 /* HJObjManager.m */; };
+		0A90AA38145E080C00BC5224 /* HJWeakMutableArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A90AA2F145E080C00BC5224 /* HJWeakMutableArray.m */; };
 		0AABC33E1432C80E009A7FE1 /* LoadMoreSearchResultsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AABC33D1432C80D009A7FE1 /* LoadMoreSearchResultsTableViewCell.m */; };
 		1D3623260D0F684500981E51 /* MyShoesAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* MyShoesAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
@@ -40,7 +49,6 @@
 		B09F204B145A7C6200B5F70D /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B09F2047145A7C6200B5F70D /* HomeViewController.xib */; };
 		B09F204C145A7C6200B5F70D /* ShoesListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B09F2048145A7C6200B5F70D /* ShoesListViewController.xib */; };
 		B09F204D145A7C6200B5F70D /* ShoesSecondaryCategoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B09F2049145A7C6200B5F70D /* ShoesSecondaryCategoryViewController.xib */; };
-		B09F2051145A7E3900B5F70D /* asyncimageview.m in Sources */ = {isa = PBXBuildFile; fileRef = B09F2050145A7E3900B5F70D /* asyncimageview.m */; };
 		B0ADDC021316FEEE00B34625 /* ShoesDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0ADDC001316FEEE00B34625 /* ShoesDetailViewController.m */; };
 		B0ADDC031316FEEE00B34625 /* ShoesDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0ADDC011316FEEE00B34625 /* ShoesDetailViewController.xib */; };
 		B0B8B7E312F7917A00446CCC /* TFHpple.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B8B7DE12F7917A00446CCC /* TFHpple.m */; };
@@ -70,6 +78,26 @@
 		0A749E49143ACD450072DA35 /* ShoesSecondaryCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoesSecondaryCategoryViewController.m; sourceTree = "<group>"; };
 		0A749E4C143AE38B0072DA35 /* ShoesCategoryDict.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoesCategoryDict.h; sourceTree = "<group>"; };
 		0A749E4D143AE38C0072DA35 /* ShoesCategoryDict.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoesCategoryDict.m; sourceTree = "<group>"; };
+		0A90AA1C145E080C00BC5224 /* HJCircularBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HJCircularBuffer.h; path = Classes/HJCacheClasses/HJCircularBuffer.h; sourceTree = "<group>"; };
+		0A90AA1D145E080C00BC5224 /* HJCircularBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HJCircularBuffer.m; path = Classes/HJCacheClasses/HJCircularBuffer.m; sourceTree = "<group>"; };
+		0A90AA1E145E080C00BC5224 /* HJManagedImageV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HJManagedImageV.h; path = Classes/HJCacheClasses/HJManagedImageV.h; sourceTree = "<group>"; };
+		0A90AA1F145E080C00BC5224 /* HJManagedImageV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HJManagedImageV.m; path = Classes/HJCacheClasses/HJManagedImageV.m; sourceTree = "<group>"; };
+		0A90AA20145E080C00BC5224 /* HJManagedImageVDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HJManagedImageVDelegate.h; path = Classes/HJCacheClasses/HJManagedImageVDelegate.h; sourceTree = "<group>"; };
+		0A90AA21145E080C00BC5224 /* HJMOBigFileCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HJMOBigFileCache.h; path = Classes/HJCacheClasses/HJMOBigFileCache.h; sourceTree = "<group>"; };
+		0A90AA22145E080C00BC5224 /* HJMOBigFileCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HJMOBigFileCache.m; path = Classes/HJCacheClasses/HJMOBigFileCache.m; sourceTree = "<group>"; };
+		0A90AA23145E080C00BC5224 /* HJMOFileCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HJMOFileCache.h; path = Classes/HJCacheClasses/HJMOFileCache.h; sourceTree = "<group>"; };
+		0A90AA24145E080C00BC5224 /* HJMOFileCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HJMOFileCache.m; path = Classes/HJCacheClasses/HJMOFileCache.m; sourceTree = "<group>"; };
+		0A90AA25145E080C00BC5224 /* HJMOHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HJMOHandler.h; path = Classes/HJCacheClasses/HJMOHandler.h; sourceTree = "<group>"; };
+		0A90AA26145E080C00BC5224 /* HJMOHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HJMOHandler.m; path = Classes/HJCacheClasses/HJMOHandler.m; sourceTree = "<group>"; };
+		0A90AA27145E080C00BC5224 /* HJMOPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HJMOPolicy.h; path = Classes/HJCacheClasses/HJMOPolicy.h; sourceTree = "<group>"; };
+		0A90AA28145E080C00BC5224 /* HJMOPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HJMOPolicy.m; path = Classes/HJCacheClasses/HJMOPolicy.m; sourceTree = "<group>"; };
+		0A90AA29145E080C00BC5224 /* HJMOUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HJMOUser.h; path = Classes/HJCacheClasses/HJMOUser.h; sourceTree = "<group>"; };
+		0A90AA2A145E080C00BC5224 /* HJMOUserBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HJMOUserBase.h; path = Classes/HJCacheClasses/HJMOUserBase.h; sourceTree = "<group>"; };
+		0A90AA2B145E080C00BC5224 /* HJMOUserBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HJMOUserBase.m; path = Classes/HJCacheClasses/HJMOUserBase.m; sourceTree = "<group>"; };
+		0A90AA2C145E080C00BC5224 /* HJObjManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HJObjManager.h; path = Classes/HJCacheClasses/HJObjManager.h; sourceTree = "<group>"; };
+		0A90AA2D145E080C00BC5224 /* HJObjManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HJObjManager.m; path = Classes/HJCacheClasses/HJObjManager.m; sourceTree = "<group>"; };
+		0A90AA2E145E080C00BC5224 /* HJWeakMutableArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HJWeakMutableArray.h; path = Classes/HJCacheClasses/HJWeakMutableArray.h; sourceTree = "<group>"; };
+		0A90AA2F145E080C00BC5224 /* HJWeakMutableArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HJWeakMutableArray.m; path = Classes/HJCacheClasses/HJWeakMutableArray.m; sourceTree = "<group>"; };
 		0AABC33C1432C80D009A7FE1 /* LoadMoreSearchResultsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadMoreSearchResultsTableViewCell.h; sourceTree = "<group>"; };
 		0AABC33D1432C80D009A7FE1 /* LoadMoreSearchResultsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadMoreSearchResultsTableViewCell.m; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -115,8 +143,6 @@
 		B09F2047145A7C6200B5F70D /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HomeViewController.xib; path = Resources/HomeViewController.xib; sourceTree = "<group>"; };
 		B09F2048145A7C6200B5F70D /* ShoesListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ShoesListViewController.xib; path = Resources/ShoesListViewController.xib; sourceTree = "<group>"; };
 		B09F2049145A7C6200B5F70D /* ShoesSecondaryCategoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ShoesSecondaryCategoryViewController.xib; path = Resources/ShoesSecondaryCategoryViewController.xib; sourceTree = "<group>"; };
-		B09F204F145A7E3900B5F70D /* asyncimageview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = asyncimageview.h; path = Classes/AsyncImageView/asyncimageview.h; sourceTree = "<group>"; };
-		B09F2050145A7E3900B5F70D /* asyncimageview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = asyncimageview.m; path = Classes/AsyncImageView/asyncimageview.m; sourceTree = "<group>"; };
 		B0ADDBFF1316FEEE00B34625 /* ShoesDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoesDetailViewController.h; sourceTree = "<group>"; };
 		B0ADDC001316FEEE00B34625 /* ShoesDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoesDetailViewController.m; sourceTree = "<group>"; };
 		B0ADDC011316FEEE00B34625 /* ShoesDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ShoesDetailViewController.xib; path = Classes/ShoesDetailViewController.xib; sourceTree = "<group>"; };
@@ -236,6 +262,33 @@
 			path = Classes;
 			sourceTree = "<group>";
 		};
+		0A90AA1A145E07CE00BC5224 /* HJCache */ = {
+			isa = PBXGroup;
+			children = (
+				0A90AA1C145E080C00BC5224 /* HJCircularBuffer.h */,
+				0A90AA1D145E080C00BC5224 /* HJCircularBuffer.m */,
+				0A90AA1E145E080C00BC5224 /* HJManagedImageV.h */,
+				0A90AA1F145E080C00BC5224 /* HJManagedImageV.m */,
+				0A90AA20145E080C00BC5224 /* HJManagedImageVDelegate.h */,
+				0A90AA21145E080C00BC5224 /* HJMOBigFileCache.h */,
+				0A90AA22145E080C00BC5224 /* HJMOBigFileCache.m */,
+				0A90AA23145E080C00BC5224 /* HJMOFileCache.h */,
+				0A90AA24145E080C00BC5224 /* HJMOFileCache.m */,
+				0A90AA25145E080C00BC5224 /* HJMOHandler.h */,
+				0A90AA26145E080C00BC5224 /* HJMOHandler.m */,
+				0A90AA27145E080C00BC5224 /* HJMOPolicy.h */,
+				0A90AA28145E080C00BC5224 /* HJMOPolicy.m */,
+				0A90AA29145E080C00BC5224 /* HJMOUser.h */,
+				0A90AA2A145E080C00BC5224 /* HJMOUserBase.h */,
+				0A90AA2B145E080C00BC5224 /* HJMOUserBase.m */,
+				0A90AA2C145E080C00BC5224 /* HJObjManager.h */,
+				0A90AA2D145E080C00BC5224 /* HJObjManager.m */,
+				0A90AA2E145E080C00BC5224 /* HJWeakMutableArray.h */,
+				0A90AA2F145E080C00BC5224 /* HJWeakMutableArray.m */,
+			);
+			name = HJCache;
+			sourceTree = "<group>";
+		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -247,7 +300,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				B09F204E145A7E0D00B5F70D /* AsyncImageView */,
+				0A90AA1A145E07CE00BC5224 /* HJCache */,
 				B0F798AB1447FCDA004EF0E9 /* BSPreviewScrollView */,
 				B0F798A41447FC64004EF0E9 /* MBProgressHUD */,
 				B092F8CE1307DB0C007855C5 /* OrderedDictionary */,
@@ -307,15 +360,6 @@
 				B09F2032145A7C2000B5F70D /* OrderedDictionary.m */,
 			);
 			name = OrderedDictionary;
-			sourceTree = "<group>";
-		};
-		B09F204E145A7E0D00B5F70D /* AsyncImageView */ = {
-			isa = PBXGroup;
-			children = (
-				B09F204F145A7E3900B5F70D /* asyncimageview.h */,
-				B09F2050145A7E3900B5F70D /* asyncimageview.m */,
-			);
-			name = AsyncImageView;
 			sourceTree = "<group>";
 		};
 		B0B8B7DC12F7917A00446CCC /* hpple */ = {
@@ -490,7 +534,15 @@
 				B09F202E145A79E200B5F70D /* MBProgressHUD.m in Sources */,
 				B09F202F145A79E200B5F70D /* TapImage.m in Sources */,
 				B09F2033145A7C2000B5F70D /* OrderedDictionary.m in Sources */,
-				B09F2051145A7E3900B5F70D /* asyncimageview.m in Sources */,
+				0A90AA30145E080C00BC5224 /* HJCircularBuffer.m in Sources */,
+				0A90AA31145E080C00BC5224 /* HJManagedImageV.m in Sources */,
+				0A90AA32145E080C00BC5224 /* HJMOBigFileCache.m in Sources */,
+				0A90AA33145E080C00BC5224 /* HJMOFileCache.m in Sources */,
+				0A90AA34145E080C00BC5224 /* HJMOHandler.m in Sources */,
+				0A90AA35145E080C00BC5224 /* HJMOPolicy.m in Sources */,
+				0A90AA36145E080C00BC5224 /* HJMOUserBase.m in Sources */,
+				0A90AA37145E080C00BC5224 /* HJObjManager.m in Sources */,
+				0A90AA38145E080C00BC5224 /* HJWeakMutableArray.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

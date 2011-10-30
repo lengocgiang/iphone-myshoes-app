@@ -47,7 +47,6 @@
  */
 
 #import "Shoes.h"
-#import "asyncimageview.h"
 
 @interface ShoesTableViewCell : UITableViewCell {
     Shoes *shoes;
