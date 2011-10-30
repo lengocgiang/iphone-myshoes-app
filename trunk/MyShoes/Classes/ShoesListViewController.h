@@ -17,6 +17,7 @@
 #import "ShoesListViewCell.h"
 #import "LoadMoreSearchResultsTableViewCell.h"
 #import "NetworkTool.h"
+#import "HJObjManager.h"
 
 @interface ShoesListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource/*, SlideImageViewDelegate*/>{
   UIView *contentView;
@@ -58,6 +59,9 @@
   
   // The array storing all categories user selected
   NSMutableArray *userSelectedCategoriesArray;  
+  
+  //HJCache library for asynchronous image loading and caching
+  HJObjManager *objMan;
 }
 
 @property (nonatomic, retain) IBOutlet UIView *contentView;

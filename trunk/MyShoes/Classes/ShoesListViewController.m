@@ -18,7 +18,7 @@
 #import "ShoesDataSource.h"
 #import "TFHpple.h"
 #import "TFHppleElement+AccessChildren.h"
-#import "asyncimageview.h"
+#import "HJManagedImageV.h"
 
 
 @implementation ShoesListViewController
@@ -114,7 +114,11 @@
   //[self.contentView addSubview:self.slideImageView];
   
   networkTool = [[NetworkTool alloc] init];
+  objMan = [[HJObjManager alloc] init];
   
+  NSString* cacheDirectory = [NSHomeDirectory() stringByAppendingString:@"/Library/Caches/imgcache/myshoes/"] ;
+  HJMOFileCache* fileCache = [[[HJMOFileCache alloc] initWithRootPath:cacheDirectory] autorelease];
+  objMan.fileCache = fileCache;
 }
 
 
@@ -137,6 +141,10 @@
 - (void)viewDidUnload {
 	// Release any retained subviews of the main view.
 	// e.g. self.myOutlet = nil;
+  [super viewDidUnload];
+  
+  [networkTool release];
+  [objMan release];
 }
 
 - (void) startAnimation {
@@ -494,25 +502,14 @@
   
   NSURL *imageUrl = [NSURL URLWithString:imageUrlStr];
   
-  //  UIImage *shoesImage = [[UIImage imageWithData: [NSData dataWithContentsOfURL: imageUrl]] retain];
-  //  
-  //  CGSize sz = SHOES_LIST_IMG_SIZE;
-  //  
-  //  UIImage *resized = [HomeViewController scale:shoesImage toSize:sz];
-  //
-  //  cell.imageView.image = resized;
-  
-  //	CGRect frame;
-  //	frame.size.width=75; frame.size.height=75;
-  //	frame.origin.x=0; frame.origin.y=0;
   CGRect frame;
 	frame.size.width=60; frame.size.height=60;
 	frame.origin.x=0; frame.origin.y=0;
-	AsyncImageView* asyncImage = [[[AsyncImageView alloc]
-                                 initWithFrame:frame] autorelease];
-	asyncImage.tag = 999;
-	[asyncImage loadImageFromURL:imageUrl];
-	[cell.contentView addSubview:asyncImage];
+  HJManagedImageV *managedImage = [[[HJManagedImageV alloc] initWithFrame:frame] autorelease];
+  managedImage.url = imageUrl;
+  [objMan manage:managedImage];
+  
+	[cell.contentView addSubview:managedImage];
   
   [cell setShoesBrandName:shoes.productBrandName];
   [cell setShoesColor:shoes.productColor];
