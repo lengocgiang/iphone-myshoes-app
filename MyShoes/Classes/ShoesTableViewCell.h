@@ -51,7 +51,6 @@
 @interface ShoesTableViewCell : UITableViewCell {
     Shoes *shoes;
     
-    UIImageView *imageView;
     UILabel *brandNameLabel;
     UILabel *categoryLabel;
     UILabel *colorLabel;
@@ -59,7 +58,6 @@
 
 @property (nonatomic, retain) Shoes *shoes;
 
-@property (nonatomic, retain) UIImageView *imageView;
 @property (nonatomic, retain) UILabel *brandNameLabel;
 @property (nonatomic, retain) UILabel *categoryLabel;
 @property (nonatomic, retain) UILabel *colorLabel;

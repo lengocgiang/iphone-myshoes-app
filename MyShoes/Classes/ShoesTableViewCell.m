@@ -49,15 +49,18 @@
 #import "ShoesTableViewCell.h"
 #import "Config.h"
 
-#pragma mark -
-#pragma mark SubviewFrames category
+#define IMAGE_SIZE          42.0
+#define EDITING_INSET       10.0
+#define TEXT_LEFT_MARGIN    8.0
+#define TEXT_RIGHT_MARGIN   5.0
+#define PREP_TIME_WIDTH     80.0
 
-@interface ShoesTableViewCell (SubviewFrames)
-- (CGRect)_imageViewFrame;
-- (CGRect)_brandNameLabelFrame;
-- (CGRect)_categoryFrame;
-- (CGRect)_colorFrame;
-@end
+//@interface ShoesTableViewCell (SubviewFrames)
+//- (CGRect)_imageViewFrame;
+//- (CGRect)_brandNameLabelFrame;
+//- (CGRect)_categoryFrame;
+//- (CGRect)_colorFrame;
+//@end
 
 
 #pragma mark -
@@ -65,7 +68,7 @@
 
 @implementation ShoesTableViewCell
 
-@synthesize shoes, imageView, brandNameLabel, categoryLabel, colorLabel;
+@synthesize shoes, brandNameLabel, categoryLabel, colorLabel;
 
 
 #pragma mark -
@@ -74,15 +77,14 @@
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
 
 	if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
-    imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
-		imageView.contentMode = UIViewContentModeScaleAspectFit;
-    [self.contentView addSubview:imageView];
-
     categoryLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     [categoryLabel setFont:[UIFont systemFontOfSize:12.0]];
     [categoryLabel setTextColor:[UIColor darkGrayColor]];
     [categoryLabel setHighlightedTextColor:[UIColor whiteColor]];
-    [self.contentView addSubview:categoryLabel];
+    
+    [categoryLabel setOpaque:YES];
+    [categoryLabel drawTextInRect:CGRectMake(IMAGE_SIZE + EDITING_INSET + TEXT_LEFT_MARGIN, 22.0, self.contentView.bounds.size.width - IMAGE_SIZE - EDITING_INSET - TEXT_LEFT_MARGIN, 16.0)];
+//    [self.contentView addSubview:categoryLabel];
 
     colorLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     colorLabel.textAlignment = UITextAlignmentRight;
@@ -91,104 +93,109 @@
     [colorLabel setHighlightedTextColor:[UIColor whiteColor]];
     colorLabel.minimumFontSize = 7.0;
     colorLabel.lineBreakMode = UILineBreakModeTailTruncation;
-    [self.contentView addSubview:colorLabel];
+    
+    [colorLabel setOpaque:YES];
+    [colorLabel drawTextInRect:CGRectMake(self.contentView.bounds.size.width - PREP_TIME_WIDTH - TEXT_RIGHT_MARGIN, 4.0, PREP_TIME_WIDTH, 16.0)];
+//    [self.contentView addSubview:colorLabel];
 
     brandNameLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     [brandNameLabel setFont:[UIFont boldSystemFontOfSize:14.0]];
     [brandNameLabel setTextColor:[UIColor blackColor]];
     [brandNameLabel setHighlightedTextColor:[UIColor whiteColor]];
-    [self.contentView addSubview:brandNameLabel];
+    
+    [brandNameLabel setOpaque:YES];
+    [brandNameLabel drawTextInRect:CGRectMake(IMAGE_SIZE + EDITING_INSET + TEXT_LEFT_MARGIN, 4.0, self.contentView.bounds.size.width - IMAGE_SIZE - EDITING_INSET - TEXT_LEFT_MARGIN, 16.0)];
+//    [self.contentView addSubview:brandNameLabel];
   }
 
+  // To imporve performance
+  [self setOpaque:YES];
+  
   return self;
 }
 
 
-#pragma mark -
-#pragma mark Laying out subviews
-
-/*
- To save space, the prep time label disappears during editing.
- */
-- (void)layoutSubviews {
-    [super layoutSubviews];
-	
-    [imageView setFrame:[self _imageViewFrame]];
-    [brandNameLabel setFrame:[self _brandNameLabelFrame]];
-    [categoryLabel setFrame:[self _categoryFrame]];
-    [colorLabel setFrame:[self _colorFrame]];
-    if (self.editing) {
-        colorLabel.alpha = 0.0;
-    } else {
-        colorLabel.alpha = 1.0;
-    }
-}
-
-
-#define IMAGE_SIZE          42.0
-#define EDITING_INSET       10.0
-#define TEXT_LEFT_MARGIN    8.0
-#define TEXT_RIGHT_MARGIN   5.0
-#define PREP_TIME_WIDTH     80.0
-
-/*
- Return the frame of the various subviews -- these are dependent on the editing state of the cell.
- */
-- (CGRect)_imageViewFrame {
-    if (self.editing) {
-        return CGRectMake(EDITING_INSET, 0.0, IMAGE_SIZE, IMAGE_SIZE);
-    }
-	else {
-        return CGRectMake(0.0, 0.0, IMAGE_SIZE, IMAGE_SIZE);
-    }
-}
-
-- (CGRect)_brandNameLabelFrame {
-    if (self.editing) {
-        return CGRectMake(IMAGE_SIZE + EDITING_INSET + TEXT_LEFT_MARGIN, 4.0, self.contentView.bounds.size.width - IMAGE_SIZE - EDITING_INSET - TEXT_LEFT_MARGIN, 16.0);
-    }
-	else {
-        return CGRectMake(IMAGE_SIZE + TEXT_LEFT_MARGIN, 4.0, self.contentView.bounds.size.width - IMAGE_SIZE - TEXT_RIGHT_MARGIN * 2 - PREP_TIME_WIDTH, 16.0);
-    }
-}
-
-- (CGRect)_categoryFrame {
-    if (self.editing) {
-        return CGRectMake(IMAGE_SIZE + EDITING_INSET + TEXT_LEFT_MARGIN, 22.0, self.contentView.bounds.size.width - IMAGE_SIZE - EDITING_INSET - TEXT_LEFT_MARGIN, 16.0);
-    }
-	else {
-        return CGRectMake(IMAGE_SIZE + TEXT_LEFT_MARGIN, 22.0, self.contentView.bounds.size.width - IMAGE_SIZE - TEXT_LEFT_MARGIN, 16.0);
-    }
-}
-
-- (CGRect)_colorFrame {
-    CGRect contentViewBounds = self.contentView.bounds;
-    return CGRectMake(contentViewBounds.size.width - PREP_TIME_WIDTH - TEXT_RIGHT_MARGIN, 4.0, PREP_TIME_WIDTH, 16.0);
-}
-
-
-#pragma mark -
-#pragma mark Recipe set accessor
-
-- (void)setShoes:(Shoes *)newShoes {
-    if (newShoes != shoes) {
-        [shoes release];
-        shoes = [newShoes retain];
-	}
-	//imageView.image = shoes.shoesImage;
-  NSString *imageName = shoes.shoesImageName;
-  NSString *imageUrl = [NSString stringWithFormat:@"%@%@",MYSHOES_URL,imageName];
-  
-  NSURL *url = [NSURL URLWithString:imageUrl];
-  //NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
-  
-  UIImage *image = [UIImage imageWithData: [NSData dataWithContentsOfURL: url]];
-
-  imageView.image = image;
-	brandNameLabel.text = shoes.productBrandName;
-	categoryLabel.text = shoes.productCategory;
-	colorLabel.text = shoes.productColor;
-}
+//#pragma mark -
+//#pragma mark Laying out subviews
+//
+///*
+// To save space, the prep time label disappears during editing.
+// */
+//- (void)layoutSubviews {
+//    [super layoutSubviews];
+//	
+//    [imageView setFrame:[self _imageViewFrame]];
+//    [brandNameLabel setFrame:[self _brandNameLabelFrame]];
+//    [categoryLabel setFrame:[self _categoryFrame]];
+//    [colorLabel setFrame:[self _colorFrame]];
+//    if (self.editing) {
+//        colorLabel.alpha = 0.0;
+//    } else {
+//        colorLabel.alpha = 1.0;
+//    }
+//}
+//
+//
+//
+//
+///*
+// Return the frame of the various subviews -- these are dependent on the editing state of the cell.
+// */
+//- (CGRect)_imageViewFrame {
+//    if (self.editing) {
+//        return CGRectMake(EDITING_INSET, 0.0, IMAGE_SIZE, IMAGE_SIZE);
+//    }
+//	else {
+//        return CGRectMake(0.0, 0.0, IMAGE_SIZE, IMAGE_SIZE);
+//    }
+//}
+//
+//- (CGRect)_brandNameLabelFrame {
+//    if (self.editing) {
+//        return CGRectMake(IMAGE_SIZE + EDITING_INSET + TEXT_LEFT_MARGIN, 4.0, self.contentView.bounds.size.width - IMAGE_SIZE - EDITING_INSET - TEXT_LEFT_MARGIN, 16.0);
+//    }
+//	else {
+//        return CGRectMake(IMAGE_SIZE + TEXT_LEFT_MARGIN, 4.0, self.contentView.bounds.size.width - IMAGE_SIZE - TEXT_RIGHT_MARGIN * 2 - PREP_TIME_WIDTH, 16.0);
+//    }
+//}
+//
+//- (CGRect)_categoryFrame {
+//    if (self.editing) {
+//        return CGRectMake(IMAGE_SIZE + EDITING_INSET + TEXT_LEFT_MARGIN, 22.0, self.contentView.bounds.size.width - IMAGE_SIZE - EDITING_INSET - TEXT_LEFT_MARGIN, 16.0);
+//    }
+//	else {
+//        return CGRectMake(IMAGE_SIZE + TEXT_LEFT_MARGIN, 22.0, self.contentView.bounds.size.width - IMAGE_SIZE - TEXT_LEFT_MARGIN, 16.0);
+//    }
+//}
+//
+//- (CGRect)_colorFrame {
+//    CGRect contentViewBounds = self.contentView.bounds;
+//    return CGRectMake(contentViewBounds.size.width - PREP_TIME_WIDTH - TEXT_RIGHT_MARGIN, 4.0, PREP_TIME_WIDTH, 16.0);
+//}
+//
+//
+//#pragma mark -
+//#pragma mark Recipe set accessor
+//
+//- (void)setShoes:(Shoes *)newShoes {
+//    if (newShoes != shoes) {
+//        [shoes release];
+//        shoes = [newShoes retain];
+//	}
+//	//imageView.image = shoes.shoesImage;
+//  NSString *imageName = shoes.shoesImageName;
+//  NSString *imageUrl = [NSString stringWithFormat:@"%@%@",MYSHOES_URL,imageName];
+//  
+//  NSURL *url = [NSURL URLWithString:imageUrl];
+//  //NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
+//  
+//  UIImage *image = [UIImage imageWithData: [NSData dataWithContentsOfURL: url]];
+//
+//  imageView.image = image;
+//	brandNameLabel.text = shoes.productBrandName;
+//	categoryLabel.text = shoes.productCategory;
+//	colorLabel.text = shoes.productColor;
+//}
 
 
 #pragma mark -
@@ -196,7 +203,6 @@
 
 - (void)dealloc {
     [shoes release];
-    [imageView release];
     [brandNameLabel release];
     [categoryLabel release];
     [colorLabel release];
