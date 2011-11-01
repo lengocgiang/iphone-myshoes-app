@@ -509,6 +509,9 @@
   managedImage.url = imageUrl;
   [objMan manage:managedImage];
   
+  // To improve performance
+  [managedImage setOpaque:YES];
+  
 	[cell.contentView addSubview:managedImage];
   
   [cell setShoesBrandName:shoes.productBrandName];
