@@ -9,13 +9,8 @@
 #import "MyShoesAppDelegate.h"
 #import "ShoesListViewController.h"
 #import "HomeViewController.h"
-//#import "UIImage+Alpha.h"
-//#import "UIImage+Resize.h"
-//#import "UIImage+RoundedCorner.h"
 #import <QuartzCore/QuartzCore.h>
 #import "Shoes.h"
-//#import "ShoesTableView.h"
-#import "ShoesDataSource.h"
 #import "TFHpple.h"
 #import "TFHppleElement+AccessChildren.h"
 #import "HJManagedImageV.h"
@@ -25,14 +20,11 @@
 
 @synthesize contentView;
 @synthesize shoesScrollingView;
-//@synthesize shoesTableView;
 @synthesize progressIndicator;
-//@synthesize shoesImage;
 @synthesize slideImageView;
 @synthesize shoesListView;
 @synthesize shoesListCell;
 @synthesize loadMoreSearchResultsCell;
-//@synthesize shoesList = _shoesList;
 @synthesize shoesDict = _shoesDict;
 @synthesize shoesBrandName;
 @synthesize shoesStyle;
@@ -40,7 +32,6 @@
 @synthesize shoesPrice;
 @synthesize toolBar;
 @synthesize imageArray = _imageArray;
-//@synthesize slideMenuViewController;
 @synthesize userSelectedCategoriesArray;
 
 /*
@@ -148,7 +139,6 @@
 }
 
 - (void) startAnimation {
-  //[shoesTableView setHidden:YES];
   //[self hideShoesInfoLabels];
   slideImageView.hidden = YES;
   progressIndicator.hidden = NO;
@@ -160,7 +150,6 @@
   progressIndicator.hidden = YES;
   [UIView beginAnimations:nil context:nil];
   [slideImageView setHidden:YES];
-  //[shoesTableView setHidden:YES];
   [UIView commitAnimations];
 }
 
@@ -316,7 +305,6 @@
       [image release];
     }
     
-    //[shoesTableView setHidden:YES];
     [shoesListView setHidden:YES];
     [shoesScrollingView setHidden:NO];
     
@@ -329,20 +317,6 @@
     
     if(_shoesArray != nil){
       
-      /*[shoesTableView removeFromSuperview];
-       
-       id shoesSource = [[ShoesDataSource alloc] init];
-       [shoesSource setDataSourceShoesArray:_shoesArray];
-       
-       //shoesTableView.dataSource = shoesSource;
-       
-       shoesTableView = [[[ShoesTableView alloc] initWithFrame:CGRectMake(0.0f,0.0f,320.0f,367.0f) 
-       withDataSource:(id)shoesSource] autorelease];
-       
-       //[self.contentView addSubview:shoesTableView];
-       
-       //Get the progress indicator on the top as always.
-       [self.contentView insertSubview:shoesTableView belowSubview:progressIndicator ];*/
       shoesListView.dataSource = self;
       shoesListView.delegate = self;
       [shoesListView reloadData];
@@ -351,10 +325,8 @@
       
     }
     
-    //[shoesTableView release];
     //Hide scrolling shoes list view
     [shoesScrollingView setHidden:YES];
-    //[shoesTableView setHidden:NO];
   }
 }
 
@@ -393,7 +365,6 @@
     shoesPrice.hidden = YES;
   }
   else{
-    //[shoesTableView setHidden:YES]; 
     [shoesListView setHidden:YES];
   }
 }
@@ -417,8 +388,6 @@
 
 - (void)dealloc {
   //[slideMenuViewController release];
-  //[shoesTableView release];
-  //[progressIndicator release];
   [_shoesDict release];
   [_shoesCategoryDict release];
   [_imageArray release];
@@ -541,10 +510,12 @@
     
 		// Slide in the a details view.
     //Set the Name of the cell is @"Category"
-    MyShoesAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    id delegate = [[UIApplication sharedApplication] delegate];
     
-    [delegate.shoesDetailController setShoes:[_shoesArray objectAtIndex:indexPath.row]];
-    [self.navigationController pushViewController:delegate.shoesDetailController animated:YES];
+    if ([delegate respondsToSelector:@selector(shoesDetailController)]){
+      [[delegate shoesDetailController] setShoes:[_shoesArray objectAtIndex:indexPath.row]];
+      [self.navigationController pushViewController:[delegate shoesDetailController] animated:YES];
+    }
   }
   //Deselected the selected Row
   [tableView deselectRowAtIndexPath:indexPath animated:YES];  

@@ -68,10 +68,6 @@
   [super viewDidLoad];
   // Do any additional setup after loading the view from its nib.
   // Load table view for the button group of Category and OnSale
-  /*aTableViewBtn = [[[ShoesTableView alloc] initWithFrame:CGRectMake(0.0f,0.0f,320.0f,300.0f) 
-                                           withDataSource:self] autorelease];
-  
-  [self.view addSubview:aTableViewBtn]; */
   aTableViewBtn = [[[UITableView alloc] initWithFrame:CGRectMake(0.0f,100.0f,320.0f,200.0f) 
                                                 style:UITableViewStyleGrouped] autorelease];
   aTableViewBtn.delegate = self;
@@ -181,9 +177,12 @@
       /*MyShoesViewController *shoesCategoryController = [[[MyShoesViewController alloc]
                                                          initWithNibName:@"MyShoesViewController" 
                                                                   bundle:nil] autorelease];*/
-      MyShoesAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+      id delegate = [[UIApplication sharedApplication] delegate];
             
-      [self.navigationController pushViewController:delegate.shoesCategoryController animated:YES];
+      
+      if ([delegate respondsToSelector:@selector(shoppingCartController)]){
+        [self.navigationController pushViewController:[delegate shoesCategoryController] animated:YES];
+      }
       
       //Deselected the selected Row
       [tableView deselectRowAtIndexPath:indexPath animated:YES];

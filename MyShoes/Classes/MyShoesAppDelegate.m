@@ -20,6 +20,7 @@
 @synthesize shoesDetailController;
 @synthesize shoppingCartController;
 @synthesize shoppingCart;
+@synthesize homeTabPreView;
 
 //@synthesize slideMenuViewController;
 //@synthesize shoesCategoryDict = _shoesCategoryDict;
@@ -63,7 +64,9 @@
   //Add tabBar Controller
   tabController = [[UITabBarController alloc] init];
   
-  homeNavController = [[UINavigationController alloc] init];
+  homeNavController = [[CustomNavigationController alloc] init];
+  //homeNavController = [[UINavigationController alloc] init];
+  homeNavController.delegate = self;
   [homeNavController pushViewController:homeViewController animated:NO];
   
   /*UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
@@ -193,5 +196,15 @@
   [super dealloc];
 }
 
+#pragma mark -
+#pragma mark track back btn of navigation bar methods
+
+//After the new shows up, it will be set as a previous view
+- (void)navigationController:(UINavigationController *)navigationController didPopViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+  if (navigationController == homeNavController){
+    homeTabPreView = viewController;
+  }
+}
 
 @end

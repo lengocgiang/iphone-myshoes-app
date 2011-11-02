@@ -8,9 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "HomeViewBtnCell.h"
-//#import "ShoesTableView.h"
-//#import "ShoesDataSourceProtocol.h"
-
 
 @interface HomeViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>{
     
@@ -20,7 +17,6 @@
   NSArray  *btnNameArray;
   UITableView *aTableViewBtn;
   IBOutlet HomeViewBtnCell *btnCell;
-  //ShoesTableView *aTableViewBtn;
 }
 
 @property (nonatomic, retain) IBOutlet UIButton *browserCategoryBtn;

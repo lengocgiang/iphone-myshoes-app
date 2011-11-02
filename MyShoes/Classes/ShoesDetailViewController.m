@@ -586,7 +586,7 @@ const NSUInteger kSizeColumn = 1;
 - (void)addToCart {
   
   //Locate the shopping cart object in MyShoesApplicationDelegate
-  MyShoesAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+  id delegate = [[UIApplication sharedApplication] delegate];
   
   ShoppingCart *shoppingCart = nil;
   if ([delegate respondsToSelector:@selector(shoppingCart)]){
@@ -596,8 +596,10 @@ const NSUInteger kSizeColumn = 1;
   //Add the selected shoes object to shopping cart
   [shoppingCart addToCart:shoes];
   
+  if ([delegate respondsToSelector:@selector(shoppingCartController)]){
   //Go to shopping cart view
-  [self.navigationController pushViewController:delegate.shoppingCartController animated:YES];
+    [self.navigationController pushViewController:[delegate shoppingCartController] animated:YES];
+  }
   
 }
 

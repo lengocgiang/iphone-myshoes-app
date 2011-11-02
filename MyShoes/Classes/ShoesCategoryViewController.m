@@ -127,12 +127,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   //Start animation
-  MyShoesAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+  id delegate = [[UIApplication sharedApplication] delegate];
   
 	//Initialize the user selected category
   NSMutableArray *userSelectedCategoriesArray = [NSMutableArray arrayWithObjects:[currentPageCategoriesArray objectAtIndex:indexPath.row], [currentPageCategoriesArray objectAtIndex:indexPath.row], nil];
   
-  [delegate.shoesSecondaryCategoryController setUserSelectedCategoriesArray:userSelectedCategoriesArray];
+  [[delegate shoesSecondaryCategoryController] setUserSelectedCategoriesArray:userSelectedCategoriesArray];
   
   //Init the array for all categories in the secondary category view
   NSMutableDictionary *categoryDict = [ShoesCategoryDict dictionary];
@@ -141,7 +141,7 @@
   if (firstCategory.categoryName == SHOES_CATEGORY_BAGS_NAME)
   {
     // Bag's secondary category is special
-    [delegate.shoesSecondaryCategoryController setCurrentPageCategoriesArray: [NSArray arrayWithObjects:
+    [[delegate shoesSecondaryCategoryController] setCurrentPageCategoriesArray: [NSArray arrayWithObjects:
                                        [categoryDict objectForKey:SHOES_CATEGORY_BACKPACKE_NAME], 
                                        [categoryDict objectForKey:SHOES_CATEGORY_HANDBAGS_NAME], 
                                        [categoryDict objectForKey:SHOES_CATEGORY_SPORTS_AND_DUFFELS_NAME], 
@@ -150,7 +150,7 @@
   }
   else
   {
-    [delegate.shoesSecondaryCategoryController setCurrentPageCategoriesArray:[NSArray arrayWithObjects:
+    [[delegate shoesSecondaryCategoryController] setCurrentPageCategoriesArray:[NSArray arrayWithObjects:
                                        [categoryDict objectForKey:SHOES_CATEGORY_DRESS_NAME], 
                                        [categoryDict objectForKey:SHOES_CATEGORY_CASUAL_NAME], 
                                        [categoryDict objectForKey:SHOES_CATEGORY_ATHLETIC_NAME], 
@@ -159,7 +159,7 @@
                                        nil]];
   }
 
-  [self.navigationController pushViewController:delegate.shoesSecondaryCategoryController animated:YES];
+  [self.navigationController pushViewController:[delegate shoesSecondaryCategoryController] animated:YES];
   
   //Deselected the selected Row
   [tableView deselectRowAtIndexPath:indexPath animated:YES];

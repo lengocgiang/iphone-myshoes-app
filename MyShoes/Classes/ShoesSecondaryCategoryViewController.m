@@ -130,12 +130,14 @@
   }
   
   //Start animation
-  MyShoesAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+  id delegate = [[UIApplication sharedApplication] delegate];
   
 	[userSelectedCategoriesArray replaceObjectAtIndex:POSITION_OF_SECONDARY_CATEGORY withObject:[currentPageCategoriesArray objectAtIndex:indexPath.row]];
   
-  [delegate.shoesListController setUserSelectedCategoriesArray:userSelectedCategoriesArray];
-  [self.navigationController pushViewController:delegate.shoesListController animated:YES];
+  if ([delegate respondsToSelector:@selector(shoesDetailController)]){
+    [[delegate shoesListController] setUserSelectedCategoriesArray:userSelectedCategoriesArray];
+    [self.navigationController pushViewController:[delegate shoesListController] animated:YES];
+  }
   
   //Deselected the selected Row
   [categoryTableView deselectRowAtIndexPath:indexPath animated:YES];

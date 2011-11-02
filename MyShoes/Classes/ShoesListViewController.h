@@ -13,7 +13,6 @@
 #import "Shoes.h"
 #import "ShoesCategory.h"
 #import "OrderedDictionary.h"
-#import "ShoesTableView.h"
 #import "ShoesListViewCell.h"
 #import "LoadMoreSearchResultsTableViewCell.h"
 #import "NetworkTool.h"
@@ -25,7 +24,6 @@
   //UIWebView *shoesImage;
   
   SlideImageView *slideImageView;
-  //ShoesTableView *shoesTableView;
   
   UITableView *shoesListView;
   UIView *shoesScrollingView;
@@ -72,8 +70,6 @@
 @property (nonatomic, retain) IBOutlet UITableView *shoesListView;
 @property (nonatomic, retain) IBOutlet ShoesListViewCell *shoesListCell;
 @property (nonatomic, retain) IBOutlet UITableViewCell *loadMoreSearchResultsCell;
-//@property (nonatomic, retain) ShoesTableView *shoesTableView;
-//@property (nonatomic, retain) NSMutableArray *shoesList;
 @property (nonatomic, retain) NSMutableDictionary *shoesDict;
 @property (nonatomic, retain) IBOutlet UILabel *shoesBrandName;
 @property (nonatomic, retain) IBOutlet UILabel *shoesStyle;

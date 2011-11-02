@@ -142,10 +142,13 @@
   }
   
   //Start animation
-  MyShoesAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+  id delegate = [[UIApplication sharedApplication] delegate];
   
-  [delegate.shoesListController hideShoesListInfoLabels];
-  [delegate.shoesListController startAnimation];
+  if ([delegate respondsToSelector:@selector(shoesListController)]){
+
+    [[delegate shoesListController] hideShoesListInfoLabels];
+    [[delegate shoesListController] startAnimation];
+  }
   
 	//screenLabel.text = ((UIButton*)sender).currentTitle;
 	NSLog(@"The button pressed is:%@",((UIButton*)sender).currentTitle);
@@ -203,7 +206,7 @@
   self.shoesArray = shoesList;
 
   //Stop Animation
-  MyShoesAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+  id delegate = [[UIApplication sharedApplication] delegate];
   
 	[xpathParser release];
   
@@ -213,11 +216,11 @@
     /*Shoes *shoes = [self.shoesArray objectAtIndex:0];
     NSString *imageName = shoes.shoesImageName;
     NSString *imageUrl = [NSString stringWithFormat:@"%@%@",MYSHOES_URL,imageName];*/
-    [delegate.shoesListController showShoesList/*:self.shoesArray*/];
+    [[delegate shoesListController] showShoesList/*:self.shoesArray*/];
   }
-  [delegate.shoesListController stopAnimation];
+  [[delegate shoesListController] stopAnimation];
   if ([self.shoesArray count] >= 1){
-    [delegate.shoesListController showShoesListInfo:[self.shoesArray objectAtIndex:0]];
+    [[delegate shoesListController] showShoesListInfo:[self.shoesArray objectAtIndex:0]];
   }
   
   //Enable all buttons
