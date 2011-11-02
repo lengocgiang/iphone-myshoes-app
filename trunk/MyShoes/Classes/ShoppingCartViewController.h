@@ -21,4 +21,6 @@
 @property (nonatomic, retain) UITableView *shoppingCartListView;
 @property (nonatomic, retain) NetworkTool *networkTool;
 
+- (void)EditButtonAction:(id)sender;
+
 @end

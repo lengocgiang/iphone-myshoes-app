@@ -48,6 +48,16 @@
   return [number unsignedIntValue];
 }
 
+//Remove shoes and shoes quantity info from shopping cart
+- (void)removeShoesAtIndex:(NSUInteger)index {
+  //Out of boundary, do nothing
+  if (index >= [self getCount]){
+    return;
+  }
+  [shoesArray removeObjectAtIndex:index];
+  [shoesQuantity removeObjectAtIndex:index];
+}
+
 - (void)dealloc {
   [shoesQuantity release];
   [shoesArray release];

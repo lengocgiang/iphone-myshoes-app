@@ -49,6 +49,7 @@
 		B09F204B145A7C6200B5F70D /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B09F2047145A7C6200B5F70D /* HomeViewController.xib */; };
 		B09F204C145A7C6200B5F70D /* ShoesListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B09F2048145A7C6200B5F70D /* ShoesListViewController.xib */; };
 		B09F204D145A7C6200B5F70D /* ShoesSecondaryCategoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B09F2049145A7C6200B5F70D /* ShoesSecondaryCategoryViewController.xib */; };
+		B0A203C7145FCCEE00E5AF97 /* CustomNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0A203C6145FCCEE00E5AF97 /* CustomNavigationController.m */; };
 		B0ADDC021316FEEE00B34625 /* ShoesDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0ADDC001316FEEE00B34625 /* ShoesDetailViewController.m */; };
 		B0ADDC031316FEEE00B34625 /* ShoesDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0ADDC011316FEEE00B34625 /* ShoesDetailViewController.xib */; };
 		B0B8B7E312F7917A00446CCC /* TFHpple.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B8B7DE12F7917A00446CCC /* TFHpple.m */; };
@@ -65,8 +66,6 @@
 		B0E59BA2144E9F810084AED5 /* ShoppingCart.m in Sources */ = {isa = PBXBuildFile; fileRef = B0E59BA1144E9F810084AED5 /* ShoppingCart.m */; };
 		B0EDFEF6144950DF0026EC99 /* BSPreviewScrollView+ReloadPages.m in Sources */ = {isa = PBXBuildFile; fileRef = B0EDFEF5144950DF0026EC99 /* BSPreviewScrollView+ReloadPages.m */; };
 		B0EE004D142D6FCC008A1131 /* ShoesListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B0EE004B142D6FCC008A1131 /* ShoesListViewCell.m */; };
-		B0EE6B811391D3D30023FD4A /* ShoesTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = B0EE6B801391D3D30023FD4A /* ShoesTableView.m */; };
-		B0EE6B861391D95C0023FD4A /* ShoesDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = B0EE6B831391D95C0023FD4A /* ShoesDataSource.m */; };
 		B0EE6B891391E1C50023FD4A /* ShoesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B0EE6B871391E1C40023FD4A /* ShoesTableViewCell.m */; };
 		B0F067C914560FB400659B05 /* ShoppingCartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0F067C714560FB400659B05 /* ShoppingCartViewController.m */; };
 		B0F067CA14560FB400659B05 /* ShoppingCartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0F067C814560FB400659B05 /* ShoppingCartViewController.xib */; };
@@ -143,6 +142,8 @@
 		B09F2047145A7C6200B5F70D /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HomeViewController.xib; path = Resources/HomeViewController.xib; sourceTree = "<group>"; };
 		B09F2048145A7C6200B5F70D /* ShoesListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ShoesListViewController.xib; path = Resources/ShoesListViewController.xib; sourceTree = "<group>"; };
 		B09F2049145A7C6200B5F70D /* ShoesSecondaryCategoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ShoesSecondaryCategoryViewController.xib; path = Resources/ShoesSecondaryCategoryViewController.xib; sourceTree = "<group>"; };
+		B0A203C5145FCCEE00E5AF97 /* CustomNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomNavigationController.h; path = Classes/customNavigationController/CustomNavigationController.h; sourceTree = "<group>"; };
+		B0A203C6145FCCEE00E5AF97 /* CustomNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomNavigationController.m; path = Classes/customNavigationController/CustomNavigationController.m; sourceTree = "<group>"; };
 		B0ADDBFF1316FEEE00B34625 /* ShoesDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoesDetailViewController.h; sourceTree = "<group>"; };
 		B0ADDC001316FEEE00B34625 /* ShoesDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoesDetailViewController.m; sourceTree = "<group>"; };
 		B0ADDC011316FEEE00B34625 /* ShoesDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ShoesDetailViewController.xib; path = Classes/ShoesDetailViewController.xib; sourceTree = "<group>"; };
@@ -175,11 +176,6 @@
 		B0EDFEF5144950DF0026EC99 /* BSPreviewScrollView+ReloadPages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BSPreviewScrollView+ReloadPages.m"; sourceTree = "<group>"; };
 		B0EE004A142D6FCC008A1131 /* ShoesListViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoesListViewCell.h; sourceTree = "<group>"; };
 		B0EE004B142D6FCC008A1131 /* ShoesListViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoesListViewCell.m; sourceTree = "<group>"; };
-		B0EE6B7F1391D3D30023FD4A /* ShoesTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoesTableView.h; sourceTree = "<group>"; };
-		B0EE6B801391D3D30023FD4A /* ShoesTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoesTableView.m; sourceTree = "<group>"; };
-		B0EE6B831391D95C0023FD4A /* ShoesDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShoesDataSource.m; path = Classes/ShoesDataSource.m; sourceTree = "<group>"; };
-		B0EE6B841391D95C0023FD4A /* ShoesDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShoesDataSource.h; path = Classes/ShoesDataSource.h; sourceTree = "<group>"; };
-		B0EE6B851391D95C0023FD4A /* ShoesDataSourceProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShoesDataSourceProtocol.h; path = Classes/ShoesDataSourceProtocol.h; sourceTree = "<group>"; };
 		B0EE6B871391E1C40023FD4A /* ShoesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoesTableViewCell.m; sourceTree = "<group>"; };
 		B0EE6B881391E1C50023FD4A /* ShoesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoesTableViewCell.h; sourceTree = "<group>"; };
 		B0F067C614560FB400659B05 /* ShoppingCartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoppingCartViewController.h; sourceTree = "<group>"; };
@@ -234,8 +230,6 @@
 				B0E1BE731301F88B0044A2EF /* TFHppleElement+AccessChildren.m */,
 				B0292543130E2CF600A78DB1 /* NSMutableArray+QueueAdditions.h */,
 				B0292544130E2CF700A78DB1 /* NSMutableArray+QueueAdditions.m */,
-				B0EE6B7F1391D3D30023FD4A /* ShoesTableView.h */,
-				B0EE6B801391D3D30023FD4A /* ShoesTableView.m */,
 				B0EE6B881391E1C50023FD4A /* ShoesTableViewCell.h */,
 				B0EE6B871391E1C40023FD4A /* ShoesTableViewCell.m */,
 				B0F63C741426B52D0017CC02 /* HomeViewController.h */,
@@ -300,11 +294,11 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				B0A203C4145FCCB700E5AF97 /* customNavigationController */,
 				0A90AA1A145E07CE00BC5224 /* HJCache */,
 				B0F798AB1447FCDA004EF0E9 /* BSPreviewScrollView */,
 				B0F798A41447FC64004EF0E9 /* MBProgressHUD */,
 				B092F8CE1307DB0C007855C5 /* OrderedDictionary */,
-				B0EE6B821391D9310023FD4A /* Data source */,
 				B0B8B7DC12F7917A00446CCC /* hpple */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -362,6 +356,15 @@
 			name = OrderedDictionary;
 			sourceTree = "<group>";
 		};
+		B0A203C4145FCCB700E5AF97 /* customNavigationController */ = {
+			isa = PBXGroup;
+			children = (
+				B0A203C5145FCCEE00E5AF97 /* CustomNavigationController.h */,
+				B0A203C6145FCCEE00E5AF97 /* CustomNavigationController.m */,
+			);
+			name = customNavigationController;
+			sourceTree = "<group>";
+		};
 		B0B8B7DC12F7917A00446CCC /* hpple */ = {
 			isa = PBXGroup;
 			children = (
@@ -374,16 +377,6 @@
 			);
 			name = hpple;
 			path = Classes/hpple;
-			sourceTree = "<group>";
-		};
-		B0EE6B821391D9310023FD4A /* Data source */ = {
-			isa = PBXGroup;
-			children = (
-				B0EE6B851391D95C0023FD4A /* ShoesDataSourceProtocol.h */,
-				B0EE6B841391D95C0023FD4A /* ShoesDataSource.h */,
-				B0EE6B831391D95C0023FD4A /* ShoesDataSource.m */,
-			);
-			name = "Data source";
 			sourceTree = "<group>";
 		};
 		B0F63C641426AA2E0017CC02 /* images */ = {
@@ -517,8 +510,6 @@
 				B0292545130E2CF700A78DB1 /* NSMutableArray+QueueAdditions.m in Sources */,
 				B03B05A813134F0500A39685 /* Reachability.m in Sources */,
 				B0ADDC021316FEEE00B34625 /* ShoesDetailViewController.m in Sources */,
-				B0EE6B811391D3D30023FD4A /* ShoesTableView.m in Sources */,
-				B0EE6B861391D95C0023FD4A /* ShoesDataSource.m in Sources */,
 				B0EE6B891391E1C50023FD4A /* ShoesTableViewCell.m in Sources */,
 				B0F63C771426B52D0017CC02 /* HomeViewController.m in Sources */,
 				B02ADE5C142941340074543C /* HomeViewBtnCell.m in Sources */,
@@ -543,6 +534,7 @@
 				0A90AA36145E080C00BC5224 /* HJMOUserBase.m in Sources */,
 				0A90AA37145E080C00BC5224 /* HJObjManager.m in Sources */,
 				0A90AA38145E080C00BC5224 /* HJWeakMutableArray.m in Sources */,
+				B0A203C7145FCCEE00E5AF97 /* CustomNavigationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
