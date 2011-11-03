@@ -49,7 +49,7 @@
   
   NSMutableArray *shoesAllAngels;
   
-  BOOL viewRested;
+  BOOL viewRest;
 
 }
 

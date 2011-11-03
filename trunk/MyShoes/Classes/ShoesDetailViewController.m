@@ -99,7 +99,7 @@ const NSUInteger kSizeColumn = 1;
   [super viewDidLoad];
   
   //
-  viewRested = YES;
+  viewRest = YES;
   //Create network toolkit
   networkTool = [[NetworkTool alloc] init];
   
@@ -230,10 +230,10 @@ const NSUInteger kSizeColumn = 1;
 - (void)viewDidAppear:(BOOL)animated {
   [super viewDidAppear:animated];
 
-  if(viewRested){
+  if(viewRest){
     //If the shoes detail view is reset, will load the info when show the view
     [self loadShoesDetail];
-    viewRested = FALSE;
+    viewRest = FALSE;
   }
   else{
     //Render shoes detail info directly
@@ -622,7 +622,7 @@ const NSUInteger kSizeColumn = 1;
   [shoesAllAngels removeAllObjects];
   
   //Set flag which shows the view has been reseted;
-  viewRested = TRUE;
+  viewRest = TRUE;
 }
 
 @end

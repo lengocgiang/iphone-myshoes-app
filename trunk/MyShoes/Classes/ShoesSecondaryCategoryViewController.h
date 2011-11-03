@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomNavigationController.h"
 
 
-@interface ShoesSecondaryCategoryViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>{
+@interface ShoesSecondaryCategoryViewController : UIViewController <UITableViewDelegate, UITableViewDataSource,
+                                                  ShoesViewProtocol>{
     
   UITableView *categoryTableView;
     
