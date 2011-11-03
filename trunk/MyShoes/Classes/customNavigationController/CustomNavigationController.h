@@ -26,3 +26,11 @@
 
 
 @end
+
+@protocol ShoesViewProtocol <NSObject>
+
+@required
+
+- (void)resetView;
+
+@end
