@@ -168,4 +168,12 @@
   [categoryTableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+#pragma mark -
+#pragma mark ShowView common methods
+
+- (void)resetView{
+  //When user leaves this view and go back the view before. it should clean this view
+  //For the category view, there is no need to hold reset since it is not loading data online
+}
+
 @end

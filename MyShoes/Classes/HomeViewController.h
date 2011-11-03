@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "HomeViewBtnCell.h"
+#import "CustomNavigationController.h"
 
-@interface HomeViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>{
+@interface HomeViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, ShoesViewProtocol>{
     
   UIButton *browserCategoryBtn;
   UIButton *onSaleBtn;

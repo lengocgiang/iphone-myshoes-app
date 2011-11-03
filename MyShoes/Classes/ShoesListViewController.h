@@ -8,34 +8,24 @@
 
 #import <UIKit/UIKit.h>
 #import "Config.h"
-#import "SlideImageView.h"
-//#import "SlideMenuViewController.h"
 #import "Shoes.h"
 #import "ShoesCategory.h"
 #import "OrderedDictionary.h"
 #import "ShoesListViewCell.h"
 #import "LoadMoreSearchResultsTableViewCell.h"
+#import "CustomNavigationController.h"
 #import "NetworkTool.h"
 #import "HJObjManager.h"
 
-@interface ShoesListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource/*, SlideImageViewDelegate*/>{
+@interface ShoesListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, ShoesViewProtocol/*, SlideImageViewDelegate*/>{
   UIView *contentView;
   UIActivityIndicatorView *progressIndicator;
   //UIWebView *shoesImage;
   
-  SlideImageView *slideImageView;
+  //SlideImageView *slideImageView;
   
   UITableView *shoesListView;
   UIView *shoesScrollingView;
-  //NSMutableArray *_shoesList;
-  
-  UILabel *shoesBrandName;
-  UILabel *shoesStyle;
-  UILabel *shoesColor;
-  UILabel *shoesPrice;
-  
-  //UIToolbar
-  UIToolbar *toolBar;
   
   NSArray *_imageArray;
   
@@ -60,30 +50,24 @@
   
   //HJCache library for asynchronous image loading and caching
   HJObjManager *objMan;
+
+  //The flag to show if the view has been reset, the initial value is TRUE
+  BOOL viewRest;
 }
 
 @property (nonatomic, retain) IBOutlet UIView *contentView;
 @property (nonatomic, retain) IBOutlet UIView *shoesScrollingView;
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *progressIndicator;
-//@property (nonatomic, retain) IBOutlet UIWebView *shoesImage;
-@property (nonatomic, retain) IBOutlet SlideImageView *slideImageView;
 @property (nonatomic, retain) IBOutlet UITableView *shoesListView;
 @property (nonatomic, retain) IBOutlet ShoesListViewCell *shoesListCell;
 @property (nonatomic, retain) IBOutlet UITableViewCell *loadMoreSearchResultsCell;
 @property (nonatomic, retain) NSMutableDictionary *shoesDict;
-@property (nonatomic, retain) IBOutlet UILabel *shoesBrandName;
-@property (nonatomic, retain) IBOutlet UILabel *shoesStyle;
-@property (nonatomic, retain) IBOutlet UILabel *shoesColor;
-@property (nonatomic, retain) IBOutlet UILabel *shoesPrice;
-@property (nonatomic, retain) UIToolbar *toolBar;
 @property (nonatomic, retain) NSArray *imageArray;
-//@property (nonatomic, retain) SlideMenuViewController *slideMenuViewController;
 @property (nonatomic, retain) NSMutableArray *userSelectedCategoriesArray;
 
 - (void)startAnimation;
 - (void)stopAnimation;
-- (void)showShoesList/*:(NSArray *) shoesList*/;
-- (void)showShoesListInfo:(Shoes *)shoes;
+- (void)showShoesList;
 - (void)hideShoesListInfoLabels;
 - (void)loadShoesList;
 - (NSString *)generateUrl;

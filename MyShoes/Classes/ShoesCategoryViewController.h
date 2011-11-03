@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "OrderedDictionary.h"
-#import "NetworkTool.h"
+#import "CustomNavigationController.h"
 
-
-@interface ShoesCategoryViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>{
+@interface ShoesCategoryViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, 
+                                                          ShoesViewProtocol>{
   
   UITableView *categoryTableView;
 

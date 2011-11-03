@@ -21,16 +21,10 @@
 @synthesize contentView;
 @synthesize shoesScrollingView;
 @synthesize progressIndicator;
-@synthesize slideImageView;
 @synthesize shoesListView;
 @synthesize shoesListCell;
 @synthesize loadMoreSearchResultsCell;
 @synthesize shoesDict = _shoesDict;
-@synthesize shoesBrandName;
-@synthesize shoesStyle;
-@synthesize shoesColor;
-@synthesize shoesPrice;
-@synthesize toolBar;
 @synthesize imageArray = _imageArray;
 @synthesize userSelectedCategoriesArray;
 
@@ -53,56 +47,36 @@
 
 - (void)viewDidAppear:(BOOL)animated {
   [super viewDidAppear:animated];
-  _shoesArray = [[NSMutableArray alloc] init];
-  currentPages = 1;
-  [self loadShoesList];
+  
+  //If the view has been reset, load the list online
+  if (viewRest){
+    _shoesArray = [[NSMutableArray alloc] init];
+    currentPages = 1;
+    [self loadShoesList];
+    
+    viewRest = FALSE;
+  }
+  else{
+    //Show the list directly
+    [self showShoesList];
+  }
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
   [super viewDidDisappear:animated];
-  [_shoesArray release];
+  //[_shoesArray release];
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
   [super viewDidLoad];
-  slideImageView.delegate = self;
+  
+  //Init the value of viewReset
+  viewRest = TRUE;
+  
   
   //Default shoes list view is table view
   _isTableView = YES;
-  
-  NSMutableArray* images = [NSMutableArray arrayWithCapacity:CAPACITY_SHOES_LIST];
-	
-	for(int i=0; i<CATEGORY_SHOES_COUNT; i++)
-	{
-		// Rounded rect is nice
-		UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(-320.0f, 0.0f, 135.0f, 135.0f)];
-		
-		// Give the buttons a width of 100 and a height of 30. The slide menu will take care of positioning the buttons.
-		// If you don't know that 100 will be enough, use my function to calculate the length of a string. You find it on my blog.
-		/*[btn setFrame:CGRectMake(0.0f, 20.0f, 50.0f, 50.0f)];
-     [btn setTitle:scategoryName forState:UIControlStateNormal];		
-     [btn addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];*/
-    //imageView.scalesPageToFit = YES;
-    imageView.backgroundColor = [UIColor clearColor];
-    imageView.layer.cornerRadius = ((imageView.frame.size.width)/135.0f)*SHOES_IMAGE_CORNER_RADIUS;
-    imageView.clipsToBounds = YES;
-		[images addObject:imageView];
-    imageView.contentMode = UIViewContentModeScaleToFill;
-    
-    //hide all imageview in the very beginning
-    imageView.hidden = YES;
-		
-    [imageView release];
-		//[btn release];
-	}
-	
-  self.imageArray = [[images copy] autorelease];
-  /*self.slideImageView = [[SlideImageView alloc] initWithFrameColorAndImages:CGRectMake(0.0f, 0.0f, 320.0f,  280.0f) 
-   backgroundColor:[UIColor grayColor]  
-   images:self.imageArray];*/
-  [self.slideImageView setupImages:self.imageArray];
-  //[self.contentView addSubview:self.slideImageView];
   
   networkTool = [[NetworkTool alloc] init];
   objMan = [[HJObjManager alloc] init];
@@ -133,14 +107,9 @@
 	// Release any retained subviews of the main view.
 	// e.g. self.myOutlet = nil;
   [super viewDidUnload];
-  
-  [networkTool release];
-  [objMan release];
 }
 
 - (void) startAnimation {
-  //[self hideShoesInfoLabels];
-  slideImageView.hidden = YES;
   progressIndicator.hidden = NO;
   [progressIndicator startAnimating];
 }
@@ -149,7 +118,6 @@
   [progressIndicator stopAnimating];
   progressIndicator.hidden = YES;
   [UIView beginAnimations:nil context:nil];
-  [slideImageView setHidden:YES];
   [UIView commitAnimations];
 }
 
@@ -202,17 +170,12 @@
 	NSArray *elements  = [xpathParser search:SHOES_CATEGORY_PRODUCT_LIST_XPATH];
 	
 	// Get the link information within the cell tag
-	//NSString *value = [element objectForKey:HREF_TAG];
-	//NSString *str;
 	
 	for (TFHppleElement *element in elements) {
     
     Shoes *shoes = [[[Shoes alloc] initWithShoesNode:element] autorelease];
     [shoesList addObject:shoes];
     
-		/*NSArray *children = [element childNodes];
-     for (TFHppleElement *child in children) {
-     }*/
 	}
 	
   if (currentPages == 1)
@@ -233,15 +196,9 @@
   //If there is any shoes come back, show the first shoes
   if ([_shoesArray count] > 0){
     //Show the first shoes in the list
-    /*Shoes *shoes = [self.shoesArray objectAtIndex:0];
-     NSString *imageName = shoes.shoesImageName;
-     NSString *imageUrl = [NSString stringWithFormat:@"%@%@",MYSHOES_URL,imageName];*/
-    [self showShoesList/*:_shoesArray*/];
+    [self showShoesList];
   }
   [self stopAnimation];
-  if ([_shoesArray count] >= 1){
-    [self showShoesListInfo:[_shoesArray objectAtIndex:0]];
-  }
   
   NSUInteger index = (currentPages-1)*CATEGORY_SHOES_COUNT;
   NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
@@ -258,140 +215,36 @@
 
 - (void) showShoesList/*:(NSArray *) shoesArray*/ {
   
-  //Start animation
-  //[self startAnimation];
-  //[self hideShoesInfoLabels];
-  
-  
-  /*if(shoesArray != nil){
-   [self.shoesDict autorelease];
-   self.shoesDict = [[NSMutableDictionary dictionaryWithCapacity:CAPACITY_SHOES_LIST] retain];
-   
-   if(_shoesArray != nil){
-   [_shoesArray release];
-   _shoesArray = nil;
-   }
-   _shoesArray = [shoesArray retain];
-   }*/
-  
-  //If scrolling view, shows shoes list in scrolling mode
-  if (!_isTableView){
-    
-    int i=0;
-    
-    for (Shoes *shoes in _shoesArray){
+  if(_shoesArray != nil){
+
+    shoesListView.dataSource = self;
+    shoesListView.delegate = self;
+    [shoesListView reloadData];
+    [shoesListView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
+    [shoesListView setHidden:NO];
       
-      NSString *imageName = shoes.shoesImageName;
-      NSString *imageUrlStr = [NSString stringWithFormat:@"%@%@",MYSHOES_URL,imageName];
-      
-      NSURL *imageUrl = [NSURL URLWithString:imageUrlStr];
-      //NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
-      
-      UIImage *image = [[UIImage imageWithData: [NSData dataWithContentsOfURL: imageUrl]] retain];
-      //UIImage *roundImage = [image roundedCornerImage:SHOES_IMAGE_CORNER_RADIUS borderSize:SHOES_IMAGE_BORDER_SIZE];
-      
-      if (i< [self.imageArray count]){
-        UIImageView *imageView;
-        imageView = [self.imageArray objectAtIndex:i++];
-        //[imageView loadRequest:requestObj];
-        imageView.image = image;
-        
-        imageView.hidden = NO;
-        
-        //Add shoes imageView pair to shoesDict (key is the imageView)
-        [self.shoesDict setObject:shoes forKey:imageView.image];
-        
-      }
-      [image release];
-    }
-    
-    [shoesListView setHidden:YES];
-    [shoesScrollingView setHidden:NO];
-    
-    /*if ([shoesArray count] >= 1){
-     [self showShoesInfo:[shoesArray objectAtIndex:0]];
-     }*/
-    //[self stopAnimation];
-  }
-  else{
-    
-    if(_shoesArray != nil){
-      
-      shoesListView.dataSource = self;
-      shoesListView.delegate = self;
-      [shoesListView reloadData];
-      [shoesListView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
-      [shoesListView setHidden:NO];
-      
-    }
-    
     //Hide scrolling shoes list view
     [shoesScrollingView setHidden:YES];
   }
 }
 
-/*- (void)scrollViewDidScroll:(UIImageView *)selectedView{
- //locate the actually shoes selected
- Shoes *shoes = [self.shoesDict objectForKey:selectedView.image];
- 
- [self showShoesListInfo:shoes];
- }
- 
- - (void)scrollViewBeganScroll{
- //When users begin scrolling, hide all the four labels
- [self hideShoesListInfoLabels];
- }*/
-
-- (void)showShoesListInfo:(Shoes *)shoes{
-  shoesBrandName.text = shoes.productCategory;
-  shoesStyle.text = shoes.productStyle;
-  shoesColor.text = shoes.productColor;
-  shoesPrice.text = shoes.productPrice;
-  //Show shoes info
-  shoesBrandName.hidden = NO;
-  shoesStyle.hidden = NO;
-  shoesColor.hidden = NO;
-  shoesPrice.hidden = NO;
-  
-}
 
 - (void)hideShoesListInfoLabels{
   
-  //Hide shoes info when changing shoes category
-  if(!_isTableView){
-    shoesBrandName.hidden = YES;
-    shoesStyle.hidden = YES;
-    shoesColor.hidden = YES;
-    shoesPrice.hidden = YES;
-  }
-  else{
-    [shoesListView setHidden:YES];
-  }
+  [shoesListView setHidden:YES];
 }
 
 - (void)openSearchView{
   NSLog(@"Gonna open search view");
 }
 
-- (void)switchShoesListView{
-  NSLog(@"Gonna switch shoes list view from table to scroll images or vice versa");
-  if (_isTableView) {
-    _isTableView = NO;
-  }
-  else{
-    _isTableView = YES;
-  }
-  
-  //Just refresh the view with existing shoes data
-  [self showShoesList/*:nil*/];
-}
-
 - (void)dealloc {
-  //[slideMenuViewController release];
   [_shoesDict release];
   [_shoesCategoryDict release];
   [_imageArray release];
   [_shoesArray release];
+  [networkTool release];
+  [objMan release];
   
   [super dealloc];
 }
@@ -526,5 +379,16 @@
 {
   return SHOES_LIST_CELL_HEIGHT;//[indexPath row] * 20;
 }
+
+#pragma mark -
+#pragma mark ShowView common methods
+
+- (void)resetView{
+  //When user leaves this view and go back the view before. it should clean this view
+  [_shoesArray release];
+  //Set flag which shows the view has been reset;
+  viewRest = TRUE;
+}
+
 
 @end
