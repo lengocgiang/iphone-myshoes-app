@@ -20,7 +20,6 @@
 @synthesize shoesDetailController;
 @synthesize shoppingCartController;
 @synthesize shoppingCart;
-@synthesize homeTabPreView;
 
 //@synthesize slideMenuViewController;
 //@synthesize shoesCategoryDict = _shoesCategoryDict;
@@ -202,8 +201,15 @@
 //After the new shows up, it will be set as a previous view
 - (void)navigationController:(UINavigationController *)navigationController didPopViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
+  id previousView;
+  
+  previousView = viewController;
+  
   if (navigationController == homeNavController){
-    homeTabPreView = viewController;
+    //Reset previous View
+    if ([previousView conformsToProtocol:@protocol(ShoesViewProtocol)]){
+      [previousView resetView];
+    }
   }
 }
 

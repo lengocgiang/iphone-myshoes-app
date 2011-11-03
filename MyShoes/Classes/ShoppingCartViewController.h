@@ -8,14 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "NetworkTool.h"
+#import "CustomNavigationController.h"
 
-@interface ShoppingCartViewController : UIViewController<UITableViewDelegate, UITableViewDataSource> {
+@interface ShoppingCartViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, ShoesViewProtocol> {
   //Table view for shopping cart
   UITableView *shoppingCartListView;
   
   /* The NetworkTool instance to do network communications. */
   NetworkTool *networkTool;
 
+  //BOOL viewRested;
 }
 
 @property (nonatomic, retain) UITableView *shoppingCartListView;

@@ -98,6 +98,8 @@ const NSUInteger kSizeColumn = 1;
 - (void)viewDidLoad {
   [super viewDidLoad];
   
+  //
+  viewRested = YES;
   //Create network toolkit
   networkTool = [[NetworkTool alloc] init];
   
@@ -228,7 +230,15 @@ const NSUInteger kSizeColumn = 1;
 - (void)viewDidAppear:(BOOL)animated {
   [super viewDidAppear:animated];
 
-  [self loadShoesDetail];
+  if(viewRested){
+    //If the shoes detail view is reset, will load the info when show the view
+    [self loadShoesDetail];
+    viewRested = FALSE;
+  }
+  else{
+    //Render shoes detail info directly
+    [self renderShoesDetail];
+  }
   
   //HUD = [[MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES] retain];
 
@@ -236,8 +246,8 @@ const NSUInteger kSizeColumn = 1;
 
 - (void)viewDidDisappear:(BOOL)animated {
   //Reset shoes detail view
-  self.shoesBrandLogo.image = nil;
-  [shoesAllAngels removeAllObjects];
+  //self.shoesBrandLogo.image = nil;
+  //[shoesAllAngels removeAllObjects];
   [self hideShoesInfo];
 }
 
@@ -601,6 +611,18 @@ const NSUInteger kSizeColumn = 1;
     [self.navigationController pushViewController:[delegate shoppingCartController] animated:YES];
   }
   
+}
+
+#pragma mark -
+#pragma mark ShowView common methods
+
+- (void)resetView{
+  //When user leaves this view and go back the view before. it should clean this view
+  self.shoesBrandLogo.image = nil;
+  [shoesAllAngels removeAllObjects];
+  
+  //Set flag which shows the view has been reseted;
+  viewRested = TRUE;
 }
 
 @end

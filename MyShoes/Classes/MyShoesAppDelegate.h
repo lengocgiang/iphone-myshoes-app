@@ -20,6 +20,7 @@
 #import "CustomNavigationController.h"
 #import "Debug.h"
 
+//@class ShoesDetailViewController;
 @class Reachability;
 
 @interface MyShoesAppDelegate : NSObject <UIApplicationDelegate,CustomNavigationControllerDelegate> {
@@ -38,7 +39,6 @@
   ShoppingCartViewController *shoppingCartController;
   ShoppingCart *shoppingCart;
   
-  id homeTabPreView;
   //Reachability object
   Reachability *_hostReach;
 }
@@ -51,10 +51,8 @@
 @property (nonatomic, retain) ShoesDetailViewController *shoesDetailController;
 @property (nonatomic, retain) ShoppingCartViewController *shoppingCartController;
 @property (nonatomic, retain) ShoppingCart *shoppingCart;
-@property (nonatomic, retain) id homeTabPreView;
 
 + (BOOL) IsEnableWIFI;
 + (BOOL) IsEnable3G;
 
 @end
-

@@ -218,5 +218,11 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
   }
 }
 
+#pragma mark -
+#pragma mark ShowView common methods
+
+- (void)resetView{
+  //Anything here need to clean this view
+}
 
 @end

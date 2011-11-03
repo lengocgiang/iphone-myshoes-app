@@ -12,10 +12,12 @@
 #import "Shoes.h"
 #import "MBProgressHUD.h"
 #import "BSPreviewScrollView+ReloadPages.h"
+#import "CustomNavigationController.h"
 #import "TapImage.h"
 
 
-@interface ShoesDetailViewController : UIViewController<MBProgressHUDDelegate, BSPreviewScrollViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource> {
+@interface ShoesDetailViewController : UIViewController<MBProgressHUDDelegate, BSPreviewScrollViewDelegate, 
+                    UIPickerViewDelegate, UIPickerViewDataSource, ShoesViewProtocol> {
 
   //UIView *contentView;
   UIView *shoesBriefView;
@@ -46,6 +48,9 @@
   MBProgressHUD *HUD;
   
   NSMutableArray *shoesAllAngels;
+  
+  BOOL viewRested;
+
 }
 
 //@property (nonatomic, retain) IBOutlet UIView *contentView;
