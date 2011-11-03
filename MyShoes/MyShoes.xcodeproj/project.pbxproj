@@ -31,7 +31,6 @@
 		B02ADE5C142941340074543C /* HomeViewBtnCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B02ADE5B142941340074543C /* HomeViewBtnCell.m */; };
 		B03B057A1313463600A39685 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B03B05791313463600A39685 /* SystemConfiguration.framework */; };
 		B03B05A813134F0500A39685 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = B03B05A613134F0500A39685 /* Reachability.m */; };
-		B092FABF1309CEFC007855C5 /* SlideImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = B092FABE1309CEFC007855C5 /* SlideImageView.m */; };
 		B09F2029145A777900B5F70D /* BSPreviewScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = B09F2028145A777900B5F70D /* BSPreviewScrollView.m */; };
 		B09F202E145A79E200B5F70D /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = B09F202B145A79E200B5F70D /* MBProgressHUD.m */; };
 		B09F202F145A79E200B5F70D /* TapImage.m in Sources */ = {isa = PBXBuildFile; fileRef = B09F202D145A79E200B5F70D /* TapImage.m */; };
@@ -56,10 +55,8 @@
 		B0B8B7E412F7917A00446CCC /* TFHppleElement.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B8B7E012F7917A00446CCC /* TFHppleElement.m */; };
 		B0B8B7E512F7917A00446CCC /* XPathQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B8B7E212F7917A00446CCC /* XPathQuery.m */; };
 		B0B8B87012F7EED600446CCC /* Shoes.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B8B86F12F7EED600446CCC /* Shoes.m */; };
-		B0B8B95E12FA8F7600446CCC /* SlideMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B8B95C12FA8F7600446CCC /* SlideMenuView.m */; };
 		B0C4BE0F142C3CB600070F39 /* ShoesCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0C4BE0D142C3CB600070F39 /* ShoesCategoryViewController.m */; };
 		B0C4BE10142C3CB600070F39 /* ShoesCategoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0C4BE0E142C3CB600070F39 /* ShoesCategoryViewController.xib */; };
-		B0E1BA8E12FF58FE0044A2EF /* SlideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0E1BA8D12FF58FE0044A2EF /* SlideMenuViewController.m */; };
 		B0E1BC8D130095560044A2EF /* ShoesCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = B0E1BC8C130095560044A2EF /* ShoesCategory.m */; };
 		B0E1BE741301F88B0044A2EF /* TFHppleElement+AccessChildren.m in Sources */ = {isa = PBXBuildFile; fileRef = B0E1BE731301F88B0044A2EF /* TFHppleElement+AccessChildren.m */; };
 		B0E5030E12F185C100C8978B /* NetworkTool.m in Sources */ = {isa = PBXBuildFile; fileRef = B0E5030D12F185C100C8978B /* NetworkTool.m */; };
@@ -119,8 +116,6 @@
 		B03B05791313463600A39685 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		B03B05A613134F0500A39685 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		B03B05A713134F0500A39685 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
-		B092FABD1309CEFC007855C5 /* SlideImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideImageView.h; sourceTree = "<group>"; };
-		B092FABE1309CEFC007855C5 /* SlideImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideImageView.m; sourceTree = "<group>"; };
 		B09F2027145A777900B5F70D /* BSPreviewScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSPreviewScrollView.h; path = Classes/BSPreviewScrollView/BSPreviewScrollView.h; sourceTree = "<group>"; };
 		B09F2028145A777900B5F70D /* BSPreviewScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSPreviewScrollView.m; path = Classes/BSPreviewScrollView/BSPreviewScrollView.m; sourceTree = "<group>"; };
 		B09F202A145A79E200B5F70D /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = Classes/MBProgressHUD/MBProgressHUD.h; sourceTree = "<group>"; };
@@ -157,13 +152,9 @@
 		B0B8B7E212F7917A00446CCC /* XPathQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XPathQuery.m; sourceTree = "<group>"; };
 		B0B8B86E12F7EED600446CCC /* Shoes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shoes.h; sourceTree = "<group>"; };
 		B0B8B86F12F7EED600446CCC /* Shoes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shoes.m; sourceTree = "<group>"; };
-		B0B8B95C12FA8F7600446CCC /* SlideMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideMenuView.m; sourceTree = "<group>"; };
-		B0B8B95D12FA8F7600446CCC /* SlideMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideMenuView.h; sourceTree = "<group>"; };
 		B0C4BE0C142C3CB600070F39 /* ShoesCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoesCategoryViewController.h; sourceTree = "<group>"; };
 		B0C4BE0D142C3CB600070F39 /* ShoesCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoesCategoryViewController.m; sourceTree = "<group>"; };
 		B0C4BE0E142C3CB600070F39 /* ShoesCategoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ShoesCategoryViewController.xib; path = Classes/ShoesCategoryViewController.xib; sourceTree = "<group>"; };
-		B0E1BA8C12FF58FE0044A2EF /* SlideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideMenuViewController.h; sourceTree = "<group>"; };
-		B0E1BA8D12FF58FE0044A2EF /* SlideMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideMenuViewController.m; sourceTree = "<group>"; };
 		B0E1BC8B130095560044A2EF /* ShoesCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoesCategory.h; sourceTree = "<group>"; };
 		B0E1BC8C130095560044A2EF /* ShoesCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoesCategory.m; sourceTree = "<group>"; };
 		B0E1BE721301F88B0044A2EF /* TFHppleElement+AccessChildren.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TFHppleElement+AccessChildren.h"; sourceTree = "<group>"; };
@@ -218,14 +209,8 @@
 				B0E1BC8C130095560044A2EF /* ShoesCategory.m */,
 				0A749E4C143AE38B0072DA35 /* ShoesCategoryDict.h */,
 				0A749E4D143AE38C0072DA35 /* ShoesCategoryDict.m */,
-				B0B8B95D12FA8F7600446CCC /* SlideMenuView.h */,
-				B0B8B95C12FA8F7600446CCC /* SlideMenuView.m */,
-				B092FABD1309CEFC007855C5 /* SlideImageView.h */,
-				B092FABE1309CEFC007855C5 /* SlideImageView.m */,
 				1D3623240D0F684500981E51 /* MyShoesAppDelegate.h */,
 				1D3623250D0F684500981E51 /* MyShoesAppDelegate.m */,
-				B0E1BA8C12FF58FE0044A2EF /* SlideMenuViewController.h */,
-				B0E1BA8D12FF58FE0044A2EF /* SlideMenuViewController.m */,
 				B0E1BE721301F88B0044A2EF /* TFHppleElement+AccessChildren.h */,
 				B0E1BE731301F88B0044A2EF /* TFHppleElement+AccessChildren.m */,
 				B0292543130E2CF600A78DB1 /* NSMutableArray+QueueAdditions.h */,
@@ -502,11 +487,8 @@
 				B0B8B7E412F7917A00446CCC /* TFHppleElement.m in Sources */,
 				B0B8B7E512F7917A00446CCC /* XPathQuery.m in Sources */,
 				B0B8B87012F7EED600446CCC /* Shoes.m in Sources */,
-				B0B8B95E12FA8F7600446CCC /* SlideMenuView.m in Sources */,
-				B0E1BA8E12FF58FE0044A2EF /* SlideMenuViewController.m in Sources */,
 				B0E1BC8D130095560044A2EF /* ShoesCategory.m in Sources */,
 				B0E1BE741301F88B0044A2EF /* TFHppleElement+AccessChildren.m in Sources */,
-				B092FABF1309CEFC007855C5 /* SlideImageView.m in Sources */,
 				B0292545130E2CF700A78DB1 /* NSMutableArray+QueueAdditions.m in Sources */,
 				B03B05A813134F0500A39685 /* Reachability.m in Sources */,
 				B0ADDC021316FEEE00B34625 /* ShoesDetailViewController.m in Sources */,
