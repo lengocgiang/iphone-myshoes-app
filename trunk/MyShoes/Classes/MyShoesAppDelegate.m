@@ -21,10 +21,6 @@
 @synthesize shoppingCartController;
 @synthesize shoppingCart;
 
-//@synthesize slideMenuViewController;
-//@synthesize shoesCategoryDict = _shoesCategoryDict;
-
-
 #pragma mark -
 #pragma mark Application lifecycle
 
@@ -182,7 +178,6 @@
 
 - (void)dealloc {
     //[viewController release];
-	//[slideMenuViewController release];
   [shoppingCart release];
   [shoesDetailController release];
   [shoesListController release];
@@ -191,7 +186,6 @@
   [tabController release];
   [window release];
 	
-	//[_shoesCategoryDict release];
   [super dealloc];
 }
 

@@ -17,12 +17,9 @@
 #import "NetworkTool.h"
 #import "HJObjManager.h"
 
-@interface ShoesListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, ShoesViewProtocol/*, SlideImageViewDelegate*/>{
+@interface ShoesListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, ShoesViewProtocol>{
   UIView *contentView;
   UIActivityIndicatorView *progressIndicator;
-  //UIWebView *shoesImage;
-  
-  //SlideImageView *slideImageView;
   
   UITableView *shoesListView;
   UIView *shoesScrollingView;
@@ -37,7 +34,6 @@
   
   ShoesListViewCell *shoesListCell;
   LoadMoreSearchResultsTableViewCell *loadMoreSearchResultsCell;
-  //SlideMenuViewController *slideMenuViewController;
   
   /* The NetworkTool instance to do network communications. */
   NetworkTool *networkTool;
