@@ -43,6 +43,11 @@
 #define TAB_HOME_NAV_NAME @"Home"
 #define TAB_HOME_NAV_PNG  @"home.png"
 #define TAB_SETTING_NAV_NAME @"Settings"
+#define TAB_SETTING_NAV_PNG @"setting.png"
+#define TAB_MYACCOUNT_NAV_NAME @"MyAccount"
+#define TAB_MYACCOUNT_NAV_PNG @"account.png"
+#define TAB_SEARCH_NAV_NAME @"Search"
+#define TAB_SEARCH_NAV_PNG @"search.png"
 
 #define CATEGORY_NAV_TITLE_NAME @"Category"
 #define SECONDARY_CATEGORY_NAV_TITLE_NAME @"SecondaryCategory"
@@ -111,3 +116,16 @@
 
 #define SHOES_IMAGE_BORDER_SIZE 0.3f
 #define SHOES_IMAGE_CORNER_RADIUS 20.0f
+
+#define SHOES_LOGIN_URL @"https://secure.shoes.com/Profiles/Login.aspx?returnurl=%2fProfiles%2fWelcome.aspx"
+#define SHOES_LOGIN_INPUT_USERNAME_ID @"ctl00$cphpagemain$createaccountorlogin$logincontrol$username"
+#define SHOES_LOGIN_INPUT_PASSWORD_ID @"ctl00$cphpagemain$createaccountorlogin$logincontrol$password"
+#define SHOES_LOGIN_INPUT_BTN_X_ID @"ctl00$cphPageMain$CreateAccountOrLogin$LoginControl$loginButton.x"
+#define SHOES_LOGIN_INPUT_BTN_Y_ID @"ctl00$cphPageMain$CreateAccountOrLogin$LoginControl$loginButton.y"
+#define SHOES_LOGIN_VALUE_EMPTY @""
+#define SHOES_LOGIN_INPUT_EVENTTARGET_ID @"__EVENTTARGET"
+#define SHOES_LOGIN_INPUT_EVENTARGUMENT_ID @"__EVENTARGUMENT"
+#define SHOES_LOGIN_INPUT_VIEWSTATEENCRYPTED_ID @"__VIEWSTATEENCRYPTED"
+#define SHOES_LOGIN_INPUT_VIEWSTATE_ID @"__VIEWSTATE"
+#define SHOES_LOGIN_INPUT_VIEWSTATE_VALUE @"z/xspKkfU6pPdaxXTTp/k4P27EE2+onbAVd0AI674gNiPyW9Zua1q3aEROHwfmY7SwD8fRgoZFZyuQhpI5Me2gpgkHGbZiWVwrBJIyRSq3gHYtw9j9Ss9/qWUfgk4oNIwPGSg4N5hFyoho8Zbrpm5UgywZzM/sGQcYGyucL6QATJ7IX95E7pqK52zNq3wslvlVEnz6CT78Jf2MYfJIzPmECMWpybVI15GF2S/CdLwq1DW+HyC5QyrMr9zYxZwlTv6T+gKaCtS/3Xc/Q7kQr1Rw2poayQUlyZoAMmZjk08Dvl7LrJ+tpf988OyxVv0PH4ZQE0xLDO56jPjA0dt4YR3vVaOj1hWpZHy+RZ7IZdxOX+IXryRMIzSxUQg4hO2gp4WsNJMkMkhxuu7vztWBySXaIU1664TzLv/JbxDMcvZp3i0Est"
+
