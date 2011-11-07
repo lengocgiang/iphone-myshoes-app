@@ -18,6 +18,9 @@
 #import "ShoppingCartViewController.h"
 #import "ShoppingCart.h"
 #import "CustomNavigationController.h"
+#import "SettingViewController.h"
+#import "MyAccountViewController.h"
+#import "SearchViewController.h"
 #import "Debug.h"
 
 //@class ShoesDetailViewController;
@@ -30,13 +33,27 @@
   
   //UINavigationController *homeNavController;
   CustomNavigationController *homeNavController;
+  CustomNavigationController *searchNavController;
+  CustomNavigationController *myAccountNavController;
+  CustomNavigationController *settingNavController;  
   
-  HomeViewController *homeViewController;
+  //All sub views of the home navigator controller
+  HomeViewController *homeViewController;  
   ShoesCategoryViewController *shoesCategoryController;
   ShoesSecondaryCategoryViewController *shoesSecondaryCategoryController;
 	ShoesListViewController *shoesListController;
   ShoesDetailViewController *shoesDetailController;
   ShoppingCartViewController *shoppingCartController;
+  
+  //All sub views of the search navigator controller
+  SearchViewController *searchController;
+  
+  //All sub views of the account navigator controller
+  MyAccountViewController *myAccountController;
+  
+  //All sub views of the setting navigator controller
+  SettingViewController *settingController;
+  
   ShoppingCart *shoppingCart;
   
   //Reachability object
@@ -50,6 +67,9 @@
 @property (nonatomic, retain) ShoesListViewController *shoesListController;
 @property (nonatomic, retain) ShoesDetailViewController *shoesDetailController;
 @property (nonatomic, retain) ShoppingCartViewController *shoppingCartController;
+@property (nonatomic, retain) SettingViewController *settingController;
+@property (nonatomic, retain) MyAccountViewController *myAccountController;
+@property (nonatomic, retain) SearchViewController *searchController;
 @property (nonatomic, retain) ShoppingCart *shoppingCart;
 
 + (BOOL) IsEnableWIFI;

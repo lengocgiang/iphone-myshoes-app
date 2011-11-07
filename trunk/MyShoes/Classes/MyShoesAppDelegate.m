@@ -19,6 +19,9 @@
 @synthesize shoesListController;
 @synthesize shoesDetailController;
 @synthesize shoppingCartController;
+@synthesize settingController;
+@synthesize myAccountController;
+@synthesize searchController;
 @synthesize shoppingCart;
 
 #pragma mark -
@@ -64,11 +67,6 @@
   homeNavController.delegate = self;
   [homeNavController pushViewController:homeViewController animated:NO];
   
-  /*UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
-                                                                  style:UIBarButtonSystemItemDone 
-                                                                 target:nil action:nil];
-  homeViewController.navigationItem.rightBarButtonItem = rightButton;*/
-  //homeNavController.title = TAB_HOME_NAV_NAME;
   homeViewController.title = HOME_NAVE_TITLE_NAME;
   
   UIBarButtonItem *backButton = [[[UIBarButtonItem alloc] initWithTitle:TAB_HOME_NAV_NAME	 
@@ -76,13 +74,60 @@
                                                                  target:nil action:nil] autorelease];
   homeViewController.navigationItem.backBarButtonItem = backButton;
   
-  UITabBarItem *homeItme = [[UITabBarItem alloc] initWithTitle:TAB_HOME_NAV_NAME image:[UIImage imageNamed:TAB_HOME_NAV_PNG] tag:0];
-  homeNavController.tabBarItem = homeItme;
-  [homeItme release];
+  //Init the search navigator and sub views
+  searchNavController = [[CustomNavigationController alloc] init];
+  searchNavController.delegate = self;
+  searchController = [[SearchViewController alloc] initWithNibName:@"SearchViewController" bundle:nil];
+  [searchNavController pushViewController:searchController animated:NO];
+
+  //Init the myAccount navigator and sub views
+  myAccountNavController = [[CustomNavigationController alloc] init];
+  myAccountNavController.delegate = self;
+  myAccountController = [[MyAccountViewController alloc] initWithNibName:@"MyAccountViewController" bundle:nil];
+  [myAccountNavController pushViewController:myAccountController animated:NO];
+  
+  //Init the setting navigator and sub views
+  settingNavController = [[CustomNavigationController alloc] init];
+  settingNavController.delegate = self;
+  settingController = [[SettingViewController alloc] initWithNibName:@"SettingViewController" bundle:nil];
+  [settingNavController pushViewController:settingController animated:NO];
+  
+  //Add the UITabBarItem for home navigator
+  UITabBarItem *homeItem = [[UITabBarItem alloc] initWithTitle:TAB_HOME_NAV_NAME 
+                                                          image:[UIImage imageNamed:TAB_HOME_NAV_PNG] 
+                                                            tag:0];
+  homeNavController.tabBarItem = homeItem;
+
+  //Add the UITabBarItem for search navigator
+  UITabBarItem *searchItem = [[UITabBarItem alloc] initWithTitle:TAB_SEARCH_NAV_NAME 
+                                                         image:[UIImage imageNamed:TAB_SEARCH_NAV_PNG] 
+                                                           tag:0];
+  searchNavController.tabBarItem = searchItem;
+
+  //Add the UITabBarItem for myAccount navigator
+  UITabBarItem *myAccountItem = [[UITabBarItem alloc] initWithTitle:TAB_MYACCOUNT_NAV_NAME 
+                                                             image:[UIImage imageNamed:TAB_MYACCOUNT_NAV_PNG] 
+                                                               tag:1];
+  myAccountNavController.tabBarItem = myAccountItem;
+
+  //Add the UITabBarItem for setting navigator
+  UITabBarItem *settingItem = [[UITabBarItem alloc] initWithTitle:TAB_SETTING_NAV_NAME 
+                                                          image:[UIImage imageNamed:TAB_SETTING_NAV_PNG] 
+                                                            tag:2];
+  settingNavController.tabBarItem = settingItem;
+  
+  [homeItem release];
+  [searchItem release];
+  [myAccountItem release];
+  [settingItem release];
   //[rightButton 
   //[rightButton release];
   
-  tabController.viewControllers = [NSArray arrayWithObjects:homeNavController, nil];
+  tabController.viewControllers = [NSArray arrayWithObjects:
+                                   homeNavController,
+                                   searchNavController,
+                                   myAccountNavController, 
+                                   settingNavController, nil];
   
   //[self.window addSubview:self.contentViewController.view];
   [window addSubview:tabController.view];
@@ -183,6 +228,12 @@
   [shoesListController release];
   [shoesCategoryController release];
   [homeNavController release];
+  [settingNavController release];
+  [settingController release];
+  [myAccountNavController release];
+  [myAccountController release];
+  [searchController release];
+  [searchNavController release];
   [tabController release];
   [window release];
 	

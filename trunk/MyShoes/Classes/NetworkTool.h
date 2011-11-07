@@ -31,5 +31,6 @@
 
 -(void)getContent:(NSString *) urlStr withDelegate:(id)requestDelegate requestSelector:(SEL)requestSelector;
 -(void)request:(NSURL *) url;
+-(void)LoginWithDelegate:(id)requestDelegate requestSelector:(SEL)requestSelector userID:(NSString*)userID password:(NSString*)password;
 
 @end

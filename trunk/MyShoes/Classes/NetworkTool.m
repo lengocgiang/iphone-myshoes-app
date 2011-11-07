@@ -7,6 +7,7 @@
 //
 
 #import "NetworkTool.h"
+#import "Config.h"
 
 
 @implementation NetworkTool
@@ -23,22 +24,10 @@
 	// Set the delegate and selector
 	self.delegate = requestDelegate;
 	self.callback = requestSelector;
-	// The URL of the Twitter Request we intend to send
+	// The URL of the Request we intend to send
 	NSURL *url = [NSURL URLWithString:urlStr];
-	//[NSURL URLWithString:@"http://twitter.com/statuses/friends_timeline.xml"];
 	[self request:url];
 }
-
-/*-(void)statuses_update:(NSString *)status delegate:(id)requestDelegate requestSelector:(SEL)requestSelector; {
-	isPost = YES;
-	// Set the delegate and selector
-	self.delegate = requestDelegate;
-	self.callback = requestSelector;
-	// The URL of the Twitter Request we intend to send
-	NSURL *url = [NSURL URLWithString:@"http://twitter.com/statuses/update.xml"];
-	requestBody = [NSString stringWithFormat:@"status=%@",status];
-	[self request:url];
-}*/
 
 //request the img and store to the local
 -(void)request:(NSURL *) url {
@@ -58,7 +47,8 @@
 		// Create the NSMutableData that will hold
 		// the received data
 		// receivedData is declared as a method instance elsewhere
-		receivedData=[[NSMutableData data] retain];
+		//receivedData=[[NSMutableData data] retain];
+    self.receivedData = [NSMutableData data];
 	} else {
 		// inform the user that the download could not be made
 	}
@@ -105,20 +95,19 @@
 - (void)connection:(NSURLConnection *)connection
   didFailWithError:(NSError *)error
 {
-    // release the connection, and the data object
-    [connection release];
-    // receivedData is declared as a method instance elsewhere
-    [receivedData release];
+  // release the connection, and the data object
+  [connection release];
+  // receivedData is declared as a method instance elsewhere
+  [receivedData release];
 	
 	[theRequest release];
 	
-    // inform the user
-    /*NSLog(@"Connection failed! Error - %@ %@",
-	 [error localizedDescription],
-	 [[error userInfo] objectForKey:NSErrorFailingURLStringKey]);*/
+  // inform the user
+  /*NSLog(@"Connection failed! Error - %@ %@",
+	[error localizedDescription],
+	[[error userInfo] objectForKey:NSErrorFailingURLStringKey]);*/
 	
-	NSLog(@"Connection failed! Error - %@",
-          [error localizedDescription]);
+	NSLog(@"Connection failed! Error - %@",[error localizedDescription]);
 	
 	if(errorCallback) {
 		[delegate performSelector:errorCallback withObject:error];
@@ -127,7 +116,7 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-    // do something with the data
+  // do something with the data
 	
 	if(delegate && callback) {
 		if([delegate respondsToSelector:self.callback]) {
@@ -139,8 +128,78 @@
 	
 	// release the connection, and the data object
 	[theConnection release];
-    [receivedData release];
+  [receivedData release];
 	[theRequest release];
+}
+
+#pragma mark - login
+- (void)LoginWithDelegate:(id)requestDelegate requestSelector:(SEL)requestSelector userID:(NSString*)userID password:(NSString*)pwd {
+  
+  self.username = userID;
+  self.password = pwd;
+  
+	self.delegate = requestDelegate;
+	self.callback = requestSelector;
+	
+  NSURL *url = [NSURL URLWithString:SHOES_LOGIN_URL];
+	
+  //(value, key) pairs
+  //The login form inputs
+  //Are they all needed?
+  NSDictionary *loginFormDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                        username, SHOES_LOGIN_INPUT_USERNAME_ID, 
+                        password, SHOES_LOGIN_INPUT_PASSWORD_ID, 
+                        @"25", SHOES_LOGIN_INPUT_BTN_X_ID, 
+                        @"16", SHOES_LOGIN_INPUT_BTN_Y_ID,                         
+                        SHOES_LOGIN_VALUE_EMPTY, SHOES_LOGIN_INPUT_EVENTTARGET_ID, 
+                        SHOES_LOGIN_VALUE_EMPTY, SHOES_LOGIN_INPUT_EVENTARGUMENT_ID, 
+                        SHOES_LOGIN_VALUE_EMPTY, SHOES_LOGIN_INPUT_VIEWSTATEENCRYPTED_ID, 
+                        SHOES_LOGIN_INPUT_VIEWSTATE_VALUE, SHOES_LOGIN_INPUT_VIEWSTATE_ID,                         
+                        nil];
+  
+  //What the hell of myBounds for and where is the value from?
+  NSString *myBounds = @"98765abcde";
+  NSMutableData *bodyData = [[NSMutableData alloc] initWithCapacity:10];
+  
+  NSArray *formKeys = [loginFormDict allKeys];
+  for (int i = 0; i < [formKeys count]; i++) {
+    [bodyData appendData:[[NSString stringWithFormat:@"--%@\n",myBounds] 
+       dataUsingEncoding:NSASCIIStringEncoding]];
+    
+    [bodyData appendData: [[NSString stringWithFormat:
+                            @"Content-Disposition: form-data; name=\"%@\"\n\n%@\n",
+                            [formKeys objectAtIndex:i],
+                            [loginFormDict valueForKey:[formKeys objectAtIndex: i]]]
+                           dataUsingEncoding:NSASCIIStringEncoding]];
+  }
+  [bodyData appendData:[[NSString stringWithFormat:@"--%@--\n", myBounds]
+     dataUsingEncoding:NSASCIIStringEncoding]];
+  
+  //We usually don't add autorelease in a debug
+  //The below two lines are just to print the value of bodyData
+  NSString *bodyDataString = [[[NSString alloc] initWithData:bodyData encoding:NSASCIIStringEncoding] autorelease];
+  NSLog(@"bodyData=%@", bodyDataString);
+  
+  NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+  [request setHTTPMethod:@"POST"];
+  [request setHTTPBody: bodyData];
+  NSString *myContent = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",myBounds];
+  [request setValue:myContent forHTTPHeaderField:@"Content-Type"];
+  
+  theConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+	
+	if (theConnection) {
+		// Create the NSMutableData that will hold
+		// the received data
+		// receivedData is declared as a method instance elsewhere
+		//receivedData=[[NSMutableData data] retain];
+    self.receivedData = [NSMutableData data];
+	} else {
+		// inform the user that the download could not be made
+	}
+  
+  [bodyData release];
+	NSLog(@"Sent the login form");
 }
 
 @end

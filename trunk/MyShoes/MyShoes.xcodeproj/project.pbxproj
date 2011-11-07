@@ -31,6 +31,16 @@
 		B02ADE5C142941340074543C /* HomeViewBtnCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B02ADE5B142941340074543C /* HomeViewBtnCell.m */; };
 		B03B057A1313463600A39685 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B03B05791313463600A39685 /* SystemConfiguration.framework */; };
 		B03B05A813134F0500A39685 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = B03B05A613134F0500A39685 /* Reachability.m */; };
+		B08768D71466163000CC9DB8 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B08768D61466163000CC9DB8 /* SearchViewController.m */; };
+		B08768D91466164B00CC9DB8 /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B08768D81466164B00CC9DB8 /* SearchViewController.xib */; };
+		B08F88FC14653298000EE234 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B08F88FB14653298000EE234 /* SettingViewController.m */; };
+		B08F88FE146532C0000EE234 /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B08F88FD146532C0000EE234 /* SettingViewController.xib */; };
+		B08F890214654362000EE234 /* MyAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B08F890114654362000EE234 /* MyAccountViewController.m */; };
+		B08F89041465437F000EE234 /* MyAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B08F89031465437F000EE234 /* MyAccountViewController.xib */; };
+		B08F8907146545E2000EE234 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B08F8906146545E2000EE234 /* LoginViewController.m */; };
+		B08F8909146545FD000EE234 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B08F8908146545FD000EE234 /* LoginViewController.xib */; };
+		B0916F1214651270008DC176 /* account.png in Resources */ = {isa = PBXBuildFile; fileRef = B0916F1014651270008DC176 /* account.png */; };
+		B0916F1314651270008DC176 /* setting.png in Resources */ = {isa = PBXBuildFile; fileRef = B0916F1114651270008DC176 /* setting.png */; };
 		B09F2029145A777900B5F70D /* BSPreviewScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = B09F2028145A777900B5F70D /* BSPreviewScrollView.m */; };
 		B09F202E145A79E200B5F70D /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = B09F202B145A79E200B5F70D /* MBProgressHUD.m */; };
 		B09F202F145A79E200B5F70D /* TapImage.m in Sources */ = {isa = PBXBuildFile; fileRef = B09F202D145A79E200B5F70D /* TapImage.m */; };
@@ -116,6 +126,20 @@
 		B03B05791313463600A39685 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		B03B05A613134F0500A39685 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		B03B05A713134F0500A39685 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		B08768D51466163000CC9DB8 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		B08768D61466163000CC9DB8 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		B08768D81466164B00CC9DB8 /* SearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SearchViewController.xib; path = Resources/SearchViewController.xib; sourceTree = "<group>"; };
+		B08F88FA14653298000EE234 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		B08F88FB14653298000EE234 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		B08F88FD146532C0000EE234 /* SettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingViewController.xib; path = Resources/SettingViewController.xib; sourceTree = "<group>"; };
+		B08F890014654362000EE234 /* MyAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAccountViewController.h; sourceTree = "<group>"; };
+		B08F890114654362000EE234 /* MyAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAccountViewController.m; sourceTree = "<group>"; };
+		B08F89031465437F000EE234 /* MyAccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MyAccountViewController.xib; path = Resources/MyAccountViewController.xib; sourceTree = "<group>"; };
+		B08F8905146545E2000EE234 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		B08F8906146545E2000EE234 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		B08F8908146545FD000EE234 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginViewController.xib; path = Resources/LoginViewController.xib; sourceTree = "<group>"; };
+		B0916F1014651270008DC176 /* account.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = account.png; path = Resources/account.png; sourceTree = "<group>"; };
+		B0916F1114651270008DC176 /* setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = setting.png; path = Resources/setting.png; sourceTree = "<group>"; };
 		B09F2027145A777900B5F70D /* BSPreviewScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSPreviewScrollView.h; path = Classes/BSPreviewScrollView/BSPreviewScrollView.h; sourceTree = "<group>"; };
 		B09F2028145A777900B5F70D /* BSPreviewScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSPreviewScrollView.m; path = Classes/BSPreviewScrollView/BSPreviewScrollView.m; sourceTree = "<group>"; };
 		B09F202A145A79E200B5F70D /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = Classes/MBProgressHUD/MBProgressHUD.h; sourceTree = "<group>"; };
@@ -237,6 +261,14 @@
 				B0F067C714560FB400659B05 /* ShoppingCartViewController.m */,
 				B0EDFEF4144950DF0026EC99 /* BSPreviewScrollView+ReloadPages.h */,
 				B0EDFEF5144950DF0026EC99 /* BSPreviewScrollView+ReloadPages.m */,
+				B08F88FA14653298000EE234 /* SettingViewController.h */,
+				B08F88FB14653298000EE234 /* SettingViewController.m */,
+				B08F890014654362000EE234 /* MyAccountViewController.h */,
+				B08F890114654362000EE234 /* MyAccountViewController.m */,
+				B08F8905146545E2000EE234 /* LoginViewController.h */,
+				B08F8906146545E2000EE234 /* LoginViewController.m */,
+				B08768D51466163000CC9DB8 /* SearchViewController.h */,
+				B08768D61466163000CC9DB8 /* SearchViewController.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -316,6 +348,10 @@
 				B09F2047145A7C6200B5F70D /* HomeViewController.xib */,
 				B09F2048145A7C6200B5F70D /* ShoesListViewController.xib */,
 				B09F2049145A7C6200B5F70D /* ShoesSecondaryCategoryViewController.xib */,
+				B08F88FD146532C0000EE234 /* SettingViewController.xib */,
+				B08F89031465437F000EE234 /* MyAccountViewController.xib */,
+				B08F8908146545FD000EE234 /* LoginViewController.xib */,
+				B08768D81466164B00CC9DB8 /* SearchViewController.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -367,6 +403,8 @@
 		B0F63C641426AA2E0017CC02 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				B0916F1014651270008DC176 /* account.png */,
+				B0916F1114651270008DC176 /* setting.png */,
 				B09F2034145A7C4B00B5F70D /* background.png */,
 				B09F2035145A7C4B00B5F70D /* category.png */,
 				B09F2036145A7C4B00B5F70D /* home.png */,
@@ -469,6 +507,12 @@
 				B09F204B145A7C6200B5F70D /* HomeViewController.xib in Resources */,
 				B09F204C145A7C6200B5F70D /* ShoesListViewController.xib in Resources */,
 				B09F204D145A7C6200B5F70D /* ShoesSecondaryCategoryViewController.xib in Resources */,
+				B0916F1214651270008DC176 /* account.png in Resources */,
+				B0916F1314651270008DC176 /* setting.png in Resources */,
+				B08F88FE146532C0000EE234 /* SettingViewController.xib in Resources */,
+				B08F89041465437F000EE234 /* MyAccountViewController.xib in Resources */,
+				B08F8909146545FD000EE234 /* LoginViewController.xib in Resources */,
+				B08768D91466164B00CC9DB8 /* SearchViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -517,6 +561,10 @@
 				0A90AA37145E080C00BC5224 /* HJObjManager.m in Sources */,
 				0A90AA38145E080C00BC5224 /* HJWeakMutableArray.m in Sources */,
 				B0A203C7145FCCEE00E5AF97 /* CustomNavigationController.m in Sources */,
+				B08F88FC14653298000EE234 /* SettingViewController.m in Sources */,
+				B08F890214654362000EE234 /* MyAccountViewController.m in Sources */,
+				B08F8907146545E2000EE234 /* LoginViewController.m in Sources */,
+				B08768D71466163000CC9DB8 /* SearchViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
