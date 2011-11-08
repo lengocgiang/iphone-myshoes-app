@@ -47,8 +47,8 @@
 		// Create the NSMutableData that will hold
 		// the received data
 		// receivedData is declared as a method instance elsewhere
-		//receivedData=[[NSMutableData data] retain];
-    self.receivedData = [NSMutableData data];
+		receivedData=[[NSMutableData data] retain];
+    //self.receivedData = [NSMutableData data];
 	} else {
 		// inform the user that the download could not be made
 	}
@@ -192,8 +192,8 @@
 		// Create the NSMutableData that will hold
 		// the received data
 		// receivedData is declared as a method instance elsewhere
-		//receivedData=[[NSMutableData data] retain];
-    self.receivedData = [NSMutableData data];
+		receivedData=[[NSMutableData data] retain];
+    //self.receivedData = [NSMutableData data];
 	} else {
 		// inform the user that the download could not be made
 	}
