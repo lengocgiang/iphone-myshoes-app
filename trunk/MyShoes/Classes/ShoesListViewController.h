@@ -16,6 +16,7 @@
 #import "CustomNavigationController.h"
 #import "NetworkTool.h"
 #import "HJObjManager.h"
+#import "MBProgressHUD.h"
 
 @interface ShoesListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, ShoesViewProtocol>{
   UIView *contentView;
@@ -44,11 +45,14 @@
   // The array storing all categories user selected
   NSMutableArray *userSelectedCategoriesArray;  
   
-  //HJCache library for asynchronous image loading and caching
+  // HJCache library for asynchronous image loading and caching
   HJObjManager *objMan;
 
-  //The flag to show if the view has been reset, the initial value is TRUE
+  // The flag to show if the view has been reset, the initial value is TRUE
   BOOL viewRest;
+  
+  // The progress indicator
+  MBProgressHUD *HUD;
 }
 
 @property (nonatomic, retain) IBOutlet UIView *contentView;
@@ -60,6 +64,7 @@
 @property (nonatomic, retain) NSMutableDictionary *shoesDict;
 @property (nonatomic, retain) NSArray *imageArray;
 @property (nonatomic, retain) NSMutableArray *userSelectedCategoriesArray;
+@property (nonatomic) BOOL viewRest;
 
 - (void)startAnimation;
 - (void)stopAnimation;

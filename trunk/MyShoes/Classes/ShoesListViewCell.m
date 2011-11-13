@@ -26,25 +26,39 @@
     //Create Lable for BrandName
     shoesBrandName = [[[UILabel alloc] init] autorelease];
     shoesBrandName.font = [UIFont fontWithName:@"Helvetica" size:(14.0)];
+    
+    [shoesBrandName setOpaque:YES];
     [self.contentView addSubview:shoesBrandName];
     
     //Create Lable for Color
     shoesColor = [[[UILabel alloc] init] autorelease];
     shoesColor.textAlignment = UITextAlignmentRight;
     shoesColor.font = [UIFont fontWithName:@"Helvetica" size:(12.0)];
+    
+    [shoesColor setOpaque:YES];
     [self.contentView addSubview:shoesColor];
     
     //Create Lable for Style
     shoesStyle = [[[UILabel alloc] init] autorelease];
     shoesStyle.font = [UIFont fontWithName:@"Helvetica" size:(12.0)];
+    
+    [shoesStyle setOpaque:YES];
     [self.contentView addSubview:shoesStyle];
     
     //Create Lable for Style
     shoesPrice = [[[UILabel alloc] init] autorelease];
     shoesPrice.textAlignment = UITextAlignmentRight;
     shoesPrice.font = [UIFont fontWithName:@"Helvetica" size:(20.0)];
+    
+    [shoesPrice setOpaque:YES];
     [self.contentView addSubview:shoesPrice];
   }
+  
+  //Remove default views
+  [self.imageView removeFromSuperview];
+  [self.textLabel removeFromSuperview];
+  [self.contentView setOpaque:YES];
+  
   return self;
 }
 
