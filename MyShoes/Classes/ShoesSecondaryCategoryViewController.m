@@ -136,6 +136,7 @@
   
   if ([delegate respondsToSelector:@selector(shoesDetailController)]){
     [[delegate shoesListController] setUserSelectedCategoriesArray:userSelectedCategoriesArray];
+    [[delegate shoesListController] setViewRest:TRUE];
     [self.navigationController pushViewController:[delegate shoesListController] animated:YES];
   }
   

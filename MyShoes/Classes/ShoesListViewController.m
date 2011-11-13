@@ -27,6 +27,7 @@
 @synthesize shoesDict = _shoesDict;
 @synthesize imageArray = _imageArray;
 @synthesize userSelectedCategoriesArray;
+@synthesize viewRest;
 
 /*
  // The designated initializer. Override to perform setup that is required before the view is loaded.
@@ -50,7 +51,8 @@
   
   //If the view has been reset, load the list online
   if (viewRest){
-    _shoesArray = [[NSMutableArray alloc] init];
+    [_shoesArray removeAllObjects];
+    [shoesListView reloadData];
     currentPages = 1;
     [self loadShoesList];
     
@@ -58,13 +60,13 @@
   }
   else{
     //Show the list directly
-    [self showShoesList];
+//    [shoesListView reloadData];
+//    currentPages = 1;
   }
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
   [super viewDidDisappear:animated];
-  //[_shoesArray release];
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -79,8 +81,10 @@
   _isTableView = YES;
   
   networkTool = [[NetworkTool alloc] init];
-  objMan = [[HJObjManager alloc] init];
   
+  _shoesArray = [[NSMutableArray alloc] init];
+  
+  objMan = [[HJObjManager alloc] init];  
   NSString* cacheDirectory = [NSHomeDirectory() stringByAppendingString:@"/Library/Caches/imgcache/myshoes/"] ;
   HJMOFileCache* fileCache = [[[HJMOFileCache alloc] initWithRootPath:cacheDirectory] autorelease];
   objMan.fileCache = fileCache;
@@ -107,6 +111,10 @@
 	// Release any retained subviews of the main view.
 	// e.g. self.myOutlet = nil;
   [super viewDidUnload];
+
+  [networkTool release];
+  [_shoesArray release];
+  [objMan release];
 }
 
 - (void) startAnimation {
@@ -124,6 +132,9 @@
 #pragma mark Network related methods
 /* Load shoes list from network. Retrieve only part of shoes one time to improve perfomance. */
 - (void)loadShoesList {
+  HUD = [[MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES] retain];
+  HUD.labelText = @"Fetching Shoes";
+  
 	//Issue the request of the selected category
 	[networkTool getContent:[self generateUrl] withDelegate:self requestSelector:@selector(shoesCategoryUdateCallbackWithData:)];
 }
@@ -160,7 +171,8 @@
 }
 
 - (void)shoesCategoryUdateCallbackWithData: (NSData *) content {
-	
+	[HUD hide:YES];
+  
 	//debug_NSLog(@"%@",[[[NSString alloc] initWithData:content encoding:NSASCIIStringEncoding] autorelease]);
   NSMutableArray *shoesList = [NSMutableArray arrayWithCapacity:CAPACITY_SHOES_LIST];
   
@@ -177,16 +189,8 @@
     [shoesList addObject:shoes];
     
 	}
-	
-  if (currentPages == 1)
-  {
-    
-    [_shoesArray addObjectsFromArray:shoesList];
-  }
-  else
-  {
-    [_shoesArray addObjectsFromArray:shoesList];
-  }
+
+  [_shoesArray addObjectsFromArray:shoesList];
   
   //Stop Animation
   //MyShoesAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
@@ -207,13 +211,13 @@
   {
     [shoesListView reloadRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationNone];
     [shoesListView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
-    [shoesListView setUserInteractionEnabled:YES];
   }
+  [shoesListView setUserInteractionEnabled:YES];
   
   currentPages++;
 }
 
-- (void) showShoesList/*:(NSArray *) shoesArray*/ {
+- (void)showShoesList {
   
   if(_shoesArray != nil){
 
@@ -384,11 +388,18 @@
 #pragma mark ShowView common methods
 
 - (void)resetView{
-  //When user leaves this view and go back the view before. it should clean this view
-  [_shoesArray release];
   //Set flag which shows the view has been reset;
-  viewRest = TRUE;
+  viewRest = FALSE;
 }
 
+#pragma mark -
+#pragma mark MBProgressHUDDelegate methods
+
+- (void)hudWasHidden:(MBProgressHUD *)hud {
+  // Remove HUD from screen when the HUD was hidded
+  [HUD removeFromSuperview];
+  [HUD release];
+	HUD = nil;
+}
 
 @end
