@@ -27,7 +27,6 @@
 @synthesize shoesDict = _shoesDict;
 @synthesize imageArray = _imageArray;
 @synthesize userSelectedCategoriesArray;
-@synthesize viewRest;
 
 /*
  // The designated initializer. Override to perform setup that is required before the view is loaded.
@@ -124,8 +123,11 @@
 #pragma mark Network related methods
 /* Load shoes list from network. Retrieve only part of shoes one time to improve perfomance. */
 - (void)loadShoesList {
-  HUD = [[MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES] retain];
-  HUD.labelText = @"Fetching Shoes";
+  if (currentPages == 1)
+  {
+    HUD = [[MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES] retain];
+    HUD.labelText = @"Fetching Shoes";
+  }
   
 	//Issue the request of the selected category
 	[networkTool getContent:[self generateUrl] withDelegate:self requestSelector:@selector(shoesCategoryUdateCallbackWithData:)];
