@@ -64,7 +64,6 @@
 @property (nonatomic, retain) NSMutableDictionary *shoesDict;
 @property (nonatomic, retain) NSArray *imageArray;
 @property (nonatomic, retain) NSMutableArray *userSelectedCategoriesArray;
-@property (nonatomic) BOOL viewRest;
 
 - (void)startAnimation;
 - (void)stopAnimation;
