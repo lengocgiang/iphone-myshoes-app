@@ -18,12 +18,21 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+  self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
   if (self) {
     self.title = NSLocalizedString(@"My Account", @"MyAccount");
     //self.tabBarItem.image = [UIImage imageNamed:@"account"];    
   }
   return self;
+}
+
+- (void)dealloc {
+  [loadingIndicator release];
+  [webview release];
+  [networkTool release];
+  [loginViewController release];
+  [loginButton release];
+  [super dealloc];
 }
 
 - (void)didReceiveMemoryWarning
@@ -57,9 +66,10 @@
 
 - (void) viewWillAppear:(BOOL)animated{
   
-  // @TODO check whether the user already log in
+  // check whether the user already log in
   if (!loginViewController){
-    loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+    loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" 
+                                                                bundle:nil];
   }
   if ([loginViewController hasUserLoggedIn]) {
     loginButton.title = @"Sign out";
@@ -80,7 +90,8 @@
 #pragma mark - Login view related
 - (void)launchLoginView {
   if (!loginViewController){
-    loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+    loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" 
+                                                                bundle:nil];
   }
   
   NSLog(@"loginButton.title=%@", loginButton.title);
@@ -105,7 +116,8 @@
   }
   [loadingIndicator startAnimating];    
   [loadingIndicator setFrame:CGRectMake(self.view.center.x - 11, self.view.center.y - 11, 22.0, 22.0)];
-  [loadingIndicator setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin];
+  [loadingIndicator setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin
+                                      | UIViewAutoresizingFlexibleRightMargin];
   [self.view addSubview:loadingIndicator];
   
   // load web page
@@ -120,7 +132,7 @@
 }
 
 
-- (void)updateData: (NSData *) content {
+- (void)updateData:(NSData *)content {
   //NSString *result = [[[NSString alloc] initWithData:content encoding:NSUTF8StringEncoding] autorelease];
   //[self.webview loadHTMLString:result baseURL:nil];
   
@@ -151,14 +163,5 @@
   [self.tabBarController setSelectedIndex:0];
   
   [self dismissModalViewControllerAnimated:YES];
-}
-
-- (void)dealloc {
-  [loadingIndicator release];
-  [webview release];
-  [networkTool release];
-  [loginViewController release];
-  [loginButton release];
-  [super dealloc];
 }
 @end

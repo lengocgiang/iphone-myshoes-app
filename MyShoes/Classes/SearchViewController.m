@@ -22,6 +22,14 @@
     }
     return self;
 }
+
+- (void)dealloc {
+  [networkTool release];   
+  [loadingIndicator release];
+  
+  [webview release];
+  [super dealloc];
+}
 							
 - (void)didReceiveMemoryWarning
 {
@@ -73,42 +81,32 @@
   return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
-- (void)dealloc {
-  if (networkTool){
-    [networkTool release];
-  }
-  
-  if (loadingIndicator) {    
-    [loadingIndicator release];
-  }
-  [webview release];
-  [super dealloc];
-}
-
-
 
 #pragma mark - network method
 
 - (IBAction)refresh:(id)sender {
   // show activity indicator view
   if (!loadingIndicator){
-    loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    loadingIndicator = [[UIActivityIndicatorView alloc] 
+                        initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
   }
   [loadingIndicator startAnimating];    
   [loadingIndicator setFrame:CGRectMake(self.view.center.x - 11, self.view.center.y - 11, 22.0, 22.0)];
-  [loadingIndicator setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin];
+  [loadingIndicator setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin
+                                      | UIViewAutoresizingFlexibleRightMargin];
   [self.view addSubview:loadingIndicator];
   
   // load web page
   if (!self.networkTool){
     self.networkTool = [[NetworkTool alloc] init];
   }
-  NSString *newUrl = [NSString stringWithFormat:@"%@",@"https://secure.shoes.com/Profiles/EditAccount.aspx"];
+  NSString *newUrl = @"https://secure.shoes.com/Profiles/EditAccount.aspx";
 	[self.networkTool getContent:newUrl withDelegate:self requestSelector:@selector(updateData:)];
 }
 
 - (void)updateData: (NSData *) content {
-  NSString *result = [[[NSString alloc] initWithData:content encoding:NSUTF8StringEncoding] autorelease];
+  NSString *result = [[[NSString alloc] initWithData:content 
+                                            encoding:NSUTF8StringEncoding] autorelease];
   [self.webview loadHTMLString:result baseURL:nil];
   
   [loadingIndicator stopAnimating];

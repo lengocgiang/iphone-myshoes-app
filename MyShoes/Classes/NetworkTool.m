@@ -133,7 +133,10 @@
 }
 
 #pragma mark - login
-- (void)LoginWithDelegate:(id)requestDelegate requestSelector:(SEL)requestSelector userID:(NSString*)userID password:(NSString*)pwd {
+- (void)loginWithDelegate:(id)requestDelegate 
+          requestSelector:(SEL)requestSelector 
+                   userID:(NSString*)userID 
+                 password:(NSString*)pwd {
   
   self.username = userID;
   self.password = pwd;
@@ -145,7 +148,7 @@
 	
   //(value, key) pairs
   //The login form inputs
-  //Are they all needed?
+  //Are they all needed? -Yes!
   NSDictionary *loginFormDict = [NSDictionary dictionaryWithObjectsAndKeys:
                         username, SHOES_LOGIN_INPUT_USERNAME_ID, 
                         password, SHOES_LOGIN_INPUT_PASSWORD_ID, 
@@ -157,7 +160,8 @@
                         SHOES_LOGIN_INPUT_VIEWSTATE_VALUE, SHOES_LOGIN_INPUT_VIEWSTATE_ID,                         
                         nil];
   
-  //What the hell of myBounds for and where is the value from?
+  //What the hell of myBounds for and where is the value from? 
+  //-Just random string to distinguish bodyData
   NSString *myBounds = @"98765abcde";
   NSMutableData *bodyData = [[NSMutableData alloc] initWithCapacity:10];
   
@@ -177,7 +181,8 @@
   
   //We usually don't add autorelease in a debug
   //The below two lines are just to print the value of bodyData
-  NSString *bodyDataString = [[[NSString alloc] initWithData:bodyData encoding:NSASCIIStringEncoding] autorelease];
+  NSString *bodyDataString = [[[NSString alloc] initWithData:bodyData 
+                                                    encoding:NSASCIIStringEncoding] autorelease];
   NSLog(@"bodyData=%@", bodyDataString);
   
   NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];

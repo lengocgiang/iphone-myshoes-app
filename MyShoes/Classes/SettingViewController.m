@@ -22,6 +22,11 @@
     return self;
 }
 
+- (void)dealloc {
+  [myTableView release];
+  [super dealloc];
+}
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -106,7 +111,8 @@
   
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
   if (cell == nil) {
-    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                   reuseIdentifier:CellIdentifier] autorelease];
     cell.accessoryType = UITableViewCellAccessoryNone;
   }
   
@@ -242,10 +248,5 @@
      [self.navigationController pushViewController:detailViewController animated:YES];
      [detailViewController release];
      */
-}
-
-- (void)dealloc {
-    [myTableView release];
-    [super dealloc];
 }
 @end

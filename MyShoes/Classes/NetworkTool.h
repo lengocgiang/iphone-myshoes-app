@@ -29,8 +29,13 @@
 @property(nonatomic) SEL					callback;
 @property(nonatomic) SEL					errorCallback;
 
--(void)getContent:(NSString *) urlStr withDelegate:(id)requestDelegate requestSelector:(SEL)requestSelector;
+-(void)getContent:(NSString *) urlStr 
+     withDelegate:(id)requestDelegate 
+  requestSelector:(SEL)requestSelector;
 -(void)request:(NSURL *) url;
--(void)LoginWithDelegate:(id)requestDelegate requestSelector:(SEL)requestSelector userID:(NSString*)userID password:(NSString*)password;
+-(void)loginWithDelegate:(id)requestDelegate 
+         requestSelector:(SEL)requestSelector 
+                  userID:(NSString *)userID 
+                password:(NSString *)password;
 
 @end
