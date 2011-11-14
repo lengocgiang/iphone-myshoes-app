@@ -10,9 +10,10 @@
 #import "CustomNavigationController.h"
 
 
-@interface ShoesSecondaryCategoryViewController : UIViewController <UITableViewDelegate, UITableViewDataSource,
-                                                  ShoesViewProtocol>{
-    
+@interface ShoesSecondaryCategoryViewController : UIViewController <UITableViewDelegate, 
+    UITableViewDataSource,
+    ShoesViewProtocol
+> {
   UITableView *categoryTableView;
     
   // The array for the categories displayed on the current page

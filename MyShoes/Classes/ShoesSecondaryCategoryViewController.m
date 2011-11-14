@@ -19,8 +19,7 @@
 @synthesize currentPageCategoriesArray;
 @synthesize userSelectedCategoriesArray;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
   if (self) {
     // Custom initialization
@@ -28,16 +27,14 @@
   return self;
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
   // we may not need to release the array specifically as it is auto-managed
   [currentPageCategoriesArray release];
   
   [super dealloc];
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
   // Releases the view if it doesn't have a superview.
   [super didReceiveMemoryWarning];
   
@@ -46,40 +43,33 @@
 
 #pragma mark - View lifecycle
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
   [super viewDidLoad];
   // Do any additional setup after loading the view from its nib.
-  categoryTableView = [[[UITableView alloc] initWithFrame:CGRectMake(0.0f,0.0f,320.0f,400.0f) style:UITableViewStyleGrouped] autorelease];
+  categoryTableView = [[[UITableView alloc] initWithFrame:CGRectMake(0.0f,0.0f,320.0f,400.0f) 
+                                                    style:UITableViewStyleGrouped] 
+                         autorelease];
   categoryTableView.delegate = self;
   categoryTableView.dataSource = self;
   
   categoryTableView.backgroundColor = [UIColor clearColor];
   
   [self.view addSubview:categoryTableView];
-  
-  /*self.categoryNameArray = [NSArray arrayWithObjects:@"women", @"men", @"girls", @"boys", @"juniors", 
-   @"bags&more", @"sale", nil];*/
-  
-
 }
 
-- (void)viewDidUnload
-{
+- (void)viewDidUnload {
   [super viewDidUnload];
   // Release any retained subviews of the main view.
   // e.g. self.myOutlet = nil;
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
+- (void)viewDidAppear:(BOOL)animated {
   [super viewDidAppear:animated];
   [categoryTableView reloadData];
   
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
   // Return YES for supported orientations
   return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
@@ -99,14 +89,16 @@
 
 
 // Customize the appearance of table view cells.
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView 
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   
   static NSString *CellIdentifier = @"CategoryCell";
   
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
   if (cell == nil) {
-    //cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
-    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault 
+                                   reuseIdentifier:CellIdentifier] 
+              autorelease];
   }
   
   // Set up the cell...
@@ -132,7 +124,8 @@
   //Start animation
   id delegate = [[UIApplication sharedApplication] delegate];
   
-	[userSelectedCategoriesArray replaceObjectAtIndex:POSITION_OF_SECONDARY_CATEGORY withObject:[currentPageCategoriesArray objectAtIndex:indexPath.row]];
+	[userSelectedCategoriesArray replaceObjectAtIndex:POSITION_OF_SECONDARY_CATEGORY 
+                                         withObject:[currentPageCategoriesArray objectAtIndex:indexPath.row]];
   
   if ([delegate respondsToSelector:@selector(shoesDetailController)]){
     [[delegate shoesListController] setUserSelectedCategoriesArray:userSelectedCategoriesArray];
@@ -146,7 +139,7 @@
 #pragma mark -
 #pragma mark ShowView common methods
 
-- (void)resetView{
+- (void)resetView {
   //When user leaves this view and go back the view before. it should clean this view
   //For the secondary category view, there is no need to hold reset since it is not loading data online
 }

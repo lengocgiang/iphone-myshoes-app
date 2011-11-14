@@ -18,32 +18,7 @@
 
 @implementation ShoesListViewController
 
-@synthesize contentView;
-@synthesize shoesScrollingView;
-@synthesize progressIndicator;
-@synthesize shoesListView;
-@synthesize shoesListCell;
-@synthesize loadMoreSearchResultsCell;
-@synthesize shoesDict = _shoesDict;
-@synthesize imageArray = _imageArray;
 @synthesize userSelectedCategoriesArray;
-
-/*
- // The designated initializer. Override to perform setup that is required before the view is loaded.
- - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
- self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
- if (self) {
- // Custom initialization
- }
- return self;
- }
- */
-
-/*
- // Implement loadView to create a view hierarchy programmatically, without using a nib.
- - (void)loadView {
- }
- */
 
 - (void)viewDidAppear:(BOOL)animated {
   [super viewDidAppear:animated];
@@ -68,28 +43,16 @@
   viewRest = TRUE;
   currentPages = 1;
   
-  //Default shoes list view is table view
-  _isTableView = YES;
-  
   networkTool = [[NetworkTool alloc] init];
   
-  _shoesArray = [[NSMutableArray alloc] init];
+  shoesArray = [[NSMutableArray alloc] init];
   
   objMan = [[HJObjManager alloc] init];  
-  NSString* cacheDirectory = [NSHomeDirectory() stringByAppendingString:@"/Library/Caches/imgcache/myshoes/"] ;
+  NSString* cacheDirectory = 
+    [NSHomeDirectory() stringByAppendingString:@"/Library/Caches/imgcache/myshoes/"] ;
   HJMOFileCache* fileCache = [[[HJMOFileCache alloc] initWithRootPath:cacheDirectory] autorelease];
   objMan.fileCache = fileCache;
 }
-
-
-
-/*
- // Override to allow orientations other than the default portrait orientation.
- - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
- // Return YES for supported orientations
- return (interfaceOrientation == UIInterfaceOrientationPortrait);
- }
- */
 
 - (void)didReceiveMemoryWarning {
 	// Releases the view if it doesn't have a superview.
@@ -104,36 +67,35 @@
   [super viewDidUnload];
 
   [networkTool release];
-  [_shoesArray release];
+  [shoesArray release];
   [objMan release];
 }
 
-- (void) startAnimation {
-  progressIndicator.hidden = NO;
-  [progressIndicator startAnimating];
+- (void)startAnimation {
 }
 
-- (void) stopAnimation {
-  [progressIndicator stopAnimating];
-  progressIndicator.hidden = YES;
+- (void)stopAnimation {
   [UIView beginAnimations:nil context:nil];
   [UIView commitAnimations];
 }
 
 #pragma mark Network related methods
-/* Load shoes list from network. Retrieve only part of shoes one time to improve perfomance. */
+// Load shoes list from network. Retrieve only part of shoes one time to improve perfomance. 
 - (void)loadShoesList {
   if (currentPages == 1)
   {
     HUD = [[MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES] retain];
     HUD.labelText = @"Fetching Shoes";
+    [HUD setOpaque:YES];
   }
   
 	//Issue the request of the selected category
-	[networkTool getContent:[self generateUrl] withDelegate:self requestSelector:@selector(shoesCategoryUdateCallbackWithData:)];
+	[networkTool getContent:[self generateUrl] 
+             withDelegate:self 
+          requestSelector:@selector(shoesCategoryUdateCallbackWithData:)];
 }
 
-/* Generate the url to load the next page of shoes list. */
+// Generate the url to load the next page of shoes list. 
 - (NSString *)generateUrl {
   ShoesCategory *firstCategory = [userSelectedCategoriesArray objectAtIndex:0];
   ShoesCategory *secondaryCategory = [userSelectedCategoriesArray objectAtIndex:1];
@@ -164,10 +126,9 @@
   return url;
 }
 
-- (void)shoesCategoryUdateCallbackWithData: (NSData *) content {
+- (void)shoesCategoryUdateCallbackWithData:(NSData *)content {
 	[HUD hide:YES];
   
-	//debug_NSLog(@"%@",[[[NSString alloc] initWithData:content encoding:NSASCIIStringEncoding] autorelease]);
   NSMutableArray *shoesList = [NSMutableArray arrayWithCapacity:CAPACITY_SHOES_LIST];
   
 	// Create parser
@@ -184,15 +145,12 @@
     
 	}
 
-  [_shoesArray addObjectsFromArray:shoesList];
-  
-  //Stop Animation
-  //MyShoesAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-  
+  [shoesArray addObjectsFromArray:shoesList];
+    
 	[xpathParser release];
   
   //If there is any shoes come back, show the first shoes
-  if ([_shoesArray count] > 0){
+  if ([shoesArray count] > 0){
     //Show the first shoes in the list
     [self showShoesList];
   }
@@ -204,7 +162,9 @@
   if (currentPages != 1)
   {
     [shoesListView reloadRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationNone];
-    [shoesListView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    [shoesListView scrollToRowAtIndexPath:indexPath 
+                         atScrollPosition:UITableViewScrollPositionTop 
+                                 animated:YES];
   }
 
   [shoesListView setUserInteractionEnabled:YES];
@@ -214,34 +174,28 @@
 
 - (void)showShoesList {
   
-  if(_shoesArray != nil){
+  if(shoesArray != nil){
 
     shoesListView.dataSource = self;
     shoesListView.delegate = self;
     [shoesListView reloadData];
     [shoesListView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
     [shoesListView setHidden:NO];
-      
-    //Hide scrolling shoes list view
-    [shoesScrollingView setHidden:YES];
   }
 }
 
 
-- (void)hideShoesListInfoLabels{
+- (void)hideShoesListInfoLabels {
   
   [shoesListView setHidden:YES];
 }
 
-- (void)openSearchView{
+- (void)openSearchView {
   NSLog(@"Gonna open search view");
 }
 
 - (void)dealloc {
-  [_shoesDict release];
-  [_shoesCategoryDict release];
-  [_imageArray release];
-  [_shoesArray release];
+  [shoesArray release];
   [networkTool release];
   [objMan release];
   
@@ -250,7 +204,7 @@
 
 #pragma mark Table view methods
 
-//Two sections here
+//Only one section
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
   return 1;
 }
@@ -260,63 +214,69 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	// Return 1 section which will be used to display the giant blank UITableViewCell as defined
 	// in the tableView:cellForRowAtIndexPath: method below
-	if ([_shoesArray count] == 0){
+	if ([shoesArray count] == 0){
 		
 		return 1;
 		
-	} else if ([_shoesArray count] < CATEGORY_SHOES_COUNT) {
+	} else if ([shoesArray count] < CATEGORY_SHOES_COUNT) {
     
 		// Add an object to the end of the array for the "Load more..." table cell.
-		return [_shoesArray count];
+		return [shoesArray count];
     
 	}	
 	// Return the number of rows as there are in the searchResults array.
-	return [_shoesArray count] + 1;
+	return [shoesArray count] + 1;
 }
 
 
 // Customize the appearance of table view cells.
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView 
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 	// Special cases:
-	// 1: if search results count == 0, display giant blank UITableViewCell, and disable user interaction.
+	// 1: if search results count == 0, display giant blank UITableViewCell, 
+  //    and disable user interaction.
 	// 2: if last cell, display the "Load More" search results UITableViewCell.
 	
-	if ([_shoesArray count] == 0){ // Special Case 1
+	if ([shoesArray count] == 0){ // Special Case 1
     
 		// Disable user interaction for this cell.
 		UITableViewCell *cell = [[[UITableViewCell alloc] init] autorelease]; 
 		cell.selectionStyle = UITableViewCellSelectionStyleNone;
 		return cell;
 		
-	} else if (indexPath.row == [_shoesArray count]){ // Special Case 2		
+	} else if (indexPath.row == [shoesArray count]){ // Special Case 2		
 		static NSString *loadMoreIdentifier = @"LoadMoreResultsCell";
-		LoadMoreSearchResultsTableViewCell *cell = (LoadMoreSearchResultsTableViewCell *) [tableView dequeueReusableCellWithIdentifier:loadMoreIdentifier];
+		LoadMoreSearchResultsTableViewCell *cell = (LoadMoreSearchResultsTableViewCell *) 
+      [tableView dequeueReusableCellWithIdentifier:loadMoreIdentifier];
 		if (cell == nil) {
-			cell = [[[LoadMoreSearchResultsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:loadMoreIdentifier] autorelease];
-      self.loadMoreSearchResultsCell = cell;
-      
+			cell = [[[LoadMoreSearchResultsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault 
+                                                        reuseIdentifier:loadMoreIdentifier] 
+                autorelease];
+      loadMoreSearchResultsCell = cell;
 		}
 		
-		// Return a standard cell
 		cell.textLabel.text = @"Load More Results...";
-    
     cell.textLabel.textAlignment = UITextAlignmentCenter;
+    
 		return cell;
 		
 	}
   
 	static NSString *MyIdentifier = @"MyIdentifier";
 	
-  ShoesListViewCell *cell = (ShoesListViewCell *)[shoesListView dequeueReusableCellWithIdentifier:MyIdentifier];
+  ShoesListViewCell *cell = (ShoesListViewCell *)
+    [shoesListView dequeueReusableCellWithIdentifier:MyIdentifier];
   
 	if(cell == nil) {
     
-    cell = [[[ShoesListViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier] autorelease];
+    cell = [[[ShoesListViewCell alloc] initWithStyle:UITableViewCellStyleDefault 
+                                     reuseIdentifier:MyIdentifier] 
+              autorelease];
     
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 	}
   
-  Shoes *shoes = [_shoesArray objectAtIndex:indexPath.row];
+  Shoes *shoes = [shoesArray objectAtIndex:indexPath.row];
   
   NSString *imageName = shoes.shoesImageName;
   NSString *imageUrlStr = [NSString stringWithFormat:@"%@%@",MYSHOES_URL,imageName];
@@ -344,19 +304,19 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	if ([_shoesArray count] == 0){
+	if ([shoesArray count] == 0){
 		return;
 		
     // Special Case for the "Load More Results..." button for paging.
-	} else if (indexPath.row == [_shoesArray count]) {
-    self.loadMoreSearchResultsCell.textLabel.text = @"Loading...";
-    self.loadMoreSearchResultsCell.textLabel.textAlignment = UITextAlignmentCenter;
+	} else if (indexPath.row == [shoesArray count]) {
+    loadMoreSearchResultsCell.textLabel.text = @"Loading...";
+    loadMoreSearchResultsCell.textLabel.textAlignment = UITextAlignmentCenter;
 		
 		// load the next page of shoe list.
     [self loadShoesList];
 		
 		// Disable user interaction if/when the loading/search results view appears.
-		[self.shoesListView setUserInteractionEnabled:NO];
+		[shoesListView setUserInteractionEnabled:NO];
     
 	} else {
     
@@ -365,7 +325,7 @@
     id delegate = [[UIApplication sharedApplication] delegate];
     
     if ([delegate respondsToSelector:@selector(shoesDetailController)]){
-      [[delegate shoesDetailController] setShoes:[_shoesArray objectAtIndex:indexPath.row]];
+      [[delegate shoesDetailController] setShoes:[shoesArray objectAtIndex:indexPath.row]];
       [self.navigationController pushViewController:[delegate shoesDetailController] animated:YES];
     }
   }
@@ -374,16 +334,15 @@
   
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-  return SHOES_LIST_CELL_HEIGHT;//[indexPath row] * 20;
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+  return SHOES_LIST_CELL_HEIGHT;
 }
 
 #pragma mark -
 #pragma mark ShowView common methods
 
-- (void)resetView{
-  [_shoesArray removeAllObjects];
+- (void)resetView {
+  [shoesArray removeAllObjects];
   [shoesListView reloadData];
   currentPages = 1;
   

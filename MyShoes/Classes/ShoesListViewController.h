@@ -18,28 +18,24 @@
 #import "HJObjManager.h"
 #import "MBProgressHUD.h"
 
-@interface ShoesListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, ShoesViewProtocol>{
+@interface ShoesListViewController : UIViewController<
+  UITableViewDelegate, 
+  UITableViewDataSource, 
+  ShoesViewProtocol
+> {
   UIView *contentView;
-  UIActivityIndicatorView *progressIndicator;
   
   UITableView *shoesListView;
-  UIView *shoesScrollingView;
   
-  NSArray *_imageArray;
+  NSMutableArray *shoesArray;
   
-  NSMutableArray *_shoesArray;
-  
-  Boolean _isTableView;
-  
-  NSMutableDictionary *_shoesCategoryDict;
-  
-  ShoesListViewCell *shoesListCell;
+  // The cell for loading more results
   LoadMoreSearchResultsTableViewCell *loadMoreSearchResultsCell;
   
-  /* The NetworkTool instance to do network communications. */
+  // The NetworkTool instance to do network communications. 
   NetworkTool *networkTool;
   
-  /* Representing how many pages have been loaded from network. */
+  // Representing how many pages have been loaded from network. 
   NSUInteger currentPages;
   
   // The array storing all categories user selected
@@ -55,14 +51,6 @@
   MBProgressHUD *HUD;
 }
 
-@property (nonatomic, retain) IBOutlet UIView *contentView;
-@property (nonatomic, retain) IBOutlet UIView *shoesScrollingView;
-@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *progressIndicator;
-@property (nonatomic, retain) IBOutlet UITableView *shoesListView;
-@property (nonatomic, retain) IBOutlet ShoesListViewCell *shoesListCell;
-@property (nonatomic, retain) IBOutlet UITableViewCell *loadMoreSearchResultsCell;
-@property (nonatomic, retain) NSMutableDictionary *shoesDict;
-@property (nonatomic, retain) NSArray *imageArray;
 @property (nonatomic, retain) NSMutableArray *userSelectedCategoriesArray;
 
 - (void)startAnimation;
