@@ -51,17 +51,9 @@
   
   //If the view has been reset, load the list online
   if (viewRest){
-    [_shoesArray removeAllObjects];
-    [shoesListView reloadData];
-    currentPages = 1;
     [self loadShoesList];
     
     viewRest = FALSE;
-  }
-  else{
-    //Show the list directly
-//    [shoesListView reloadData];
-//    currentPages = 1;
   }
 }
 
@@ -75,7 +67,7 @@
   
   //Init the value of viewReset
   viewRest = TRUE;
-  
+  currentPages = 1;
   
   //Default shoes list view is table view
   _isTableView = YES;
@@ -212,6 +204,7 @@
     [shoesListView reloadRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationNone];
     [shoesListView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
   }
+
   [shoesListView setUserInteractionEnabled:YES];
   
   currentPages++;
@@ -388,8 +381,12 @@
 #pragma mark ShowView common methods
 
 - (void)resetView{
+  [_shoesArray removeAllObjects];
+  [shoesListView reloadData];
+  currentPages = 1;
+  
   //Set flag which shows the view has been reset;
-  viewRest = FALSE;
+  viewRest = TRUE;
 }
 
 #pragma mark -
