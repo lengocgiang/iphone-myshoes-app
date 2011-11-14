@@ -26,6 +26,16 @@
     return self;
 }
 
+- (void)dealloc {
+  [networkTool release];  
+  [loadingIndicator release];
+  
+  [userID release];
+  [password release];
+  [loginButton release];
+  [super dealloc];
+}
+
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.
@@ -86,21 +96,6 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (void)dealloc {
-  if (networkTool){
-    [networkTool release];
-  }
-  
-  if (loadingIndicator) {    
-    [loadingIndicator release];
-  }
-  
-  [userID release];
-  [password release];
-  [loginButton release];
-  [super dealloc];
-}
-
 - (IBAction)cancelLogin:(id)sender {
   [self.delegate loginViewCancel:self];
 }
@@ -112,11 +107,13 @@
   
   // show activity indicator view
   if (!loadingIndicator){
-    loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    loadingIndicator = [[UIActivityIndicatorView alloc] 
+                        initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
   }
   [loadingIndicator startAnimating];    
   [loadingIndicator setFrame:CGRectMake(self.view.center.x - 11, self.view.center.y - 11, 22.0, 22.0)];
-  [loadingIndicator setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin];
+  [loadingIndicator setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin
+                                      | UIViewAutoresizingFlexibleRightMargin];
   [self.view addSubview:loadingIndicator];
   
   // load web page
@@ -125,7 +122,7 @@
     self.networkTool = [[NetworkTool alloc] init];
   }
     
-  [self.networkTool LoginWithDelegate:self 
+  [self.networkTool loginWithDelegate:self 
                       requestSelector:@selector(updateData:) 
                                userID:self.userID.text
                              password:self.password.text];
@@ -148,13 +145,17 @@
 
 #pragma mark - network method
 
-- (void)updateData: (NSData *) content {
+- (void)updateData:(NSData *)content {
   [loadingIndicator stopAnimating];
   [loadingIndicator removeFromSuperview];
   
   // show alert when login failed
     if (![self hasUserLoggedIn]) {
-        UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:@"Error!" message:@"We're sorry the login information you entered does not match our records." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil] autorelease];
+        UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:@"Error!" 
+                                                             message:@"We're sorry the login information you entered does not match our records." 
+                                                            delegate:self 
+                                                   cancelButtonTitle:@"OK" 
+                                                   otherButtonTitles:nil, nil] autorelease];
         [alertView show];
     }
     
