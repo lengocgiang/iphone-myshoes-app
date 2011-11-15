@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "NetworkTool.h"
 #import "CustomNavigationController.h"
+#import "HJManagedImageV.h"
 
 @interface ShoppingCartViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, ShoesViewProtocol> {
   //Table view for shopping cart
@@ -17,7 +18,8 @@
   /* The NetworkTool instance to do network communications. */
   NetworkTool *networkTool;
 
-  //BOOL viewRested;
+  //HJCache library for asynchronous image loading and caching
+  HJObjManager *objMan;
 }
 
 @property (nonatomic, retain) UITableView *shoppingCartListView;

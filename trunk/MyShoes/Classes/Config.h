@@ -39,6 +39,9 @@
 #define SHOES_LIST_CELL_IMG_WIDTH 60.0f
 #define SHOES_LIST_CELL_HEIGHT 60.0f
 
+#define CART_LIST_CELL_IMG_WIDTH 44.0f
+#define CART_LIST_CELL_HEIGHT 44.0f
+
 #define HOME_NAVE_TITLE_NAME @"MyShoes"
 #define TAB_HOME_NAV_NAME @"Home"
 #define TAB_HOME_NAV_PNG  @"home.png"

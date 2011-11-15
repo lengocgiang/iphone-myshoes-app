@@ -19,11 +19,6 @@
   
 }
 
-//@property (nonatomic, retain) IBOutlet UILabel *shoesBrandName;
-//@property (nonatomic, retain) IBOutlet UILabel *shoesStyle;
-//@property (nonatomic, retain) IBOutlet UILabel *shoesColor;
-//@property (nonatomic, retain) IBOutlet UILabel *shoesPrice;
-
 - (void)setShoesBrandName:(NSString *)txt;
 - (void)setShoesStyle:(NSString *)txt;
 - (void)setShoesColor:(NSString *)txt;

@@ -49,8 +49,20 @@
   
   NSMutableArray *shoesAllAngels;
   
+  //The flag to show if the view is reset. If it's still in the stack of navigator, the value
+  //should be false. So it won't reset it view when users come back
+  //The default value is TRUE
   BOOL viewRest;
 
+  //The flag to show if the view is from shopping cart view
+  //If yes, means it's from shopping cart view and it has a textfield for shoes Quantity
+  //and the button change to "UPdate the cart"
+  //Took the second solution, there is no more edting mode for shoes detail view
+  /*                    
+  BOOL editing;
+  UILabel *shoesQuantityLabel;
+  UITextField *shoesQuantity;*/
+                      
 }
 
 //@property (nonatomic, retain) IBOutlet UIView *contentView;
@@ -69,6 +81,7 @@
 @property (nonatomic, retain) /*IBOutlet*/BSPreviewScrollView *shoesImageScrollView;
 @property (nonatomic, retain) UIPickerView *chooseColor;
 @property (nonatomic, retain) Shoes *shoes;
+//@property (nonatomic, assign) BOOL editing;
 @property (nonatomic, retain) NetworkTool *networkTool;
 
 + (UIImage *)maskWhiteToTransparent:(UIImage *)image;

@@ -10,7 +10,7 @@
 #import "TFHppleElement+AccessChildren.h"
 
 
-@interface Shoes : NSObject {
+@interface Shoes : NSObject<NSCopying> {
 	
 	//it's something like
 	///Shopping/ProductDetails.aspx?p=EC1240753&pg=5137941
@@ -81,6 +81,7 @@
 @property (nonatomic, retain) NSArray *urlsWithColors;
 
 - (id)initWithShoesNode:(TFHppleElement *)node;
+- (id)copyWithZone:(NSZone*)zone;
 - (void)processProductImage:(TFHppleElement *)node;
 - (void)processBrandTitleColor:(TFHppleElement *)node;
 - (void)processProductSKU:(TFHppleElement *)node;

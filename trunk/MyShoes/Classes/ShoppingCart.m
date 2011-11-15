@@ -58,6 +58,15 @@
   [shoesQuantity removeObjectAtIndex:index];
 }
 
+//Update the quantity for a selected shoes
+- (void)updateShoes:(id)shoes withQuantity:(NSUInteger)quantity {
+  //Locate the shoes in the shopping cart shoes list
+  //If we can't find it, skip the rest of the code
+  NSUInteger index = [shoesArray indexOfObject:shoes];
+  [shoesQuantity replaceObjectAtIndex:index withObject:[NSNumber numberWithInt:quantity]];
+}
+
+
 - (void)dealloc {
   [shoesQuantity release];
   [shoesArray release];
