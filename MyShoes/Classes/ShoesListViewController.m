@@ -284,8 +284,10 @@
   NSURL *imageUrl = [NSURL URLWithString:imageUrlStr];
   
   CGRect frame;
-	frame.size.width=60; frame.size.height=60;
-	frame.origin.x=0; frame.origin.y=0;
+	frame.size.width = SHOES_LIST_CELL_IMG_WIDTH;
+  frame.size.height = SHOES_LIST_CELL_HEIGHT;
+	frame.origin.x=0;
+  frame.origin.y=0;
   HJManagedImageV *managedImage = [[[HJManagedImageV alloc] initWithFrame:frame] autorelease];
   managedImage.url = imageUrl;
   [objMan manage:managedImage];
@@ -325,7 +327,11 @@
     id delegate = [[UIApplication sharedApplication] delegate];
     
     if ([delegate respondsToSelector:@selector(shoesDetailController)]){
-      [[delegate shoesDetailController] setShoes:[shoesArray objectAtIndex:indexPath.row]];
+      [[delegate shoesDetailController] setShoes:[_shoesArray objectAtIndex:indexPath.row]];
+      
+      //Set editing to false to indicate that it is not from shopping cart view
+      //There is no more editing mode for shoesDetailView
+      //[[delegate shoesDetailController] setEditing:NO];
       [self.navigationController pushViewController:[delegate shoesDetailController] animated:YES];
     }
   }

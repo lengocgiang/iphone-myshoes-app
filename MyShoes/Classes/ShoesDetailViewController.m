@@ -33,6 +33,7 @@
 @synthesize chooseColor;
 //@synthesize progressIndicator;
 @synthesize shoes;
+//@synthesize editing;
 @synthesize networkTool;
 
 const CGFloat kScrollImgViewOffsetX	= 6.0f;
@@ -102,6 +103,17 @@ const NSUInteger kSizeColumn = 1;
   viewRest = YES;
   //Create network toolkit
   networkTool = [[NetworkTool alloc] init];
+  
+  //NSInteger quantityYOffset = 0;
+  
+  //Check if the table is in editing mode
+  //Took the second solution, there is no more editing mode for ShoesDetailView
+  /*if(self.isEditing){
+    quantityYOffset = 30;
+    //Add the Quantity
+    shoesQuantityLabel = [[[UILabel alloc] init] autorelease];
+    shoesQuantityLabel.frame = CGRectMake(5, 3, 144, 21);
+  }*/
   
   //Create shoes brief info view programmically
   self.shoesBriefView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 60)] autorelease];
@@ -255,6 +267,7 @@ const NSUInteger kSizeColumn = 1;
 - (void)dealloc {  
   [shoesAllAngels release];
   [networkTool release];
+  [shoes release];
   [super dealloc];
 }
 
@@ -463,6 +476,11 @@ const NSUInteger kSizeColumn = 1;
 	// TapImage is a subclassed UIImageView that catch touch/tap events 
 	TapImage *imageView = [[[TapImage alloc] initWithFrame:imageViewFrame] autorelease];
 	imageView.userInteractionEnabled = YES;
+  
+  //If there is no data in shoesAllAngels, return an empty imageview
+  if ((shoesAllAngels==nil) || ([shoesAllAngels count] ==0)){
+    return imageView;
+  }
 
   UIImage *image = [shoesAllAngels objectAtIndex:index];
   CGSize sz = CGSizeMake(kScrollObjWidth, kScrollObjHeight);
@@ -485,7 +503,8 @@ const NSUInteger kSizeColumn = 1;
 
 - (int)itemCount:(BSPreviewScrollView*)scrollView {
 	// Return the number of pages we intend to display
-	return [self.shoes.shoesImgsAllAngle count];//[self.scrollPages count];
+  return [shoesAllAngels count];
+	//return [self.shoes.shoesImgsAllAngle count];//[self.scrollPages count];
 }
 
 #pragma mark -
@@ -604,7 +623,9 @@ const NSUInteger kSizeColumn = 1;
   }
   
   //Add the selected shoes object to shopping cart
-  [shoppingCart addToCart:shoes];
+  //A copy of existing shoes object should be passed to shopping cart
+  Shoes *shoesCopy = [[shoes copy] autorelease];
+  [shoppingCart addToCart:shoesCopy];
   
   if ([delegate respondsToSelector:@selector(shoppingCartController)]){
   //Go to shopping cart view

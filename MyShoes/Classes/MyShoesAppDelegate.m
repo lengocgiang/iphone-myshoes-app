@@ -246,14 +246,14 @@
 //After the new shows up, it will be set as a previous view
 - (void)navigationController:(UINavigationController *)navigationController didPopViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
-  id previousView;
+  id currentView;
   
-  previousView = viewController;
+  currentView = viewController;
   
   if (navigationController == homeNavController){
     //Reset previous View
-    if ([previousView conformsToProtocol:@protocol(ShoesViewProtocol)]){
-      [previousView resetView];
+    if ([currentView conformsToProtocol:@protocol(ShoesViewProtocol)]){
+      [currentView resetView];
     }
   }
 }

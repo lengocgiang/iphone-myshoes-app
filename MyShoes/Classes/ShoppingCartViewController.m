@@ -7,7 +7,10 @@
 //
 
 #import "ShoppingCartViewController.h"
+#import "ShoesDetailViewController.h"
+#import "ShoppingCartViewCell.h"
 #import "MyShoesAppDelegate.h"
+#import <QuartzCore/QuartzCore.h>
 #import "Shoes.h"
 
 @implementation ShoppingCartViewController
@@ -50,7 +53,7 @@
   
   //Enable selection in edit mode only like alarm app
   shoppingCartListView.allowsSelection = NO;
-  shoppingCartListView.allowsSelectionDuringEditing = YES;
+  //shoppingCartListView.allowsSelectionDuringEditing = YES;
   
   [self.view addSubview:shoppingCartListView];
     
@@ -64,6 +67,13 @@
   
   //Add the network tookit in charge of http communication
   networkTool = [[NetworkTool alloc] init];
+  
+  objMan = [[HJObjManager alloc] init];
+  
+  NSString* cacheDirectory = [NSHomeDirectory() stringByAppendingString:@"/Library/Caches/imgcache/myshoes/"] ;
+  HJMOFileCache* fileCache = [[[HJMOFileCache alloc] initWithRootPath:cacheDirectory] autorelease];
+  objMan.fileCache = fileCache;
+
     
 }
 
@@ -82,6 +92,7 @@
 
 - (void)dealloc {
     
+  [objMan release];
   [networkTool release];
   [shoppingCartListView release];
   [super dealloc];
@@ -119,12 +130,12 @@
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-  static NSString *CellIdentifier = @"CategoryCell";
+  static NSString *CellIdentifier = @"CartCell";
   
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+  id cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
   if (cell == nil) {
     //cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
-    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
+    cell = [[[ShoppingCartViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
   }
   
   // Set up the cell...
@@ -144,36 +155,78 @@
   NSURL *imageUrl = [NSURL URLWithString:imageUrlStr];
   //NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
   
-  UIImage *shoesImage = [UIImage imageWithData: [NSData dataWithContentsOfURL: imageUrl]];
+  /*UIImage *shoesImage = [UIImage imageWithData: [NSData dataWithContentsOfURL: imageUrl]];
   
   CGSize sz = SHOES_LIST_IMG_SIZE;
   
   UIImage *resized = [HomeViewController scale:shoesImage toSize:sz];
+  [cell imageView].image = resized;*/
   
-  cell.imageView.image = resized;
+  // To improve performance
+  [[cell imageView] setOpaque:YES];
+  CGRect frame;
+	frame.size.width = CART_LIST_CELL_IMG_WIDTH;
+  frame.size.height = CART_LIST_CELL_HEIGHT;
+	frame.origin.x = 0;
+  frame.origin.y = 0;
+  HJManagedImageV *managedImage = [[[HJManagedImageV alloc] initWithFrame:frame] autorelease];
+  managedImage.url = imageUrl;
+  [objMan manage:managedImage];
   
-  cell.textLabel.text = shoes.productStyle;
-  cell.textLabel.font = [UIFont fontWithName:@"Helvetica" size:(14.0)];
+  // To improve performance
+  [managedImage setOpaque:YES];
   
-  NSUInteger quantity = [shoppingCart getQuantity:indexPath.row];
-  NSString *price = shoes.productPrice;
-  cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ %d", price, quantity];
-  cell.detailTextLabel.font = [UIFont fontWithName:@"Helvetica" size:(10.0)];
-    
+	[[cell contentView] addSubview:managedImage];
 
-  //If edit mode, should accessory disclosure indicator
-  /*if(tableView.editing){
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-  }*/
-  
-  cell.editingAccessoryType = UITableViewCellAccessoryDisclosureIndicator;
+
+  [cell setShoes:shoes];
+  [cell setShoesInfo:shoes.productStyle];
+  //If the shopping cart list view is not in edit mode, just show Image of the shoes
+  if(!tableView.editing){
+    [cell setEditing:NO];
+    NSUInteger quantity = [shoppingCart getQuantity:indexPath.row];
+    NSString *price = shoes.productPrice;
+    
+    [cell setShoesDetail:[NSString stringWithFormat:@"%@ %d", price, quantity]];
+    //cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ %d", price, quantity];
+    //cell.detailTextLabel.font = [UIFont fontWithName:@"Helvetica" size:(10.0)];
+    //cell.detailTextLabel.textAlignment = UITextAlignmentRight;
+  }
+  else
+  {
+    [cell setEditing:YES];
+    [cell setShoesQuantity:[shoppingCart getQuantity:indexPath.row]];
+  }
+
+  //cell.editingStyle
+  //cell.editingAccessoryType = UITableViewCellAccessoryDisclosureIndicator;
   
   return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    //View mode is just to view the list of shopping cart
-    //Edit mode let user delete/modify items in shopping cart
+  //View mode is just to view the list of shopping cart
+  //Edit mode let user delete/modify items in shopping cart
+  
+  /*
+  id delegate = [[UIApplication sharedApplication] delegate];
+  
+  ShoppingCart *shoppingCart = nil;
+  if ([delegate respondsToSelector:@selector(shoppingCart)]){
+    shoppingCart = [delegate shoppingCart];
+  }
+
+  //Here, we push a brand new ShoesDetailController instance since it's different than
+  //the one from ShoesListView
+  ShoesDetailViewController *shoesDetailView = [[[ShoesDetailViewController alloc]
+                                                initWithNibName:@"ShoesDetailViewController"
+                                                bundle:nil] autorelease];
+  
+  [shoesDetailView setShoes:[shoppingCart getShoesAtIndex:indexPath.row]];
+  //Set the shoesDetailView to be editing mode
+  //There is no more editing mode for shoesDetailView
+  //[shoesDetailView setEditing:YES];
+  [self.navigationController pushViewController:shoesDetailView animated:YES];*/
 }
 
 // Update the data model according to edit actions delete or insert.
@@ -191,12 +244,6 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
     [shoppingCart removeShoesAtIndex:indexPath.row];
     [shoppingCartListView reloadData];
   } 
-  //There is only delete mode at the moment
-  
-  /*else if (editingStyle == UITableViewCellEditingStyleInsert) {
-    [arryData insertObject:@"Mac Mini" atIndex:[arryData count]];
-    [tblSimpleTable reloadData];
-  }*/
 }
 
 #pragma mark navigation bar button methods
@@ -216,6 +263,8 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.navigationItem.rightBarButtonItem setTitle:@"Done"];
     [self.navigationItem.rightBarButtonItem setStyle:UIBarButtonItemStyleDone];
   }
+  
+  //[shoppingCartListView reloadData];
 }
 
 #pragma mark -

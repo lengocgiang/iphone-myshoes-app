@@ -27,5 +27,6 @@
 - (id)getShoesAtIndex:(NSUInteger)index;
 - (NSUInteger)getQuantity:(NSUInteger)index;
 - (void)removeShoesAtIndex:(NSUInteger)index;
+- (void)updateShoes:(id)shoes withQuantity:(NSUInteger)quantity;
 
 @end

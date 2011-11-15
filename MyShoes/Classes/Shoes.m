@@ -73,6 +73,45 @@
 	return self;
 }
 
+- (id)copyWithZone:(NSZone*)zone {
+  
+	Shoes *copy = [[[self class] allocWithZone: zone] init];
+  
+  //Copy all shoes properties
+	copy.pID = [[self.pID copy] autorelease];
+	copy.pgID = [[self.pgID copy] autorelease];
+	copy.shoesImageName = [[self.shoesImageName copy] autorelease];
+	copy.productSalesmessaging = [[self.productSalesmessaging copy] autorelease];
+	
+	copy.brandName = [[self.brandName copy] autorelease];
+	copy.styleNameList = [[self.styleNameList copy] autorelease];
+	
+	copy.productPrice = [[self.productPrice copy] autorelease];
+  copy.productCategory = [[self.productCategory copy] autorelease];
+  //NSString *_product;
+	copy.productPriceCurrency = [[self.productPriceCurrency copy] autorelease];
+  copy.productDetailLink = [[self.productDetailLink copy] autorelease];
+  copy.productRating = [[self.productRating copy] autorelease];
+  copy.productStyle = [[self.productStyle copy] autorelease];
+  copy.productColor = [[self.productColor copy] autorelease];
+  copy.productBrandName = [[self.productBrandName copy] autorelease];
+  
+  copy.productSKU = [[self.productSKU copy] autorelease];
+  
+  copy.shoesImgsAllAngle = [[self.shoesImgsAllAngle copy] autorelease];
+  copy.shoesImgsCount = self.shoesImgsCount;
+  copy.productBrandLogo = [[self.productBrandLogo copy] autorelease];
+  copy.shoesColors = [[self.shoesColors copy] autorelease];
+  copy.urlsWithColors = [[self.urlsWithColors copy] autorelease];
+  copy.shoesSizes = [[self.shoesSizes copy] autorelease];
+  copy.shoesSizesValue = [[self.shoesSizesValue copy] autorelease];
+  
+  copy.selectedColor = self.selectedColor;
+  copy.selectedSize = self.selectedSize;
+  
+	return copy;//[copy autorelease];
+}
+
 - (void)processProductImage:(TFHppleElement *)node{
   
   NSArray *elements  = [node childNodes];  
@@ -246,6 +285,12 @@
               i, tmpStr, SHOES_INFO_SHOESIMGS_FILE_SURFIX];
     [imgArray addObject:tmpUrl];
   }
+  
+  //Update shoesImageName since in the shoes detail view page, there is no shoesImageName tag
+  //This is to update shoesImageName in case that user select a different color of shoes
+  //The shoesImageName is in format of shoes_isec1305414.jpg
+  self.shoesImageName = [NSString stringWithFormat:@"%@%c%@%@", SHOES_INFO_SHOESIMGS_ALLANGLE_URIPREFIX,
+                         83, tmpStr, SHOES_INFO_SHOESIMGS_FILE_SURFIX];
   
   //[self.shoesImgsAllAngle release];
   //self.shoesImgsAllAngle = [[NSArray arrayWithArray:imgArray] retain];
