@@ -108,8 +108,10 @@
   
   [url appendString:secondaryCategory.categoryName];
   
-  // Bag's url doesn't has "+Shoes"
-  if (firstCategory.categoryName != SHOES_CATEGORY_BAGS_NAME)
+  // Bag's url doesn't has "+Shoes", and the same for the secondary category boots and sandals
+  if ((firstCategory.categoryName != SHOES_CATEGORY_BAGS_NAME)
+      && (secondaryCategory.categoryName != SHOES_CATEGORY_BOOTS_NAME)
+      && (secondaryCategory.categoryName != SHOES_CATEGORY_SANDALS_NAME))
   {
     [url appendString:@"+Shoes"];
   }
