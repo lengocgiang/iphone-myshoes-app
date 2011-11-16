@@ -329,7 +329,7 @@
     id delegate = [[UIApplication sharedApplication] delegate];
     
     if ([delegate respondsToSelector:@selector(shoesDetailController)]){
-      [[delegate shoesDetailController] setShoes:[_shoesArray objectAtIndex:indexPath.row]];
+      [[delegate shoesDetailController] setShoes:[shoesArray objectAtIndex:indexPath.row]];
       
       //Set editing to false to indicate that it is not from shopping cart view
       //There is no more editing mode for shoesDetailView
