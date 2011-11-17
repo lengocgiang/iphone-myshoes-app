@@ -135,31 +135,13 @@
 #pragma mark - login
 - (void)loginWithDelegate:(id)requestDelegate 
           requestSelector:(SEL)requestSelector 
-                   userID:(NSString*)userID 
-                 password:(NSString*)pwd {
-  
-  self.username = userID;
-  self.password = pwd;
+            loginFormDict:(NSDictionary *)loginFormDict{
   
 	self.delegate = requestDelegate;
 	self.callback = requestSelector;
 	
   NSURL *url = [NSURL URLWithString:SHOES_LOGIN_URL];
 	
-  //(value, key) pairs
-  //The login form inputs
-  //Are they all needed? -Yes!
-  NSDictionary *loginFormDict = [NSDictionary dictionaryWithObjectsAndKeys:
-                        username, SHOES_LOGIN_INPUT_USERNAME_ID, 
-                        password, SHOES_LOGIN_INPUT_PASSWORD_ID, 
-                        @"25", SHOES_LOGIN_INPUT_BTN_X_ID, 
-                        @"16", SHOES_LOGIN_INPUT_BTN_Y_ID,                         
-                        SHOES_LOGIN_VALUE_EMPTY, SHOES_LOGIN_INPUT_EVENTTARGET_ID, 
-                        SHOES_LOGIN_VALUE_EMPTY, SHOES_LOGIN_INPUT_EVENTARGUMENT_ID, 
-                        SHOES_LOGIN_VALUE_EMPTY, SHOES_LOGIN_INPUT_VIEWSTATEENCRYPTED_ID, 
-                        SHOES_LOGIN_INPUT_VIEWSTATE_VALUE, SHOES_LOGIN_INPUT_VIEWSTATE_ID,                         
-                        nil];
-  
   //What the hell of myBounds for and where is the value from? 
   //-Just random string to distinguish bodyData
   NSString *myBounds = @"98765abcde";

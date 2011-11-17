@@ -7,6 +7,10 @@
 //
 
 #import "LoginViewController.h"
+#import "TFHpple.h"
+#import "TFHppleElement+AccessChildren.h"
+#import "Config.h"
+
 
 @implementation LoginViewController
 
@@ -15,6 +19,7 @@
 @synthesize password;
 @synthesize delegate;
 @synthesize networkTool;
+@synthesize networkTool2;
 @synthesize loadingIndicator;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -28,6 +33,7 @@
 
 - (void)dealloc {
   [networkTool release];  
+  [networkTool2 release];
   [loadingIndicator release];
   
   [userID release];
@@ -81,6 +87,7 @@
 {
   [self setLoadingIndicator:nil];
   [self setNetworkTool:nil];
+  [self setNetworkTool2:nil];  
   [self setUserID:nil];
   [self setPassword:nil];
   [self setLoginButton:nil];
@@ -121,12 +128,12 @@
     NSLog(@"create networkTool");
     self.networkTool = [[NetworkTool alloc] init];
   }
-    
-  [self.networkTool loginWithDelegate:self 
-                      requestSelector:@selector(updateData:) 
-                               userID:self.userID.text
-                             password:self.password.text];
-
+  
+  //Issue the request of the selected category
+  [self.networkTool getContent:SHOES_LOGIN_URL 
+                  withDelegate:self 
+               requestSelector:@selector(buildLoginFormDict:)];
+  
 }
 
 - (IBAction)usernameChanged:(id)sender {
@@ -144,6 +151,47 @@
 
 
 #pragma mark - network method
+
+
+- (void)buildLoginFormDict:(NSData *)content {
+  NSString *viewState;
+  // Create parser
+  TFHpple *xpathParser = [[TFHpple alloc] initWithHTMLData:content];
+  NSArray *elements  = [xpathParser search:@"//*[@id='__VIEWSTATE']"];
+  if((elements != nil) && ([elements count] > 0)){
+    TFHppleElement *targetNode = [elements objectAtIndex:0];
+    viewState = [targetNode objectForKey:VALUE_TAG];
+  }else{
+    // set default value here
+    NSLog(@"======= NOT found!!!!");
+    viewState = SHOES_LOGIN_INPUT_VIEWSTATE_VALUE;
+  }
+  [xpathParser release];
+  
+  if (!self.networkTool2) {
+    self.networkTool2 = [[NetworkTool alloc] init];
+  }
+  
+  //(value, key) pairs
+  //The login form inputs
+  //Are they all needed? -Yes!
+  NSDictionary *loginFormDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                                 self.userID.text, SHOES_LOGIN_INPUT_USERNAME_ID, 
+                                 self.password.text, SHOES_LOGIN_INPUT_PASSWORD_ID, 
+                                 viewState, SHOES_LOGIN_INPUT_VIEWSTATE_ID, 
+                                 @"25", SHOES_LOGIN_INPUT_BTN_X_ID, 
+                                 @"16", SHOES_LOGIN_INPUT_BTN_Y_ID,                         
+                                 SHOES_LOGIN_VALUE_EMPTY, SHOES_LOGIN_INPUT_EVENTTARGET_ID, 
+                                 SHOES_LOGIN_VALUE_EMPTY, SHOES_LOGIN_INPUT_EVENTARGUMENT_ID, 
+                                 SHOES_LOGIN_VALUE_EMPTY, SHOES_LOGIN_INPUT_VIEWSTATEENCRYPTED_ID,                         
+                                 nil];
+  
+  [self.networkTool2 loginWithDelegate:self 
+                       requestSelector:@selector(updateData:) 
+                         loginFormDict:loginFormDict];
+  
+}
+
 
 - (void)updateData:(NSData *)content {
   [loadingIndicator stopAnimating];
