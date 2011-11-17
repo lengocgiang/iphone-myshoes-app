@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Shoes.h"
 
-@interface ShoppingCartViewCell : UITableViewCell<UITextFieldDelegate> {
+@interface ShoppingCartViewCell : UITableViewCell/*<UITextFieldDelegate>*/ {
   
   //UILabel *shoesBrandName;
   UILabel *shoesInfo;

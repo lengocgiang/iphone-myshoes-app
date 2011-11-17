@@ -11,7 +11,7 @@
 #import "CustomNavigationController.h"
 #import "HJManagedImageV.h"
 
-@interface ShoppingCartViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, ShoesViewProtocol> {
+@interface ShoppingCartViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, ShoesViewProtocol, UITextFieldDelegate> {
   //Table view for shopping cart
   UITableView *shoppingCartListView;
   

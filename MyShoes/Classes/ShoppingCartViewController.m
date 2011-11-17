@@ -274,4 +274,50 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
   //Anything here need to clean this view
 }
 
+#pragma mark UITextFieldDelegate methods
+
+/*- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+ 
+ }*/
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+  //Grab the number that user set for quantity
+  //For the moment, don't do any valid check
+  id delegate = [[UIApplication sharedApplication] delegate];
+  
+  ShoppingCart *shoppingCart = nil;
+  if ([delegate respondsToSelector:@selector(shoppingCart)]){
+    shoppingCart = [delegate shoppingCart];
+  }
+  
+  NSString *str = textField.text;
+  
+  //Convert the String to number
+  NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
+  [f setNumberStyle:NSNumberFormatterNoStyle];
+  NSNumber * myNumber = [f numberFromString:str];
+  [f release];
+  
+  //Set the updated number of shoppingCart
+  UITableViewCell *cell = (UITableViewCell*) [[textField superview] superview];
+  NSUInteger i = [shoppingCartListView indexPathForCell:cell].row;
+  
+  Shoes *shoes = [shoppingCart getShoesAtIndex:i];
+  [shoppingCart updateShoes:shoes withQuantity:myNumber.integerValue];
+  
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+  [textField resignFirstResponder];
+  return NO;
+}
+
+- (void) textFieldDidBeginEditing:(UITextField *)textField {
+  shoppingCartListView.contentInset =  UIEdgeInsetsMake(0, 0, 300, 0);
+  
+  UITableViewCell *cell = (UITableViewCell*) [[textField superview] superview];
+  [shoppingCartListView scrollToRowAtIndexPath:[shoppingCartListView indexPathForCell:cell] atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+}
+
+
 @end

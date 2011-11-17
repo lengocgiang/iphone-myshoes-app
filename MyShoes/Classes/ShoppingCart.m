@@ -25,7 +25,29 @@
 }
 
 - (void)addToCart:(Shoes *)shoes {
-  [self addToCart:shoes andQuantitiy:1];
+  //Check if the shoes exist, if yes, just quantity plus 1
+  int i = 0, index = -1;
+  for(Shoes* s in shoesArray){
+    if([s equals:shoes])
+    {
+      index = i;
+      break;
+    }
+    i++;
+  }
+  
+  //Not the same type of shoes in shopping cart
+  if(index == -1) {
+    [self addToCart:shoes andQuantitiy:1];
+  }
+  else //Add quantity by 1
+  {
+    NSUInteger q = [self getQuantity:index];
+    q++;
+    [shoesQuantity replaceObjectAtIndex:index withObject:[NSNumber numberWithInt:q]];
+    
+    
+  }
 }
 
 - (void)addToCart:(Shoes *)shoes andQuantitiy:(NSUInteger)quantity {
@@ -61,7 +83,6 @@
 //Update the quantity for a selected shoes
 - (void)updateShoes:(id)shoes withQuantity:(NSUInteger)quantity {
   //Locate the shoes in the shopping cart shoes list
-  //If we can't find it, skip the rest of the code
   NSUInteger index = [shoesArray indexOfObject:shoes];
   [shoesQuantity replaceObjectAtIndex:index withObject:[NSNumber numberWithInt:quantity]];
 }

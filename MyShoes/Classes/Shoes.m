@@ -452,6 +452,24 @@
   }
 }
 
+//Compare to other shoes, if shoes shoesImageName are the same, return True
+//And the same size
+- (BOOL)equals:(Shoes *)shoes {
+  if(shoes == nil) {
+    return false;
+  }
+  
+  if(self.shoesImageName == nil) {
+    return false;
+  }
+  
+  if([self.shoesImageName isEqualToString:shoes.shoesImageName] && (self.selectedSize == shoes.selectedSize)){
+    return true;
+  }
+  
+  return false;
+}
+
 #pragma mark -
 #pragma mark dealloc methods
 
