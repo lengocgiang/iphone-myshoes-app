@@ -23,6 +23,7 @@
 @property (retain, nonatomic) IBOutlet UIButton *loginButton;
 
 @property (nonatomic, retain) NetworkTool *networkTool;
+@property (nonatomic, retain) NetworkTool *networkTool2;
 @property (retain, nonatomic) UIActivityIndicatorView *loadingIndicator;
 @property (nonatomic, assign) id <LoginViewControllerDelegate>   delegate;
 

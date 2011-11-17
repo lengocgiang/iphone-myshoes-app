@@ -35,7 +35,6 @@
 -(void)request:(NSURL *) url;
 -(void)loginWithDelegate:(id)requestDelegate 
          requestSelector:(SEL)requestSelector 
-                  userID:(NSString *)userID 
-                password:(NSString *)password;
+           loginFormDict:(NSDictionary *)loginFormDict;
 
 @end
