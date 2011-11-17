@@ -8,6 +8,7 @@
 
 #import "ShoppingCartViewCell.h"
 #import "ShoppingCart.h"
+#import "ShoppingCartViewController.h"
 #import "MyShoesAppDelegate.h"
 #import "Config.h"
 
@@ -47,7 +48,15 @@
       //By default, Shoes Quantity Input should be invisible
       [shoesQuantity setHidden:YES];
       
-      shoesQuantity.delegate = self;
+      //Locate shopping cart object
+      id delegate = [[UIApplication sharedApplication] delegate];
+      
+      ShoppingCartViewController *shoppingCartView = nil;
+      if ([delegate respondsToSelector:@selector(shoppingCart)]){
+        shoppingCartView = [delegate shoppingCartController];
+      }
+      
+      shoesQuantity.delegate = shoppingCartView;
       [self.contentView addSubview:shoesQuantity];
       
     }
@@ -122,11 +131,9 @@
   [shoes release];
 }
 
+/*
 #pragma mark UITextFieldDelegate methods
 
-/*- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-  
-}*/
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
   //Grab the number that user set for quantity
@@ -155,5 +162,10 @@
   [textField resignFirstResponder];
   return NO;
 }
+
+- (void) textFieldDidBeginEditing:(UITextField *)textField {
+  UITableViewCell *cell = (UITableViewCell*) [[textField superview] superview];
+  [tView scrollToRowAtIndexPath:[tView indexPathForCell:cell] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+}*/
 
 @end

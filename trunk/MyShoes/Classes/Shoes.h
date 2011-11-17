@@ -92,5 +92,6 @@
 - (void)processShoesSizes:(TFHppleElement *)node;
 - (void)processShoesPrice:(TFHppleElement *)node;
 - (NSString *)processShoesInfo:(TFHppleElement *)node withProductTag:(NSString*)tag;
+- (BOOL)equals:(Shoes *)shoes;
 
 @end
