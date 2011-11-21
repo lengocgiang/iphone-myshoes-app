@@ -14,7 +14,8 @@
 @interface ShoppingCartViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, ShoesViewProtocol, UITextFieldDelegate> {
   //Table view for shopping cart
   UITableView *shoppingCartListView;
-  
+  UIButton *checkOutBtn;
+
   /* The NetworkTool instance to do network communications. */
   NetworkTool *networkTool;
 
@@ -23,6 +24,7 @@
 }
 
 @property (nonatomic, retain) UITableView *shoppingCartListView;
+@property (nonatomic, retain) UIButton *checkOutBtn;
 @property (nonatomic, retain) NetworkTool *networkTool;
 
 - (void)EditButtonAction:(id)sender;
