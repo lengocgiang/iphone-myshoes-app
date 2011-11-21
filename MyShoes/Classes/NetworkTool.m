@@ -189,4 +189,51 @@
 	NSLog(@"Sent the login form");
 }
 
++ (BOOL)hasUserLoggedIn {
+  BOOL hasFoundUserNameInCookie = NO;
+  BOOL hasFoundRememberMe = NO;
+  BOOL loginIsTrue = NO;
+  
+  NSArray * cookies  = [NSHTTPCookieStorage sharedHTTPCookieStorage].cookies;
+  NSString *cookieName, *cookieValue;
+  
+  for (int i = 0; i < cookies.count; i++){
+    cookieName = [[cookies objectAtIndex:i] name];
+    cookieValue = [(NSHTTPCookie *)[cookies objectAtIndex:i] value];
+    if ([cookieName isEqualToString:@"UserName"]) {
+      hasFoundUserNameInCookie = YES;
+      NSLog(@"Found cookie \"%@=%@\" in sharedHTTPCookieStorage!", cookieName, cookieValue);
+    }else if([cookieName isEqualToString:@"rememberMe"]){
+      hasFoundRememberMe = YES;
+      NSLog(@"Found cookie \"%@=%@\" in sharedHTTPCookieStorage!", cookieName, cookieValue);
+    }else if([cookieName isEqualToString:@"Login"]){
+      if ([cookieValue isEqualToString:@"true"]){
+        loginIsTrue = YES;
+      }
+    }
+  }
+  
+  if (hasFoundUserNameInCookie && hasFoundRememberMe && loginIsTrue) {
+    NSLog(@"User already logged in!");
+    return YES;
+  }else{
+    NSLog(@"User needs to log in!");
+    return NO;
+  }
+}
+
++ (void)showAllSavedCookies {
+  NSArray * cookies  = [NSHTTPCookieStorage sharedHTTPCookieStorage].cookies;
+  NSString *cookieName, *cookieValue;
+  
+  NSLog(@"Dump save cookies start: ===========");
+  for (int i = 0; i < cookies.count; i++){
+    cookieName = [[cookies objectAtIndex:i] name];
+    cookieValue = [(NSHTTPCookie *)[cookies objectAtIndex:i] value];
+    NSLog(@"Found cookie \"%@=%@\" in sharedHTTPCookieStorage!", cookieName, cookieValue);
+  }
+  NSLog(@"Dump save cookies end: ===========");
+}
+
+
 @end

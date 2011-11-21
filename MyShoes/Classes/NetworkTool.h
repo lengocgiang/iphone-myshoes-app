@@ -36,5 +36,8 @@
 -(void)loginWithDelegate:(id)requestDelegate 
          requestSelector:(SEL)requestSelector 
            loginFormDict:(NSDictionary *)loginFormDict;
++ (BOOL)hasUserLoggedIn;
++ (void)showAllSavedCookies;
+
 
 @end
