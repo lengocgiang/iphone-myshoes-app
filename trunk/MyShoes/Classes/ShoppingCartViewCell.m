@@ -17,50 +17,61 @@
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
-        // Initialization code
-      // Initialization code
-      //Create Shoes Info Label
-      shoesInfo = [[[UILabel alloc] init] autorelease];
-      shoesInfo.font = [UIFont fontWithName:@"Helvetica" size:(14.0)];
-      [self.contentView addSubview:shoesInfo];
-      
-      //Create Shoes Detail Label
-      shoesDetail = [[[UILabel alloc] init] autorelease];
-      shoesDetail.textAlignment = UITextAlignmentRight;
-      shoesDetail.font = [UIFont fontWithName:@"Helvetica" size:(10.0)];
-      [self.contentView addSubview:shoesDetail];
-      
-      //Create input for quantity
-      //Should accept number only
-      shoesQuantity = [[[UITextField alloc] init] autorelease];
-      shoesQuantity.textAlignment = UITextAlignmentRight;
-      shoesQuantity.font = [UIFont fontWithName:@"Helvetica" size:(12.0)];
-      
-      //Quantity text input field should accept number only
-      shoesQuantity.keyboardType = UIKeyboardTypeNumberPad;
-      //Set the boder and corner of the text field
-      shoesQuantity.layer.cornerRadius = 2.0f;
-      shoesQuantity.clipsToBounds = YES;
-      shoesQuantity.layer.borderWidth = 1.0f;
-      
-      //By default, Shoes Quantity Input should be invisible
-      [shoesQuantity setHidden:YES];
-      
-      //Locate shopping cart object
-      id delegate = [[UIApplication sharedApplication] delegate];
-      
-      ShoppingCartViewController *shoppingCartView = nil;
-      if ([delegate respondsToSelector:@selector(shoppingCart)]){
-        shoppingCartView = [delegate shoppingCartController];
-      }
-      
-      shoesQuantity.delegate = shoppingCartView;
-      [self.contentView addSubview:shoesQuantity];
-      
+  self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+  if (self) {
+    // Initialization code
+    // Initialization code
+    //Create Shoes Info Label
+    shoesInfo = [[[UILabel alloc] init] autorelease];
+    shoesInfo.font = [UIFont fontWithName:@"Helvetica" size:(14.0)];
+    [self.contentView addSubview:shoesInfo];
+    
+    //Create Shoes size Info Label which is below the Shoes Info Label
+    shoesSizeInfo = [[[UILabel alloc] init] autorelease];
+    shoesSizeInfo.font = [UIFont fontWithName:@"Helvetica" size:(10.0)];
+    [self.contentView addSubview:shoesSizeInfo];
+    
+    //Create Shoes Detail Label
+    shoesDetail = [[[UILabel alloc] init] autorelease];
+    shoesDetail.textAlignment = UITextAlignmentRight;
+    shoesDetail.font = [UIFont fontWithName:@"Helvetica" size:(10.0)];
+    [self.contentView addSubview:shoesDetail];
+    
+    //Create input for quantity
+    //Should accept number only
+    shoesQuantity = [[[UITextField alloc] init] autorelease];
+    shoesQuantity.textAlignment = UITextAlignmentRight;
+    shoesQuantity.font = [UIFont fontWithName:@"Helvetica" size:(12.0)];
+    
+    //Quantity text input field should accept number only
+    shoesQuantity.keyboardType = UIKeyboardTypeNumberPad;
+    //Set the boder and corner of the text field
+    shoesQuantity.layer.cornerRadius = 2.0f;
+    shoesQuantity.clipsToBounds = YES;
+    shoesQuantity.layer.borderWidth = 1.0f;
+    
+    //By default, Shoes Quantity Input should be invisible
+    [shoesQuantity setHidden:YES];
+    
+    //Locate shopping cart object
+    id delegate = [[UIApplication sharedApplication] delegate];
+    
+    ShoppingCartViewController *shoppingCartView = nil;
+    if ([delegate respondsToSelector:@selector(shoppingCart)]){
+      shoppingCartView = [delegate shoppingCartController];
     }
-    return self;
+    
+    shoesQuantity.delegate = shoppingCartView;
+    [self.contentView addSubview:shoesQuantity];
+    
+  }
+
+  //Remove default views
+  [self.imageView removeFromSuperview];
+  [self.textLabel removeFromSuperview];
+  [self.contentView setOpaque:YES];
+
+  return self;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
@@ -76,12 +87,21 @@
   float indicatorSize = 5;//cell.accessoryView.frame.size.width;
   
   //The frame of the shoes info label
-  frame.origin.x = 10 + CART_LIST_CELL_IMG_WIDTH;
-  frame.origin.y = 10;
+  frame.origin.x = 5 + SHOES_LIST_CELL_IMG_WIDTH;
+  frame.origin.y = 5;
   frame.size.height = 30;
   frame.size.width = 150;
   
   shoesInfo.frame = frame;
+  
+  //The frame of the shoessize info label
+  frame.origin.x = 5 + SHOES_LIST_CELL_IMG_WIDTH;
+  frame.origin.y = 5 + shoesInfo.frame.size.height;
+  frame.size.height = 20;
+  frame.size.width = 150;
+  
+  shoesSizeInfo.frame = frame;
+ 
   
   //The frame of the shoes detail label
   frame.origin.x = self.contentView.frame.size.width - 70 - indicatorSize;
@@ -102,6 +122,10 @@
 
 - (void)setShoesInfo:(NSString *)txt {
   shoesInfo.text = txt;
+}
+
+- (void)setShoesSizeInfo:(NSString *)txt {
+  shoesSizeInfo.text = txt;
 }
 
 - (void)setShoesDetail:(NSString *)txt {

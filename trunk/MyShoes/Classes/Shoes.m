@@ -470,6 +470,13 @@
   return false;
 }
 
+- (NSString *)getShoesSizeInfo {
+  if((self.shoesSizes != nil) && ([self.shoesSizes count] > self.selectedSize)) {
+    return [self.shoesSizes objectAtIndex:self.selectedSize]; 
+  }
+  return nil;
+}
+
 #pragma mark -
 #pragma mark dealloc methods
 

@@ -13,6 +13,7 @@
   
   //UILabel *shoesBrandName;
   UILabel *shoesInfo;
+  UILabel *shoesSizeInfo;
   //UILabel *shoesColor;
   UILabel *shoesDetail;
   
@@ -24,6 +25,7 @@
 @property (nonatomic, retain) Shoes *shoes;
 
 - (void)setShoesInfo:(NSString *)txt;
+- (void)setShoesSizeInfo:(NSString *)txt;
 - (void)setShoesDetail:(NSString *)txt;
 - (void)setShoesQuantity:(NSUInteger)quantity;
 - (void)setEditing:(BOOL)editing;
