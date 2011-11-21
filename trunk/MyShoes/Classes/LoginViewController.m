@@ -198,7 +198,7 @@
   [loadingIndicator removeFromSuperview];
   
   // show alert when login failed
-    if (![self hasUserLoggedIn]) {
+    if (![NetworkTool hasUserLoggedIn]) {
         UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:@"Error!" 
                                                              message:@"We're sorry the login information you entered does not match our records." 
                                                             delegate:self 
@@ -208,11 +208,11 @@
     }
     
   [self.delegate loginViewConfirm:self];
-  [self showAllSavedCookies];
+  [NetworkTool showAllSavedCookies];
 
 }
 
-- (BOOL)hasUserLoggedIn {
+/*- (BOOL)hasUserLoggedIn {
   BOOL hasFoundUserNameInCookie = NO;
   BOOL hasFoundRememberMe = NO;
   BOOL loginIsTrue = NO;
@@ -256,6 +256,6 @@
     NSLog(@"Found cookie \"%@=%@\" in sharedHTTPCookieStorage!", cookieName, cookieValue);
   }
   NSLog(@"Dump save cookies end: ===========");
-}
+}*/
 
 @end

@@ -31,7 +31,7 @@
 - (IBAction)confirmLogin:(id)sender;
 - (IBAction)usernameChanged:(id)sender;
 
-- (BOOL)hasUserLoggedIn;
-- (void)showAllSavedCookies;
+//- (BOOL)hasUserLoggedIn;
+//- (void)showAllSavedCookies;
 
 @end
