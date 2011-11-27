@@ -20,6 +20,7 @@
 @synthesize shoesDetailController;
 @synthesize shoppingCartController;
 @synthesize settingController;
+@synthesize loginViewController;
 @synthesize myAccountController;
 @synthesize searchController;
 @synthesize shoppingCart;
@@ -85,6 +86,11 @@
   myAccountNavController.delegate = self;
   myAccountController = [[MyAccountViewController alloc] initWithNibName:@"MyAccountViewController" bundle:nil];
   [myAccountNavController pushViewController:myAccountController animated:NO];
+  
+  //Init the login View which can be reused
+  loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" 
+                                                              bundle:nil];
+  //loginViewController.title = LOGIN_NAV_TITLE_NAME;
   
   //Init the setting navigator and sub views
   settingNavController = [[CustomNavigationController alloc] init];
@@ -231,6 +237,7 @@
   [settingNavController release];
   [settingController release];
   [myAccountNavController release];
+  [loginViewController release];
   [myAccountController release];
   [searchController release];
   [searchNavController release];

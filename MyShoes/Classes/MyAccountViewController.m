@@ -7,12 +7,13 @@
 //
 
 #import "MyAccountViewController.h"
+#import "MyShoesAppDelegate.h"
 
 @implementation MyAccountViewController
 
 @synthesize webview;
 @synthesize networkTool;
-@synthesize loginViewController;
+//@synthesize loginViewController;
 @synthesize loginButton;
 @synthesize loadingIndicator;
 
@@ -30,7 +31,7 @@
   [loadingIndicator release];
   [webview release];
   [networkTool release];
-  [loginViewController release];
+  //[loginViewController release];
   [loginButton release];
   [super dealloc];
 }
@@ -57,7 +58,7 @@
   [self setLoadingIndicator:nil];
   [self setWebview:nil];
   [self setNetworkTool:nil];
-  [self setLoginViewController:nil];
+  //[self setLoginViewController:nil];
   [self setLoginButton:nil];
   [super viewDidUnload];
   // Release any retained subviews of the main view.
@@ -67,11 +68,12 @@
 - (void) viewWillAppear:(BOOL)animated{
   
   // check whether the user already log in
-  if (!loginViewController){
+  // hasUserLoggedIn is moved to NetworkTool
+  /*if (!loginViewController){
     loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" 
                                                                 bundle:nil];
-  }
-  if ([loginViewController hasUserLoggedIn]) {
+  }*/
+  if ([NetworkTool hasUserLoggedIn]) {
     loginButton.title = @"Sign out";
   }else{
     // launch login view if not
@@ -89,17 +91,24 @@
 
 #pragma mark - Login view related
 - (void)launchLoginView {
-  if (!loginViewController){
+  /*if (!loginViewController){
     loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" 
                                                                 bundle:nil];
-  }
+  }*/
   
+  LoginViewController *loginView;
+  id delegate = [[UIApplication sharedApplication] delegate];
+  
+  if ([delegate respondsToSelector:@selector(loginViewController)]){
+    loginView = (LoginViewController *)([delegate loginViewController]); 
+  }
+
   NSLog(@"loginButton.title=%@", loginButton.title);
   if ([loginButton.title isEqualToString:@"Sign In"]){
-    loginViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    loginViewController.modalPresentationStyle = UIModalPresentationPageSheet;
-    loginViewController.delegate = self;
-    [self presentModalViewController:loginViewController animated:YES];
+    loginView.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    loginView.modalPresentationStyle = UIModalPresentationPageSheet;
+    loginView.delegate = self;
+    [self presentModalViewController:loginView animated:YES];
   }else{
     // sign out
     NSLog(@"rrrrrrrrr");
@@ -139,10 +148,10 @@
   [loadingIndicator stopAnimating];
   [loadingIndicator removeFromSuperview];
   
-  NSLog(@"has user logged in? %d", loginViewController.hasUserLoggedIn);
+  NSLog(@"has user logged in? %d", [NetworkTool hasUserLoggedIn]);
   loginButton.title = @"Sign In";
 
-  [loginViewController showAllSavedCookies];
+  [NetworkTool showAllSavedCookies];
 }
 
 - (IBAction)signin:(id)sender {
@@ -152,8 +161,8 @@
 #pragma mask - Login view delegate method
 - (void)loginViewConfirm:(id)sender{
   [self dismissModalViewControllerAnimated:YES];
-  NSLog(@"userID=%@", loginViewController.userID.text);
-  NSLog(@"password=%@", loginViewController.password.text);
+  //NSLog(@"userID=%@", loginViewController.userID.text);
+  //NSLog(@"password=%@", loginViewController.password.text);
 }
 
 - (void)loginViewCancel:(id)sender{

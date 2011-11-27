@@ -356,8 +356,34 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
   if ([delegate respondsToSelector:@selector(shoppingCart)]){
     shoppingCart = [delegate shoppingCart];
   }
+  
+  //Check if user log in
+  if(![NetworkTool hasUserLoggedIn]) {
+    LoginViewController *loginView;
     
+    if ([delegate respondsToSelector:@selector(loginViewController)]){
+      loginView = [delegate loginViewController]; 
+    }
+    
+    loginView.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    loginView.modalPresentationStyle = UIModalPresentationPageSheet;
+    //loginView.delegate = self;
+    [self presentModalViewController:loginView animated:YES];
+  }    
 }
 
+#pragma mask - Login view delegate method
+- (void)loginViewConfirm:(id)sender{
+  [self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)loginViewCancel:(id)sender{
+  // go back to tab1 first so we don't stuck here. Otherwise, dismissModalView
+  // will throw exception since viewWillAppear() in this view will keep
+  // launching modalView which prevent dismiss itself.
+  [self.tabBarController setSelectedIndex:0];
+  
+  [self dismissModalViewControllerAnimated:YES];
+}
 
 @end
