@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "NetworkTool.h"
 #import "CustomNavigationController.h"
+#import "LoginViewController.h"
 #import "HJManagedImageV.h"
 
-@interface ShoppingCartViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, ShoesViewProtocol, UITextFieldDelegate> {
+@interface ShoppingCartViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, 
+ShoesViewProtocol, UITextFieldDelegate, LoginViewControllerDelegate> {
   //Table view for shopping cart
   UITableView *shoppingCartListView;
   UIButton *checkOutBtn;

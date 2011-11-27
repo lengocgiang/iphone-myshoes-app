@@ -51,6 +51,7 @@
 #define TAB_MYACCOUNT_NAV_PNG @"account.png"
 #define TAB_SEARCH_NAV_NAME @"Search"
 #define TAB_SEARCH_NAV_PNG @"search.png"
+#define LOGIN_NAV_TITLE_NAME @"Login"
 
 #define CATEGORY_NAV_TITLE_NAME @"Category"
 #define SECONDARY_CATEGORY_NAV_TITLE_NAME @"SecondaryCategory"

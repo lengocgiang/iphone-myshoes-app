@@ -14,7 +14,7 @@
 
 @property (retain, nonatomic) IBOutlet UIWebView *webview;
 @property (nonatomic, retain) NetworkTool *networkTool;
-@property (retain, nonatomic) LoginViewController * loginViewController;
+//@property (retain, nonatomic) LoginViewController * loginViewController;
 @property (retain, nonatomic) IBOutlet UIBarButtonItem *loginButton;
 @property (retain, nonatomic) UIActivityIndicatorView *loadingIndicator;
 
