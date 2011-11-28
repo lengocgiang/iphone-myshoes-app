@@ -18,6 +18,56 @@
 		0A90AA36145E080C00BC5224 /* HJMOUserBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A90AA2B145E080C00BC5224 /* HJMOUserBase.m */; };
 		0A90AA37145E080C00BC5224 /* HJObjManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A90AA2D145E080C00BC5224 /* HJObjManager.m */; };
 		0A90AA38145E080C00BC5224 /* HJWeakMutableArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A90AA2F145E080C00BC5224 /* HJWeakMutableArray.m */; };
+		0A9A7E72148440E10078916F /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AABA82E1479B51300A7176E /* SenTestingKit.framework */; };
+		0A9A7E73148440E10078916F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		0A9A7E74148440E10078916F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		0A9A7E7A148440E10078916F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0A9A7E78148440E10078916F /* InfoPlist.strings */; };
+		0A9A7E7D148440E10078916F /* ShoesListViewControllerApplicationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9A7E7C148440E10078916F /* ShoesListViewControllerApplicationTests.m */; };
+		0A9A7E85148447130078916F /* CustomNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0A203C6145FCCEE00E5AF97 /* CustomNavigationController.m */; };
+		0A9A7E86148447130078916F /* HJCircularBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A90AA1D145E080C00BC5224 /* HJCircularBuffer.m */; };
+		0A9A7E87148447130078916F /* HJManagedImageV.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A90AA1F145E080C00BC5224 /* HJManagedImageV.m */; };
+		0A9A7E88148447130078916F /* HJMOBigFileCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A90AA22145E080C00BC5224 /* HJMOBigFileCache.m */; };
+		0A9A7E89148447130078916F /* HJMOFileCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A90AA24145E080C00BC5224 /* HJMOFileCache.m */; };
+		0A9A7E8A148447130078916F /* HJMOHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A90AA26145E080C00BC5224 /* HJMOHandler.m */; };
+		0A9A7E8B148447130078916F /* HJMOPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A90AA28145E080C00BC5224 /* HJMOPolicy.m */; };
+		0A9A7E8C148447130078916F /* HJMOUserBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A90AA2B145E080C00BC5224 /* HJMOUserBase.m */; };
+		0A9A7E8D148447130078916F /* HJObjManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A90AA2D145E080C00BC5224 /* HJObjManager.m */; };
+		0A9A7E8E148447130078916F /* HJWeakMutableArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A90AA2F145E080C00BC5224 /* HJWeakMutableArray.m */; };
+		0A9A7E8F148447130078916F /* BSPreviewScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = B09F2028145A777900B5F70D /* BSPreviewScrollView.m */; };
+		0A9A7E90148447130078916F /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = B09F202B145A79E200B5F70D /* MBProgressHUD.m */; };
+		0A9A7E91148447130078916F /* TapImage.m in Sources */ = {isa = PBXBuildFile; fileRef = B09F202D145A79E200B5F70D /* TapImage.m */; };
+		0A9A7E92148447130078916F /* OrderedDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = B09F2032145A7C2000B5F70D /* OrderedDictionary.m */; };
+		0A9A7E93148447130078916F /* TFHpple.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B8B7DE12F7917A00446CCC /* TFHpple.m */; };
+		0A9A7E94148447130078916F /* TFHppleElement.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B8B7E012F7917A00446CCC /* TFHppleElement.m */; };
+		0A9A7E95148447130078916F /* XPathQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B8B7E212F7917A00446CCC /* XPathQuery.m */; };
+		0A9A7E96148447130078916F /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = B03B05A613134F0500A39685 /* Reachability.m */; };
+		0A9A7E97148447130078916F /* NetworkTool.m in Sources */ = {isa = PBXBuildFile; fileRef = B0E5030D12F185C100C8978B /* NetworkTool.m */; };
+		0A9A7E98148447130078916F /* ShoppingCart.m in Sources */ = {isa = PBXBuildFile; fileRef = B0E59BA1144E9F810084AED5 /* ShoppingCart.m */; };
+		0A9A7E99148447130078916F /* ShoesCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = B0E1BC8C130095560044A2EF /* ShoesCategory.m */; };
+		0A9A7E9A148447130078916F /* ShoesCategoryDict.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A749E4D143AE38C0072DA35 /* ShoesCategoryDict.m */; };
+		0A9A7E9B148447130078916F /* MyShoesAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* MyShoesAppDelegate.m */; };
+		0A9A7E9C148447130078916F /* TFHppleElement+AccessChildren.m in Sources */ = {isa = PBXBuildFile; fileRef = B0E1BE731301F88B0044A2EF /* TFHppleElement+AccessChildren.m */; };
+		0A9A7E9D148447130078916F /* NSMutableArray+QueueAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B0292544130E2CF700A78DB1 /* NSMutableArray+QueueAdditions.m */; };
+		0A9A7E9E148447130078916F /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0F63C751426B52D0017CC02 /* HomeViewController.m */; };
+		0A9A7E9F148447130078916F /* HomeViewBtnCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B02ADE5B142941340074543C /* HomeViewBtnCell.m */; };
+		0A9A7EA0148447130078916F /* ShoesCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0C4BE0D142C3CB600070F39 /* ShoesCategoryViewController.m */; };
+		0A9A7EA1148447130078916F /* ShoesSecondaryCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A749E49143ACD450072DA35 /* ShoesSecondaryCategoryViewController.m */; };
+		0A9A7EA2148447130078916F /* ShoesListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* ShoesListViewController.m */; };
+		0A9A7EA3148447130078916F /* LoadMoreSearchResultsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AABC33D1432C80D009A7FE1 /* LoadMoreSearchResultsTableViewCell.m */; };
+		0A9A7EA4148447130078916F /* ShoesListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B0EE004B142D6FCC008A1131 /* ShoesListViewCell.m */; };
+		0A9A7EA5148447130078916F /* ShoesDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0ADDC001316FEEE00B34625 /* ShoesDetailViewController.m */; };
+		0A9A7EA6148447130078916F /* ShoppingCartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0F067C714560FB400659B05 /* ShoppingCartViewController.m */; };
+		0A9A7EA7148447130078916F /* ShoppingCartViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B09C9F13146E0F0B0074CE8B /* ShoppingCartViewCell.m */; };
+		0A9A7EA8148447130078916F /* BSPreviewScrollView+ReloadPages.m in Sources */ = {isa = PBXBuildFile; fileRef = B0EDFEF5144950DF0026EC99 /* BSPreviewScrollView+ReloadPages.m */; };
+		0A9A7EA9148447130078916F /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B08F88FB14653298000EE234 /* SettingViewController.m */; };
+		0A9A7EAA148447130078916F /* MyAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B08F890114654362000EE234 /* MyAccountViewController.m */; };
+		0A9A7EAB148447130078916F /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B08F8906146545E2000EE234 /* LoginViewController.m */; };
+		0A9A7EAC148447140078916F /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B08768D61466163000CC9DB8 /* SearchViewController.m */; };
+		0A9A7EAD148447140078916F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
+		0A9A7EAE148447690078916F /* Shoes.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B8B86F12F7EED600446CCC /* Shoes.m */; };
+		0A9A7EAF148447D50078916F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
+		0A9A7EB0148447EC0078916F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B029241C130DCC8B00A78DB1 /* QuartzCore.framework */; };
+		0A9A7EB1148447F60078916F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B03B05791313463600A39685 /* SystemConfiguration.framework */; };
 		0AABC33E1432C80E009A7FE1 /* LoadMoreSearchResultsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AABC33D1432C80D009A7FE1 /* LoadMoreSearchResultsTableViewCell.m */; };
 		1D3623260D0F684500981E51 /* MyShoesAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* MyShoesAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
@@ -79,6 +129,16 @@
 		B0F63C771426B52D0017CC02 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0F63C751426B52D0017CC02 /* HomeViewController.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		0A9A7E83148444760078916F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1D6058900D05DD3D006BFB54;
+			remoteInfo = MyShoes;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		0A749E48143ACD450072DA35 /* ShoesSecondaryCategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShoesSecondaryCategoryViewController.h; sourceTree = "<group>"; };
 		0A749E49143ACD450072DA35 /* ShoesSecondaryCategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShoesSecondaryCategoryViewController.m; sourceTree = "<group>"; };
@@ -104,6 +164,13 @@
 		0A90AA2D145E080C00BC5224 /* HJObjManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HJObjManager.m; path = Classes/HJCacheClasses/HJObjManager.m; sourceTree = "<group>"; };
 		0A90AA2E145E080C00BC5224 /* HJWeakMutableArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HJWeakMutableArray.h; path = Classes/HJCacheClasses/HJWeakMutableArray.h; sourceTree = "<group>"; };
 		0A90AA2F145E080C00BC5224 /* HJWeakMutableArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HJWeakMutableArray.m; path = Classes/HJCacheClasses/HJWeakMutableArray.m; sourceTree = "<group>"; };
+		0A9A7E71148440E10078916F /* MyShoesApplicationTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyShoesApplicationTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A9A7E77148440E10078916F /* MyShoesApplicationTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MyShoesApplicationTests-Info.plist"; sourceTree = "<group>"; };
+		0A9A7E79148440E10078916F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0A9A7E7B148440E10078916F /* ShoesListViewControllerApplicationTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShoesListViewControllerApplicationTests.h; sourceTree = "<group>"; };
+		0A9A7E7C148440E10078916F /* ShoesListViewControllerApplicationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShoesListViewControllerApplicationTests.m; sourceTree = "<group>"; };
+		0A9A7E7E148440E10078916F /* MyShoesApplicationTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MyShoesApplicationTests-Prefix.pch"; sourceTree = "<group>"; };
+		0AABA82E1479B51300A7176E /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		0AABC33C1432C80D009A7FE1 /* LoadMoreSearchResultsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadMoreSearchResultsTableViewCell.h; sourceTree = "<group>"; };
 		0AABC33D1432C80D009A7FE1 /* LoadMoreSearchResultsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadMoreSearchResultsTableViewCell.m; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -201,6 +268,19 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		0A9A7E6D148440E10078916F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A9A7EB1148447F60078916F /* SystemConfiguration.framework in Frameworks */,
+				0A9A7EB0148447EC0078916F /* QuartzCore.framework in Frameworks */,
+				0A9A7EAF148447D50078916F /* CoreGraphics.framework in Frameworks */,
+				0A9A7E74148440E10078916F /* Foundation.framework in Frameworks */,
+				0A9A7E72148440E10078916F /* SenTestingKit.framework in Frameworks */,
+				0A9A7E73148440E10078916F /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1D60588F0D05DD3D006BFB54 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -300,10 +380,31 @@
 			name = HJCache;
 			sourceTree = "<group>";
 		};
+		0A9A7E75148440E10078916F /* MyShoesApplicationTests */ = {
+			isa = PBXGroup;
+			children = (
+				0A9A7E7B148440E10078916F /* ShoesListViewControllerApplicationTests.h */,
+				0A9A7E7C148440E10078916F /* ShoesListViewControllerApplicationTests.m */,
+				0A9A7E76148440E10078916F /* Supporting Files */,
+			);
+			path = MyShoesApplicationTests;
+			sourceTree = "<group>";
+		};
+		0A9A7E76148440E10078916F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0A9A7E77148440E10078916F /* MyShoesApplicationTests-Info.plist */,
+				0A9A7E78148440E10078916F /* InfoPlist.strings */,
+				0A9A7E7E148440E10078916F /* MyShoesApplicationTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				1D6058910D05DD3D006BFB54 /* MyShoes.app */,
+				0A9A7E71148440E10078916F /* MyShoesApplicationTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -320,6 +421,7 @@
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
+				0A9A7E75148440E10078916F /* MyShoesApplicationTests */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
@@ -364,6 +466,7 @@
 				288765A40DF7441C002DB57D /* CoreGraphics.framework */,
 				B029241C130DCC8B00A78DB1 /* QuartzCore.framework */,
 				B03B05791313463600A39685 /* SystemConfiguration.framework */,
+				0AABA82E1479B51300A7176E /* SenTestingKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -441,6 +544,25 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		0A9A7E70148440E10078916F /* MyShoesApplicationTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0A9A7E81148440E20078916F /* Build configuration list for PBXNativeTarget "MyShoesApplicationTests" */;
+			buildPhases = (
+				0A9A7E6C148440E10078916F /* Sources */,
+				0A9A7E6D148440E10078916F /* Frameworks */,
+				0A9A7E6E148440E10078916F /* Resources */,
+				0A9A7E6F148440E10078916F /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0A9A7E84148444760078916F /* PBXTargetDependency */,
+			);
+			name = MyShoesApplicationTests;
+			productName = MyShoesApplicationTests;
+			productReference = 0A9A7E71148440E10078916F /* MyShoesApplicationTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 		1D6058900D05DD3D006BFB54 /* MyShoes */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "MyShoes" */;
@@ -475,17 +597,27 @@
 				Japanese,
 				French,
 				German,
+				en,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				1D6058900D05DD3D006BFB54 /* MyShoes */,
+				0A9A7E70148440E10078916F /* MyShoesApplicationTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		0A9A7E6E148440E10078916F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A9A7E7A148440E10078916F /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1D60588D0D05DD3D006BFB54 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -518,7 +650,73 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0A9A7E6F148440E10078916F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		0A9A7E6C148440E10078916F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A9A7EAE148447690078916F /* Shoes.m in Sources */,
+				0A9A7E85148447130078916F /* CustomNavigationController.m in Sources */,
+				0A9A7E86148447130078916F /* HJCircularBuffer.m in Sources */,
+				0A9A7E87148447130078916F /* HJManagedImageV.m in Sources */,
+				0A9A7E88148447130078916F /* HJMOBigFileCache.m in Sources */,
+				0A9A7E89148447130078916F /* HJMOFileCache.m in Sources */,
+				0A9A7E8A148447130078916F /* HJMOHandler.m in Sources */,
+				0A9A7E8B148447130078916F /* HJMOPolicy.m in Sources */,
+				0A9A7E8C148447130078916F /* HJMOUserBase.m in Sources */,
+				0A9A7E8D148447130078916F /* HJObjManager.m in Sources */,
+				0A9A7E8E148447130078916F /* HJWeakMutableArray.m in Sources */,
+				0A9A7E8F148447130078916F /* BSPreviewScrollView.m in Sources */,
+				0A9A7E90148447130078916F /* MBProgressHUD.m in Sources */,
+				0A9A7E91148447130078916F /* TapImage.m in Sources */,
+				0A9A7E92148447130078916F /* OrderedDictionary.m in Sources */,
+				0A9A7E93148447130078916F /* TFHpple.m in Sources */,
+				0A9A7E94148447130078916F /* TFHppleElement.m in Sources */,
+				0A9A7E95148447130078916F /* XPathQuery.m in Sources */,
+				0A9A7E96148447130078916F /* Reachability.m in Sources */,
+				0A9A7E97148447130078916F /* NetworkTool.m in Sources */,
+				0A9A7E98148447130078916F /* ShoppingCart.m in Sources */,
+				0A9A7E99148447130078916F /* ShoesCategory.m in Sources */,
+				0A9A7E9A148447130078916F /* ShoesCategoryDict.m in Sources */,
+				0A9A7E9B148447130078916F /* MyShoesAppDelegate.m in Sources */,
+				0A9A7E9C148447130078916F /* TFHppleElement+AccessChildren.m in Sources */,
+				0A9A7E9D148447130078916F /* NSMutableArray+QueueAdditions.m in Sources */,
+				0A9A7E9E148447130078916F /* HomeViewController.m in Sources */,
+				0A9A7E9F148447130078916F /* HomeViewBtnCell.m in Sources */,
+				0A9A7EA0148447130078916F /* ShoesCategoryViewController.m in Sources */,
+				0A9A7EA1148447130078916F /* ShoesSecondaryCategoryViewController.m in Sources */,
+				0A9A7EA2148447130078916F /* ShoesListViewController.m in Sources */,
+				0A9A7EA3148447130078916F /* LoadMoreSearchResultsTableViewCell.m in Sources */,
+				0A9A7EA4148447130078916F /* ShoesListViewCell.m in Sources */,
+				0A9A7EA5148447130078916F /* ShoesDetailViewController.m in Sources */,
+				0A9A7EA6148447130078916F /* ShoppingCartViewController.m in Sources */,
+				0A9A7EA7148447130078916F /* ShoppingCartViewCell.m in Sources */,
+				0A9A7EA8148447130078916F /* BSPreviewScrollView+ReloadPages.m in Sources */,
+				0A9A7EA9148447130078916F /* SettingViewController.m in Sources */,
+				0A9A7EAA148447130078916F /* MyAccountViewController.m in Sources */,
+				0A9A7EAB148447130078916F /* LoginViewController.m in Sources */,
+				0A9A7EAC148447140078916F /* SearchViewController.m in Sources */,
+				0A9A7EAD148447140078916F /* main.m in Sources */,
+				0A9A7E7D148440E10078916F /* ShoesListViewControllerApplicationTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1D60588E0D05DD3D006BFB54 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -570,7 +768,76 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		0A9A7E84148444760078916F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1D6058900D05DD3D006BFB54 /* MyShoes */;
+			targetProxy = 0A9A7E83148444760078916F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		0A9A7E78148440E10078916F /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0A9A7E79148440E10078916F /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
+		0A9A7E7F148440E20078916F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MyShoes.app/MyShoes";
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MyShoesApplicationTests/MyShoesApplicationTests-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				INFOPLIST_FILE = "MyShoesApplicationTests/MyShoesApplicationTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		0A9A7E80148440E20078916F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUNDLE_LOADER = "/Users/kevin/Projects/MyShoes/build/Release-iphoneos/MyShoes.app/MyShoes";
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MyShoesApplicationTests/MyShoesApplicationTests-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				INFOPLIST_FILE = "MyShoesApplicationTests/MyShoesApplicationTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -635,6 +902,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0A9A7E81148440E20078916F /* Build configuration list for PBXNativeTarget "MyShoesApplicationTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0A9A7E7F148440E20078916F /* Debug */,
+				0A9A7E80148440E20078916F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "MyShoes" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
