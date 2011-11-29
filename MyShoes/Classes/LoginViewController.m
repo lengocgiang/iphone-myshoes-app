@@ -186,9 +186,11 @@
                                  SHOES_LOGIN_VALUE_EMPTY, SHOES_LOGIN_INPUT_VIEWSTATEENCRYPTED_ID,                         
                                  nil];
   
-  [self.networkTool2 loginWithDelegate:self 
-                       requestSelector:@selector(updateData:) 
-                         loginFormDict:loginFormDict];
+  [self.networkTool2 sendFormWithDelegate:self 
+                          requestSelector:@selector(updateData:) 
+                                 formDict:loginFormDict
+                            formActionUrl:[NSURL URLWithString:SHOES_LOGIN_URL]
+   ];
   
 }
 

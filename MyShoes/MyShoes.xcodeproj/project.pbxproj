@@ -127,6 +127,8 @@
 		B0F067C914560FB400659B05 /* ShoppingCartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0F067C714560FB400659B05 /* ShoppingCartViewController.m */; };
 		B0F067CA14560FB400659B05 /* ShoppingCartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0F067C814560FB400659B05 /* ShoppingCartViewController.xib */; };
 		B0F63C771426B52D0017CC02 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0F63C751426B52D0017CC02 /* HomeViewController.m */; };
+		D727FAF41483335C00B0510D /* SignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D727FAF21483335C00B0510D /* SignupViewController.m */; };
+		D727FAF51483335C00B0510D /* SignupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D727FAF31483335C00B0510D /* SignupViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -265,6 +267,9 @@
 		B0F067C814560FB400659B05 /* ShoppingCartViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ShoppingCartViewController.xib; path = Classes/ShoppingCartViewController.xib; sourceTree = "<group>"; };
 		B0F63C741426B52D0017CC02 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		B0F63C751426B52D0017CC02 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		D727FAF11483335C00B0510D /* SignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignupViewController.h; sourceTree = "<group>"; };
+		D727FAF21483335C00B0510D /* SignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupViewController.m; sourceTree = "<group>"; };
+		D727FAF31483335C00B0510D /* SignupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SignupViewController.xib; path = Classes/SignupViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -347,6 +352,8 @@
 				B08F890114654362000EE234 /* MyAccountViewController.m */,
 				B08F8905146545E2000EE234 /* LoginViewController.h */,
 				B08F8906146545E2000EE234 /* LoginViewController.m */,
+				D727FAF11483335C00B0510D /* SignupViewController.h */,
+				D727FAF21483335C00B0510D /* SignupViewController.m */,
 				B08768D51466163000CC9DB8 /* SearchViewController.h */,
 				B08768D61466163000CC9DB8 /* SearchViewController.m */,
 			);
@@ -453,6 +460,7 @@
 				B08F88FD146532C0000EE234 /* SettingViewController.xib */,
 				B08F89031465437F000EE234 /* MyAccountViewController.xib */,
 				B08F8908146545FD000EE234 /* LoginViewController.xib */,
+				D727FAF31483335C00B0510D /* SignupViewController.xib */,
 				B08768D81466164B00CC9DB8 /* SearchViewController.xib */,
 			);
 			name = Resources;
@@ -645,6 +653,7 @@
 				B08F89041465437F000EE234 /* MyAccountViewController.xib in Resources */,
 				B08F8909146545FD000EE234 /* LoginViewController.xib in Resources */,
 				B08768D91466164B00CC9DB8 /* SearchViewController.xib in Resources */,
+				D727FAF51483335C00B0510D /* SignupViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -763,6 +772,7 @@
 				B08F8907146545E2000EE234 /* LoginViewController.m in Sources */,
 				B08768D71466163000CC9DB8 /* SearchViewController.m in Sources */,
 				B09C9F14146E0F0B0074CE8B /* ShoppingCartViewCell.m in Sources */,
+				D727FAF41483335C00B0510D /* SignupViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -861,6 +871,7 @@
 				GCC_PREFIX_HEADER = MyShoes_Prefix.pch;
 				INFOPLIST_FILE = "MyShoes-Info.plist";
 				PRODUCT_NAME = MyShoes;
+				SYMROOT = release;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

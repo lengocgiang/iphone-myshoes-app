@@ -21,6 +21,7 @@
 @synthesize shoppingCartController;
 @synthesize settingController;
 @synthesize loginViewController;
+@synthesize signupViewController;
 @synthesize myAccountController;
 @synthesize searchController;
 @synthesize shoppingCart;
@@ -91,6 +92,11 @@
   loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" 
                                                               bundle:nil];
   //loginViewController.title = LOGIN_NAV_TITLE_NAME;
+  
+  
+  //Init the signup View which can be reused
+  signupViewController = [[SignupViewController alloc] initWithNibName:@"SignupViewController" 
+                                                              bundle:nil];
   
   //Init the setting navigator and sub views
   settingNavController = [[CustomNavigationController alloc] init];
@@ -238,6 +244,7 @@
   [settingController release];
   [myAccountNavController release];
   [loginViewController release];
+  [signupViewController release];
   [myAccountController release];
   [searchController release];
   [searchNavController release];

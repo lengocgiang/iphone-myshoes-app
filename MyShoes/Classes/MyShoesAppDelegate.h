@@ -22,6 +22,7 @@
 #import "MyAccountViewController.h"
 #import "SearchViewController.h"
 #import "LoginViewController.h"
+#import "SignupViewController.h"
 #import "Debug.h"
 
 //@class ShoesDetailViewController;
@@ -51,6 +52,7 @@
   
   //All sub views of the account navigator controller
   LoginViewController * loginViewController;
+  SignupViewController * signupViewController;  
   MyAccountViewController *myAccountController;
   
   //All sub views of the setting navigator controller
@@ -71,6 +73,7 @@
 @property (nonatomic, retain) ShoppingCartViewController *shoppingCartController;
 @property (nonatomic, retain) SettingViewController *settingController;
 @property (nonatomic, retain) LoginViewController * loginViewController;
+@property (nonatomic, retain) SignupViewController * signupViewController;
 @property (nonatomic, retain) MyAccountViewController *myAccountController;
 @property (nonatomic, retain) SearchViewController *searchController;
 @property (nonatomic, retain) ShoppingCart *shoppingCart;

@@ -15,6 +15,7 @@
 @synthesize browserCategoryBtn;
 @synthesize onSaleBtn;
 @synthesize aTableViewBtn;
+@synthesize loginToolbar;
 
 + (UIImage *)scale:(UIImage *)image toSize:(CGSize)size
 {
@@ -44,6 +45,7 @@
 
 - (void)dealloc
 {
+  [loginToolbar release];
     [super dealloc];
 }
 
@@ -57,11 +59,20 @@
 
 #pragma mark - View lifecycle
 
-/*- (void)viewDidAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
   [super viewDidAppear:animated];
-  [aTableViewBtn deselectRowAtIndexPath:[aTableViewBtn indexPathForSelectedRow] animated:YES];
-}*/
+  //[aTableViewBtn deselectRowAtIndexPath:[aTableViewBtn indexPathForSelectedRow] animated:YES];
+  
+  
+  if ([NetworkTool hasUserLoggedIn]){
+    [loginToolbar removeFromSuperview];
+  }else{
+    // add "sign up" and "log in" toolbar at bottom
+    [loginToolbar setFrame:CGRectMake(0, self.view.frame.size.height - 44, self.view.frame.size.width, 44.0)];
+    [self.view addSubview:loginToolbar];
+  }
+}
 
 - (void)viewDidLoad
 {
@@ -78,11 +89,13 @@
   [self.view addSubview:aTableViewBtn];
 
   btnNameArray = [NSArray arrayWithObjects:@"Category", @"OnSale", nil];
+ 
   
 }
 
 - (void)viewDidUnload
 {
+  [self setLoginToolbar:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -94,7 +107,69 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-#pragma mark Table view methods
+#pragma mark - Login/Signup view methods
+
+- (IBAction)launchLogin:(id)sender {
+  LoginViewController *loginView;
+  id delegate = [[UIApplication sharedApplication] delegate];
+  
+  if ([delegate respondsToSelector:@selector(loginViewController)]){
+    loginView = (LoginViewController *)([delegate loginViewController]); 
+  }
+  
+  loginView.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+  loginView.modalPresentationStyle = UIModalPresentationPageSheet;
+  loginView.delegate = self;
+  [self presentModalViewController:loginView animated:YES];
+}
+
+- (IBAction)launchSignup:(id)sender {
+  SignupViewController *signupView;
+  id delegate = [[UIApplication sharedApplication] delegate];
+  
+  if ([delegate respondsToSelector:@selector(signupViewController)]){
+    signupView = (SignupViewController *)([delegate signupViewController]); 
+  }
+  
+  signupView.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+  signupView.modalPresentationStyle = UIModalPresentationPageSheet;
+  signupView.delegate = self;
+  [self presentModalViewController:signupView animated:YES];
+  
+}
+
+#pragma mark - Login/Signup delegate method
+
+- (void)loginViewConfirm:(id)sender{
+  [self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)loginViewCancel:(id)sender{
+  // go back to tab1 first so we don't stuck here. Otherwise, dismissModalView
+  // will throw exception since viewWillAppear() in this view will keep
+  // launching modalView which prevent dismiss itself.
+  [self.tabBarController setSelectedIndex:0];
+  
+  [self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)signupViewConfirm:(id)sender{
+  [self dismissModalViewControllerAnimated:YES];
+  // maybe we should login automatically after sign up?
+  // below code not work yet, not sure why login view doesn't show up
+  //[self showLoginView];
+}
+
+- (void)signupViewCancel:(id)sender{
+  // go back to tab1 first so we don't stuck here. Otherwise, dismissModalView
+  // will throw exception since viewWillAppear() in this view will keep
+  // launching modalView which prevent dismiss itself.
+  [self.tabBarController setSelectedIndex:0];
+  
+  [self dismissModalViewControllerAnimated:YES];
+}
+
+#pragma mark - Table view methods
 
 //Two sections here
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

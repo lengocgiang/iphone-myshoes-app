@@ -133,14 +133,13 @@
 }
 
 #pragma mark - login
-- (void)loginWithDelegate:(id)requestDelegate 
-          requestSelector:(SEL)requestSelector 
-            loginFormDict:(NSDictionary *)loginFormDict{
+- (void)sendFormWithDelegate:(id)requestDelegate 
+             requestSelector:(SEL)requestSelector 
+                    formDict:(NSDictionary *)loginFormDict
+               formActionUrl:(NSURL *)url{
   
 	self.delegate = requestDelegate;
 	self.callback = requestSelector;
-	
-  NSURL *url = [NSURL URLWithString:SHOES_LOGIN_URL];
 	
   //What the hell of myBounds for and where is the value from? 
   //-Just random string to distinguish bodyData
@@ -165,7 +164,7 @@
   //The below two lines are just to print the value of bodyData
   NSString *bodyDataString = [[[NSString alloc] initWithData:bodyData 
                                                     encoding:NSASCIIStringEncoding] autorelease];
-  NSLog(@"bodyData=%@", bodyDataString);
+  //NSLog(@"bodyData=%@", bodyDataString);
   
   NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
   [request setHTTPMethod:@"POST"];
@@ -186,7 +185,6 @@
 	}
   
   [bodyData release];
-	NSLog(@"Sent the login form");
 }
 
 + (BOOL)hasUserLoggedIn {
