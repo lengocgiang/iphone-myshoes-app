@@ -33,9 +33,10 @@
      withDelegate:(id)requestDelegate 
   requestSelector:(SEL)requestSelector;
 -(void)request:(NSURL *) url;
--(void)loginWithDelegate:(id)requestDelegate 
-         requestSelector:(SEL)requestSelector 
-           loginFormDict:(NSDictionary *)loginFormDict;
+- (void)sendFormWithDelegate:(id)requestDelegate 
+             requestSelector:(SEL)requestSelector 
+                    formDict:(NSDictionary *)loginFormDict
+               formActionUrl:(NSURL *)url;
 + (BOOL)hasUserLoggedIn;
 + (void)showAllSavedCookies;
 
