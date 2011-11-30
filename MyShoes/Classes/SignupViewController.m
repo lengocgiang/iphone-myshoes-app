@@ -18,6 +18,14 @@
 @synthesize networkTool2;
 @synthesize loadingIndicator;
 
+@synthesize firstName;
+@synthesize lastName;
+@synthesize emailAddress;
+@synthesize password;
+@synthesize passwordConfirm;
+@synthesize passwordAnswer;
+@synthesize receiveMail;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -33,6 +41,13 @@
   [networkTool2 release];
   [loadingIndicator release];
   
+  [firstName release];
+  [lastName release];
+  [emailAddress release];
+  [password release];
+  [passwordConfirm release];
+  [passwordAnswer release];
+  [receiveMail release];
   [super dealloc];
 }
 
@@ -50,10 +65,18 @@
 {
   [super viewDidLoad];
   // Do any additional setup after loading the view from its nib.
+  [firstName becomeFirstResponder];
 }
 
 - (void)viewDidUnload
 {
+  [self setFirstName:nil];
+  [self setLastName:nil];
+  [self setEmailAddress:nil];
+  [self setPassword:nil];
+  [self setPasswordConfirm:nil];
+  [self setPasswordAnswer:nil];
+  [self setReceiveMail:nil];
   [super viewDidUnload];
   // Release any retained subviews of the main view.
   // e.g. self.myOutlet = nil;
@@ -129,21 +152,25 @@
   
   //(value, key) pairs
   NSDictionary *signupFormDict = [NSDictionary dictionaryWithObjectsAndKeys:
-                                 viewState, SHOES_LOGIN_INPUT_VIEWSTATE_ID, 
-                                 @"779", @"ctl00$cphPageMain$ucCustomerInfo$txtFirstName", 
-                                 @"y", @"ctl00$cphPageMain$ucCustomerInfo$txtLastName",
-                                  @"772@777.com", @"ctl00$cphPageMain$ucCustomerInfo$txtEmailAddress",
-                                  @"777777", @"ctl00$cphPageMain$ucCustomerInfo$txtPassword",
-                                  @"777777", @"ctl00$cphPageMain$ucCustomerInfo$txtConfirmPassword",
+                                  viewState, SHOES_LOGIN_INPUT_VIEWSTATE_ID, 
+                                  firstName.text, @"ctl00$cphPageMain$ucCustomerInfo$txtFirstName", 
+                                  lastName.text, @"ctl00$cphPageMain$ucCustomerInfo$txtLastName",
+                                  emailAddress.text, @"ctl00$cphPageMain$ucCustomerInfo$txtEmailAddress",
+                                  password.text, @"ctl00$cphPageMain$ucCustomerInfo$txtPassword",
+                                  passwordConfirm.text, @"ctl00$cphPageMain$ucCustomerInfo$txtConfirmPassword",
+                                  
+                                  //disable password question for now, use password as the default value instead
                                   @"1", @"ctl00$cphPageMain$ucCustomerInfo$ddlPasswordQuestion",
-                                  @"777", @"ctl00$cphPageMain$ucCustomerInfo$txtPasswordAnswer",
-                                  @"on", @"ctl00$cphPageMain$ucCustomerInfo$cbSubscribe",
-                                 @"35", @"ctl00$cphPageMain$imgBtnCreate.x", 
-                                 @"12", @"ctl00$cphPageMain$imgBtnCreate.y",                         
-                                 SHOES_LOGIN_VALUE_EMPTY, SHOES_LOGIN_INPUT_EVENTTARGET_ID, 
-                                 SHOES_LOGIN_VALUE_EMPTY, SHOES_LOGIN_INPUT_EVENTARGUMENT_ID, 
-                                 SHOES_LOGIN_VALUE_EMPTY, SHOES_LOGIN_INPUT_VIEWSTATEENCRYPTED_ID,                         
-                                 nil];
+                                  //passwordAnswer.text, @"ctl00$cphPageMain$ucCustomerInfo$txtPasswordAnswer",
+                                  password.text, @"ctl00$cphPageMain$ucCustomerInfo$txtPasswordAnswer",
+                                  
+                                  receiveMail.isOn?@"on":@"off", @"ctl00$cphPageMain$ucCustomerInfo$cbSubscribe",
+                                  @"35", @"ctl00$cphPageMain$imgBtnCreate.x", 
+                                  @"12", @"ctl00$cphPageMain$imgBtnCreate.y",                         
+                                  SHOES_LOGIN_VALUE_EMPTY, SHOES_LOGIN_INPUT_EVENTTARGET_ID, 
+                                  SHOES_LOGIN_VALUE_EMPTY, SHOES_LOGIN_INPUT_EVENTARGUMENT_ID, 
+                                  SHOES_LOGIN_VALUE_EMPTY, SHOES_LOGIN_INPUT_VIEWSTATEENCRYPTED_ID,                         
+                                  nil];
   
   [self.networkTool2 sendFormWithDelegate:self 
                           requestSelector:@selector(updateData:) 
@@ -157,11 +184,11 @@
   [loadingIndicator stopAnimating];
   [loadingIndicator removeFromSuperview];
   
-  /*
+  
   NSString *bodyDataString = [[[NSString alloc] initWithData:content 
                                                     encoding:NSASCIIStringEncoding] autorelease];
   NSLog(@"bodyData=%@", bodyDataString);
-  */
+  
   
   // Create parser
   NSString *errorMessage = nil;
@@ -178,8 +205,13 @@
       elements  = [xpathParser search:@"//span[@id='ctl00_cphPageMain_ucCustomerInfo_ComparePasswords']"];
       if((elements != nil) && ([elements count] > 0)){
         errorMessage = @"The new Password and new password confirmation you entered do not match.  Please re-enter them and try again.";
+      }else{
+        // check whether we are still in sign up page
+        elements  = [xpathParser search:@"//input[@name='ctl00$cphPageMain$ucCustomerInfo$txtEmailAddress']"];
+        if((elements != nil) && ([elements count] > 0)){
+          errorMessage = @"We're sorry, we were unable to submit your information because some required fields were left blank or contained errors. Please complete the areas and try again.";
+        }
       }
-      // could add more check here in the future...
     }
   
   }
@@ -204,6 +236,112 @@
   }
   
   [self.delegate signupViewConfirm:self];
+}
+
+#pragma mark - UITextFieldDelegate method
+- (BOOL) textFieldShouldReturn:(UITextField *)textField {
+  switch (textField.tag) {
+    case 0:
+      if (firstName.text.length == 0) {
+        return NO;
+      }
+      [lastName becomeFirstResponder];
+      break;
+    case 1:
+      if (lastName.text.length == 0) {
+        return NO;
+      }
+      [emailAddress becomeFirstResponder];
+      break;
+    case 2:
+      if (emailAddress.text.length == 0) {
+        return NO;
+      }
+      [password becomeFirstResponder];
+      break;
+    case 3:
+      [passwordConfirm becomeFirstResponder];
+      break;
+    case 4:
+      //[receiveMail becomeFirstResponder];
+      [textField resignFirstResponder];
+      break;
+    default:
+      [textField resignFirstResponder];
+      break;
+  }
+  return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+  [textField resignFirstResponder];
+}
+
+
+- (BOOL) textFieldShouldEndEditing:(UITextField *)textField{
+  
+  switch (textField.tag) {
+    case 0:
+      if (firstName.text.length == 0) {
+        UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:@"Sorry!" 
+                                                             message:@"This is a required field which could not be left blank."
+                                                            delegate:self 
+                                                   cancelButtonTitle:@"OK" 
+                                                   otherButtonTitles:nil, nil] autorelease] ;
+        [alertView show];
+        return NO;
+      }
+      break;
+    case 1:
+      if (lastName.text.length == 0) {
+        UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:@"Sorry!" 
+                                                             message:@"This is a required field which could not be left blank."
+                                                            delegate:self 
+                                                   cancelButtonTitle:@"OK" 
+                                                   otherButtonTitles:nil, nil] autorelease] ;
+        [alertView show];
+        return NO;
+      }
+      break;
+    case 2:
+      if (emailAddress.text.length == 0) {
+        UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:@"Sorry!" 
+                                                             message:@"This is a required field which could not be left blank."
+                                                            delegate:self 
+                                                   cancelButtonTitle:@"OK" 
+                                                   otherButtonTitles:nil, nil] autorelease] ;
+        [alertView show];
+        return NO;
+      }
+      break;
+    case 3:
+      if (password.text.length < 6 || password.text.length > 12) {
+        UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:@"Sorry!" 
+                                                             message:@"The Password you entered did not meet the required format. Passwords must be 6-12 alphanumeric characters. Please select a new Password and try again."
+                                                            delegate:self 
+                                                   cancelButtonTitle:@"OK" 
+                                                   otherButtonTitles:nil, nil] autorelease] ;
+        [alertView show];
+        return NO;
+      }
+      break;
+    case 4:
+      if (![passwordConfirm.text isEqualToString:password.text]) {
+        UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:@"Sorry!" 
+                                                             message:@"The new Password and new password confirmation you entered do not match.  Please re-enter them and try again."
+                                                            delegate:self 
+                                                   cancelButtonTitle:@"OK" 
+                                                   otherButtonTitles:nil, nil] autorelease] ;
+        [alertView show];
+        // return YES here so we allow user to change the password instead of sticking here
+        // if he already forget the password he set in above field.
+        return YES;
+      }
+      break;
+    default:
+      break;
+  }
+  return YES;
 }
 
 @end

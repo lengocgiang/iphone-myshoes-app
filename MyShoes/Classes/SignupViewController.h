@@ -14,7 +14,7 @@
 - (void)signupViewCancel:(id)sender;
 @end 
 
-@interface SignupViewController : UIViewController
+@interface SignupViewController : UIViewController<UITextFieldDelegate>
 
 
 
@@ -23,6 +23,15 @@
 @property (nonatomic, retain) NetworkTool *networkTool2;
 @property (retain, nonatomic) UIActivityIndicatorView *loadingIndicator;
 @property (nonatomic, assign) id <SignupViewControllerDelegate>   delegate;
+
+@property (retain, nonatomic) IBOutlet UITextField *firstName;
+@property (retain, nonatomic) IBOutlet UITextField *lastName;
+@property (retain, nonatomic) IBOutlet UITextField *emailAddress;
+@property (retain, nonatomic) IBOutlet UITextField *password;
+@property (retain, nonatomic) IBOutlet UITextField *passwordConfirm;
+@property (retain, nonatomic) IBOutlet UITextField *passwordAnswer;
+@property (retain, nonatomic) IBOutlet UISwitch *receiveMail;
+
 
 - (IBAction)cancelSignup:(id)sender;
 - (IBAction)confirmSignup:(id)sender;
