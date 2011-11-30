@@ -162,9 +162,11 @@
   
   //We usually don't add autorelease in a debug
   //The below two lines are just to print the value of bodyData
+  /*
   NSString *bodyDataString = [[[NSString alloc] initWithData:bodyData 
                                                     encoding:NSASCIIStringEncoding] autorelease];
-  //NSLog(@"bodyData=%@", bodyDataString);
+  NSLog(@"bodyData=%@", bodyDataString);
+  */
   
   NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
   [request setHTTPMethod:@"POST"];
