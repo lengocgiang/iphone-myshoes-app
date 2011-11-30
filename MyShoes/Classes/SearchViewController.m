@@ -7,49 +7,63 @@
 //
 
 #import "SearchViewController.h"
+#import "MyShoesAppDelegate.h"
+#import "ShoesListViewController.h"
 
 @implementation SearchViewController
-@synthesize webview;
+
 @synthesize networkTool;
 @synthesize loadingIndicator;
+@synthesize searchKey;
+@synthesize searchKeyArray;
+@synthesize searchHistory;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-      self.title = NSLocalizedString(@"Account Info", @"Account Info");
-      self.tabBarItem.image = [UIImage imageNamed:@"search"];
-    }
-    return self;
+  self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+  if (self) {
+    self.title = NSLocalizedString(@"Search", @"Search");
+    self.tabBarItem.image = [UIImage imageNamed:@"search"];
+  }
+  return self;
 }
 
 - (void)dealloc {
   [networkTool release];   
   [loadingIndicator release];
   
-  [webview release];
+  [searchKey release];
+  [searchKeyArray release];
+  [searchHistory release];
   [super dealloc];
 }
-							
+
 - (void)didReceiveMemoryWarning
 {
-    [super didReceiveMemoryWarning];
-    // Release any cached data, images, etc that aren't in use.
+  [super didReceiveMemoryWarning];
+  // Release any cached data, images, etc that aren't in use.
 }
 
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
+  [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+  
+  //searchKeyArray = [NSMutableArray arrayWithCapacity: 10];
+  searchKeyArray = [[NSMutableArray alloc] initWithCapacity: 10];
+  
 }
 
 - (void)viewDidUnload
 {
   [self setLoadingIndicator:nil];
   [self setNetworkTool:nil];
-  [self setWebview:nil];
+  [self setSearchKey:nil];
+  [self setSearchKeyArray:nil];  
+  [self setSearchHistory:nil];
   [super viewDidUnload];
   // Release any retained subviews of the main view.
   // e.g. self.myOutlet = nil;
@@ -57,12 +71,12 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
+  [super viewWillAppear:animated];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
+  [super viewDidAppear:animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -77,41 +91,84 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
+  // Return YES for supported orientations
   return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
 
-#pragma mark - network method
-
-- (IBAction)refresh:(id)sender {
-  // show activity indicator view
-  if (!loadingIndicator){
-    loadingIndicator = [[UIActivityIndicatorView alloc] 
-                        initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-  }
-  [loadingIndicator startAnimating];    
-  [loadingIndicator setFrame:CGRectMake(self.view.center.x - 11, self.view.center.y - 11, 22.0, 22.0)];
-  [loadingIndicator setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin
-                                      | UIViewAutoresizingFlexibleRightMargin];
-  [self.view addSubview:loadingIndicator];
-  
-  // load web page
-  if (!self.networkTool){
-    self.networkTool = [[NetworkTool alloc] init];
-  }
-  NSString *newUrl = @"https://secure.shoes.com/Profiles/EditAccount.aspx";
-	[self.networkTool getContent:newUrl withDelegate:self requestSelector:@selector(updateData:)];
+- (IBAction)cancelSearch:(id)sender {
+  [searchKey setText:@""];
+  [searchKey resignFirstResponder];
 }
 
-- (void)updateData: (NSData *) content {
-  NSString *result = [[[NSString alloc] initWithData:content 
-                                            encoding:NSUTF8StringEncoding] autorelease];
-  [self.webview loadHTMLString:result baseURL:nil];
-  
-  [loadingIndicator stopAnimating];
-  [loadingIndicator removeFromSuperview];
-    
-    // test for svn
+- (IBAction)clearSearch:(id)sender {
+  [searchKeyArray removeAllObjects];
+  [[self searchHistory] reloadData];
 }
+
+- (void)loadSearchResultWithKey:(NSString *)key{
+  NSLog(@"searchKey=%@", key);
+  
+  /*
+   id delegate = [[UIApplication sharedApplication] delegate];
+   if ([delegate respondsToSelector:@selector(shoesDetailController)]){
+   //[[delegate shoesListController] setUserSelectedCategoriesArray:userSelectedCategoriesArray];
+   ShoesListViewController *shoesListController = (ShoesListViewController *)([delegate shoesListController]); 
+   //[self.navigationController pushViewController:shoesListController animated:YES];
+   }
+   */
+}
+
+#pragma mark - UITextFieldDelegate method
+- (BOOL) textFieldShouldReturn:(UITextField *)textField {
+  if (textField.text.length == 0) {
+    return NO;
+  }
+  
+  if ([searchKeyArray count] == 10) {
+    [searchKeyArray removeObjectAtIndex:0];
+  }
+  [searchKeyArray addObject:textField.text];
+  [[self searchHistory] reloadData];
+  
+  [self loadSearchResultWithKey:textField.text];
+  
+  return YES;
+}
+
+#pragma mark - table view method
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+  return [searchKeyArray count];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+  return @"Recent Searches";
+}
+
+// Customize the appearance of table view cells.
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+  int count = [searchKeyArray count];
+  int rowNumber = [indexPath row];
+  
+  static NSString *CellIdentifier = @"Cell";
+  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+  if (cell == nil) {
+    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                   reuseIdentifier:CellIdentifier] autorelease]; 
+  }
+  
+  // show search history in reverse order
+  cell.textLabel.text = [searchKeyArray objectAtIndex:(count -1 - rowNumber)];
+  return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+  
+  NSString *selectedKey = [[self searchKeyArray] objectAtIndex:([searchKeyArray count] - 1 - [indexPath row])];
+  
+  [self loadSearchResultWithKey:selectedKey];
+  
+}
+
+
 @end
