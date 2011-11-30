@@ -52,7 +52,6 @@
   [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
   
-  //searchKeyArray = [NSMutableArray arrayWithCapacity: 10];
   searchKeyArray = [[NSMutableArray alloc] initWithCapacity: 10];
   
 }
@@ -109,14 +108,15 @@
 - (void)loadSearchResultWithKey:(NSString *)key{
   NSLog(@"searchKey=%@", key);
   
-  /*
-   id delegate = [[UIApplication sharedApplication] delegate];
-   if ([delegate respondsToSelector:@selector(shoesDetailController)]){
-   //[[delegate shoesListController] setUserSelectedCategoriesArray:userSelectedCategoriesArray];
-   ShoesListViewController *shoesListController = (ShoesListViewController *)([delegate shoesListController]); 
-   //[self.navigationController pushViewController:shoesListController animated:YES];
-   }
-   */
+  
+  id delegate = [[UIApplication sharedApplication] delegate];
+  if ([delegate respondsToSelector:@selector(shoesDetailController)]){
+    ShoesListViewController *shoesListController = (ShoesListViewController *)([delegate shoesListController]); 
+    [shoesListController setListType:@"search"];
+    [shoesListController setListKey:key];
+    [self.navigationController pushViewController:shoesListController animated:YES];
+  }
+  
 }
 
 #pragma mark - UITextFieldDelegate method
@@ -125,10 +125,28 @@
     return NO;
   }
   
-  if ([searchKeyArray count] == 10) {
-    [searchKeyArray removeObjectAtIndex:0];
+  // check duplicate key first
+  int dupIndex = -1;
+  NSString * tempItem;
+  for (int i=0; i<[searchKeyArray count]; i++) {
+    tempItem = [searchKeyArray objectAtIndex:i];
+    if ([tempItem isEqualToString:textField.text]) {
+      dupIndex = i;
+      break;
+    }
   }
-  [searchKeyArray addObject:textField.text];
+  
+  if (dupIndex >= 0) {
+    // remove key from array and push it on top
+    [searchKeyArray removeObjectAtIndex:dupIndex];
+    [searchKeyArray addObject:textField.text];
+  }else{
+    if ([searchKeyArray count] == 10) {
+      [searchKeyArray removeObjectAtIndex:0];
+    }
+    [searchKeyArray addObject:textField.text];
+  }
+  
   [[self searchHistory] reloadData];
   
   [self loadSearchResultWithKey:textField.text];

@@ -19,6 +19,9 @@
 @implementation ShoesListViewController
 
 @synthesize userSelectedCategoriesArray;
+@synthesize listType;
+@synthesize listKey;
+
 
 - (void)viewDidAppear:(BOOL)animated {
   [super viewDidAppear:animated];
@@ -69,6 +72,8 @@
   [networkTool release];
   [shoesArray release];
   [objMan release];
+  [listKey release];
+  [listType release];
 }
 
 - (void)startAnimation {
@@ -90,7 +95,14 @@
   }
   
 	//Issue the request of the selected category
-	[networkTool getContent:[self generateUrl] 
+  NSString *targetUrl;
+  if ([[self listType] isEqualToString:@"search"]) {
+    targetUrl = [self generateUrlWithKey:[self listKey]];
+  }else{
+    targetUrl = [self generateUrl];
+  }
+  
+	[networkTool getContent:targetUrl 
              withDelegate:self 
           requestSelector:@selector(shoesCategoryUdateCallbackWithData:)];
 }
@@ -125,6 +137,13 @@
   }
   [url appendString:@"/Products.aspx"];
   
+  return url;
+}
+
+- (NSString *)generateUrlWithKey:(NSString *)key{
+  NSMutableString *url;
+  
+  url = [NSMutableString stringWithFormat:@"http://www.shoes.com/en-US/Mens/_/_/_/Num+96-Srch0+%@/Products.aspx?icid=entiresitesearch", key];
   return url;
 }
 
@@ -200,6 +219,8 @@
   [shoesArray release];
   [networkTool release];
   [objMan release];
+  [listKey release];
+  [listType release];
   
   [super dealloc];
 }

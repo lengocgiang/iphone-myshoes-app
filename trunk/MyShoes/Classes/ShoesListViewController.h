@@ -59,6 +59,10 @@
 - (void)hideShoesListInfoLabels;
 - (void)loadShoesList;
 - (NSString *)generateUrl;
+- (NSString *)generateUrlWithKey:(NSString *)key;
+
+@property (nonatomic, copy) NSString *listType;
+@property (nonatomic, copy) NSString *listKey;
 
 @end
 

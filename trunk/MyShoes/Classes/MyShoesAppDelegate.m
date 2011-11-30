@@ -264,7 +264,7 @@
   
   currentView = viewController;
   
-  if (navigationController == homeNavController){
+  if (navigationController == homeNavController || navigationController == searchNavController){
     //Reset previous View
     if ([currentView conformsToProtocol:@protocol(ShoesViewProtocol)]){
       [currentView resetView];
