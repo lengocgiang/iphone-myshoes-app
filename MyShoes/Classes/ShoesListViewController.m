@@ -143,7 +143,25 @@
 - (NSString *)generateUrlWithKey:(NSString *)key{
   NSMutableString *url;
   
-  url = [NSMutableString stringWithFormat:@"http://www.shoes.com/en-US/Mens/_/_/_/Num+96-Srch0+%@/Products.aspx?icid=entiresitesearch", key];
+  /*
+  http://www.shoes.com/en-US/_/_/_/_/Srch0+black/Products.aspx?icid=entiresitesearch
+  http://www.shoes.com/en-US/Womens/_/_/_/Srch1+black/Products.aspx?icid=entiresitesearch
+  http://www.shoes.com/en-US/Womens/_/_/_/Num+96-Srch1+black/Products.aspx?icid=entiresitesearch
+  http://www.shoes.com/en-US/Womens/_/_/_/Num+192-Srch1+black/Products.aspx?icid=entiresitesearch   
+  http://www.shoes.com/en-US/Mens/_/_/_/Srch1+black/Products.aspx?icid=entiresitesearch
+  http://www.shoes.com/en-US/Mens/_/_/_/Num+96-Srch1+black/Products.aspx?icid=entiresitesearch 
+  */ 
+  
+  url = [NSMutableString stringWithFormat:@"http://www.shoes.com/en-US/"];
+  //append the category name or "_" for all categories
+  [url appendString:@"_"];
+  [url appendString:@"/_/_/_/Num+"];
+  [url appendString:[NSString stringWithFormat:@"%d", CATEGORY_SHOES_COUNT * (currentPages - 1)]];
+  [url appendString:@"-Srch1+"];
+  //replace spaces in search keywords to "+" in url
+  [url appendString:[key stringByReplacingOccurrencesOfString:@" " withString:@"+"]];
+  [url appendString:@"/Products.aspx?icid=entiresitesearch"];
+
   return url;
 }
 

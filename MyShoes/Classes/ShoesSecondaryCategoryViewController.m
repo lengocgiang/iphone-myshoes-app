@@ -128,8 +128,14 @@
                                          withObject:[currentPageCategoriesArray objectAtIndex:indexPath.row]];
   
   if ([delegate respondsToSelector:@selector(shoesDetailController)]){
-    [[delegate shoesListController] setUserSelectedCategoriesArray:userSelectedCategoriesArray];
+    //reset view if listType is different with the new one
+    NSString *currentListType = [[delegate shoesListController] listType];
+    if (![currentListType isEqualToString:@"category"]) {
+      [[delegate shoesListController] resetView];
+    }
     [[delegate shoesListController] setListType:@"category"];
+    
+    [[delegate shoesListController] setUserSelectedCategoriesArray:userSelectedCategoriesArray];
     [self.navigationController pushViewController:[delegate shoesListController] animated:YES];
   }
   
