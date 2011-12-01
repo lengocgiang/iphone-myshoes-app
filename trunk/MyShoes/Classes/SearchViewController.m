@@ -114,6 +114,7 @@
     ShoesListViewController *shoesListController = (ShoesListViewController *)([delegate shoesListController]); 
     [shoesListController setListType:@"search"];
     [shoesListController setListKey:key];
+    [shoesListController resetView];
     [self.navigationController pushViewController:shoesListController animated:YES];
   }
   
