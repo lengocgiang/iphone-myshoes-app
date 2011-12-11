@@ -18,12 +18,17 @@
 @synthesize shoppingCartListView;
 @synthesize checkOutBtn;
 @synthesize networkTool;
+//@synthesize shoppingCartURL;
+@synthesize viewState;
+@synthesize previousPage;
+@synthesize shoes;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+      // Custom initialization
+      shoppingCartURL = nil;
     }
     return self;
 }
@@ -92,7 +97,9 @@
   NSString* cacheDirectory = [NSHomeDirectory() stringByAppendingString:@"/Library/Caches/imgcache/myshoes/"] ;
   HJMOFileCache* fileCache = [[[HJMOFileCache alloc] initWithRootPath:cacheDirectory] autorelease];
   objMan.fileCache = fileCache;
-
+  
+  //Load the view if it's new
+  viewRest = TRUE;
     
 }
 
@@ -109,19 +116,148 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (void)dealloc {
-    
+- (void)dealloc {    
+  [shoppingCartURL release];
   [objMan release];
   [networkTool release];
   [shoppingCartListView release];
   [super dealloc];
 }
 
+- (void)setShoppingCartURL:(NSString *)cartUrl {
+  if(shoppingCartURL != nil) {
+    [shoppingCartURL release];
+    shoppingCartURL = nil;
+  }
+  shoppingCartURL = [cartUrl retain];
+}
+
 - (void)viewDidAppear:(BOOL)animated {
   [super viewDidAppear:animated];
   
+  //Load shopping cart view
+  if(viewRest){
+    //If the shoes detail view is reset, will load the info when show the view
+    [self loadCartDetail];
+    viewRest = FALSE;
+  }
+  else{
+    //Render shoes detail info directly
+    [self renderCartDetail];
+  }
+  
+  //Refresh shopping cart list view
+  //[shoppingCartListView reloadData];
+}
+
+#pragma mark Network related methods
+- (void)loadCartDetail {
+
+  /*NSString *newUrl;
+
+  if(!shoppingCartURL){
+    //Load shopping cart info using the default product info url
+    //Check if the shoes detail link is available
+    
+    newUrl = SHOES_CART_URL_DEFAULT;    
+  }
+  else{
+    //Add shoes to the shopping cart
+    newUrl = shoppingCartURL;
+  }*/
+  //Load shoes info using the default product info url
+  [self loadCartDetailWithProductUrl:shoppingCartURL];
+  
+}
+
+- (void)loadCartDetailWithProductUrl:(NSString *)url {
+  
+  NSString *newUrl;
+
+  if(!url){
+
+    //Start progress indicator
+    HUD = [[MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES] retain];
+    HUD.labelText = @"Loading cart detail";
+    [HUD setOpaque:YES];
+
+    //Load shopping cart info using the default product info url
+    //Check if the shoes detail link is available
+    
+    newUrl = [NSString stringWithFormat:@"%@%@",MYSHOES_URL,SHOES_CART_URL_DEFAULT];
+    [networkTool getContent:url withDelegate:self requestSelector:@selector(addToCartCallBack:)];
+
+  }
+  else{
+    //Start progress indicator
+    HUD = [[MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES] retain];
+    HUD.labelText = @"Adding to cart";
+    [HUD setOpaque:YES];
+    
+    //Add shoes to the shopping cart
+    newUrl = [NSString stringWithFormat:@"http://%@%@",MYSHOES_HOSTNAME,url];
+    //Remove any \ in the url which is invalid
+    newUrl = [newUrl stringByReplacingOccurrencesOfString:@"\\" withString:@""];
+
+    //Add the shoes to shopping cart by submitting add to cart form 
+    //(value, key) pairs
+    //The login form inputs
+    //Are they all needed? -Yes!
+    NSDictionary *cartFormDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                                  SHOES_LOGIN_VALUE_EMPTY, SHOES_LOGIN_INPUT_EVENTTARGET_ID, 
+                                  SHOES_LOGIN_VALUE_EMPTY, SHOES_LOGIN_INPUT_EVENTARGUMENT_ID, 
+                                  self.viewState,SHOES_LOGIN_INPUT_VIEWSTATE_ID, 
+                                  SHOES_LOGIN_VALUE_EMPTY, SHOES_LOGIN_INPUT_VIEWSTATEENCRYPTED_ID,
+                                  [self.shoes getShoesColorValue],SHOES_CART_INPUT_COLOR,
+                                  [self.shoes getShoesSize],SHOES_CART_INPUT_SIZENWIDTH,
+                                  self.previousPage,SHOES_CART_INPUT_PREVIOUSPAGE,
+                                  CART_INPUT_BTN_X_VALUE_DEFAULT, SHOES_CART_INPUT_BTN_X_ID, 
+                                  CART_INPUT_BTN_Y_VALUE_DEFAULT, SHOES_CART_INPUT_BTN_Y_ID,                         
+                                  nil];
+    
+    [self.networkTool addToCart:newUrl
+                          WithDelegate:self
+                       requestSelector:@selector(addToCartCallBack:)
+                          cartFormDict:cartFormDict];
+  }
+}
+
+- (void)addToCartCallBack:(NSData *)content {
+  
+  //Hide HUD progress indicator
+  [HUD hide:YES];
+  
+  
+  //Shoes verify if the shoes added to shopping cart
+  //Do nothing at the moment
+  /*
+  if (![NetworkTool hasUserLoggedIn]) {
+    UIAlertView *alertView = [[[UIAlertView alloc] initWithTitle:@"Error!" 
+                                                         message:@"We're sorry the login information you entered does not match our records." 
+                                                        delegate:self 
+                                               cancelButtonTitle:@"OK" 
+                                               otherButtonTitles:nil, nil] autorelease];
+    [alertView show];
+  }*/
+  //Process shopping cart list
+  NSString *bodyDataString = [[[NSString alloc] initWithData:content 
+                                                    encoding:NSASCIIStringEncoding] autorelease];
+
+  NSLog(@"bodyDataString=%@", bodyDataString);
+  
+  //Clean up add cart specific values
+  self.shoes = nil;
+  self.viewState = nil;
+  self.shoppingCartURL = nil;
+  
+  //Render cart list
+  [self renderCartDetail];
+}  
+
+- (void)renderCartDetail {
   //Refresh shopping cart list view
   [shoppingCartListView reloadData];
+  
 }
 
 #pragma mark Table view methods
@@ -165,10 +301,10 @@
     shoppingCart = [delegate shoppingCart];
   }
   
-  Shoes *shoes = [shoppingCart getShoesAtIndex:indexPath.row];
+  Shoes *tmpShoes = [shoppingCart getShoesAtIndex:indexPath.row];
   
   //imageView.image = shoes.shoesImage;
-  NSString *imageName = shoes.shoesImageName;
+  NSString *imageName = tmpShoes.shoesImageName;
   NSString *imageUrlStr = [NSString stringWithFormat:@"%@%@",MYSHOES_URL,imageName];
   
   NSURL *imageUrl = [NSURL URLWithString:imageUrlStr];
@@ -198,15 +334,15 @@
 	[[cell contentView] addSubview:managedImage];
 
 
-  [cell setShoes:shoes];
-  [cell setShoesInfo:shoes.productStyle];
-  [cell setShoesSizeInfo:[shoes getShoesSizeInfo]];
+  [cell setShoes:tmpShoes];
+  [cell setShoesInfo:tmpShoes.productStyle];
+  [cell setShoesSizeInfo:[tmpShoes getShoesSizeInfo]];
   
   //If the shopping cart list view is not in edit mode, just show Image of the shoes
   if(!tableView.editing){
     [cell setEditing:NO];
     NSUInteger quantity = [shoppingCart getQuantity:indexPath.row];
-    NSString *price = shoes.productPrice;
+    NSString *price = tmpShoes.productPrice;
     
     [cell setShoesDetail:[NSString stringWithFormat:@"%@ %d", price, quantity]];
     //cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ %d", price, quantity];
@@ -297,6 +433,8 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
 
 - (void)resetView{
   //Anything here need to clean this view
+  //Set flag which shows the view has been reseted;
+  viewRest = TRUE;
 }
 
 #pragma mark UITextFieldDelegate methods
@@ -327,8 +465,8 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
   UITableViewCell *cell = (UITableViewCell*) [[textField superview] superview];
   NSUInteger i = [shoppingCartListView indexPathForCell:cell].row;
   
-  Shoes *shoes = [shoppingCart getShoesAtIndex:i];
-  [shoppingCart updateShoes:shoes withQuantity:myNumber.integerValue];
+  Shoes *tmpShoes = [shoppingCart getShoesAtIndex:i];
+  [shoppingCart updateShoes:tmpShoes withQuantity:myNumber.integerValue];
   
 }
 
@@ -367,14 +505,21 @@ forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     loginView.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     loginView.modalPresentationStyle = UIModalPresentationPageSheet;
-    //loginView.delegate = self;
+    loginView.delegate = self;
     [self presentModalViewController:loginView animated:YES];
+    
+    [loginView setInfo:LOGIN_VIEW_CHECKOUT_REMINDER];
   }    
 }
 
 #pragma mask - Login view delegate method
 - (void)loginViewConfirm:(id)sender{
+  //Reset loginView info, sender is the loginView
+  [sender setInfo:@""];
   [self dismissModalViewControllerAnimated:YES];
+  
+  //Got to check out view
+  
 }
 
 - (void)loginViewCancel:(id)sender{

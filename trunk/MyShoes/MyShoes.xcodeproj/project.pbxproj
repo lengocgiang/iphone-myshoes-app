@@ -802,7 +802,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MyShoes.app/MyShoes";
+				BUNDLE_LOADER = "${BUILT_PRODUCTS_DIR}/MyShoes.app/MyShoes";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -818,9 +818,10 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
 				INFOPLIST_FILE = "MyShoesApplicationTests/MyShoesApplicationTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYMROOT = build;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -830,7 +831,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				BUNDLE_LOADER = "/Users/kevin/Projects/MyShoes/build/Release-iphoneos/MyShoes.app/MyShoes";
+				BUNDLE_LOADER = "${BUILT_PRODUCTS_DIR}/MyShoes.app/MyShoes";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -839,9 +840,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MyShoesApplicationTests/MyShoesApplicationTests-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
 				INFOPLIST_FILE = "MyShoesApplicationTests/MyShoesApplicationTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYMROOT = build;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = octest;
@@ -859,6 +861,7 @@
 				GCC_PREFIX_HEADER = MyShoes_Prefix.pch;
 				INFOPLIST_FILE = "MyShoes-Info.plist";
 				PRODUCT_NAME = MyShoes;
+				SYMROOT = build;
 			};
 			name = Debug;
 		};
@@ -871,7 +874,7 @@
 				GCC_PREFIX_HEADER = MyShoes_Prefix.pch;
 				INFOPLIST_FILE = "MyShoes-Info.plist";
 				PRODUCT_NAME = MyShoes;
-				SYMROOT = release;
+				SYMROOT = build;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -888,6 +891,7 @@
 				OTHER_LDFLAGS = "-lxml2";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0E31CE08-4CCA-48C2-81FD-3E209C129980";
 				SDKROOT = iphoneos;
+				SYMROOT = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -905,7 +909,7 @@
 				OTHER_LDFLAGS = "-lxml2";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0E31CE08-4CCA-48C2-81FD-3E209C129980";
 				SDKROOT = iphoneos;
-				SYMROOT = /Users/denny/projects/output/MyShoes;
+				SYMROOT = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -920,6 +924,7 @@
 				0A9A7E80148440E20078916F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "MyShoes" */ = {
 			isa = XCConfigurationList;

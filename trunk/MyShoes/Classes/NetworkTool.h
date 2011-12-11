@@ -37,6 +37,13 @@
              requestSelector:(SEL)requestSelector 
                     formDict:(NSDictionary *)loginFormDict
                formActionUrl:(NSURL *)url;
+-(void)loginWithDelegate:(id)requestDelegate 
+         requestSelector:(SEL)requestSelector 
+           loginFormDict:(NSDictionary *)loginFormDict;
+-(void)addToCart:(NSString *)cartURL
+    WithDelegate:(id)requestDelegate
+ requestSelector:(SEL)requestSelector
+    cartFormDict:(NSDictionary *)cartFormDict;
 + (BOOL)hasUserLoggedIn;
 + (void)showAllSavedCookies;
 

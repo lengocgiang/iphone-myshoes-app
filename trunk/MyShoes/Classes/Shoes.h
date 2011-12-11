@@ -46,12 +46,17 @@
   NSString *_productBrandLogo;
   
   NSArray *_shoesColors;
-  NSArray *_urlsWithColors;
+  NSArray *_shoesColorsValue;
+  //NSArray *_urlsWithColors;
+  //The value of 
+  ///Shopping/ProductDetails.aspx?p12435&pg=5080624 pg=508064,whichi s the same for all color urls
+  NSString *_colorURLPGValue;
+
   NSArray *_shoesSizes;
   NSArray *_shoesSizesValue;
   
-  int _selectedColor;
-  int _selectedSize;
+  NSUInteger _selectedColor;
+  NSUInteger _selectedSize;
 }
 
 @property (nonatomic, retain) NSString	*pID;
@@ -74,11 +79,13 @@
 @property (nonatomic, assign) NSUInteger shoesImgsCount;
 @property (nonatomic, retain) NSString *productBrandLogo;
 @property (nonatomic, retain) NSArray *shoesColors;
+@property (nonatomic, retain) NSArray *shoesColorsValue;
+@property (nonatomic, retain) NSString *colorURLPGValue;
 @property (nonatomic, retain) NSArray *shoesSizes;
 @property (nonatomic, retain) NSArray *shoesSizesValue;
-@property (nonatomic, assign) int selectedColor;
-@property (nonatomic, assign) int selectedSize;
-@property (nonatomic, retain) NSArray *urlsWithColors;
+@property (nonatomic, assign) NSUInteger selectedColor;
+@property (nonatomic, assign) NSUInteger selectedSize;
+//@property (nonatomic, retain) NSArray *urlsWithColors;
 
 - (id)initWithShoesNode:(TFHppleElement *)node;
 - (id)copyWithZone:(NSZone*)zone;
@@ -93,6 +100,11 @@
 - (void)processShoesPrice:(TFHppleElement *)node;
 - (NSString *)processShoesInfo:(TFHppleElement *)node withProductTag:(NSString*)tag;
 - (BOOL)equals:(Shoes *)shoes;
+//Return the shoes size description info not the actually shoes size value
 - (NSString *)getShoesSizeInfo;
+- (NSString *)getShoesSize;
+- (NSString *)getShoesColor;
+- (NSString *)getShoesColorValue;
+- (NSString *)getShoesColorURL:(NSUInteger)index;
 
 @end

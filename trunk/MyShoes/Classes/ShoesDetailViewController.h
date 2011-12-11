@@ -48,7 +48,6 @@
   MBProgressHUD *HUD;
   
   NSMutableArray *shoesAllAngels;
-  
   //The flag to show if the view is reset. If it's still in the stack of navigator, the value
   //should be false. So it won't reset it view when users come back
   //The default value is TRUE
@@ -62,7 +61,12 @@
   BOOL editing;
   UILabel *shoesQuantityLabel;
   UITextField *shoesQuantity;*/
-                      
+  
+  //Input of viewstate value in add to shopping cart form                    
+  NSString *viewState;
+  NSString *previousPage;
+
+  NSString *cartUrl;                    
 }
 
 //@property (nonatomic, retain) IBOutlet UIView *contentView;
@@ -83,6 +87,9 @@
 @property (nonatomic, retain) Shoes *shoes;
 //@property (nonatomic, assign) BOOL editing;
 @property (nonatomic, retain) NetworkTool *networkTool;
+@property (nonatomic, retain) NSString *viewState;
+@property (nonatomic, retain) NSString *previousPage;
+@property (nonatomic, retain) NSString *cartUrl;
 
 + (UIImage *)maskWhiteToTransparent:(UIImage *)image;
 //- (void)startAnimation;

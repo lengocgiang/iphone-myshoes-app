@@ -17,6 +17,7 @@
 #define SHOES_COLORS_BASEURL_TAG @"onchange"
 #define SELECTD_TAG @"selected"
 #define VALUE_TAG @"value"
+#define ONCLICK_TAG @"onclick"
 
 #define SHOES_INFO_SKU_PREFIX @"Style # "
 #define SHOES_INFO_SHOESIMGS_ALLANGLE_URIPREFIX @"ProductImages/shoes_i"
@@ -106,7 +107,7 @@
 #define SHOES_DETAIL_BRANDLOGO_IMG_XPATH @"//img[@id='ctl00_cphPageMain_BrandAndPrice1_imgLogo']"
 #define SHOES_DETAIL_AVAILABLE_COLORS_XPATH @"//select[@id='ctl00_cphPageMain_ProductSelection2_ddlColor']"
 #define SHOES_DETAIL_AVAILABLE_SIZES_XPATH @"//select[@id='ctl00_cphPageMain_ProductSelection2_ddlSizeAndWidth']"
-#define SHOES_DETAIL_SHOES_IMAGES_LARGE @"//img[@id='ctl00_cphPageMain_ImageMultiView1_imgLargeDisplay']"
+#define SHOES_DETAIL_SHOES_IMAGES_LARGE @"//img[contains(@id,'_imgLargeDisplay')]"
 #define SHOES_DETAIL_SHOES_IMAGES_ALLANGEL @"//div[@class='multThumbs']"
 #define SHOES_DETAIL_SHOES_PRICE @"//span[@id='ctl00_cphPageMain_BrandAndPrice1_ProductPrice']//span[@class='e4xprice']"
 //#define SHOES_DETAIL_SHOES_IMAGES_ALLANGEL_DEFAULT 8
@@ -121,22 +122,38 @@
 #define SHOES_IMAGE_BORDER_SIZE 0.3f
 #define SHOES_IMAGE_CORNER_RADIUS 20.0f
 
+#define LOGIN_VIEW_CHECKOUT_REMINDER @"You don't need an account to place an order."
+
+#define SHOES_LOGIN_INPUT_VIEWSTATE_XPATH @"//*[@id='__VIEWSTATE']"
+#define SHOES_INPUT_BTN_X_VALUE_DEFAULT @"25"
+#define SHOES_INPUT_BTN_Y_VALUE_DEFAULT @"16"
+#define CART_INPUT_BTN_X_VALUE_DEFAULT @"75"
+#define CART_INPUT_BTN_Y_VALUE_DEFAULT @"23"
 #define SHOES_LOGIN_URL @"https://secure.shoes.com/Profiles/Login.aspx?returnurl=%2fProfiles%2fWelcome.aspx"
 #define SHOES_LOGIN_INPUT_USERNAME_ID @"ctl00$cphpagemain$createaccountorlogin$logincontrol$username"
 #define SHOES_LOGIN_INPUT_PASSWORD_ID @"ctl00$cphpagemain$createaccountorlogin$logincontrol$password"
 #define SHOES_LOGIN_INPUT_BTN_X_ID @"ctl00$cphPageMain$CreateAccountOrLogin$LoginControl$loginButton.x"
 #define SHOES_LOGIN_INPUT_BTN_Y_ID @"ctl00$cphPageMain$CreateAccountOrLogin$LoginControl$loginButton.y"
 #define SHOES_LOGIN_VALUE_EMPTY @""
-#define SHOES_LOGIN_INPUT_EVENTTARGET_ID @"__EVENTTARGET"
+#define SHOES_LOGIN_INPUT_EVENTTARGET_ID @" "
 #define SHOES_LOGIN_INPUT_EVENTARGUMENT_ID @"__EVENTARGUMENT"
 #define SHOES_LOGIN_INPUT_VIEWSTATEENCRYPTED_ID @"__VIEWSTATEENCRYPTED"
 #define SHOES_LOGIN_INPUT_VIEWSTATE_ID @"__VIEWSTATE"
+#define SHOES_CART_INPUT_PREVIOUSPAGE @"__PREVIOUSPAGE"
 #define SHOES_LOGIN_INPUT_VIEWSTATE_VALUE @"z/xspKkfU6pPdaxXTTp/k4P27EE2+onbAVd0AI674gNiPyW9Zua1q3aEROHwfmY7SwD8fRgoZFZyuQhpI5Me2gpgkHGbZiWVwrBJIyRSq3gHYtw9j9Ss9/qWUfgk4oNIwPGSg4N5hFyoho8Zbrpm5UgywZzM/sGQcYGyucL6QATJ7IX95E7pqK52zNq3wslvlVEnz6CT78Jf2MYfJIzPmECMWpybVI15GF2S/CdLwq1DW+HyC5QyrMr9zYxZwlTv6T+gKaCtS/3Xc/Q7kQr1Rw2poayQUlyZoAMmZjk08Dvl7LrJ+tpf988OyxVv0PH4ZQE0xLDO56jPjA0dt4YR3vVaOj1hWpZHy+RZ7IZdxOX+IXryRMIzSxUQg4hO2gp4WsNJMkMkhxuu7vztWBySXaIU1664TzLv/JbxDMcvZp3i0Est"
+#define SHOES_CART_INPUT_PREVIOUS_VALUE @"3cDmxz7ydFqHr1Hx0TVkE5vMHKfZhSd15STNpsnDOCGbZK5FBjM6b1J9xCozCcci4lvDEJqUc1cR-hWzZ4y2eq8GtHGUcAoDcVQDSsvsxMoxjwRS0"
 
 #define SHOES_SIGNUP_XPATH_EMAIL_EXIST @"//span[@id='ctl00_cphPageMain_ucCustomerInfo_EmailExists']"
 #define SHOES_SIGNUP_XPATH_PASSWORD_REG @"//span[@id='ctl00_cphPageMain_ucCustomerInfo_PasswordRegEx']"
 #define SHOES_SIGNUP_XPATH_PASSWORD_COMPARE @"//span[@id='ctl00_cphPageMain_ucCustomerInfo_ComparePasswords']"
 #define SHOES_SIGNUP_XPATH_EMAIL_ADDRESS @"//input[@name='ctl00$cphPageMain$ucCustomerInfo$txtEmailAddress']"
+#define SHOES_CART_URL_DEFAULT @"/Checkout/Cart.aspx"
+#define SHOES_CART_URL_XPATH @"//input[contains(@name,'btnAddToCart')]"
+#define SHOES_CART_INPUT_COLOR @"ctl00$cphPageMain$ProductSelection2$ddlColor"
+#define SHOES_CART_INPUT_SIZENWIDTH @"ctl00$cphPageMain$ProductSelection2$ddlSizeAndWidth"
+#define SHOES_CART_INPUT_BTN_X_ID @"ctl00$cphPageMain$ProductSelection2$btnAddToCart.x"
+#define SHOES_CART_INPUT_BTN_Y_ID @"ctl00$cphPageMain$ProductSelection2$btnAddToCart.y"
+#define SHOES_CART_INPUT_PREVIOUSPAGE_XPATH @"//input[contains(@name,'PREVIOUS')]"
 
 #define SHOES_SIGNUP_URL @"https://secure.shoes.com/Profiles/CreateAccount.aspx"
 #define SHOES_SIGNUP_INPUT_FIRSTNAME @"ctl00$cphPageMain$ucCustomerInfo$txtFirstName"
