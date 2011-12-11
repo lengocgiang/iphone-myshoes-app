@@ -17,6 +17,7 @@
 @synthesize loginButton;
 @synthesize userID;
 @synthesize password;
+@synthesize infoLabel;
 @synthesize delegate;
 @synthesize networkTool;
 @synthesize networkTool2;
@@ -54,15 +55,19 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
+  [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+  
+  //Set the font of the reminder info of login view
+  infoLabel.font = [UIFont fontWithName:@"Helvetica" size:(10.0)];
+
 
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    [userID becomeFirstResponder];
+    //[userID becomeFirstResponder];
     
     NSString *emailValue = [[NSUserDefaults standardUserDefaults] stringForKey:@"email"];
     NSString *passwordValue = [[NSUserDefaults standardUserDefaults] stringForKey:@"password"];
@@ -157,7 +162,7 @@
   NSString *viewState;
   // Create parser
   TFHpple *xpathParser = [[TFHpple alloc] initWithHTMLData:content];
-  NSArray *elements  = [xpathParser search:@"//*[@id='__VIEWSTATE']"];
+  NSArray *elements  = [xpathParser search:SHOES_LOGIN_INPUT_VIEWSTATE_XPATH];
   if((elements != nil) && ([elements count] > 0)){
     TFHppleElement *targetNode = [elements objectAtIndex:0];
     viewState = [targetNode objectForKey:VALUE_TAG];
@@ -179,8 +184,8 @@
                                  self.userID.text, SHOES_LOGIN_INPUT_USERNAME_ID, 
                                  self.password.text, SHOES_LOGIN_INPUT_PASSWORD_ID, 
                                  viewState, SHOES_LOGIN_INPUT_VIEWSTATE_ID, 
-                                 @"25", SHOES_LOGIN_INPUT_BTN_X_ID, 
-                                 @"16", SHOES_LOGIN_INPUT_BTN_Y_ID,                         
+                                 SHOES_INPUT_BTN_X_VALUE_DEFAULT, SHOES_LOGIN_INPUT_BTN_X_ID, 
+                                 SHOES_INPUT_BTN_Y_VALUE_DEFAULT, SHOES_LOGIN_INPUT_BTN_Y_ID,                         
                                  SHOES_LOGIN_VALUE_EMPTY, SHOES_LOGIN_INPUT_EVENTTARGET_ID, 
                                  SHOES_LOGIN_VALUE_EMPTY, SHOES_LOGIN_INPUT_EVENTARGUMENT_ID, 
                                  SHOES_LOGIN_VALUE_EMPTY, SHOES_LOGIN_INPUT_VIEWSTATEENCRYPTED_ID,                         
@@ -212,6 +217,10 @@
   [self.delegate loginViewConfirm:self];
   [NetworkTool showAllSavedCookies];
 
+}
+
+- (void)setInfo:(NSString *)info {
+  [infoLabel setText:info];
 }
 
 /*- (BOOL)hasUserLoggedIn {

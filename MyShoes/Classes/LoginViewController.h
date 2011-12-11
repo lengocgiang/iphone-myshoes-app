@@ -21,6 +21,7 @@
 @property (retain, nonatomic) IBOutlet UITextField *userID;
 @property (retain, nonatomic) IBOutlet UITextField *password;
 @property (retain, nonatomic) IBOutlet UIButton *loginButton;
+@property (retain, nonatomic) IBOutlet UILabel *infoLabel;
 
 @property (nonatomic, retain) NetworkTool *networkTool;
 @property (nonatomic, retain) NetworkTool *networkTool2;
@@ -30,6 +31,8 @@
 - (IBAction)cancelLogin:(id)sender;
 - (IBAction)confirmLogin:(id)sender;
 - (IBAction)usernameChanged:(id)sender;
+
+- (void)setInfo:(NSString *)info;
 
 //- (BOOL)hasUserLoggedIn;
 //- (void)showAllSavedCookies;

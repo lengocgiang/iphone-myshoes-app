@@ -35,6 +35,9 @@
 @synthesize shoes;
 //@synthesize editing;
 @synthesize networkTool;
+@synthesize viewState;
+@synthesize previousPage;
+@synthesize cartUrl;
 
 const CGFloat kScrollImgViewOffsetX	= 6.0f;
 const CGFloat kScrollImgViewOffsetY	= 6.0f;
@@ -264,7 +267,9 @@ const NSUInteger kSizeColumn = 1;
 }
 
 
-- (void)dealloc {  
+- (void)dealloc { 
+  [cartUrl release];
+  [viewState release];
   [shoesAllAngels release];
   [networkTool release];
   [shoes release];
@@ -364,26 +369,83 @@ const NSUInteger kSizeColumn = 1;
     [shoes processProductBrandLogo:[elements objectAtIndex:0]];
   }
   
-  //Process available shoes colors info and update the current color
-  
+  //Process available shoes colors info and update the current color 
   elements = [xpathParser search:SHOES_DETAIL_AVAILABLE_COLORS_XPATH];
   if((elements != nil) && ([elements count] > 0)){
     [shoes processShoesColors:[elements objectAtIndex:0]];
   }
   
   //Process and update shoes price in case the same model with difference color have the different price
-  
   elements = [xpathParser search:SHOES_DETAIL_SHOES_PRICE];
   if((elements != nil) && ([elements count] > 0)){
     [shoes processShoesPrice:[elements objectAtIndex:0]];
   }
     
   //Process available shoes size info
-  
   elements = [xpathParser search:SHOES_DETAIL_AVAILABLE_SIZES_XPATH];
   if((elements != nil) && ([elements count] > 0)){
     [shoes processShoesSizes:[elements objectAtIndex:0]];
   }
+  
+  //Process view state value for shopping cart form
+  elements  = [xpathParser search:SHOES_LOGIN_INPUT_VIEWSTATE_XPATH];
+  if((elements != nil) && ([elements count] > 0)){
+    TFHppleElement *targetNode = [elements objectAtIndex:0];
+    self.viewState = [targetNode objectForKey:VALUE_TAG];
+  }else{
+    // set default value here
+    //NSLog(@"======= NOT found!!!!");
+    self.viewState = SHOES_LOGIN_INPUT_VIEWSTATE_VALUE;
+  }
+
+  //Process add to cart url
+  elements = [xpathParser search:SHOES_CART_URL_XPATH];
+  self.cartUrl = nil;
+
+  NSString *tmpStr;
+  if((elements != nil) && ([elements count] > 0)){
+    TFHppleElement *targetNode = [elements objectAtIndex:0];
+    //The link of add to cart is shown as below, need to grab the value
+    //onclick="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions("ctl00$cphPageMain$ProductSelection2$btnAddToCart", "", true, "Cart", "/en-US/Product/EC1271616-5155238/Timberland/White_Brown/Men\'s+Roll+Top+Quilted+Top.aspx", false, false))"
+    
+    tmpStr = [targetNode objectForKey:ONCLICK_TAG];
+    
+    NSArray *fields = [tmpStr componentsSeparatedByString:@","];
+    //The cart url contains .aspx
+    NSString *target = @".aspx";
+    for (NSString *value in fields){
+      NSRange range = [value rangeOfString:target 
+                                   options:NSCaseInsensitiveSearch];
+      
+      if(range.location != NSNotFound) {
+        //found it...
+        NSCharacterSet* characters = [NSCharacterSet characterSetWithCharactersInString:@"\""];
+
+        //Get rid of the heading and trailing white space
+        value = [value stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        //Get rid of the "
+        self.cartUrl = [value stringByTrimmingCharactersInSet:characters];
+        break;
+      }
+    }
+    
+  }/*else{
+    // set default value here
+    //NSLog(@"======= NOT found!!!!");
+    self.viewState = SHOES_LOGIN_INPUT_VIEWSTATE_VALUE;
+  }*/
+  
+  //Process previous page value
+  elements  = [xpathParser search:SHOES_CART_INPUT_PREVIOUSPAGE_XPATH];
+  if((elements != nil) && ([elements count] > 0)){
+    TFHppleElement *targetNode = [elements objectAtIndex:0];
+    self.previousPage = [targetNode objectForKey:VALUE_TAG];
+  }else{
+    // set default value here
+    //NSLog(@"======= NOT found!!!!");
+    self.previousPage = SHOES_CART_INPUT_PREVIOUS_VALUE;
+  }
+  
   
 	[xpathParser release];
   
@@ -516,11 +578,11 @@ const NSUInteger kSizeColumn = 1;
   //Shoes size depends on shoes color selection.
   if(component == kColorColumn){//Should reload shoes info to get the avaiable sizes
     //Put a safe check, it should not happen at all
-    if (row > [shoes.urlsWithColors count] -1 ){
+    if (row > [shoes.shoesColorsValue count] -1 ){
       return;
     }
       
-    NSString *urlWithColor = [shoes.urlsWithColors objectAtIndex:row];
+    NSString *urlWithColor = [shoes getShoesColorURL:row];
     
     //Remove previous shoes images of all angels
     [shoesAllAngels removeAllObjects];
@@ -628,7 +690,13 @@ const NSUInteger kSizeColumn = 1;
   [shoppingCart addToCart:shoesCopy];
   
   if ([delegate respondsToSelector:@selector(shoppingCartController)]){
-  //Go to shopping cart view
+    //Go to shopping cart view
+    //Set shopping cart url
+    [[delegate shoppingCartController] setShoppingCartURL:self.cartUrl];
+    //Set shopping cart form viewstate value
+    [[delegate shoppingCartController] setViewState:self.viewState];
+    [[delegate shoppingCartController] setPreviousPage:self.previousPage];    
+    [[delegate shoppingCartController] setShoes:shoesCopy];
     [self.navigationController pushViewController:[delegate shoppingCartController] animated:YES];
   }
   

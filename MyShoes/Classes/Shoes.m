@@ -32,11 +32,13 @@
 @synthesize productBrandName = _productBrandName;
 @synthesize productBrandLogo = _productBrandLogo;
 @synthesize shoesColors = _shoesColors;
+@synthesize shoesColorsValue = _shoesColorsValue;
+@synthesize colorURLPGValue = _colorURLPGValue;
 @synthesize shoesSizes = _shoesSizes;
 @synthesize shoesSizesValue = _shoesSizesValue;
 @synthesize selectedColor = _selectedColor;
 @synthesize selectedSize = _selectedSize;
-@synthesize urlsWithColors = _urlsWithColors;
+//@synthesize urlsWithColors = _urlsWithColors;
 
 /*  Child node structure
  
@@ -102,7 +104,8 @@
   copy.shoesImgsCount = self.shoesImgsCount;
   copy.productBrandLogo = [[self.productBrandLogo copy] autorelease];
   copy.shoesColors = [[self.shoesColors copy] autorelease];
-  copy.urlsWithColors = [[self.urlsWithColors copy] autorelease];
+  copy.shoesColorsValue = [[self.shoesColorsValue copy] autorelease];
+  copy.colorURLPGValue = [[self.colorURLPGValue copy] autorelease];
   copy.shoesSizes = [[self.shoesSizes copy] autorelease];
   copy.shoesSizesValue = [[self.shoesSizesValue copy] autorelease];
   
@@ -323,11 +326,21 @@
     return;
   }
   
+  //Parse shoes color url pg value
+  NSRange range = [baseColorURL rangeOfString:@"' + this.options[this.selectedIndex].value + '"];
+  NSString *tmpStr;
+  tmpStr = [baseColorURL substringFromIndex: (range.location  + range.length)];
+  
+  range = [tmpStr rangeOfString:@"'"];
+  tmpStr = [tmpStr substringToIndex:range.location];
+
+  self.colorURLPGValue = tmpStr;
+  
   NSMutableArray *colorsArray = [NSMutableArray arrayWithCapacity:SHOES_INFO_COLOR_COUNT];
-  NSMutableArray *urlsWithColors = [NSMutableArray arrayWithCapacity:SHOES_INFO_COLOR_COUNT];
+  //NSMutableArray *urlsWithColors = [NSMutableArray arrayWithCapacity:SHOES_INFO_COLOR_COUNT];
+  NSMutableArray *colorsValueArray = [NSMutableArray arrayWithCapacity:SHOES_INFO_COLOR_COUNT];
   NSString *colorName;
   NSString *urlWithColor;
-  NSString *tmpStr;
   int i = 0;
   
   for(TFHppleElement *child in childElements){
@@ -349,7 +362,7 @@
     //"javascript: location.href='/Shopping/ProductDetails.aspx?p=' + this.options[this.selectedIndex].value + '&pg=5080624'"
     //Output is something like
     ///Shopping/ProductDetails.aspx?p12435&pg=5080624
-    NSRange range = [baseColorURL rangeOfString:@"' + this.options[this.selectedIndex].value + '"];
+    /*NSRange range = [baseColorURL rangeOfString:@"' + this.options[this.selectedIndex].value + '"];
     tmpStr = [baseColorURL substringFromIndex: (range.location  + range.length)];
     
     range = [tmpStr rangeOfString:@"'"];
@@ -357,7 +370,8 @@
     
     urlWithColor = [NSString stringWithFormat:@"%@%@%@",@"/Shopping/ProductDetails.aspx?p=", urlWithColor, tmpStr];
     
-    [urlsWithColors addObject:urlWithColor];
+    [urlsWithColors addObject:urlWithColor];*/
+    [colorsValueArray addObject:urlWithColor];
     i++;
   }
   
@@ -366,7 +380,15 @@
   self.shoesColors = [NSArray arrayWithArray:colorsArray];
   //[self.urlsWithColors release];
   //self.urlsWithColors = [[NSArray arrayWithArray:urlsWithColors] retain];
-  self.urlsWithColors = [NSArray arrayWithArray:urlsWithColors];
+  //self.urlsWithColors = [NSArray arrayWithArray:urlsWithColors];
+  self.shoesColorsValue = [NSArray arrayWithArray:colorsValueArray];
+}
+
+- (NSString *)getShoesColorURL:(NSUInteger)index {
+  NSString *colorSelected = [self.shoesColorsValue objectAtIndex:index];
+  NSString *urlWithColor = [NSString stringWithFormat:@"%@%@%@",@"/Shopping/ProductDetails.aspx?p=", colorSelected, self.colorURLPGValue];
+  
+  return urlWithColor;
 }
 
 - (void)processShoesSizes:(TFHppleElement *)node {
@@ -477,6 +499,27 @@
   return nil;
 }
 
+- (NSString *)getShoesSize {
+  if((self.shoesSizesValue != nil) && ([self.shoesSizesValue count] > self.selectedSize)) {
+    return [self.shoesSizesValue objectAtIndex:self.selectedSize]; 
+  }
+  return nil;
+}
+
+- (NSString *)getShoesColor {
+  if((self.shoesColors != nil) && ([self.shoesColors count] > self.selectedColor)) {
+    return [self.shoesColors objectAtIndex:self.selectedColor]; 
+  }
+  return nil;
+}
+
+- (NSString *)getShoesColorValue {
+  if((self.shoesColorsValue != nil) && ([self.shoesColorsValue count] > self.selectedColor)) {
+    return [self.shoesColorsValue objectAtIndex:self.selectedColor]; 
+  }
+  return nil;  
+}
+
 #pragma mark -
 #pragma mark dealloc methods
 
@@ -487,7 +530,9 @@
   [_shoesSizes release];
   [_shoesSizesValue release];
   [_shoesColors release];
-  [_urlsWithColors release];  
+  [_shoesColorsValue release];
+  [_colorURLPGValue release];
+  //[_urlsWithColors release];  
   [_productBrandLogo release];
   [_shoesImgsAllAngle release];
   [_productSKU release];
