@@ -1,0 +1,1 @@
+This is a third party iphone app for www.shoes.com. End users can use this app to do their shopping.
